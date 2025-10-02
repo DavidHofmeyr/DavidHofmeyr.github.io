@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Working with Data in R | Introduction to R</title>
+  <meta name="description" content="2 Working with Data in R | Introduction to R" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Working with Data in R | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Working with Data in R | Introduction to R" />
+  
+  
+  
+
+<meta name="author" content="David P. Hofmeyr" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-r.html"/>
+<link rel="next" href="background.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#background-on-r"><i class="fa fa-check"></i><b>1.1</b> Background on R</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-rstudio"><i class="fa fa-check"></i><b>1.2</b> Getting started with RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statements-expressions-and-objects"><i class="fa fa-check"></i><b>1.3</b> Statements, expressions and objects</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plots"><i class="fa fa-check"></i><b>1.4</b> Basic plots</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R scripts</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>1.6</b> R markdown</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.7</b> Functions</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#s:0help"><i class="fa fa-check"></i><b>1.8</b> Getting Help</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loops-and-flow"><i class="fa fa-check"></i><b>1.9</b> Loops and Flow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-frames"><i class="fa fa-check"></i><b>2.1</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>2.2</b> Importing and Exporting Data</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-plotting"><i class="fa fa-check"></i><b>2.3</b> Data Plotting</a></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#exercises-3"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>3</b> Statistical Background</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="background.html"><a href="background.html#probability-basics"><i class="fa fa-check"></i><b>3.1</b> Probability Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="background.html"><a href="background.html#random-variables"><i class="fa fa-check"></i><b>3.2</b> Random Variables</a></li>
+<li class="chapter" data-level="3.3" data-path="background.html"><a href="background.html#samples-and-statistical-modelling"><i class="fa fa-check"></i><b>3.3</b> Samples and Statistical Modelling</a></li>
+<li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
+<li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
+<li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fundamentals1.html"><a href="fundamentals1.html#two-archetypal-problems"><i class="fa fa-check"></i><b>4.1</b> Two Archetypal Problems</a></li>
+<li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
+<li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
+<li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-and-take-aways"><i class="fa fa-check"></i><b>4.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fundamentals2.html"><a href="fundamentals2.html#a-quick-recap"><i class="fa fa-check"></i><b>5.1</b> A Quick Recap</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals2.html"><a href="fundamentals2.html#overfitting"><i class="fa fa-check"></i><b>5.2</b> Overfitting</a></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-and-take-aways-1"><i class="fa fa-check"></i><b>5.5</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear.html"><a href="linear.html#the-linear-model"><i class="fa fa-check"></i><b>6.1</b> The Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-and-take-aways-2"><i class="fa fa-check"></i><b>7.3</b> Summary and Take-aways</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonparametric Smoothing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
+<li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
+<li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-4"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
+<li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-and-take-aways-3"><i class="fa fa-check"></i><b>10.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="working-with-data-in-r" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Working with Data in R<a href="working-with-data-in-r.html#working-with-data-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this chapter we will start to work with data objects within R, and begin to understand better how the various concepts we learned in the introductory chapter are relevant to working with data.</p>
+<p>R developers have created functions and packages for almost every
+laborious task that stands between us and good quantitative scientific
+analysis. Data input, manipulation, and output is easy in R. It is just
+a matter of breaking down what needs to be done into small achievable
+tasks, and knowing the right functions.</p>
+<div id="data-frames" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Data Frames<a href="working-with-data-in-r.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We saw a number of object types in the introductory chapter, from single numbers to vectors and matrices; character strings; logical objects etc. We also saw dynamic objects like functions.</p>
+<p>When it comes to working with data, we typically have a collection of <em>variables</em> measured on a set of entities</p>
+<ul>
+<li>These could be, for example, health related variables measured on a group of individuals (the “entities”).</li>
+</ul>
+<p>A convenient way of storing these data is in a tabular format, where each row in the table represents one of the individuals/entities and each column represents one of the variables. Table-like objects for storing multiple individual objects of the <em>same type</em> can be achieved with the use of matrices, as we saw briefly with matrices of numbers in the previous chapter. However, when some of the variables are of a different type it becomes difficult to store them all in a matrix.</p>
+<p><strong>Data frames</strong> are sort of like a mixture of a matrix and a list. Like a matrix, they have a tabular format, but like a list we are not restricted to having the same object types throughout. The elements in a data frame can also be accessed using the same approaches as for a matrix (indexing) or a list (by name or index).</p>
+<p>When indexing a data frame as one would a matrix, we use exactly the same syntax, i.e. <code>dataframe[row_indices,column_indices]</code>. The result is itself a data frame containing only the subset of the full data frame which is indexed. On the other hand, when treating a data frame as a list, the elements of the data frame correspond with entire columns of its tabular format. For example, <code>dataframe[,1]</code> and <code>dataframe[[1]]</code> operate very similarly.</p>
+<p>Let’s create a data frame containing the data on the sizes and masses of the planets in the solar system.</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="working-with-data-in-r.html#cb227-1" tabindex="-1"></a>planets <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb227-2"><a href="working-with-data-in-r.html#cb227-2" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Mercury&quot;</span>, <span class="st">&quot;Venus&quot;</span>, <span class="st">&quot;Earth&quot;</span>,</span>
+<span id="cb227-3"><a href="working-with-data-in-r.html#cb227-3" tabindex="-1"></a>        <span class="st">&quot;Mars&quot;</span>, <span class="st">&quot;Jupiter&quot;</span>, <span class="st">&quot;Saturn&quot;</span>,</span>
+<span id="cb227-4"><a href="working-with-data-in-r.html#cb227-4" tabindex="-1"></a>        <span class="st">&quot;Uranus&quot;</span>, <span class="st">&quot;Neptune&quot;</span>),</span>
+<span id="cb227-5"><a href="working-with-data-in-r.html#cb227-5" tabindex="-1"></a>    <span class="at">mass   =</span> <span class="fu">c</span>(<span class="fl">3.30</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">23</span>, <span class="fl">4.87</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">24</span>, <span class="fl">5.97</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">24</span>,</span>
+<span id="cb227-6"><a href="working-with-data-in-r.html#cb227-6" tabindex="-1"></a>        <span class="fl">6.42</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">23</span>, <span class="fl">1.90</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">27</span>, <span class="fl">5.68</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">26</span>,</span>
+<span id="cb227-7"><a href="working-with-data-in-r.html#cb227-7" tabindex="-1"></a>        <span class="fl">8.68</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">25</span>, <span class="fl">1.02</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">26</span>),</span>
+<span id="cb227-8"><a href="working-with-data-in-r.html#cb227-8" tabindex="-1"></a>    <span class="at">radius =</span> <span class="fu">c</span>(<span class="fl">2.440</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="fl">6.052</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="fl">6.371</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>,</span>
+<span id="cb227-9"><a href="working-with-data-in-r.html#cb227-9" tabindex="-1"></a>        <span class="fl">3.390</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="fl">6.991</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>, <span class="fl">5.823</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>,</span>
+<span id="cb227-10"><a href="working-with-data-in-r.html#cb227-10" tabindex="-1"></a>        <span class="fl">2.536</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>, <span class="fl">2.462</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>)</span>
+<span id="cb227-11"><a href="working-with-data-in-r.html#cb227-11" tabindex="-1"></a>)</span></code></pre></div>
+<p>Note that the <code>type</code> of a data frame is a list, but the <code>class</code> of an object typically dictates how it is actually processed.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="working-with-data-in-r.html#cb228-1" tabindex="-1"></a><span class="fu">typeof</span>(planets)</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="working-with-data-in-r.html#cb230-1" tabindex="-1"></a><span class="fu">class</span>(planets)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="working-with-data-in-r.html#cb232-1" tabindex="-1"></a><span class="fu">is.list</span>(planets)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="working-with-data-in-r.html#cb234-1" tabindex="-1"></a><span class="fu">is.data.frame</span>(planets)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>To access specific contents, we can, as mentioned above, do this by indexing or by name:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="working-with-data-in-r.html#cb236-1" tabindex="-1"></a>planets<span class="sc">$</span>mass</span></code></pre></div>
+<pre><code>## [1] 3.30e+23 4.87e+24 5.97e+24 6.42e+23 1.90e+27 5.68e+26 8.68e+25 1.02e+26</code></pre>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="working-with-data-in-r.html#cb238-1" tabindex="-1"></a>planets[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>##      name    mass  radius
+## 1 Mercury 3.3e+23 2440000</code></pre>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="working-with-data-in-r.html#cb240-1" tabindex="-1"></a>planets[<span class="dv">1</span>,<span class="st">&#39;mass&#39;</span>]</span></code></pre></div>
+<pre><code>## [1] 3.3e+23</code></pre>
+<ul>
+<li>In R the class of objects is very important. The same function, for
+example <code>summary()</code> and <code>plot()</code>, will perform differently depending upon the class of the object.</li>
+</ul>
+<p>Since we created this data frame, we already know the names of the
+variables that are contained within it. But say we load a foreign data
+set, how do we know what the variables are called? Outside R, we hope
+that this data set also has good documentation, such as a PDF or website
+telling you all the details you could ever want know. But <em>within</em> R, we
+can get a list of the attributes of an object by using the <code>names()</code>
+function:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="working-with-data-in-r.html#cb242-1" tabindex="-1"></a><span class="fu">names</span>(planets)</span></code></pre></div>
+<pre><code>## [1] &quot;name&quot;   &quot;mass&quot;   &quot;radius&quot;</code></pre>
+<p>As well as using <code>names()</code>, it is also good practice to check the <em>size</em>
+of the data frame. As with matrices, the functions <code>nrow()</code>, <code>ncol()</code> and <code>dim()</code> can be applied to data frames.</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="working-with-data-in-r.html#cb244-1" tabindex="-1"></a><span class="fu">nrow</span>(planets)</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="working-with-data-in-r.html#cb246-1" tabindex="-1"></a><span class="fu">ncol</span>(planets)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="working-with-data-in-r.html#cb248-1" tabindex="-1"></a><span class="fu">dim</span>(planets)</span></code></pre></div>
+<pre><code>## [1] 8 3</code></pre>
+<p>Ultimately, there is a great function that contains and prints all this
+information for your in a convenient format, <code>str</code>. This will print also
+the class of the columns and the first few observations, and can be a
+pretty useful function to have a first look at a new data frame:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="working-with-data-in-r.html#cb250-1" tabindex="-1"></a><span class="fu">str</span>(planets)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    8 obs. of  3 variables:
+##  $ name  : chr  &quot;Mercury&quot; &quot;Venus&quot; &quot;Earth&quot; &quot;Mars&quot; ...
+##  $ mass  : num  3.30e+23 4.87e+24 5.97e+24 6.42e+23 1.90e+27 ...
+##  $ radius: num  2440000 6052000 6371000 3390000 69910000 ...</code></pre>
+<p>As with lists, we can add to a data frame by simplying creating newly named variables. For example, we could estimate the average density of each planet and add this as a new variable/field</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="working-with-data-in-r.html#cb252-1" tabindex="-1"></a><span class="do">### First we can calculate the volumes of each, assuming they</span></span>
+<span id="cb252-2"><a href="working-with-data-in-r.html#cb252-2" tabindex="-1"></a><span class="do">### are approximately spherical</span></span>
+<span id="cb252-3"><a href="working-with-data-in-r.html#cb252-3" tabindex="-1"></a>volumes <span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>pi<span class="sc">*</span>planets<span class="sc">$</span>radius<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb252-4"><a href="working-with-data-in-r.html#cb252-4" tabindex="-1"></a></span>
+<span id="cb252-5"><a href="working-with-data-in-r.html#cb252-5" tabindex="-1"></a><span class="do">### Now we can add the densities to our data frame</span></span>
+<span id="cb252-6"><a href="working-with-data-in-r.html#cb252-6" tabindex="-1"></a>planets<span class="sc">$</span>density <span class="ot">&lt;-</span> planets<span class="sc">$</span>mass<span class="sc">/</span>volumes</span>
+<span id="cb252-7"><a href="working-with-data-in-r.html#cb252-7" tabindex="-1"></a></span>
+<span id="cb252-8"><a href="working-with-data-in-r.html#cb252-8" tabindex="-1"></a>planets<span class="sc">$</span>density</span></code></pre></div>
+<pre><code>## [1] 5423.2029 5244.9771 5511.4124 3934.1175 1327.5384  686.7827 1270.5254 1631.7267</code></pre>
+<p><strong>Factor Variables</strong></p>
+<p>It is common in statistical data to have categorical variables,
+indicating some subdivision of the data, such as social class, primary
+diagnosis, tumour stage, gender, species, etc. Such variables are stored
+in data files often as strings indicating their actual value, though
+abbreviations may be used; e.g. “m” for male, and “f” for female. But, due to
+the actual number of observations, it may be more sensible to store the
+categorical data using numerical codes; 1 for male, 2 for female. With
+their meaningful names then being store in the documentation for the
+data.</p>
+<p>Regardless of how they are originally stored, in R they should be
+converted to <em>factors</em>. A factor is a data structure which stores the
+categorical data as numerical codes, but has <em>labels</em> which make the
+codes meaningful.</p>
+<p>Mercury, Venus, Earth and Mars are called the <em>terrestrial</em> planets,
+as they are primarily composed of rock and metal. Jupiter and
+Saturn, are composed mainly of hydrogen and helium, thus are
+referred to as <em>gas giants</em>. Finally, Uranus and Neptune, are
+composed largely of substances with relatively high melting points,
+thus are often referred to separately as <em>ice giants</em>. We can add
+a variable which categorises the planets in this way</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="working-with-data-in-r.html#cb254-1" tabindex="-1"></a>planets<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;terrestrial&quot;</span>, <span class="st">&quot;gas_giant&quot;</span>, <span class="st">&quot;ice_giant&quot;</span>),</span>
+<span id="cb254-2"><a href="working-with-data-in-r.html#cb254-2" tabindex="-1"></a>                    <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb254-3"><a href="working-with-data-in-r.html#cb254-3" tabindex="-1"></a></span>
+<span id="cb254-4"><a href="working-with-data-in-r.html#cb254-4" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
+<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;   &quot;gas_giant&quot;   &quot;ice_giant&quot;   &quot;ice_giant&quot;</code></pre>
+<p>Now, as it is currently <code>planets$type</code> is a vector of character objects, and although it clearly delineates which items are in each of the categories we can explicitly convert
+this to a factor using <code>as.factor()</code></p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="working-with-data-in-r.html#cb256-1" tabindex="-1"></a>planets<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(planets<span class="sc">$</span>type)</span>
+<span id="cb256-2"><a href="working-with-data-in-r.html#cb256-2" tabindex="-1"></a></span>
+<span id="cb256-3"><a href="working-with-data-in-r.html#cb256-3" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
+<pre><code>## [1] terrestrial terrestrial terrestrial terrestrial gas_giant   gas_giant   ice_giant   ice_giant  
+## Levels: gas_giant ice_giant terrestrial</code></pre>
+<p>Now when we print the <code>type</code> variable we see that it now has what are called <code>Levels</code>, which are the
+labels which give meaning to the category codes. In this example we named the codes with meaningful
+labels already, however as mentioned previously it may be more convenient, when there is a large number
+of categories to use numeric codes but use the <code>Levels</code> to encode meaning</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="working-with-data-in-r.html#cb258-1" tabindex="-1"></a>pain <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb258-2"><a href="working-with-data-in-r.html#cb258-2" tabindex="-1"></a>pain_f <span class="ot">&lt;-</span> <span class="fu">factor</span>(pain, <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb258-3"><a href="working-with-data-in-r.html#cb258-3" tabindex="-1"></a>             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;none&quot;</span>, <span class="st">&quot;mild&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;severe&quot;</span>))</span>
+<span id="cb258-4"><a href="working-with-data-in-r.html#cb258-4" tabindex="-1"></a>pain_f</span></code></pre></div>
+<pre><code>## [1] none   mild   severe medium medium mild   mild   severe
+## Levels: none mild medium severe</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="working-with-data-in-r.html#cb260-1" tabindex="-1"></a><span class="do">### if you need to work with the actual string labels</span></span>
+<span id="cb260-2"><a href="working-with-data-in-r.html#cb260-2" tabindex="-1"></a>pain_c <span class="ot">&lt;-</span> <span class="fu">as.character</span>(pain_f)</span>
+<span id="cb260-3"><a href="working-with-data-in-r.html#cb260-3" tabindex="-1"></a>pain_c</span></code></pre></div>
+<pre><code>## [1] &quot;none&quot;   &quot;mild&quot;   &quot;severe&quot; &quot;medium&quot; &quot;medium&quot; &quot;mild&quot;   &quot;mild&quot;   &quot;severe&quot;</code></pre>
+<div id="combining-data-frames" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Combining Data Frames<a href="working-with-data-in-r.html#combining-data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s suppose we want to combine the contents of multiple data frames. We may, for example, be collating the data from multiple sources. When everything is “nice”, in that each data frame has the same collection of variables (with the same names!), then the function <code>rbind()</code> can be used. However, when some of the data frames are missing certain of the variables then this will give us an error.</p>
+<p>Let’s create a small data frame containing “newly discovered exoplanets”.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="working-with-data-in-r.html#cb262-1" tabindex="-1"></a>exoplanets <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb262-2"><a href="working-with-data-in-r.html#cb262-2" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Kepler-186f&quot;</span>, <span class="st">&quot;Kepler-62f&quot;</span>, <span class="st">&quot;Kepler-438b&quot;</span>),</span>
+<span id="cb262-3"><a href="working-with-data-in-r.html#cb262-3" tabindex="-1"></a>    <span class="at">mass =</span> <span class="fu">c</span>(<span class="fl">1.9</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">23</span>, <span class="fl">3.32</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">23</span>, <span class="fl">2.64</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">23</span>),</span>
+<span id="cb262-4"><a href="working-with-data-in-r.html#cb262-4" tabindex="-1"></a>    <span class="at">radius =</span> <span class="fu">c</span>(<span class="fl">1.17</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="fl">1.41</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="fl">1.12</span> <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>)</span>
+<span id="cb262-5"><a href="working-with-data-in-r.html#cb262-5" tabindex="-1"></a>)</span></code></pre></div>
+<p>Since this data frame does not have the fields <code>$density</code> and <code>$type</code>, which we created, trying to row-bind with <code>planets</code> will fail:</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="working-with-data-in-r.html#cb263-1" tabindex="-1"></a><span class="fu">rbind</span>(planets, exoplanets)</span></code></pre></div>
+<pre><code>## Error in rbind(deparse.level, ...): numbers of columns of arguments do not match</code></pre>
+<p>If we create these fields for <code>exoplanets</code> as well then all should be fine.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="working-with-data-in-r.html#cb265-1" tabindex="-1"></a>exoplanets<span class="sc">$</span>density <span class="ot">&lt;-</span> exoplanets<span class="sc">$</span>mass <span class="sc">/</span> (<span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>pi<span class="sc">*</span>exoplanets<span class="sc">$</span>radius<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb265-2"><a href="working-with-data-in-r.html#cb265-2" tabindex="-1"></a></span>
+<span id="cb265-3"><a href="working-with-data-in-r.html#cb265-3" tabindex="-1"></a>exoplanets<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">&quot;exo&quot;</span></span>
+<span id="cb265-4"><a href="working-with-data-in-r.html#cb265-4" tabindex="-1"></a></span>
+<span id="cb265-5"><a href="working-with-data-in-r.html#cb265-5" tabindex="-1"></a><span class="fu">rbind</span>(planets, exoplanets)</span></code></pre></div>
+<pre><code>##           name     mass   radius    density        type
+## 1      Mercury 3.30e+23  2440000  5423.2029 terrestrial
+## 2        Venus 4.87e+24  6052000  5244.9771 terrestrial
+## 3        Earth 5.97e+24  6371000  5511.4124 terrestrial
+## 4         Mars 6.42e+23  3390000  3934.1175 terrestrial
+## 5      Jupiter 1.90e+27 69910000  1327.5384   gas_giant
+## 6       Saturn 5.68e+26 58230000   686.7827   gas_giant
+## 7       Uranus 8.68e+25 25360000  1270.5254   ice_giant
+## 8      Neptune 1.02e+26 24620000  1631.7267   ice_giant
+## 9  Kepler-186f 1.90e+23  1170000 28320.9232         exo
+## 10  Kepler-62f 3.32e+23  1410000 28274.3179         exo
+## 11 Kepler-438b 2.64e+23  1120000 44860.2046         exo</code></pre>
+<p>Note that when binding the data frames together in this way R will have added a new level to the <code>$type</code> field</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="working-with-data-in-r.html#cb267-1" tabindex="-1"></a><span class="fu">levels</span>(<span class="fu">rbind</span>(planets, exoplanets)<span class="sc">$</span>type)</span></code></pre></div>
+<pre><code>## [1] &quot;gas_giant&quot;   &quot;ice_giant&quot;   &quot;terrestrial&quot; &quot;exo&quot;</code></pre>
+<p>However, if we had incorrectly named one of the variables/fields in either of the data frames R would still not have been happy. The <code>dplyr</code> package contains a number of useful functions for handling data frames more effectively. For example, the function <code>bind_rows()</code> is functionally very similar to <code>rbind()</code> but if some of the data frames have different variables then the collection of <em>all</em> variables across all data frames being combined will be included.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="working-with-data-in-r.html#cb269-1" tabindex="-1"></a><span class="do">### First load the dplyr library</span></span>
+<span id="cb269-2"><a href="working-with-data-in-r.html#cb269-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb269-3"><a href="working-with-data-in-r.html#cb269-3" tabindex="-1"></a></span>
+<span id="cb269-4"><a href="working-with-data-in-r.html#cb269-4" tabindex="-1"></a><span class="do">### Let&#39;s add to the planets data frame their distances from the sun</span></span>
+<span id="cb269-5"><a href="working-with-data-in-r.html#cb269-5" tabindex="-1"></a>planets<span class="sc">$</span>distance <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">58</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">108</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">150</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">228</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">779</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">1400</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">2900</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">4500</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>)</span>
+<span id="cb269-6"><a href="working-with-data-in-r.html#cb269-6" tabindex="-1"></a></span>
+<span id="cb269-7"><a href="working-with-data-in-r.html#cb269-7" tabindex="-1"></a><span class="fu">bind_rows</span>(planets, exoplanets)</span></code></pre></div>
+<pre><code>##           name     mass   radius    density        type distance
+## 1      Mercury 3.30e+23  2440000  5423.2029 terrestrial 5.80e+07
+## 2        Venus 4.87e+24  6052000  5244.9771 terrestrial 1.08e+08
+## 3        Earth 5.97e+24  6371000  5511.4124 terrestrial 1.50e+08
+## 4         Mars 6.42e+23  3390000  3934.1175 terrestrial 2.28e+08
+## 5      Jupiter 1.90e+27 69910000  1327.5384   gas_giant 7.79e+08
+## 6       Saturn 5.68e+26 58230000   686.7827   gas_giant 1.40e+09
+## 7       Uranus 8.68e+25 25360000  1270.5254   ice_giant 2.90e+09
+## 8      Neptune 1.02e+26 24620000  1631.7267   ice_giant 4.50e+09
+## 9  Kepler-186f 1.90e+23  1170000 28320.9232         exo       NA
+## 10  Kepler-62f 3.32e+23  1410000 28274.3179         exo       NA
+## 11 Kepler-438b 2.64e+23  1120000 44860.2046         exo       NA</code></pre>
+<p>Notice that, rather than producing an error, <code>bind_rows()</code> has created <code>NA</code> entries in the <code>$distance</code> field for <code>exoplanets</code>. In R, <code>NA</code> is a special value that represents missing or undefined data.</p>
+</div>
+<div id="filtering" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> “Filtering”<a href="working-with-data-in-r.html#filtering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We saw how we could isolate different parts of a data frame either by explicitly specifying row and column indices, or by accessing the <code>fields</code> in data frame as a list using <code>dataframe$fieldname</code>. Indexing by explicit lists of row/column indices can be risky if we aren’t fully on top of where different items and variables are stored.</p>
+<p>We can also isolate parts of a vector/matrix/array/data frame by specifying <em>conditions</em> for the indices or field names, just as we used conditional statements to direct the <em>flow</em> of our code. Specifically, if we have a data frame with dimensions <code>n</code> (rows) and <code>p</code> (variables/columns), then we can pass a vector of <code>n</code> logical objects (i.e. <code>TRUE</code> and <code>FALSE</code>) instead of specifying row indices (or <code>p</code> such logicals instead of column indices). R will then extract only the rows/columns associated with the <code>TRUE</code> indices.</p>
+<p>For example, suppose we wanted to extract the planets whose masses are less than the average mass:</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="working-with-data-in-r.html#cb271-1" tabindex="-1"></a>planets[planets<span class="sc">$</span>mass <span class="sc">&lt;</span> <span class="fu">mean</span>(planets<span class="sc">$</span>mass),]</span></code></pre></div>
+<pre><code>##      name     mass   radius  density        type distance
+## 1 Mercury 3.30e+23  2440000 5423.203 terrestrial 5.80e+07
+## 2   Venus 4.87e+24  6052000 5244.977 terrestrial 1.08e+08
+## 3   Earth 5.97e+24  6371000 5511.412 terrestrial 1.50e+08
+## 4    Mars 6.42e+23  3390000 3934.117 terrestrial 2.28e+08
+## 7  Uranus 8.68e+25 25360000 1270.525   ice_giant 2.90e+09
+## 8 Neptune 1.02e+26 24620000 1631.727   ice_giant 4.50e+09</code></pre>
+<p>Let’s examine what has happened here. In place of an explicit list of row indices we provided a logical comparison between the vector of entries in <code>planets$mass</code> and the single numeric quantity <code>mean(planets$mass)</code>.</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="working-with-data-in-r.html#cb273-1" tabindex="-1"></a>planets<span class="sc">$</span>mass <span class="sc">&lt;</span> <span class="fu">mean</span>(planets<span class="sc">$</span>mass)</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE</code></pre>
+<p>We can see that this logical comparison has compared each entry in the vector of masses with the single quantity <code>mean(planets$mass)</code> and returned a vector with the corresponding logical <em>evaluations</em> of the comparisons. When passed as indices R has extracted only those rows where the logical comparison evaluated to <code>TRUE</code>.</p>
+<p>We can use the Boolean operators to create more complex indexing.</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="working-with-data-in-r.html#cb275-1" tabindex="-1"></a>planets[planets<span class="sc">$</span>mass<span class="sc">&lt;</span><span class="fu">mean</span>(planets<span class="sc">$</span>mass) <span class="sc">&amp;</span> </span>
+<span id="cb275-2"><a href="working-with-data-in-r.html#cb275-2" tabindex="-1"></a>          planets<span class="sc">$</span>density<span class="sc">&gt;</span><span class="fu">mean</span>(planets<span class="sc">$</span>density),]</span></code></pre></div>
+<pre><code>##      name     mass  radius  density        type distance
+## 1 Mercury 3.30e+23 2440000 5423.203 terrestrial 5.80e+07
+## 2   Venus 4.87e+24 6052000 5244.977 terrestrial 1.08e+08
+## 3   Earth 5.97e+24 6371000 5511.412 terrestrial 1.50e+08
+## 4    Mars 6.42e+23 3390000 3934.117 terrestrial 2.28e+08</code></pre>
+<p>The <code>filter</code> funcion in the <code>dplyr</code> package provides a perhaps more accessible syntax for performing this sort of filtering.</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="working-with-data-in-r.html#cb277-1" tabindex="-1"></a><span class="fu">filter</span>(planets, mass <span class="sc">&lt;</span> <span class="fu">mean</span>(mass))</span></code></pre></div>
+<pre><code>##      name     mass   radius  density        type distance
+## 1 Mercury 3.30e+23  2440000 5423.203 terrestrial 5.80e+07
+## 2   Venus 4.87e+24  6052000 5244.977 terrestrial 1.08e+08
+## 3   Earth 5.97e+24  6371000 5511.412 terrestrial 1.50e+08
+## 4    Mars 6.42e+23  3390000 3934.117 terrestrial 2.28e+08
+## 5  Uranus 8.68e+25 25360000 1270.525   ice_giant 2.90e+09
+## 6 Neptune 1.02e+26 24620000 1631.727   ice_giant 4.50e+09</code></pre>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="working-with-data-in-r.html#cb279-1" tabindex="-1"></a><span class="fu">filter</span>(planets, density <span class="sc">&gt;</span> <span class="fu">mean</span>(density))</span></code></pre></div>
+<pre><code>##      name     mass  radius  density        type distance
+## 1 Mercury 3.30e+23 2440000 5423.203 terrestrial 5.80e+07
+## 2   Venus 4.87e+24 6052000 5244.977 terrestrial 1.08e+08
+## 3   Earth 5.97e+24 6371000 5511.412 terrestrial 1.50e+08
+## 4    Mars 6.42e+23 3390000 3934.117 terrestrial 2.28e+08</code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="working-with-data-in-r.html#cb281-1" tabindex="-1"></a><span class="fu">filter</span>(planets, mass <span class="sc">&lt;</span> <span class="fu">mean</span>(mass), density <span class="sc">&gt;</span> <span class="fu">mean</span>(density))</span></code></pre></div>
+<pre><code>##      name     mass  radius  density        type distance
+## 1 Mercury 3.30e+23 2440000 5423.203 terrestrial 5.80e+07
+## 2   Venus 4.87e+24 6052000 5244.977 terrestrial 1.08e+08
+## 3   Earth 5.97e+24 6371000 5511.412 terrestrial 1.50e+08
+## 4    Mars 6.42e+23 3390000 3934.117 terrestrial 2.28e+08</code></pre>
+<p>We saw earlier that R will use the value <code>NA</code> when data entries are missing. Trying to filter when there are <code>NA</code> values will typically produce errors or result in strange behaviour, since applying logical comparisons with <code>NA</code> will always produce <code>NA</code>, even if we try to check if <code>NA</code> is equal to itself!</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="working-with-data-in-r.html#cb283-1" tabindex="-1"></a><span class="cn">NA</span><span class="sc">==</span><span class="cn">NA</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>However R has a special function <code>is.na()</code> which can allow us to handle this. For example</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="working-with-data-in-r.html#cb285-1" tabindex="-1"></a>planets_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(planets, exoplanets)</span>
+<span id="cb285-2"><a href="working-with-data-in-r.html#cb285-2" tabindex="-1"></a></span>
+<span id="cb285-3"><a href="working-with-data-in-r.html#cb285-3" tabindex="-1"></a>planets_all[planets_all<span class="sc">$</span>distance <span class="sc">&gt;</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span>,]</span></code></pre></div>
+<pre><code>##         name     mass   radius   density      type distance
+## 6     Saturn 5.68e+26 58230000  686.7827 gas_giant  1.4e+09
+## 7     Uranus 8.68e+25 25360000 1270.5254 ice_giant  2.9e+09
+## 8    Neptune 1.02e+26 24620000 1631.7267 ice_giant  4.5e+09
+## NA      &lt;NA&gt;       NA       NA        NA      &lt;NA&gt;       NA
+## NA.1    &lt;NA&gt;       NA       NA        NA      &lt;NA&gt;       NA
+## NA.2    &lt;NA&gt;       NA       NA        NA      &lt;NA&gt;       NA</code></pre>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="working-with-data-in-r.html#cb287-1" tabindex="-1"></a>planets_all[planets_all<span class="sc">$</span>distance <span class="sc">&gt;</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span> <span class="sc">|</span> </span>
+<span id="cb287-2"><a href="working-with-data-in-r.html#cb287-2" tabindex="-1"></a>                   <span class="fu">is.na</span>(planets_all<span class="sc">$</span>distance),]</span></code></pre></div>
+<pre><code>##           name     mass   radius    density      type distance
+## 6       Saturn 5.68e+26 58230000   686.7827 gas_giant  1.4e+09
+## 7       Uranus 8.68e+25 25360000  1270.5254 ice_giant  2.9e+09
+## 8      Neptune 1.02e+26 24620000  1631.7267 ice_giant  4.5e+09
+## 9  Kepler-186f 1.90e+23  1170000 28320.9232       exo       NA
+## 10  Kepler-62f 3.32e+23  1410000 28274.3179       exo       NA
+## 11 Kepler-438b 2.64e+23  1120000 44860.2046       exo       NA</code></pre>
+</div>
+</div>
+<div id="importing-and-exporting-data" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Importing and Exporting Data<a href="working-with-data-in-r.html#importing-and-exporting-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="saving-and-exporting" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Saving and Exporting<a href="working-with-data-in-r.html#saving-and-exporting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The are multiple ways in which we can export or save our data, and other R objects. The functions <code>write.table()</code> and <code>write.csv()</code> will write the contents of a data frame (or matrix) to a file, where by default <code>write.table()</code> separates the columns by a <code>Tab</code> and <code>write.csv()</code> by a comma. In addition to the name of the data frame/matrix which is to be written, both functions require an argument <code>file</code>, the filename to which the contents should be written. R will not hesitate to overwrite the contents of a file with the same name, so always be careful to choose sensible and unique names for your files so as not to accidentally lose anything.</p>
+<p>For example, suppose we have created a folder in our <code>H</code> drive called <code>My Awesome Data</code>. We can then write the contents of our <code>planets</code> data frame to a new file in that folder using either of</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="working-with-data-in-r.html#cb289-1" tabindex="-1"></a><span class="fu">write.csv</span>(planets, <span class="at">file =</span> <span class="st">&quot;H:/My Awesome Data/planets.csv&quot;</span>,</span>
+<span id="cb289-2"><a href="working-with-data-in-r.html#cb289-2" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb289-3"><a href="working-with-data-in-r.html#cb289-3" tabindex="-1"></a></span>
+<span id="cb289-4"><a href="working-with-data-in-r.html#cb289-4" tabindex="-1"></a><span class="fu">write.table</span>(planets, <span class="at">file =</span> <span class="st">&quot;H:/My Awesome Data/planets.txt&quot;</span>,</span>
+<span id="cb289-5"><a href="working-with-data-in-r.html#cb289-5" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Note that setting <code>row.names = FALSE</code> prevents R from adding an additional column with either the rownames (not the same as the field <code>planets$name</code>) of the data being written or, if there are no such rownames, then naming the rows from 1 to <code>nrow(planets)</code>.</p>
+<p><strong>The Working Directory</strong></p>
+<p>If the argument <code>file</code> does not specify an entire path then R will by default write to the <em>working directory</em>. You can check the working directory with the command <code>getwd()</code>, and set it with <code>setwd(directory)</code>. For example, we could navigate to the directory <code>H:/My Awesome Data</code> and then simply write the content of <code>planets</code> using.</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="working-with-data-in-r.html#cb290-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;H:/My Awesome Data/&quot;</span>)</span>
+<span id="cb290-2"><a href="working-with-data-in-r.html#cb290-2" tabindex="-1"></a></span>
+<span id="cb290-3"><a href="working-with-data-in-r.html#cb290-3" tabindex="-1"></a><span class="fu">write.csv</span>(planets, <span class="at">file =</span> <span class="st">&quot;planets.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><strong>Saving</strong> R objects of any type can be achieved with the function <code>save()</code>. Similar to the <code>write.*()</code> functions one needs to specify the filename where the objects being saved will be stored. However <code>save()</code> operates by saving an R environment, containing all the other arguments passed to <code>save()</code>. Although <code>save()</code> will allow you to use any filename, typically we use the file extension <code>.RData</code>.</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="working-with-data-in-r.html#cb291-1" tabindex="-1"></a><span class="fu">save</span>(planets, exoplanets, <span class="at">file =</span> <span class="st">&quot;planets.RData&quot;</span>)</span></code></pre></div>
+</div>
+<div id="importing-data" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Importing data<a href="working-with-data-in-r.html#importing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Just as we have the files <code>write.csv()</code> and <code>write.table()</code> so too are there related functions <code>read.csv()</code> and <code>read.table()</code>. When using either of these we need to allocate the contents of the file being read to a data frame in R. In addition we need to provide the full path if reading from outside the working directory, but if reading from the working directory we can simply use <code>read.csv("~/&lt;filename&gt;")</code>. For example, if we have navigated (i.e. set the working directory) to the location where <code>planets.csv</code> is saved then we can read it using</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="working-with-data-in-r.html#cb292-1" tabindex="-1"></a>planets_read <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/planets.csv&quot;</span>)</span>
+<span id="cb292-2"><a href="working-with-data-in-r.html#cb292-2" tabindex="-1"></a></span>
+<span id="cb292-3"><a href="working-with-data-in-r.html#cb292-3" tabindex="-1"></a>planets_read</span></code></pre></div>
+<pre><code>##      name     mass   radius   density        type
+## 1 Mercury 3.30e+23  2440000 5423.2029 terrestrial
+## 2   Venus 4.87e+24  6052000 5244.9771 terrestrial
+## 3   Earth 5.97e+24  6371000 5511.4124 terrestrial
+## 4    Mars 6.42e+23  3390000 3934.1175 terrestrial
+## 5 Jupiter 1.90e+27 69910000 1327.5384   gas_giant
+## 6  Saturn 5.68e+26 58230000  686.7827   gas_giant
+## 7  Uranus 8.68e+25 25360000 1270.5254   ice_giant
+## 8 Neptune 1.02e+26 24620000 1631.7267   ice_giant</code></pre>
+<p><strong>File Format</strong></p>
+<p>In general, before you import a data set, try to inspect the file using
+a text editor to confirm the structure. Once you have identified the
+structure, and if it happens to be something standard, like a CSV, or
+<code>Tab</code>-delimited file, then go ahead and use those respective functions to
+read it in. But in the event of it being something a bit more special,
+like colon separated values, you can setup <code>read.table(, sep = ":")</code> to import the data correctly.</p>
+<p>So what would happen if we use the wrong format? Let’s read in the <code>Tab</code> separated <code>planets.txt</code> as though it is a <code>.csv</code> and inspect it</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="working-with-data-in-r.html#cb294-1" tabindex="-1"></a>planets_tab <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/planets.txt&quot;</span>)</span>
+<span id="cb294-2"><a href="working-with-data-in-r.html#cb294-2" tabindex="-1"></a></span>
+<span id="cb294-3"><a href="working-with-data-in-r.html#cb294-3" tabindex="-1"></a><span class="fu">str</span>(planets_tab)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    8 obs. of  1 variable:
+##  $ name.mass.radius.density.type: chr  &quot;Mercury 3.3e+23 2440000 5423.20288031323 terrestrial&quot; &quot;Venus 4.87e+24 6052000 5244.97706969092 terrestrial&quot; &quot;Earth 5.97e+24 6371000 5511.41236928615 terrestrial&quot; &quot;Mars 6.42e+23 3390000 3934.11747589116 terrestrial&quot; ...</code></pre>
+<p>The <code>read.csv()</code> function expects the columns/variables to be separated by commas, and so continues to read each line until it finds a comma. Since there are none, it thinks there is only a single item to read in each line and concatenates the contents of each line.</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="working-with-data-in-r.html#cb296-1" tabindex="-1"></a>planets_tab[<span class="dv">1</span>,<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Mercury 3.3e+23 2440000 5423.20288031323 terrestrial&quot;</code></pre>
+<p><strong>Loading</strong> saved R objects can be achieved with the function <code>load()</code>. Unlike the <code>read.*()</code> functions we do not need to allocate the contents being loaded since the saved objects (with their names) will be imported into the global environment. Let’s remove the <code>planets</code> data frame and then reload it.</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="working-with-data-in-r.html#cb298-1" tabindex="-1"></a><span class="fu">rm</span>(planets)</span>
+<span id="cb298-2"><a href="working-with-data-in-r.html#cb298-2" tabindex="-1"></a></span>
+<span id="cb298-3"><a href="working-with-data-in-r.html#cb298-3" tabindex="-1"></a>planets</span></code></pre></div>
+<pre><code>## Error: object &#39;planets&#39; not found</code></pre>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="working-with-data-in-r.html#cb300-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/planets.RData&quot;</span>)</span>
+<span id="cb300-2"><a href="working-with-data-in-r.html#cb300-2" tabindex="-1"></a></span>
+<span id="cb300-3"><a href="working-with-data-in-r.html#cb300-3" tabindex="-1"></a>planets</span></code></pre></div>
+<pre><code>##      name     mass   radius   density        type
+## 1 Mercury 3.30e+23  2440000 5423.2029 terrestrial
+## 2   Venus 4.87e+24  6052000 5244.9771 terrestrial
+## 3   Earth 5.97e+24  6371000 5511.4124 terrestrial
+## 4    Mars 6.42e+23  3390000 3934.1175 terrestrial
+## 5 Jupiter 1.90e+27 69910000 1327.5384   gas_giant
+## 6  Saturn 5.68e+26 58230000  686.7827   gas_giant
+## 7  Uranus 8.68e+25 25360000 1270.5254   ice_giant
+## 8 Neptune 1.02e+26 24620000 1631.7267   ice_giant</code></pre>
+<p><strong>Be careful</strong> when using the <code>load()</code> function since if the specified file contains objects with the same names as those in the current environment these will be overwritten.</p>
+<div id="loading-data-from-packages" class="section level4 hasAnchor" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> Loading Data from Packages<a href="working-with-data-in-r.html#loading-data-from-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For the most part we will be working with data which are contained in existing R libraries. Depending on the package, when we load its library using the function <code>library()</code> either R will also import all of the package’s data sets to the global environment or it will allow you to access these data sets with the function <code>data()</code>.</p>
+<p>We can also use the function <code>data()</code> to inspect the entire list of data sets included in a package. Let’s look at the <code>ISLR2</code> package to start. If you haven’t already done so, install the package using <code>install.packages("ISLR2")</code>.</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="working-with-data-in-r.html#cb302-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb302-2"><a href="working-with-data-in-r.html#cb302-2" tabindex="-1"></a></span>
+<span id="cb302-3"><a href="working-with-data-in-r.html#cb302-3" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;ISLR2&quot;</span>)</span></code></pre></div>
+<p>This should bring up a new tab called <code>R data sets</code> which includes the list of data sets included in the <code>ISLR2</code> package. Since <code>ISLR2</code> automatically loads its data sets to the environment (so-called <em>lazy loading</em>) along with the library, you should be able to access these. For example</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="working-with-data-in-r.html#cb303-1" tabindex="-1"></a><span class="fu">str</span>(Auto)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    392 obs. of  9 variables:
+##  $ mpg         : num  18 15 18 16 17 15 14 14 14 15 ...
+##  $ cylinders   : int  8 8 8 8 8 8 8 8 8 8 ...
+##  $ displacement: num  307 350 318 304 302 429 454 440 455 390 ...
+##  $ horsepower  : int  130 165 150 150 140 198 220 215 225 190 ...
+##  $ weight      : int  3504 3693 3436 3433 3449 4341 4354 4312 4425 3850 ...
+##  $ acceleration: num  12 11.5 11 12 10.5 10 9 8.5 10 8.5 ...
+##  $ year        : int  70 70 70 70 70 70 70 70 70 70 ...
+##  $ origin      : Factor w/ 3 levels &quot;American&quot;,&quot;European&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ name        : Factor w/ 304 levels &quot;amc ambassador brougham&quot;,..: 49 36 231 14 161 141 54 223 241 2 ...
+##  - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:5] 33 127 331 337 355
+##   ..- attr(*, &quot;names&quot;)= chr [1:5] &quot;33&quot; &quot;127&quot; &quot;331&quot; &quot;337&quot; ...</code></pre>
+</div>
+</div>
+</div>
+<div id="data-plotting" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Data Plotting<a href="working-with-data-in-r.html#data-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It might seem to you that scientists have an obsession with
+quantification. Your impressions would be correct. To build reliable,
+reproducible results, scientists naturally seek to gather and record
+counts, measurements, and attributes of the phenomenon under
+observation. Data, the collective name for such counts, measurements,
+and attributes, are the lifeblood of science. Studying data with
+quantitative tools allows scientists to detect patterns, make
+predictions, and assess the reliability of current theory. Being able to
+visualise data is crucial to this endeavour. Even a small data set is
+practically incomprehensible all by itself. Plotting data allows us to
+visualise the relationships we are interested in.</p>
+<p>Visualisation can be used for two things; (a) for the computer to show
+the scientist what is happening in the data, and (b) for you to show
+other people. Graphs that fall into (a) tend to be produced quicker and
+dirtier than the graphs we produce for (b).</p>
+<p>Finally, different types of graphs emphasise different aspects of the
+data and variables under study. Building a <em>good</em> graph therefore takes
+time and is often an iterative process.</p>
+<p>We saw in the previous chapter how the function <code>plot()</code> could be used to graphically display the relationships between two vector arguments. In this section we will briefly look at some useful was of visualising data, either single variables or the relationships between two variables.</p>
+<p><strong>The <code>airquality</code> Data Set</strong></p>
+<p>For illustrative purposes we will be working with one of the data sets which is loaded automatically when we start R. The <code>airquality</code> data set includes multiple air quality measurements taken in the Summer (May - September) of 1973 in New York. As always, if you want details on anything you can use the function <code>help(airquality)</code>.</p>
+<p>Let’s begin by inspecting the contents of that data set.</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="working-with-data-in-r.html#cb305-1" tabindex="-1"></a><span class="fu">str</span>(airquality)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    153 obs. of  6 variables:
+##  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
+##  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
+##  $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+##  $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...
+##  $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
+##  $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+<p>We can see that the data contain 6 variables including <code>Ozone</code>, <code>Solar.R</code>, <code>Wind</code>, <code>Temp</code>, <code>Month</code> and <code>Day</code>. Most of these are self explanatory, where checking the documentation tells us that <code>Solar.R</code> is solar radiation and <code>Day</code> is the day of the month.</p>
+<div id="scatter-plots" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Scatter Plots<a href="working-with-data-in-r.html#scatter-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A scatter plot is a plot of the values of two variables against one another. When we used the function <code>plot()</code> in the previous chapter, even though we primarily used this to visualise the graphs of functions, what was actually happening is that R was plotting pairs of values of the vector of arguments to the function and the function evaluations against one another (either as points, <code>type = "p"</code> or as a line, <code>type = "l"</code>). Since in general we don’t expect two measured (rather than <em>derived</em>) variables in a data set to fit precisely to some functional form using a scatter plot of two measured variables as points is useful for getting a sense of the <em>general trend</em> in the relationship between the variables, or perhaps to see whether or not there is a relationship at all.</p>
+<p>For example, we may expect that there will be a negative relationship between temperature and wind speed since wind moves from low pressure systems (high temperature) to high pressure (low temperature).</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="working-with-data-in-r.html#cb307-1" tabindex="-1"></a><span class="fu">plot</span>(airquality<span class="sc">$</span>Wind, airquality<span class="sc">$</span>Temp,</span>
+<span id="cb307-2"><a href="working-with-data-in-r.html#cb307-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Wind Speed&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Temperature&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-119-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Indeed we can see that the trend is that high temperatures <em>typically</em> coincide with lower wind speeds, but that there is a lot of <em>scatter</em> of the points around this general relationship.</p>
+<p>Although in this case there is a physical law which suggests we may see such a relationship, scatter plots can also simply be used as exploratory tools to investigate whether there may be a relationship between variables or not. If we call <code>plot()</code> on an entire data frame R will produce a <em>matrix of plots</em> showing the scatter plots of all pairs of variables against one another. When the number of variables is only up to about six or seven this can be instructive, but if there is a large number of variables then this will not be very easy to digest.</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="working-with-data-in-r.html#cb308-1" tabindex="-1"></a><span class="fu">plot</span>(airquality)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-120-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The scatter plots of the <em>continuous</em> variables <code>Ozone</code>, <code>Solar.R</code>, <code>Wind</code> and <code>Temp</code> are quite instructive, and to a lesser extent their plots against <code>Month</code> as well. However, although we should expect some relationship between these measured variables and time, since the day of the month “resets” somewhat arbitrarily at the turn of each month plotting against <code>Day</code> may not have been very useful. We can plot a sub-data frame in the obvious way, by selecting some of its columns</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="working-with-data-in-r.html#cb309-1" tabindex="-1"></a><span class="fu">plot</span>(airquality[,<span class="sc">!</span>(<span class="fu">names</span>(airquality)<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Month&quot;</span>))])</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-121-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="box-plots" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Box-plots<a href="working-with-data-in-r.html#box-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Box-plots (or box and whisker plots) provide a very simply representation of the distribution of values of a single variable. They are based on what is known as the “five number summary” which includes the minimum and maximum values, and the three intermediate <em>quartiles</em>. The first quartile is the value which separates the bottom <span class="math inline">\(25\%\)</span> of values from the upper <span class="math inline">\(75\%\)</span>, the second quartile (or median) separates the bottom and top halves, and the third quartile separates the top <span class="math inline">\(25\%\)</span> from the rest.</p>
+<p>A box-plot shows the distribution of values with a “box” illustrating the range between the first and third quartiles along with a line for the median, and “whiskers” reaching to the maximum and minimum values.
+- An exception to this is that if there are values above the value <span class="math inline">\(Q_3 + 1.5(Q_3-Q_1)\)</span>, where <span class="math inline">\(Q_3-Q_1\)</span> is called the “interquartile range” (IQR) then the top “whisker” only extends to the largest value below this threshold and all points above it are shown individually. The same applies to the values below <span class="math inline">\(Q_1 - 1.5(Q_3-Q_1)\)</span>.</p>
+<p>For example the boxplot of <code>Ozone</code> shows that there are two values above the threshold <span class="math inline">\(Q_3 + 1.5 IQR\)</span>, but no such “outliers” in the lower values.</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="working-with-data-in-r.html#cb310-1" tabindex="-1"></a><span class="fu">boxplot</span>(airquality<span class="sc">$</span>Ozone)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-122-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Boxplots are extremely useful for getting a sense of the symmetry/asymmetry of the distribution. If the distribution is roughly symmetric we should see the median roughly in the middle of the “box” and the lengths of the whiskers being more or less the same length. The distribution of <code>Ozone</code> is <em>right skewed</em> since the length of the upper half of the “box” is longer than that of the lower half and the upper whisker is longer than the lower whisker (plus there are some fairly extreme values in the <em>upper tail</em>).</p>
+<p>We saw when using scatter plots that the <em>discrete</em> variables <code>Month</code> and <code>Day</code> were less instructive. We can investigate the relationships numeric and categorical variables (where we might reasonably think of <code>Month</code> as a category for this purpose) by comparing the distributions of the numeric variable within different levels/values of the category. We can achieve this using box-plots by calling</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="working-with-data-in-r.html#cb311-1" tabindex="-1"></a><span class="fu">boxplot</span>(Ozone<span class="sc">~</span>Month, <span class="at">data =</span> airquality)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-123-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The argument <code>Ozone~Month</code> is a <code>formula</code> which tells R we want to know “how does <code>Ozone</code> relate to <code>Month</code>?”. We will use formulas a lot in this module when we start to fit predictive models. We can clearly see above that the distribution of <code>Ozone</code> varies a lot with the changing months. Also, since the months are ordered this gives us a sense of change over time, with <code>Ozone</code> peaking in July and Aurgust (Months 7 and 8).</p>
+</div>
+<div id="histograms" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Histograms<a href="working-with-data-in-r.html#histograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Histograms provide a far more detailed representation of the distribution of a numeric variable. How they work is by breaking up the interval/range of values of the variable into equal width <em>bins</em> and then showing the proportions of the observations which fall into each of these bins.</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="working-with-data-in-r.html#cb312-1" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-124-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Setting <code>freq = FALSE</code> tells R we want to see the <em>proportion</em> of observations in each bin and not the total, however in some cases we may wish to see the total and can simply omit this argument since its default is to show the totals.</p>
+<p>It should be clear that the shape of the histogram will depend on the number of bins being used. Although the general shape will be similar for any appropriate number of bins, the more bins we include the more potential for the histogram for capturing detail in the distribution. However, using a large number of bins increases the variability in the proportions. By default <code>hist()</code> will use what is known as Sturge’s rule to compute an appropriate number of bins, but we can also vary this manually by providing <code>breaks = number_of_bins</code></p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="working-with-data-in-r.html#cb313-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb313-2"><a href="working-with-data-in-r.html#cb313-2" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">4</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb313-3"><a href="working-with-data-in-r.html#cb313-3" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">7</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb313-4"><a href="working-with-data-in-r.html#cb313-4" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">12</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb313-5"><a href="working-with-data-in-r.html#cb313-5" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">25</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-125-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="summary-2" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Summary<a href="working-with-data-in-r.html#summary-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Data frames are the standard object for storing data in R. Each
+column in a data frame is considered to be a variable, such that the
+type of data it contains (strings vs numbers) can differ from the
+other columns. Accessing data can be done using both the dollar
+syntax and the square-bracket syntax:</li>
+</ul>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="working-with-data-in-r.html#cb314-1" tabindex="-1"></a>planets<span class="sc">$</span>name</span></code></pre></div>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot;  &quot;Neptune&quot;</code></pre>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="working-with-data-in-r.html#cb316-1" tabindex="-1"></a>planets<span class="sc">$</span>name[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="working-with-data-in-r.html#cb318-1" tabindex="-1"></a>planets[, <span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot;  &quot;Neptune&quot;</code></pre>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="working-with-data-in-r.html#cb320-1" tabindex="-1"></a>planets[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;</code></pre>
+<ul>
+<li><p>To export data use either the <code>write.table()</code> or <code>write.csv()</code>
+functions. Make sure to set the parameter <code>row.names=FALSE</code>. Check
+the help pages for each for more details.</p></li>
+<li><p>Both have these have sister functions; <code>read.table()</code> and
+<code>read.csv()</code>. With <code>read.table()</code> having lots of options that can be
+modified to read in any structured data file.</p></li>
+<li><p>R has a <em>working directory</em>, use <code>getwd()</code> to find out what it
+currently is. And use <code>setwd()</code> to change it. Equally, there is a
+menu in RStudio that allows you to do the same thing.</p></li>
+<li><p>Working directories are good, as they allow you to use relative
+paths, rather than absolute ones.</p></li>
+</ul>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="working-with-data-in-r.html#cb322-1" tabindex="-1"></a><span class="co"># relative file names</span></span>
+<span id="cb322-2"><a href="working-with-data-in-r.html#cb322-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;H:/Awesome R Data/&quot;</span>)</span>
+<span id="cb322-3"><a href="working-with-data-in-r.html#cb322-3" tabindex="-1"></a><span class="fu">write.table</span>(planets, <span class="at">file =</span> <span class="st">&quot;planet.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb322-4"><a href="working-with-data-in-r.html#cb322-4" tabindex="-1"></a></span>
+<span id="cb322-5"><a href="working-with-data-in-r.html#cb322-5" tabindex="-1"></a><span class="co"># absolute file names</span></span>
+<span id="cb322-6"><a href="working-with-data-in-r.html#cb322-6" tabindex="-1"></a><span class="fu">write.table</span>(planets, <span class="at">file =</span> <span class="st">&quot;H:/Awesome R Data/planet.csv&quot;</span>,</span>
+<span id="cb322-7"><a href="working-with-data-in-r.html#cb322-7" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<ul>
+<li><p>It can be a good idea to set your working directory at the top of
+your script.</p></li>
+<li><p>R’s base plotting functions allow us to conduct cursory investigations of our data</p>
+<ul>
+<li><p>Scatterplots can show give a sense of relationships between pairs of numerical variables</p></li>
+<li><p>Box-plots and histograms can show the distributions of numeric variables. In addition inspecting box-plots of a variable across different levels of a categorical variable can give us a sense of the relationship between them.</p></li>
+<li><p>Although we didn’t cover them here, bar-plots (with the function <code>barplot()</code>) can be used to illustrate the distribution of a categorical variable by showing the proportions of observations in each category. Also we can inspect the relationship between two categorical variables much as we did with histograms using <code>barplot(variable1~variable2, data)</code>.</p></li>
+<li><p>We have only used R’s base plotting functionality, where more advanced visualisations can be achieved using <code>ggplot</code> and its derivatives. You can see the documentation of the more recent <code>ggplot2</code> at <a href="http://docs.ggplot2.org" class="uri">http://docs.ggplot2.org</a> and there have been
+many <code>ggplot2</code> questions answered on StackOverflow.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="exercises-3" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Exercises<a href="working-with-data-in-r.html#exercises-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Working on your <code>planets</code> data frame:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Add the volumes for each planet as new variable using the dollar
+syntax.</li>
+<li>Now add variables with the following definitions:</li>
+</ol>
+<pre><code>* `mass_earths` The mass of a planet as a proportion of the mass of Earth.
+* `volume_earths` Express `volume` as a proportion of Earth&#39;s volume.
+* `gravity_earths` Express `gravity` as a proportion of Earth&#39;s gravity.</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Create a new data frame which only contains the names of the
+planets, and each of the measurements expressed as a proportion of
+Earth. Inspect this data frame for information on the other
+planets relative to Earth.</li>
+</ol>
+<!-- -->
+<ol start="2" style="list-style-type: decimal">
+<li>Make sure you are familiar with writing and reading from data files
+that are Tab-delimitted or CSV. For each file format:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Look-up the help page, see the arguments needed to use the
+particular <code>write.*()</code> function.</li>
+<li>Store the <code>planet</code> data frame with the appropriate file extension.</li>
+<li>Can you open it in Excel?</li>
+<li>Can you read it back into R?</li>
+</ol>
+<!-- -->
+<ol start="3" style="list-style-type: decimal">
+<li>Explore the <code>Auto</code> data set in the package <code>ISLR2</code>. Use the <code>help()</code> function to get additional information on its variables if needed. The plan is to explore this data set using graphs/plots.</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li><p>Separate out numerical variables between which you think there might be a relationship. Use scatter plots to identify any strong relationships.</p></li>
+<li><p>Investigate the presence of relationships between categorical variables.</p></li>
+<li><p>See if any of the interesting relationships you found differ by <code>origin</code>. For example, you can include different colours for each <code>origin</code> in a scatter plot of two variables using the argument <code>col</code> in a call to plot.</p></li>
+<li><p>The field <code>$name</code> is the vehicle model, which is almost unique for each entry. Create a new field <code>$make</code> which is a factor variable specifying the make of car. You are certainly not expected to do this manually. Start by writing a function which uses the base function <code>substr()</code> to look for the first space in a character object (use <code>help(substr)</code> to get you started. You may also wish to consult the function <code>nchar()</code>), and so return only the first word/acronym/initialism in each of the car models. Then apply this function to <code>Auto$name</code> to obtain <code>$make</code>.</p></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="background.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

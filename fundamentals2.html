@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 The Fundamentals of Predictive Modelling II | Introduction to R</title>
+  <meta name="description" content="5 The Fundamentals of Predictive Modelling II | Introduction to R" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 The Fundamentals of Predictive Modelling II | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 The Fundamentals of Predictive Modelling II | Introduction to R" />
+  
+  
+  
+
+<meta name="author" content="David P. Hofmeyr" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="fundamentals1.html"/>
+<link rel="next" href="linear.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#background-on-r"><i class="fa fa-check"></i><b>1.1</b> Background on R</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-rstudio"><i class="fa fa-check"></i><b>1.2</b> Getting started with RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statements-expressions-and-objects"><i class="fa fa-check"></i><b>1.3</b> Statements, expressions and objects</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plots"><i class="fa fa-check"></i><b>1.4</b> Basic plots</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R scripts</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>1.6</b> R markdown</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.7</b> Functions</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#s:0help"><i class="fa fa-check"></i><b>1.8</b> Getting Help</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loops-and-flow"><i class="fa fa-check"></i><b>1.9</b> Loops and Flow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-frames"><i class="fa fa-check"></i><b>2.1</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>2.2</b> Importing and Exporting Data</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-plotting"><i class="fa fa-check"></i><b>2.3</b> Data Plotting</a></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#exercises-3"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>3</b> Statistical Background</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="background.html"><a href="background.html#probability-basics"><i class="fa fa-check"></i><b>3.1</b> Probability Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="background.html"><a href="background.html#random-variables"><i class="fa fa-check"></i><b>3.2</b> Random Variables</a></li>
+<li class="chapter" data-level="3.3" data-path="background.html"><a href="background.html#samples-and-statistical-modelling"><i class="fa fa-check"></i><b>3.3</b> Samples and Statistical Modelling</a></li>
+<li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
+<li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
+<li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fundamentals1.html"><a href="fundamentals1.html#two-archetypal-problems"><i class="fa fa-check"></i><b>4.1</b> Two Archetypal Problems</a></li>
+<li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
+<li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
+<li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-and-take-aways"><i class="fa fa-check"></i><b>4.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fundamentals2.html"><a href="fundamentals2.html#a-quick-recap"><i class="fa fa-check"></i><b>5.1</b> A Quick Recap</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals2.html"><a href="fundamentals2.html#overfitting"><i class="fa fa-check"></i><b>5.2</b> Overfitting</a></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-and-take-aways-1"><i class="fa fa-check"></i><b>5.5</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear.html"><a href="linear.html#the-linear-model"><i class="fa fa-check"></i><b>6.1</b> The Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-and-take-aways-2"><i class="fa fa-check"></i><b>7.3</b> Summary and Take-aways</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonparametric Smoothing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
+<li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
+<li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-4"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
+<li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-and-take-aways-3"><i class="fa fa-check"></i><b>10.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fundamentals2" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> The Fundamentals of Predictive Modelling II<a href="fundamentals2.html#fundamentals2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="math display">\[
+\def\x{\mathbf{x}}
+\def\Rr{\mathbb{R}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\def\F{\mathcal{F}}
+\def\hbbeta{\hat{\boldsymbol{\beta}}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\X{\mathbf{X}}
+\def\y{\mathbf{y}}
+\def\hg{\hat g}
+\]</span></p>
+<p>In the previous chapter we looked mainly on model training, where we focus on estimating predictive models by minimising a loss function. In this chapter we look mainly at <em>evaluating</em> models so that we can use these evaluations in order to select which (from multiple possible models) to take forward for actually predicting on cases which are not in our observations.</p>
+<div id="a-quick-recap" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> A Quick Recap<a href="fundamentals2.html#a-quick-recap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall the regression setting, where a numeric response variable, <span class="math inline">\(Y\)</span>,
+is related to covariates <span class="math inline">\(X\)</span> via the equation <span class="math display">\[
+  Y = g^*(X) + \epsilon
+\]</span></p>
+<ul>
+<li>We can think of <span class="math inline">\(g^*(X)\)</span> as the “signal” (what <em>is</em> predictable
+about <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span>) and <span class="math inline">\(\epsilon\)</span> as the “noise” (what <em>is not</em>
+predictable)</li>
+</ul>
+<p>We are considering fitting a model by minimising training error: <span class="math display">\[
+  \hat g = \argmin_{g \in \F} \frac{1}{n}\sum_{i=1}^n (y_i - g(\x_i))^2
+\]</span> We finished by looking at polynomials of a single covariate:
+<span class="math inline">\(\hat g(x) = \hat \beta_0 + \sum_{j=1}^d \hat \beta_j x^j\)</span>, where <span class="math inline">\(d\)</span> is
+the degree of the polynomial</p>
+</div>
+<div id="overfitting" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Overfitting<a href="fundamentals2.html#overfitting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We saw in the last section that as we increased the degree of the
+polynomial, we were able to fit better and better to the training data
+(getting smaller and smaller <em>training error</em>)</p>
+<p>This is because the higher degree models have more <em>flexibility</em>:</p>
+<ul>
+<li><p>Let’s use the notation <span class="math inline">\(\hat g_d\)</span> to be the fitted degree <span class="math inline">\(d\)</span>
+polynomial model, so that <span class="math display">\[\begin{align*}
+  \hat g_d(x) &amp;= \hat \beta_0 + \sum_{j=1}^d \hat \beta_j x^j,\\
+  \mbox{where } \hbbeta &amp;= \argmin_{\bbeta \in \Rr^{d+1}} \frac{1}{n}\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^d \beta_j x_i^j\right)^2
+\end{align*}\]</span></p></li>
+<li><p>But for any <span class="math inline">\(d&#39; &gt; d\)</span> we could also write
+<span class="math inline">\(\hat g_d(x) = \hat \beta_0 + \sum_{j=1}^d \hat \beta_j x^j + \sum_{j=d+1}^{d&#39;} 0 x^j\)</span></p></li>
+<li><p>In other words, <span class="math inline">\(\hat g_d\)</span> is also a degree <span class="math inline">\(d&#39;\)</span> polynomial, but we
+are only allowed to choose the value zero for all of the
+coefficients <span class="math inline">\(\hat \beta_{d+1}, ..., \hat \beta_{d&#39;}\)</span></p></li>
+<li><p>On the other hand the fitted degree <span class="math inline">\(d&#39;\)</span> model, <span class="math inline">\(\hat g_{d&#39;}\)</span> is
+“allowed” to have zero OR non-zero values for these coefficients,
+and would choose whichever gave the lower training error</p></li>
+<li><p>These extra options available to <span class="math inline">\(\hat g_{d&#39;}\)</span> means it is a
+strictly more flexible model than <span class="math inline">\(\hat g_d\)</span>, and so we should
+expect it to have lower training error (it is impossible for it to
+have higher training error)</p></li>
+</ul>
+<p>If we took this idea to the extreme, we would be able to fit the
+training data perfectly (i.e. achieve zero training error) if we went as
+far as using a degree <span class="math inline">\(n-1\)</span> polynomial</p>
+<p>The fact that we can always fit the training data perfectly, provided we
+have a flexible enough model, should give us pause when choosing to fit
+models only based on training error. Indeed we saw previously, when
+using the <code>cars</code> data set, that although our training error kept
+decreasing as we increased the degree of the polynomial, when plotting
+the functions which had been fit they did not seem like realistic
+representations of the actual relationship between speed and stopping
+distance.</p>
+<p>Another way of viewing this is that a model which fits the data
+perfectly must essentially have “memorised” every aspect of them, even
+the random residual terms which are, by definition, unpredictable</p>
+<ul>
+<li>A model which fits too well to the data (incorporating all or most
+of the noise) is said to <em>overfit</em> the data</li>
+</ul>
+<p>When we try to make predictions from such a model it will ultimately be
+reproducing the “noise” from the training data.</p>
+<p><strong>Example:</strong></p>
+<p>Let’s return to the example we saw right at the beginning of this
+section. We have the setup where</p>
+<p><span class="math display">\[\begin{align*}
+Y = 1 + 4X - 3X^2 - X^3 + 2X^4 + \epsilon,
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(X\)</span> is uniformly distributed on <span class="math inline">\((0,1)\)</span> and
+<span class="math inline">\(\epsilon \sim N(0, 1/25)\)</span>. In the following code chunk we simulate a
+set of <span class="math inline">\(n = 30\)</span> realisations of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="fundamentals2.html#cb359-1" tabindex="-1"></a><span class="do">### First let&#39;s set up what is fixed</span></span>
+<span id="cb359-2"><a href="fundamentals2.html#cb359-2" tabindex="-1"></a><span class="co">#sample size</span></span>
+<span id="cb359-3"><a href="fundamentals2.html#cb359-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb359-4"><a href="fundamentals2.html#cb359-4" tabindex="-1"></a></span>
+<span id="cb359-5"><a href="fundamentals2.html#cb359-5" tabindex="-1"></a><span class="co"># residual standard deviation</span></span>
+<span id="cb359-6"><a href="fundamentals2.html#cb359-6" tabindex="-1"></a>sigma_resid <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb359-7"><a href="fundamentals2.html#cb359-7" tabindex="-1"></a></span>
+<span id="cb359-8"><a href="fundamentals2.html#cb359-8" tabindex="-1"></a><span class="co"># true regression function</span></span>
+<span id="cb359-9"><a href="fundamentals2.html#cb359-9" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb359-10"><a href="fundamentals2.html#cb359-10" tabindex="-1"></a></span>
+<span id="cb359-11"><a href="fundamentals2.html#cb359-11" tabindex="-1"></a><span class="do">### Now we can sample our realisations of X and Y</span></span>
+<span id="cb359-12"><a href="fundamentals2.html#cb359-12" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb359-13"><a href="fundamentals2.html#cb359-13" tabindex="-1"></a></span>
+<span id="cb359-14"><a href="fundamentals2.html#cb359-14" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb359-15"><a href="fundamentals2.html#cb359-15" tabindex="-1"></a></span>
+<span id="cb359-16"><a href="fundamentals2.html#cb359-16" tabindex="-1"></a><span class="do">### We then fit a high degree polynomial, say with degree six</span></span>
+<span id="cb359-17"><a href="fundamentals2.html#cb359-17" tabindex="-1"></a></span>
+<span id="cb359-18"><a href="fundamentals2.html#cb359-18" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">poly</span>(x, <span class="dv">6</span>), <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb359-19"><a href="fundamentals2.html#cb359-19" tabindex="-1"></a></span>
+<span id="cb359-20"><a href="fundamentals2.html#cb359-20" tabindex="-1"></a><span class="do">### For plotting reasons we can obtain predictions over a grid of values of x</span></span>
+<span id="cb359-21"><a href="fundamentals2.html#cb359-21" tabindex="-1"></a></span>
+<span id="cb359-22"><a href="fundamentals2.html#cb359-22" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">by =</span> <span class="fl">0.01</span>))</span>
+<span id="cb359-23"><a href="fundamentals2.html#cb359-23" tabindex="-1"></a></span>
+<span id="cb359-24"><a href="fundamentals2.html#cb359-24" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
+<span id="cb359-25"><a href="fundamentals2.html#cb359-25" tabindex="-1"></a></span>
+<span id="cb359-26"><a href="fundamentals2.html#cb359-26" tabindex="-1"></a><span class="do">### Finally let&#39;s visualise the sample points, the true function and</span></span>
+<span id="cb359-27"><a href="fundamentals2.html#cb359-27" tabindex="-1"></a><span class="do">### the fitted function</span></span>
+<span id="cb359-28"><a href="fundamentals2.html#cb359-28" tabindex="-1"></a></span>
+<span id="cb359-29"><a href="fundamentals2.html#cb359-29" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb359-30"><a href="fundamentals2.html#cb359-30" tabindex="-1"></a></span>
+<span id="cb359-31"><a href="fundamentals2.html#cb359-31" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb359-32"><a href="fundamentals2.html#cb359-32" tabindex="-1"></a></span>
+<span id="cb359-33"><a href="fundamentals2.html#cb359-33" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-150-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Try re-running the above code multiple times. You will see how much the fitted function varies from sample to sample. This is because the model is trying to model too much of the data and is capturing a lot of what makes the samples different (the residual “noise” terms) and not only what makes them similar (the actual functional “signal” component).</p>
+<p>Now try changing the degree of the polynomial and run the code multiple times. What do you observe?</p>
+<p>Although we never know the true function in practice, for a comparison like we have here, using simulations like this in order to see how well different types of models <em>tend to perform</em> can be very instructive.</p>
+</div>
+<div id="prediction-error-and-generalisation" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Prediction Error and Generalisation<a href="fundamentals2.html#prediction-error-and-generalisation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What we actually want is not a model which simply reproduces the
+training data, but one which <em>generalises</em> well, meaning that it
+predicts well/accurately on new cases (i.e. those not in our sample). We
+already know the values of <span class="math inline">\(Y\)</span> in our sample, and we want our model to
+pick up on the trend in the relationships with the covariates so that it
+will be able to reproduce that trend in its predictions, but without
+unnecessary incorporation of the noise.</p>
+<p>The <em>prediction error</em> (or generalisation error) of a model, <span class="math inline">\(\hg\)</span>, is
+its expected error/loss over the entire distribution of potential pairs
+of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+
+PredictionError(\hat g) &amp;= E_{X,Y}\left[L(Y, \hg(X))\right].
+
+\end{align*}\]</span></p>
+<p>In the standard regression setting we have <span class="math inline">\(L(y, \hat y) = (y-\hat y)^2\)</span>
+and so</p>
+<p><span class="math display">\[\begin{align*}
+
+PredictionError(\hat g) &amp;= E_{X,Y}\left[\left(Y -
+\hg(X)\right)^2\right].
+
+\end{align*}\]</span></p>
+<p>Typically the training error underestimates the prediction error, since
+the model has been fit/chosen/optimised specifically to minimise the
+error on the training data, and not the entire distribution of <span class="math inline">\(Y\)</span> and
+<span class="math inline">\(X\)</span></p>
+<ul>
+<li>Note that this is the case even in the absence of overfitting, but
+overfitting will tend to lead to a larger difference between
+prediction error and training error</li>
+</ul>
+<p>Moreover we cannot directly tell whether a model has overfit or not, but
+models with more flexibility have a greater risk of overfitting.</p>
+<p>But there is another side of the “coin”, and if a model is not given
+enough flexibility, it may <em>underfit</em>, meaning it may not pick up much
+on the noise in the data but may be so inflexible that it also misses a
+lot of what is actually the signal.</p>
+<p>Perhaps the most difficult problem in predictive modelling is
+identifying the right amount of flexibility: so that the model can
+capture the nuances of the regression function <span class="math inline">\(g^*\)</span>, but is not so
+flexible that it captures an unnecessarily large amount of the noise as
+well.</p>
+<p>Choosing a model, or the right amount of flexibility to give a model
+when training, is known as <em>model selection.</em></p>
+<p>If we somehow had direct access to the prediction error of a model, or of a
+collection of models given different amounts of flexibility, then
+selecting the one with the lowest prediction error is an obvious
+approach</p>
+<ul>
+<li>Or, if model interpretability is also a key aspect of the analysis,
+then we may choose a model based on some trade-off of accuracy and
+interpretability.</li>
+</ul>
+<div id="expected-prediction-error" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Expected Prediction Error<a href="fundamentals2.html#expected-prediction-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It turns out that obtaining a reliable enough estimate for prediction
+error of a model, <span class="math inline">\(\hat g\)</span>, for the purpose of model selection, is not
+so easy.</p>
+<p>We typically instead rely on the <em>expected</em> prediction error of <span class="math inline">\(\hat g\)</span>
+as an <em>estimator</em>:</p>
+<p><span class="math display">\[\begin{align*}
+
+E\left[PredictionError(\hat g)\right] = E_{\hat g, X, Y}\left[L(Y,
+\hat g(X))\right].
+
+\end{align*}\]</span></p>
+<p>How this differs from prediction error is:</p>
+<ul>
+<li>Instead of the prediction error of the model I obtained from <em>my
+specific training data</em>, it quantifies the average prediction error
+of the models I could have obtained by using the same
+fitting/training/estimation procedure (the same <em>estimator</em>) on
+infinitely many training data sets from the same population</li>
+</ul>
+</div>
+<div id="the-bias-variance-tradeoff" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> The Bias-Variance Tradeoff<a href="fundamentals2.html#the-bias-variance-tradeoff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Expected prediction error has (at least) two advantages over prediction
+error: We can obtain more stable estimates for it, and we can use the
+statistical properties of <span class="math inline">\(\hat g\)</span> (as an estimator) to better
+understand it.</p>
+<p>In particular, in the regression setting, and using as before the
+squared error as the loss function, it can be shown that</p>
+<p><span class="math display">\[\begin{align}
+        e^2(\hat g) :=&amp; E\left[PredictionError(\hat g)\right]\\
+        =&amp; \sigma_{\epsilon}^2 + \int_{\Rr^p} f_X(\x) Bias(\hat g(\x))^2 d\x + \int_{\Rr^p}f_X(\x) Var(\hat g(\x))d\x,\label{eq:biasvariance}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\sigma^2_\epsilon\)</span> is the variance of the residual <span class="math inline">\(\epsilon\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\sigma_\epsilon^2\)</span> is called the <em>irreducible error</em> since there is
+no model which has prediction error below this quantity.
+<ul>
+<li><span class="math inline">\(\sigma_\epsilon^2\)</span> is the prediction error of <span class="math inline">\(g^*\)</span></li>
+</ul></li>
+<li>The second term corresponds with the average squared bias of <span class="math inline">\(\hg\)</span>,
+across all possible values of <span class="math inline">\(X\)</span>. Recall that the bias of <span class="math inline">\(\hg\)</span> at
+a particular <span class="math inline">\(\x\)</span> is <span class="math inline">\(E[\hg(\x)] − g^*(\x)\)</span>, i.e. how “far off” <span class="math inline">\(\hg\)</span>
+is from <span class="math inline">\(g^*\)</span>, when evaluated at <span class="math inline">\(\x\)</span>, on average over infinitely
+many training sets</li>
+<li>The final term is the average variance of <span class="math inline">\(\hg\)</span>, again across all
+possible values of <span class="math inline">\(X\)</span>.</li>
+</ul>
+<p>We will refer to these latter two terms simply as the model bias and
+model variance, and they are statistical properties of the <em>estimator</em>
+<span class="math inline">\(\hg\)</span>. The sum of the (squared) bias and the variance is also sometimes
+referred to as the <em>risk</em>, and quantifies the excess error of the model
+over the best possible model <span class="math inline">\(g^*\)</span></p>
+<p>It is worth noting that although this exact decomposition holds only for
+the squared error loss function, and where <span class="math inline">\(Y = g^*(X) + \epsilon\)</span>, the
+intuition we can gain from it applies to other contexts as well.</p>
+<p>Broadly speaking for models to have low bias, they require more
+flexibility in order to be able to fit to a potentially complex
+regression function, <span class="math inline">\(g^*\)</span></p>
+<ul>
+<li>When <span class="math inline">\(g^*\)</span> is relatively simple, we may not need much flexibility,
+but typically adding flexibility does not increase bias, but could
+decrease it</li>
+</ul>
+<p>But as we have seen, more flexibility allows models to fit closer to the
+data, thus incorporating more of the “noise”. This makes them more
+variable across different samples, hence increasing their variance.</p>
+<p>This balancing of flexibility against susceptibility to noise is
+referred to as the <em>Bias-Variance tradeoff</em> and is one of the
+fundamental principles in statistical learning.</p>
+<div id="the-bias-and-variance-of-a-regression-model" class="section level4 hasAnchor" number="5.3.2.1">
+<h4><span class="header-section-number">5.3.2.1</span> The Bias and Variance of a Regression Model<a href="fundamentals2.html#the-bias-and-variance-of-a-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s return to a simple example we saw right at the beginning of this
+section. We have the setup where</p>
+<p><span class="math display">\[\begin{align*}
+  Y = 1 + 4X - 3X^2 - X^3 + 2X^4 + \epsilon,
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(X\)</span> is uniformly distributed on <span class="math inline">\((0,1)\)</span> and
+<span class="math inline">\(\epsilon \sim N(0, 1/25)\)</span>.</p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="fundamentals2.html#cb360-1" tabindex="-1"></a><span class="do">### First we can set up what is constant:</span></span>
+<span id="cb360-2"><a href="fundamentals2.html#cb360-2" tabindex="-1"></a><span class="co"># The regression function, a degree 4 polynomial</span></span>
+<span id="cb360-3"><a href="fundamentals2.html#cb360-3" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb360-4"><a href="fundamentals2.html#cb360-4" tabindex="-1"></a></span>
+<span id="cb360-5"><a href="fundamentals2.html#cb360-5" tabindex="-1"></a><span class="co"># The standard deviation of the residuals (later we can try varying this to see what effect it has on estimation)</span></span>
+<span id="cb360-6"><a href="fundamentals2.html#cb360-6" tabindex="-1"></a>sigma_resid <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb360-7"><a href="fundamentals2.html#cb360-7" tabindex="-1"></a></span>
+<span id="cb360-8"><a href="fundamentals2.html#cb360-8" tabindex="-1"></a><span class="co"># The sample size, which has a very substantial effect on the statistical properties of the regression estimator</span></span>
+<span id="cb360-9"><a href="fundamentals2.html#cb360-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb360-10"><a href="fundamentals2.html#cb360-10" tabindex="-1"></a></span>
+<span id="cb360-11"><a href="fundamentals2.html#cb360-11" tabindex="-1"></a><span class="do">### We can now simulate some data with this set-up</span></span>
+<span id="cb360-12"><a href="fundamentals2.html#cb360-12" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb360-13"><a href="fundamentals2.html#cb360-13" tabindex="-1"></a></span>
+<span id="cb360-14"><a href="fundamentals2.html#cb360-14" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb360-15"><a href="fundamentals2.html#cb360-15" tabindex="-1"></a></span>
+<span id="cb360-16"><a href="fundamentals2.html#cb360-16" tabindex="-1"></a><span class="do">### Now let&#39;s plot the data, and add the true regression function</span></span>
+<span id="cb360-17"><a href="fundamentals2.html#cb360-17" tabindex="-1"></a></span>
+<span id="cb360-18"><a href="fundamentals2.html#cb360-18" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">3.25</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb360-19"><a href="fundamentals2.html#cb360-19" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>)</span>
+<span id="cb360-20"><a href="fundamentals2.html#cb360-20" tabindex="-1"></a></span>
+<span id="cb360-21"><a href="fundamentals2.html#cb360-21" tabindex="-1"></a><span class="do">### Now let&#39;s add the simple linear regression fit from the data</span></span>
+<span id="cb360-22"><a href="fundamentals2.html#cb360-22" tabindex="-1"></a></span>
+<span id="cb360-23"><a href="fundamentals2.html#cb360-23" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb360-24"><a href="fundamentals2.html#cb360-24" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-151-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Run the above code multiple times. You should not be surprised to see a
+different fitted model each time, since the sample changed. Although no
+single fitted model can show us what the bias and variance are, repeated
+experiments can give us some understanding of these. The simple linear
+model is, well “simple”, and so it doesn’t have very high variance, and
+you probably noticed that even with a small-ish sample size (30) the
+models fit on different samples were not that different from one
+another. You will probably also have been able to see regions where the
+models <em>tend</em> to over/under estimate the true function, indicating
+potential bias.</p>
+<p>The following chunk of code will run this experiment 500 times, and add
+all of the lines fit to the different data sets generated.</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="fundamentals2.html#cb361-1" tabindex="-1"></a><span class="do">### First we set the number of repeats of the experiment</span></span>
+<span id="cb361-2"><a href="fundamentals2.html#cb361-2" tabindex="-1"></a>repeats <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb361-3"><a href="fundamentals2.html#cb361-3" tabindex="-1"></a></span>
+<span id="cb361-4"><a href="fundamentals2.html#cb361-4" tabindex="-1"></a><span class="do">### We will be adding the lines from multiple fitted regression models</span></span>
+<span id="cb361-5"><a href="fundamentals2.html#cb361-5" tabindex="-1"></a><span class="do">### and so first need to set up a plot on which to add these</span></span>
+<span id="cb361-6"><a href="fundamentals2.html#cb361-6" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb361-7"><a href="fundamentals2.html#cb361-7" tabindex="-1"></a></span>
+<span id="cb361-8"><a href="fundamentals2.html#cb361-8" tabindex="-1"></a><span class="do">### Now we repeat the experiment. We will also store the predictions over</span></span>
+<span id="cb361-9"><a href="fundamentals2.html#cb361-9" tabindex="-1"></a><span class="do">### a grid of values for x so that we can calculate estimate the bias and</span></span>
+<span id="cb361-10"><a href="fundamentals2.html#cb361-10" tabindex="-1"></a><span class="do">### variance</span></span>
+<span id="cb361-11"><a href="fundamentals2.html#cb361-11" tabindex="-1"></a></span>
+<span id="cb361-12"><a href="fundamentals2.html#cb361-12" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">by =</span> .<span class="dv">01</span>))</span>
+<span id="cb361-13"><a href="fundamentals2.html#cb361-13" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">matrix</span>(, repeats, <span class="fu">length</span>(x_grid<span class="sc">$</span>x))</span>
+<span id="cb361-14"><a href="fundamentals2.html#cb361-14" tabindex="-1"></a></span>
+<span id="cb361-15"><a href="fundamentals2.html#cb361-15" tabindex="-1"></a><span class="cf">for</span>(rep <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>repeats){</span>
+<span id="cb361-16"><a href="fundamentals2.html#cb361-16" tabindex="-1"></a>  <span class="co"># simulate data</span></span>
+<span id="cb361-17"><a href="fundamentals2.html#cb361-17" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb361-18"><a href="fundamentals2.html#cb361-18" tabindex="-1"></a></span>
+<span id="cb361-19"><a href="fundamentals2.html#cb361-19" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb361-20"><a href="fundamentals2.html#cb361-20" tabindex="-1"></a></span>
+<span id="cb361-21"><a href="fundamentals2.html#cb361-21" tabindex="-1"></a>  <span class="co"># fit model</span></span>
+<span id="cb361-22"><a href="fundamentals2.html#cb361-22" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb361-23"><a href="fundamentals2.html#cb361-23" tabindex="-1"></a>  </span>
+<span id="cb361-24"><a href="fundamentals2.html#cb361-24" tabindex="-1"></a>  <span class="co"># store predictions</span></span>
+<span id="cb361-25"><a href="fundamentals2.html#cb361-25" tabindex="-1"></a>  predicted[rep,] <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
+<span id="cb361-26"><a href="fundamentals2.html#cb361-26" tabindex="-1"></a>  </span>
+<span id="cb361-27"><a href="fundamentals2.html#cb361-27" tabindex="-1"></a>  <span class="co"># add line to graph</span></span>
+<span id="cb361-28"><a href="fundamentals2.html#cb361-28" tabindex="-1"></a>  </span>
+<span id="cb361-29"><a href="fundamentals2.html#cb361-29" tabindex="-1"></a>  <span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red&quot;</span>, <span class="at">alpha.f =</span> .<span class="dv">1</span>))</span>
+<span id="cb361-30"><a href="fundamentals2.html#cb361-30" tabindex="-1"></a>  </span>
+<span id="cb361-31"><a href="fundamentals2.html#cb361-31" tabindex="-1"></a>}</span>
+<span id="cb361-32"><a href="fundamentals2.html#cb361-32" tabindex="-1"></a></span>
+<span id="cb361-33"><a href="fundamentals2.html#cb361-33" tabindex="-1"></a><span class="do">### All of the lines will have obscured the original plot. We can add that back</span></span>
+<span id="cb361-34"><a href="fundamentals2.html#cb361-34" tabindex="-1"></a><span class="do">### and also add the averaged model predictions</span></span>
+<span id="cb361-35"><a href="fundamentals2.html#cb361-35" tabindex="-1"></a></span>
+<span id="cb361-36"><a href="fundamentals2.html#cb361-36" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb361-37"><a href="fundamentals2.html#cb361-37" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-152-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Now we are able to see the bias more clearly, where the dashed line is the average fitted value for each value of <span class="math inline">\(x\)</span> over all 500 fitted models. We can also see that that variance increases as we move away from the middle of the range of <span class="math inline">\(x\)</span> values.</p>
+<p>We know that as we increase the flexibility (degree of the polynomial, where a linear/affine function is just a degree one polynomial) we should see the bias decreasing and the variance increasing. Let’s run the same experiment but for degrees two up to five for comparison.</p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="fundamentals2.html#cb362-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb362-2"><a href="fundamentals2.html#cb362-2" tabindex="-1"></a></span>
+<span id="cb362-3"><a href="fundamentals2.html#cb362-3" tabindex="-1"></a><span class="do">### We can put the above code into a loop over the degree</span></span>
+<span id="cb362-4"><a href="fundamentals2.html#cb362-4" tabindex="-1"></a><span class="do">### of the polynomial. We&#39;ve seen the linear (degree one)</span></span>
+<span id="cb362-5"><a href="fundamentals2.html#cb362-5" tabindex="-1"></a><span class="do">### polynomial so let&#39;s look at degrees 2 - 5</span></span>
+<span id="cb362-6"><a href="fundamentals2.html#cb362-6" tabindex="-1"></a></span>
+<span id="cb362-7"><a href="fundamentals2.html#cb362-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb362-8"><a href="fundamentals2.html#cb362-8" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb362-9"><a href="fundamentals2.html#cb362-9" tabindex="-1"></a>        <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Degree &quot;</span>, d, <span class="st">&quot; polynomial fits&quot;</span>))</span>
+<span id="cb362-10"><a href="fundamentals2.html#cb362-10" tabindex="-1"></a></span>
+<span id="cb362-11"><a href="fundamentals2.html#cb362-11" tabindex="-1"></a>  x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">by =</span> .<span class="dv">01</span>))</span>
+<span id="cb362-12"><a href="fundamentals2.html#cb362-12" tabindex="-1"></a>  predicted <span class="ot">&lt;-</span> <span class="fu">matrix</span>(, repeats, <span class="fu">length</span>(x_grid<span class="sc">$</span>x))</span>
+<span id="cb362-13"><a href="fundamentals2.html#cb362-13" tabindex="-1"></a></span>
+<span id="cb362-14"><a href="fundamentals2.html#cb362-14" tabindex="-1"></a>  <span class="cf">for</span>(rep <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>repeats){</span>
+<span id="cb362-15"><a href="fundamentals2.html#cb362-15" tabindex="-1"></a>    <span class="co"># simulate data</span></span>
+<span id="cb362-16"><a href="fundamentals2.html#cb362-16" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb362-17"><a href="fundamentals2.html#cb362-17" tabindex="-1"></a>  </span>
+<span id="cb362-18"><a href="fundamentals2.html#cb362-18" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb362-19"><a href="fundamentals2.html#cb362-19" tabindex="-1"></a>  </span>
+<span id="cb362-20"><a href="fundamentals2.html#cb362-20" tabindex="-1"></a>    <span class="co"># fit model</span></span>
+<span id="cb362-21"><a href="fundamentals2.html#cb362-21" tabindex="-1"></a>    model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">poly</span>(x, d), <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb362-22"><a href="fundamentals2.html#cb362-22" tabindex="-1"></a>    </span>
+<span id="cb362-23"><a href="fundamentals2.html#cb362-23" tabindex="-1"></a>    <span class="co"># store predictions</span></span>
+<span id="cb362-24"><a href="fundamentals2.html#cb362-24" tabindex="-1"></a>    predicted[rep,] <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
+<span id="cb362-25"><a href="fundamentals2.html#cb362-25" tabindex="-1"></a>    </span>
+<span id="cb362-26"><a href="fundamentals2.html#cb362-26" tabindex="-1"></a>    <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted[rep,],</span>
+<span id="cb362-27"><a href="fundamentals2.html#cb362-27" tabindex="-1"></a>          <span class="at">col =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red&quot;</span>, <span class="at">alpha.f =</span> .<span class="dv">1</span>))</span>
+<span id="cb362-28"><a href="fundamentals2.html#cb362-28" tabindex="-1"></a>  }</span>
+<span id="cb362-29"><a href="fundamentals2.html#cb362-29" tabindex="-1"></a></span>
+<span id="cb362-30"><a href="fundamentals2.html#cb362-30" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb362-31"><a href="fundamentals2.html#cb362-31" tabindex="-1"></a>  <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb362-32"><a href="fundamentals2.html#cb362-32" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-153-1.png" width="1200px" height="800px" style="display: block; margin: auto;" /></p>
+<p>We can see that the quadratic (degree two) model still has very obvious
+bias, in that the average fit shown with the dashed line over/underestimates the true function at different values of <span class="math inline">\(x\)</span>. In the extreme left and right we can also see slight bias in the degree three polynomial model.</p>
+<p>Although we can see very slight deviations in the average fit from the true function for degrees four and five, these are down to the fact that we have averaged 500 fitted models and not infinitely many. In fact if the true model is a degree <span class="math inline">\(d\)</span> polynomial (where here we know <span class="math inline">\(d = 4\)</span>) then the bias of all models with degree at least <span class="math inline">\(d\)</span> is theoretically zero.</p>
+<p>The “cost” of choosing a higher degree polynomial is, however, that the variance increases, and the higher variation in the fitted models with degrees 4 and 5 should be very apparent in these experiments.</p>
+</div>
+</div>
+</div>
+<div id="estimating-expected-prediction-error" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Estimating (Expected) Prediction Error<a href="fundamentals2.html#estimating-expected-prediction-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It is important to note that the experiments we conducted in the
+previous subsection could only be performed because the true
+distribution of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> was known</p>
+<ul>
+<li><p>We knew the true regression function, <span class="math inline">\(g^*\)</span></p></li>
+<li><p>We knew the distribution of the residuals, and so could generate
+lots of samples and fit lots of regression models</p></li>
+</ul>
+<p>In reality we do not know <span class="math inline">\(g^*\)</span> and only get one sample from which we
+have to do “everything”</p>
+<ul>
+<li><p>We need to find our estimates for <span class="math inline">\(g^*\)</span> AND try to estimate what
+their (expected) prediction errors are (so that we can choose the
+one seen to be the “best”)</p></li>
+<li><p>By definition (expected) prediction error is based on the loss
+attained by our estimate(s)/estimator(s) for points separate from
+the training data</p></li>
+</ul>
+<div id="validation-for-estimating-expected-prediction-error" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Validation for Estimating (Expected) Prediction Error<a href="fundamentals2.html#validation-for-estimating-expected-prediction-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We saw in our introduction to statistics that the <em>bootstrap</em> was a way
+of “overcoming” the fact that we have only a single sample from which to
+perform estimation and potentially estimate our uncertainty. A similar
+idea can be applied in the context of predictive modelling. Although it
+is possible to estimate the variance of a model directly using the
+bootstrap, estimating bias is typically not possible without making some
+assumptions.</p>
+<p>However, we don’t necessarily need to estimate the bias and variance of
+a model if we can more directly estimate its expected prediction error,
+bypassing the need for estimating these two components of the risk
+altogether.</p>
+<p>The most principled approach for estimating the prediction error of a
+model is by actually <em>testing</em> it on cases (pairs of values for <span class="math inline">\(X\)</span> and
+<span class="math inline">\(Y\)</span>) which were not given to it for training</p>
+<ul>
+<li>Part of the sample which is set aside from training, to assess the
+prediction capabilities of different trained models, and which is
+used for model selection is called a <em>validation set</em>.</li>
+</ul>
+<p>For clarity, let’s adopt the following notation. Letting <span class="math inline">\(\hg\)</span> be an
+estimator for <span class="math inline">\(g^*\)</span>, for a specific training set <span class="math inline">\(T\)</span> we will write
+<span class="math inline">\(\hg^T\)</span> to be the resulting model fit after training on <span class="math inline">\(T\)</span>. Then, if we
+split our entire sample into training
+<span class="math inline">\(T = \{(y_1^T, \x_1^T), ..., (y_{n_T}^T, \x_{n_T}^T)\}\)</span> and validation
+<span class="math inline">\(V = \{(y_1^V, \x_1^V), ..., (y_{n_V}^V, \x_{n_V}^V)\}\)</span> sets then the
+<em>validation error</em> of <span class="math inline">\(\hg^T\)</span> is <span class="math display">\[
+Val(\hg^T) := \frac{1}{n_V}\sum_{i=1}^{n_V}L\left(y_i^V, \hg^T(\x_i^V)\right)
+\]</span></p>
+<p>Hopefully it is clear that the training and validation sets must not
+overlap, and any overlap would be a direct form of <em>data leakage</em>,
+something which was mentioned in relation to exploratory data analysis.</p>
+<p>A few other points may also have come to mind. We are aware that, all
+other things being equal, models trained on larger samples tend to give
+more accurate predictions.</p>
+<ul>
+<li><span class="math inline">\(n\)</span> seldom affects bias substantially and increasing <span class="math inline">\(n\)</span> will
+decrease variance</li>
+</ul>
+<p>What this means is that the model trained on the entire sample
+<span class="math inline">\(\hg^{T\cup V}\)</span> is likely to be a better model than <span class="math inline">\(\hg^T\)</span>. Although
+<span class="math inline">\(Val(\hg^T)\)</span> is an unbiased estimate for <span class="math inline">\(PredictionError(\hg^T)\)</span> it
+will typically <em>overestimate</em> <span class="math inline">\(PredictionError(\hg^{T\cup V})\)</span>. When it
+comes to actually producing a model for deployment, we would like to be
+able to use all of (or as much of) the data for training this final
+model as possible, to get the best results once it is deployed.</p>
+<ul>
+<li><p>A small validation set would mean that <span class="math inline">\(Val(\hg^T)\)</span> is only slightly
+biased as an estimate for <span class="math inline">\(PredictionError(\hg^{T\cup V})\)</span>, and so
+this particular issue may not be too problematic</p></li>
+<li><p>But a small validation set would mean that the variance of
+<span class="math inline">\(Val(\hg^T)\)</span> is large, and we may not want to base such an important
+decision as model selection on an unreliable estimate for
+performance.</p></li>
+</ul>
+<div id="cross-validation" class="section level4 hasAnchor" number="5.4.1.1">
+<h4><span class="header-section-number">5.4.1.1</span> Cross Validation<a href="fundamentals2.html#cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To achieve both relatively low variance <em>and</em> relatively low bias
+(overestimation) when estimating prediction error, we could repeatedly
+split the data into training and validation sets, with each validation
+set being relatively small, and then average the resulting validation
+errors</p>
+<ul>
+<li><p>Since each validation set is small, we should not have too much bias</p></li>
+<li><p>The variance of the averaged validation errors is lower than that of
+a single validation error</p></li>
+</ul>
+<p>The issue with this is that the averaged validation error is not an
+estimate for the prediction error of any single model, but is rather is
+an estimate for the expected prediction error of <span class="math inline">\(\hg\)</span> (as an estimator)
+fit on a training set the size of <span class="math inline">\(T\)</span>. This is not necessarily a
+problem. Ultimately we can obtain better estimates for the expected
+prediction error of <span class="math inline">\(\hg\)</span> than of the actual prediction error of our
+particular realisation of <span class="math inline">\(\hg\)</span>.</p>
+<p><em>Cross validation</em>, arguably the most universally applied method for
+estimating model performance for model selection in predictive
+modelling, is a very systematic approach to this repeated validation
+idea: simply put, every point in the sample is used as a validation point
+(i.e. within one of the validation sets) exactly once.</p>
+<p>To be precise, cross validation works as follows:</p>
+<ul>
+<li><p>Split the sample into <span class="math inline">\(K\)</span> subsets (called validation “folds”), of
+roughly equal size.</p></li>
+<li><p>For <span class="math inline">\(k = 1, ..., K\)</span> let the <span class="math inline">\(k\)</span>-th fold be
+<span class="math inline">\(V_k = \{(y_1^{V_k}, \x_1^{V_k}), ..., (y_{n_k}^{V_k}, \x_{n_k}^{V_k})\}\)</span>
+and let <span class="math inline">\(T_k\)</span> be all the points except those in fold <span class="math inline">\(k\)</span>.</p></li>
+<li><p>For each <span class="math inline">\(k = 1, ..., K\)</span>:</p>
+<ul>
+<li><p>fit the model to all except the <span class="math inline">\(k\)</span>-th fold to obtain <span class="math inline">\(\hat g^{T_k}\)</span></p></li>
+<li><p>estimate the prediction error of <span class="math inline">\(\hat g^{T_k}\)</span> using the validation
+error from fold <span class="math inline">\(k\)</span>, <span class="math display">\[
+Val(\hat g^{T_k}) = \frac{1}{n_k}\sum_{i=1}^{n_k}L(y_i^{V_k}, \hat g^{T_k}(\x_i^{V_k}))
+\]</span></p></li>
+</ul></li>
+<li><p>Average these to obtain the cross-validation based estimate for
+expected prediction error of <span class="math inline">\(\hat g\)</span> <span class="math display">\[
+\widehat{E[PredictionError(\hat g)]}_{CV} = \frac{1}{K}\sum_{k=1}^K Val(\hat g^{T_k})
+\]</span></p></li>
+</ul>
+<p><strong>Considerations and Limitations</strong></p>
+<p>Cross validation (CV) is popular for its universality and simplicity,
+but has some limitations:</p>
+<ul>
+<li><p>It is an estimate of expected prediction error, and not prediction
+error</p></li>
+<li><p>It is a biased estimate of the expected prediction error of <span class="math inline">\(\hg\)</span>
+fit using the entire training sample, since each “training set” used
+in CV has size (approximately) <span class="math inline">\(n\frac{K-1}{K} &lt; n\)</span></p></li>
+<li><p>It depends on the specific splitting of the sample into folds; if
+the folds had been split differently the output would be different</p>
+<ul>
+<li>There are two sources of randomness: the randomness in the
+drawing of our sample from the population (the “regular”
+randomness in statistics) and also the randomness in how we
+split this sample into folds</li>
+</ul></li>
+</ul>
+<p><strong>The Effect of Varying</strong> <span class="math inline">\(K\)</span></p>
+<p>As we can see above, the size of each training set used in cross validation is <span class="math inline">\(n\frac{K-1}{K}\)</span>, which is increasing in <span class="math inline">\(K\)</span>. As a result, the larger
+the number of folds the less is the bias in the cross validation based estimate of
+expected prediction error of the model trained using the entire sample
+(size <span class="math inline">\(n\)</span>). The interaction of <span class="math inline">\(K\)</span> with the variance has some subtlety
+to it:</p>
+<ul>
+<li><p>For large <span class="math inline">\(K\)</span> each validation set is small, and so each of the <span class="math inline">\(K\)</span>
+estimates of prediction error has high variance. However, the final
+estimate of prediction error is an average of all <span class="math inline">\(K\)</span>, and typically
+when we average a larger number of random variables there is a
+greater reduction in variance.</p></li>
+<li><p>The main factor which leads the <em>variance of the cross validation estimate to
+increase with</em> <span class="math inline">\(K\)</span> is the fact that the training sets have large
+overlap and hence the prediction errors of each of the resulting
+models are highly correlated. When averaging positively correlated
+random variables there is a lesser reduction in variance compared
+with averaging independent (or uncorrelated) ones.</p></li>
+</ul>
+<p>There is also the factor of computation, since <span class="math inline">\(K\)</span> separate models need
+to be trained to obtain an estimate for the expected prediction error.
+Although there are some special cases where specifically the <span class="math inline">\(n\)</span>-fold
+(or “Leave-One-Out”) cross validation estimate can be obtained efficiently.</p>
+<p>It is also worth considering the relationship between <span class="math inline">\(n\)</span> and <span class="math inline">\(K\)</span>.
+Although it will depend on the particulars of the model being used, as a
+general rule of thumb if <span class="math inline">\(n\)</span> is smaller it may be preferable to choose a
+larger value for <span class="math inline">\(K\)</span>. This is both because when <span class="math inline">\(n\)</span> is smaller,
+decreasing it by a fixed proportion will often affect the expected
+prediction error a greater amount than when <span class="math inline">\(n\)</span> is larger, and also
+because fitting each model is computationally less demanding and so more
+total models can be fit in a relatively small amount of time.</p>
+<p>All things considered, for most problems it has become common to choose
+<span class="math inline">\(K\)</span> equal to either five or ten, and these give a reasonable tradeoff of
+bias and variance, as well as not being problematic computationally
+except when fitting each model is already computationally burdensome.</p>
+</div>
+<div id="cross-validation-in-r" class="section level4 hasAnchor" number="5.4.1.2">
+<h4><span class="header-section-number">5.4.1.2</span> Cross Validation in R<a href="fundamentals2.html#cross-validation-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>One of the benefits of Cross Validation is its simplicity. Nonetheless,
+whenever existing implementations (which are popular, and so any bugs
+will almost surely have been identified) are available it is beneficial
+to leverage this convenience. The <code>caret</code> package (Classification And
+REgresstion Training) is an extremely popular and versatile general
+purpose package, which includes links to a very large number of
+implementations of predictive models. For a list of all the models
+included in <code>caret</code> see the package documentation at
+<a href="https://topepo.github.io/caret/available-models.html" class="uri">https://topepo.github.io/caret/available-models.html</a>.</p>
+<p>For those models included in the package, performing cross validation
+for multiple different “versions” of the models (e.g. the “versions” of
+a simple polynomial regression model could be associated with different
+polynomial degrees) can be done with a single call to the function
+<code>train</code>. However as simple polynomial regression is not one of the
+models included we have to run cross validation separately for each
+degree (or, as we will cover a little later on, we can create our own
+“method” for caret to operate on).</p>
+<ul>
+<li>When we think of exploring different “versions” of a model, like different degrees of a polynomial regression model, we often refer to this as <em>model tuning</em>, and the variables (or parameters) which determine the different “versions” are called <em>tuning parameters</em> or sometimes <em>hyperparameters</em>. Model tuning is also a <em>model selection</em> task, but instead of choosing from among multiple model types we are choosing from different “versions” of the same model type.</li>
+</ul>
+<p>Now, ensuring you have the package installed, run the following code
+chunk. It will run cross validation for estimating the expected prediction error of
+simple polynomial models on the <code>cars</code> data set we explored previously.</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="fundamentals2.html#cb363-1" tabindex="-1"></a><span class="do">### First we load the package</span></span>
+<span id="cb363-2"><a href="fundamentals2.html#cb363-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb363-3"><a href="fundamentals2.html#cb363-3" tabindex="-1"></a></span>
+<span id="cb363-4"><a href="fundamentals2.html#cb363-4" tabindex="-1"></a><span class="do">### the function train() is the main workhorse of the package</span></span>
+<span id="cb363-5"><a href="fundamentals2.html#cb363-5" tabindex="-1"></a><span class="do">### it takes formula and data arguments, just as we saw with the</span></span>
+<span id="cb363-6"><a href="fundamentals2.html#cb363-6" tabindex="-1"></a><span class="do">### lm() function. Also, since it offers broad functionality we</span></span>
+<span id="cb363-7"><a href="fundamentals2.html#cb363-7" tabindex="-1"></a><span class="do">### to specify what method (type of model) we want to be using.</span></span>
+<span id="cb363-8"><a href="fundamentals2.html#cb363-8" tabindex="-1"></a><span class="do">### Finally we need to provide an argument called trControl which</span></span>
+<span id="cb363-9"><a href="fundamentals2.html#cb363-9" tabindex="-1"></a><span class="do">### tells train() what exactly we want to do, i.e., just fit one</span></span>
+<span id="cb363-10"><a href="fundamentals2.html#cb363-10" tabindex="-1"></a><span class="do">### model on all the data, or do CV (or something else like the</span></span>
+<span id="cb363-11"><a href="fundamentals2.html#cb363-11" tabindex="-1"></a><span class="do">### bootstrap) for model selection. The trControl object is</span></span>
+<span id="cb363-12"><a href="fundamentals2.html#cb363-12" tabindex="-1"></a><span class="do">### produced by the function trainControl. For details on this</span></span>
+<span id="cb363-13"><a href="fundamentals2.html#cb363-13" tabindex="-1"></a><span class="do">### have a look at help(trainControl), remembering to ensure the</span></span>
+<span id="cb363-14"><a href="fundamentals2.html#cb363-14" tabindex="-1"></a><span class="do">### caret package is loaded.</span></span>
+<span id="cb363-15"><a href="fundamentals2.html#cb363-15" tabindex="-1"></a></span>
+<span id="cb363-16"><a href="fundamentals2.html#cb363-16" tabindex="-1"></a><span class="do">### let&#39;s start by setting up the trControl object. We want to do</span></span>
+<span id="cb363-17"><a href="fundamentals2.html#cb363-17" tabindex="-1"></a><span class="do">### cross validation, and let&#39;s choose 10 folds</span></span>
+<span id="cb363-18"><a href="fundamentals2.html#cb363-18" tabindex="-1"></a></span>
+<span id="cb363-19"><a href="fundamentals2.html#cb363-19" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb363-20"><a href="fundamentals2.html#cb363-20" tabindex="-1"></a></span>
+<span id="cb363-21"><a href="fundamentals2.html#cb363-21" tabindex="-1"></a><span class="do">### For the models linked directly by caret we can perform CV</span></span>
+<span id="cb363-22"><a href="fundamentals2.html#cb363-22" tabindex="-1"></a><span class="do">### across multiple &quot;versions&quot; of the model using a single call.</span></span>
+<span id="cb363-23"><a href="fundamentals2.html#cb363-23" tabindex="-1"></a><span class="do">### However simple polynomial regression is not linked directly</span></span>
+<span id="cb363-24"><a href="fundamentals2.html#cb363-24" tabindex="-1"></a><span class="do">### and so we cannot directly use a single call to run CV for</span></span>
+<span id="cb363-25"><a href="fundamentals2.html#cb363-25" tabindex="-1"></a><span class="do">### all polynomial degrees, and will have to do these in a loop</span></span>
+<span id="cb363-26"><a href="fundamentals2.html#cb363-26" tabindex="-1"></a></span>
+<span id="cb363-27"><a href="fundamentals2.html#cb363-27" tabindex="-1"></a>CV_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb363-28"><a href="fundamentals2.html#cb363-28" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb363-29"><a href="fundamentals2.html#cb363-29" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb363-30"><a href="fundamentals2.html#cb363-30" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
+<span id="cb363-31"><a href="fundamentals2.html#cb363-31" tabindex="-1"></a>  CV_results[[d]] <span class="ot">&lt;-</span> <span class="fu">train</span>(form, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb363-32"><a href="fundamentals2.html#cb363-32" tabindex="-1"></a>                           <span class="at">data =</span> cars, <span class="at">trControl =</span> trControl)</span>
+<span id="cb363-33"><a href="fundamentals2.html#cb363-33" tabindex="-1"></a>}</span></code></pre></div>
+<p>Setting the seed before each call to the function <code>train</code> was important
+here so that the same CV folds were used each time. In the output of
+<code>train</code> is a list with a field <code>results</code> which contains the performance
+statistics from the cross validation. The result <code>RMSE</code> (Root Mean
+Squared Error) is the square root of the estimate of expected prediction
+error based on the squared error loss function.</p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="fundamentals2.html#cb364-1" tabindex="-1"></a>CV_results[[<span class="dv">1</span>]]<span class="sc">$</span>results<span class="sc">$</span>RMSE</span></code></pre></div>
+<pre><code>## [1] 15.11234</code></pre>
+<p>If we wish to choose the model which gave the lowest expected prediction
+error, we can inspect them all</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="fundamentals2.html#cb366-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))</span></code></pre></div>
+<pre><code>## [1] 15.11234 14.91259 14.93013 14.83372 15.93608</code></pre>
+<p>We can see that the degree four polynomial gave the smallest estimated
+expected prediction error. However, the differences when compared with
+the lower degree models are relatively small. It is often prudent to opt
+for a <em>simpler</em> model if the estimate of expected prediction error is
+similar to that which attained the lowest estimate. This is especially
+true if the sample is relatively small, and hence the estimate for
+expected prediction error may be highly variable. Try changing the seed
+and re-running the above code.</p>
+<p><strong>A Better Way: Create Your Own Models For Use In <code>caret</code></strong></p>
+<p>Instead of looping over the different values of <code>d</code>, the degree of the
+polynomial, we can have <code>caret</code> do all that work for us. It will also
+output the results in a far more digestible way than if we just populate
+a list of outputs as we did above. It will also go ahead and do the
+model selection for us. The <code>caret</code> package allows us to link to our own
+models, so that we can use the <code>train</code> function to apply all its
+wonderful methodology. Instead of setting the <code>method</code> argument to the
+name of a method/model which <code>caret</code> is already linked to, we can
+provide a list containing all the objects it needs in order to offer the
+same functionality. The following video gives a brief demo for how we
+could implement simple polynomial regression, and select of the “tuning
+parameter” <code>d</code> (the degree of the polynomial) automatically. In
+addition, the script which I go through in the video is available at &lt;“<a href="https://modules.lancaster.ac.uk/mod/folder/view.php?id=2771508" class="uri">https://modules.lancaster.ac.uk/mod/folder/view.php?id=2771508</a>”&gt;.</p>
+<p><video src="caret_own_model_default.mp4" width="600" controls=""><a href="caret_own_model_default.mp4">Video</a></video></p>
+<p>For those who are interested, some far more advanced examples can be
+seen in the <code>caret</code> documentation at
+<a href="https://topepo.github.io/caret/using-your-own-model-in-train.html" class="uri">https://topepo.github.io/caret/using-your-own-model-in-train.html</a>.</p>
+</div>
+</div>
+<div id="covariance-based-estimates-of-in-sample-error" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Covariance Based Estimates of “In-Sample Error”<a href="fundamentals2.html#covariance-based-estimates-of-in-sample-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An alternative to cross validation for estimating the expected prediction error of a model is that of estimating what is known as <em>in-sample error</em>, and <em>expected in-sample error</em>. The in-sample error of a model is very closely related to its prediction error, except that rather than looking at all possible pairs of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in the population it uses the same <span class="math inline">\(X\)</span> values as in the sample but pairs these with other possible values of <span class="math inline">\(Y\)</span>.</p>
+<p>Specifically, suppose that we have a sample as always, equal to <span class="math inline">\((y_1, \x_1), ..., (y_n, \x_n)\)</span>. Then the in-sample error of a fitted model <span class="math inline">\(\hg\)</span> is the average error it would achieve for the same values of <span class="math inline">\(\x_i; i = 1, ..., n\)</span> but over new potential values of response, say <span class="math inline">\(\tilde Y_i;  i =1, ..., n\)</span>
+<span class="math display">\[
+E_{\tilde Y_1, ..., \tilde Y_n}\left[\frac{1}{n}\sum_{i=1}^n L(\tilde Y_i, \hg(\x_i)) \right].
+\]</span></p>
+<ul>
+<li>Recall that in the predictive modelling context we are interested in the conditional distribution(s) of <span class="math inline">\(Y|X\)</span>, and in the above the <span class="math inline">\(\tilde Y_i\)</span>’s are <em>paired</em> with the observations of <span class="math inline">\(X\)</span> in the sample, i.e. <span class="math inline">\(\tilde Y_i\)</span> is from the conditional distribution of <span class="math inline">\(Y|X = \x_i\)</span>.</li>
+</ul>
+<p>As it is with prediction error, however, estimating in-sample error is not straightforward and we need to rely on estimates for expected in-sample error. This is just the expected value of in-sample error over potential training sets (and hence different fitted models).</p>
+<p>It turns out that for the squared error loss function we can obtain an unbiased estimate for expected in-sample error from the quantity
+<span class="math display">\[
+\frac{1}{n}\sum_{i=1}^n L(y_i, \hg(\x_i)) + \frac{1}{n}\sum_{i=1}^n Cov(Y_i, \hg(\x_i)).
+\]</span></p>
+<p>The first term above is just the training error. The second term above may be seen as a “penalty” to avoid selecting models likely to overfit. Models with too much flexibility will fit very closely to the sample, meaning that the fitted values would “follow” the values of the response if we instead had a different set of realisations (a different sample). This leads to a high covariance between each <span class="math inline">\(Y_i\)</span> and its corresponding fitted value, <span class="math inline">\(\hg(\x_i)\)</span>. The more flexibility, the more able the model will be able to follow the variations in the data, leading to higher covariance between the actual responses and the fitted values from the model.</p>
+<p>This doesn’t yet, however, tell us about how to compute or estimate these covariances. It turns out, however, that for some models we can obtain analytical expressions for the covariance between the response and fitted values. For example in a simplified setting (like the linear and quadratic models we have seen) the quantity <span class="math inline">\(\sum_{i=1}^n Cov(Y_i \hat Y_i)\)</span> is equal to <span class="math inline">\(\sigma^2_{\epsilon}\)</span> multiplied by the number of parameters in the model (the model <em>degrees of freedom</em>). As long as we can obtain a reasonable estimate for <span class="math inline">\(\sigma^2_{\epsilon}\)</span> we can use this to obtain estimates of the expected in-sample error and use this as an alternative to something like cross validation to select/tune a model. As a rule-of-thumb estimating <span class="math inline">\(\sigma^2_{\epsilon}\)</span> with the quantity <span class="math inline">\(\frac{1}{n - df(\hg^*)}\sum_{i=1}^n(y_i - \hg^*(\x_i))^2\)</span>, where <span class="math inline">\(\hg^*\)</span> is the most (or one of the most) flexible models which has been fit and <span class="math inline">\(df(\hg^*)\)</span> is its degrees of freedom.</p>
+<p>Let’s apply this to the <code>cars</code> data set to see how it compares with cross validation</p>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="fundamentals2.html#cb368-1" tabindex="-1"></a><span class="do">### Let&#39;s create a vector to store the training errors of</span></span>
+<span id="cb368-2"><a href="fundamentals2.html#cb368-2" tabindex="-1"></a><span class="do">### the polynomial models for d = 1, 2, ..., 5</span></span>
+<span id="cb368-3"><a href="fundamentals2.html#cb368-3" tabindex="-1"></a>tr_err <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">5</span>)</span>
+<span id="cb368-4"><a href="fundamentals2.html#cb368-4" tabindex="-1"></a></span>
+<span id="cb368-5"><a href="fundamentals2.html#cb368-5" tabindex="-1"></a><span class="do">### Now we can loop of the the degree of the polynomial</span></span>
+<span id="cb368-6"><a href="fundamentals2.html#cb368-6" tabindex="-1"></a><span class="do">### as before</span></span>
+<span id="cb368-7"><a href="fundamentals2.html#cb368-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb368-8"><a href="fundamentals2.html#cb368-8" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
+<span id="cb368-9"><a href="fundamentals2.html#cb368-9" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(form, <span class="at">data =</span> cars)</span>
+<span id="cb368-10"><a href="fundamentals2.html#cb368-10" tabindex="-1"></a>  </span>
+<span id="cb368-11"><a href="fundamentals2.html#cb368-11" tabindex="-1"></a>  tr_err[d] <span class="ot">&lt;-</span> <span class="fu">mean</span>((mod<span class="sc">$</span>fitted.values <span class="sc">-</span> cars<span class="sc">$</span>dist)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb368-12"><a href="fundamentals2.html#cb368-12" tabindex="-1"></a>}</span>
+<span id="cb368-13"><a href="fundamentals2.html#cb368-13" tabindex="-1"></a></span>
+<span id="cb368-14"><a href="fundamentals2.html#cb368-14" tabindex="-1"></a><span class="do">### Now we can use the training error from the most flexible</span></span>
+<span id="cb368-15"><a href="fundamentals2.html#cb368-15" tabindex="-1"></a><span class="do">### to estimate the residual variance</span></span>
+<span id="cb368-16"><a href="fundamentals2.html#cb368-16" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cars)</span>
+<span id="cb368-17"><a href="fundamentals2.html#cb368-17" tabindex="-1"></a></span>
+<span id="cb368-18"><a href="fundamentals2.html#cb368-18" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> tr_err[<span class="dv">5</span>]<span class="sc">/</span>(n <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">*</span>n</span>
+<span id="cb368-19"><a href="fundamentals2.html#cb368-19" tabindex="-1"></a><span class="co"># Can you see why this is the appropriate estimate?</span></span>
+<span id="cb368-20"><a href="fundamentals2.html#cb368-20" tabindex="-1"></a></span>
+<span id="cb368-21"><a href="fundamentals2.html#cb368-21" tabindex="-1"></a><span class="do">### Now let&#39;s estime the expected in-sample error</span></span>
+<span id="cb368-22"><a href="fundamentals2.html#cb368-22" tabindex="-1"></a><span class="do">### for each model</span></span>
+<span id="cb368-23"><a href="fundamentals2.html#cb368-23" tabindex="-1"></a>eise <span class="ot">&lt;-</span> tr_err <span class="sc">+</span> sig2_hat<span class="sc">*</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span>n</span>
+<span id="cb368-24"><a href="fundamentals2.html#cb368-24" tabindex="-1"></a></span>
+<span id="cb368-25"><a href="fundamentals2.html#cb368-25" tabindex="-1"></a>eise</span></code></pre></div>
+<pre><code>## [1] 236.4006 230.4896 231.3477 229.2818 233.2552</code></pre>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="fundamentals2.html#cb370-1" tabindex="-1"></a><span class="do">### When we did cross validation the caret package</span></span>
+<span id="cb370-2"><a href="fundamentals2.html#cb370-2" tabindex="-1"></a><span class="do">### returned the square root of the estimated expected</span></span>
+<span id="cb370-3"><a href="fundamentals2.html#cb370-3" tabindex="-1"></a><span class="do">### prediction error</span></span>
+<span id="cb370-4"><a href="fundamentals2.html#cb370-4" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 228.3829 222.3852 222.9089 220.0393 253.9585</code></pre>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="fundamentals2.html#cb372-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>eise</span></code></pre></div>
+<pre><code>## [1] 0.9660842 0.9648382 0.9635234 0.9596891 1.0887582</code></pre>
+<p>We can see that the estimates for expected in-sample error and the cross validation based estimates of expected prediction error are similar, and in fact aside from the degree five model the ratio of the cross validation and in-sample errors is very close to constant.</p>
+</div>
+<div id="test-sets" class="section level3 hasAnchor" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Test Sets<a href="fundamentals2.html#test-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we continue it is important to touch on an important but subtle point. Using cross validation in order to select a model, based on its estimated expected prediction error, is very well founded. However, if we need both to select a model <em>and</em> to estimate its prediction or expected prediction error we face a little bit of a problem.</p>
+<p>The reason that training error underestimates prediction error is because the function is chosen based on how well it predicts the training set (its training error) and not based on how well it predicts the entire distribution. Now let’s think about the validation error <em>of the selected model</em> in a similar light. We took a set of models, i.e. those models trained on the training split, and chose the one which had the lowest validation error. But this can be seen as another example of <em>training</em>. Instead of selecting from a class of functions <span class="math inline">\(\F\)</span> based on the error on the training split (maybe with some penalisation) we selected from a much smaller set of models (the models trained on the training split) and just replaced the error on the training split with that on the validation split. But the same source of bias exists; we chose a model because it fit well on a sample of observations (now the validation split) and not necessarily on the whole population.</p>
+<p>Unfortunately cross validation (as opposed to a single validation split) has the same source of bias, but just to a slightly lesser extent.</p>
+<p>Now, this does not mean that using validation or cross validation to perform model selection is a bad idea. It only means that we cannot use the validation or cross validation based estimate of the (expected) prediction error as a true reflection of the prediction error of the selected model.</p>
+<p><em>If</em> we need perform training AND model selection AND have a reliable estimate of the prediction performance of the <em>selected model</em> we need to first, before any training and validation, separate some of the data as a <em>test set</em> which cannot be touched until we have done all of our training, validation, etc., and is only used as a final step to estimate the prediction error of our final selected model.</p>
+<p>When both a final model <em>and</em> an estimate for its prediction error is needed then the typical workflow is:</p>
+<ul>
+<li><p>Split the entire sample in a “training + selection” set and a test set.</p></li>
+<li><p>Use the “training + selection” set in order to both select and train the final model(s) we want for deployment</p>
+<ul>
+<li>This could be be using cross validation, a single validation split or the expected in sample error based approach above</li>
+</ul></li>
+<li><p>Estimate the prediction error of the selected and trained model(s) by calculating its/their error on the test set.</p>
+<ul>
+<li>It is important that the test set is kept completely separate from the “training + selection” set from the very beginning to avoid <em>data leakage</em>. Data leakage is when <em>extra information</em> which would not be available in practice is used in making modelling decisions. What we mean by “in practice” when we actually take the model(s) we have selected and trained and deploy them for use on new cases. Since the training/validation/testing splitting of the data is ultimately to try and represent the fact that when we actually deploy a model for use on data outside our sample it needs to be fully “ready to go” long before we see any of those “true test cases”. Perhaps more importantly, we typically will never know the values of the response variable for the cases on which we need the model to actually make predictions after deployment. This means that <em>any</em> information which relates even indirectly to the response variables in the test set, which is used for any part of the modelling/fitting/selecting tasks is a violation of this representation. Similarly, any information about the response variables in a validation set which is used in training will introduce additional bias to the validation error.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="summary-and-take-aways-1" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Summary and Take-Aways<a href="fundamentals2.html#summary-and-take-aways-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Overfitting is the term used to describe how overly flexible models may fit the data too well, modelling not only the trend in the relationships between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> (the “signal”), but also the unpredictable “noise” component <span class="math inline">\(\epsilon\)</span></p></li>
+<li><p>Models which have high flexibility have high variance, and typically low bias. The variance and bias combine to define the risk</p></li>
+<li><p>Although we cannot know necessarily when a model is overfitting, we can select an appropriate model (i.e. one which will likely generalise well) by estimating the expected prediction error of a number of models and choose the lowest</p>
+<ul>
+<li>If we care also about interpretability then we may wish to balance accuracy and interpretability</li>
+</ul></li>
+<li><p>Cross-Validation is a principled and universal approach for estimating expected prediction error.</p></li>
+<li><p>The <code>caret</code> package provides a unified framework for training and “tuning” models, either by existing links to a very large number of packages and implementations or with the use of our own model implementations.</p></li>
+<li><p>If we need to have an estimate for the prediction error of our final selected model(s) then we need to first set aside a <em>test set</em>, which we don’t look at at all until after all modelling, training and selecting has been done. Once the final selected and fitted model(s) are ready for deployment then we can use the test set to estimate prediction error.</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fundamentals1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

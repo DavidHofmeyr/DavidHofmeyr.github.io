@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Linear Regression: Ordinary Least Squares and Regularised Variants | Introduction to R</title>
+  <meta name="description" content="6 Linear Regression: Ordinary Least Squares and Regularised Variants | Introduction to R" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Linear Regression: Ordinary Least Squares and Regularised Variants | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Linear Regression: Ordinary Least Squares and Regularised Variants | Introduction to R" />
+  
+  
+  
+
+<meta name="author" content="David P. Hofmeyr" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="fundamentals2.html"/>
+<link rel="next" href="glms.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#background-on-r"><i class="fa fa-check"></i><b>1.1</b> Background on R</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-rstudio"><i class="fa fa-check"></i><b>1.2</b> Getting started with RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statements-expressions-and-objects"><i class="fa fa-check"></i><b>1.3</b> Statements, expressions and objects</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plots"><i class="fa fa-check"></i><b>1.4</b> Basic plots</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R scripts</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>1.6</b> R markdown</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.7</b> Functions</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#s:0help"><i class="fa fa-check"></i><b>1.8</b> Getting Help</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loops-and-flow"><i class="fa fa-check"></i><b>1.9</b> Loops and Flow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-frames"><i class="fa fa-check"></i><b>2.1</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>2.2</b> Importing and Exporting Data</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-plotting"><i class="fa fa-check"></i><b>2.3</b> Data Plotting</a></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#exercises-3"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>3</b> Statistical Background</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="background.html"><a href="background.html#probability-basics"><i class="fa fa-check"></i><b>3.1</b> Probability Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="background.html"><a href="background.html#random-variables"><i class="fa fa-check"></i><b>3.2</b> Random Variables</a></li>
+<li class="chapter" data-level="3.3" data-path="background.html"><a href="background.html#samples-and-statistical-modelling"><i class="fa fa-check"></i><b>3.3</b> Samples and Statistical Modelling</a></li>
+<li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
+<li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
+<li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fundamentals1.html"><a href="fundamentals1.html#two-archetypal-problems"><i class="fa fa-check"></i><b>4.1</b> Two Archetypal Problems</a></li>
+<li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
+<li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
+<li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-and-take-aways"><i class="fa fa-check"></i><b>4.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fundamentals2.html"><a href="fundamentals2.html#a-quick-recap"><i class="fa fa-check"></i><b>5.1</b> A Quick Recap</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals2.html"><a href="fundamentals2.html#overfitting"><i class="fa fa-check"></i><b>5.2</b> Overfitting</a></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-and-take-aways-1"><i class="fa fa-check"></i><b>5.5</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear.html"><a href="linear.html#the-linear-model"><i class="fa fa-check"></i><b>6.1</b> The Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-and-take-aways-2"><i class="fa fa-check"></i><b>7.3</b> Summary and Take-aways</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonparametric Smoothing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
+<li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
+<li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-4"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
+<li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-and-take-aways-3"><i class="fa fa-check"></i><b>10.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linear" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Linear Regression: Ordinary Least Squares and Regularised Variants<a href="linear.html#linear" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="math display">\[
+\def\x{\mathbf{x}}
+\def\Rr{\mathbb{R}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\def\F{\mathcal{F}}
+\def\hbbeta{\hat{\boldsymbol{\beta}}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\X{\mathbf{X}}
+\def\y{\mathbf{y}}
+\def\hg{\hat g}
+\def\hbeta{\hat \beta}
+\def\I{\mathbf{I}}
+\def\hbr{\hbbeta^{(ridge)}}
+\def\hbl{\hbbeta^{(LASSO)}}
+\def\hbe{\hbbeta^{e-net}}
+\]</span></p>
+<p>In this section we will study the (multiple) linear regression model in greater detail, and will formally encounter a number of popular approaches for <em>regularising</em> estimation of the optimal linear model.</p>
+<p>Despite their simplicity, especially in comparison with modern hyper flexible models, linear models remain extremely important for a number of reasons, not least of all their interpretability.</p>
+<div id="the-linear-model" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> The Linear Model<a href="linear.html#the-linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As we discussed briefly in Chapter <a href="fundamentals1.html#fundamentals1">4</a>, a linear (or more technically <em>affine</em>) function of covariates <span class="math inline">\(X_1, X_2, ..., X_p\)</span> is expressible as <span class="math display">\[
+g(X) = \beta_0 + \sum_{j=1}^p \beta_j X_j,
+\]</span> where the vector of <em>coefficients</em> <span class="math inline">\(\bbeta = (\beta_0, \beta_1, ..., \beta_p)\)</span> fully parameterises the function.</p>
+<p>The description of a linear function conveys a lot of information about the “behaviour” of the function for changes in the values of the <span class="math inline">\(X\)</span>’s. In particular, a one “unit” change in the value of <span class="math inline">\(X_j\)</span> results in a change in <span class="math inline">\(g(X)\)</span> by an amount <span class="math inline">\(\beta_j\)</span>. In addition the signs (positive or negative) of the coefficients describe the nature of the relationships between the function value and the variables, or more relevantly to our context, relationships between the covariates and the “typical” values of the response.</p>
+<div id="a-quick-aside-on-assumptions" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> A Quick Aside on “Assumptions”<a href="linear.html#a-quick-aside-on-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You will see many statistical texts saying that the linear model “assumes” the relationship between the (mean) response and the covariates is linear. Perhaps more correctly, regardless of the true form of the relationship between the response and covariates we may <em>choose to model</em> the (mean) response as a linear function of the covariates.</p>
+<p>Why might we wish to do this? The fact of the matter is that, even if the actual relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> is not linear, it may very well be prudent to model it as though it is. By doing so we give ourselves the ability to understand the effects of changes in <span class="math inline">\(X\)</span> on the value of the prediction for <span class="math inline">\(Y\)</span></p>
+<ul>
+<li>Hopefully it is clear that this is not the same as the effects of changes in <span class="math inline">\(X\)</span> on the <em>actual</em> value of <span class="math inline">\(Y\)</span>, or even of the actual value of the expected value of <span class="math inline">\(Y\)</span>. That is, how we choose to model the situation doesn’t change reality, but a simplified representation of reality which we understand may be more useful than a more accurate representation which we don’t.</li>
+</ul>
+<p>Moreover, if the sample size is not very large then we may not have enough “information” to be able to accurately enough describe the true relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>, and in fact the accuracy of a linear model may be better than that of a model with the “correct” form simply because trying to estimate the right parameters for the “correct” model would result in very high variance.</p>
+<ul>
+<li>We saw this in essence (i.e. a model simpler than the true model being preferable) in one of the examples from Chapter <a href="fundamentals2.html#fundamentals2">5</a>, where we fit polynomial models to a simple example where we knew the true function was a degree 4 polynomial, but found that only when the sample became quite large did the accuracy of the fitted degree 4 model exceed that of the fitted degree 3 model.</li>
+</ul>
+<p>Where the “assumptions” actually do matter, however, is in whether the theoretical results associated with linear models can be applied without error. We will describe some of these theoretical results, as we go forward.</p>
+</div>
+</div>
+<div id="ordinary-least-squares" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Ordinary Least Squares<a href="linear.html#ordinary-least-squares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Ordinary Least Squares (OLS) linear model is the direct extension of the simple linear regression model we saw before to the situation where we have multiple covariates</p>
+<ul>
+<li>More precisely the simple linear regression model we saw before was the OLS model for the particular context where we only have one covariate.</li>
+</ul>
+<p>Although we have already seen this model briefly, here we will look in more depth.</p>
+<p>Within the framework we have been considering, when performing training/fitting/estimation, our collection of functions <span class="math inline">\(\F\)</span> from which to select our fitted model is the collection of all linear (affine) functions. This means that each <span class="math inline">\(g \in \F\)</span> can be written as <span class="math display">\[
+g(\x) = \beta_0 + \sum_{j=1}^p \beta_j x_j,
+\]</span> for some coefficients <span class="math inline">\(\bbeta \in \Rr^{p+1}\)</span>, and our loss function is the squared error loss. As a result we may describe the fitted OLS model as</p>
+<p><span class="math display">\[\begin{align*}
+  \hg(\x) =&amp; \ \hbeta_0 + \sum_{j=1}^p \hbeta_j x_j, \mbox{ where }\\
+  \hbbeta =&amp; \argmin_{\bbeta \in \Rr^{p+1}} \frac{1}{n}\sum_{i=1}^n \left(y_i - \hbeta_0 - \sum_{j=1}^p \hbeta_j x_{ij}\right)^2.
+  
+\end{align*}\]</span></p>
+<div id="some-of-the-theory-for-ols" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Some of the Theory for OLS<a href="linear.html#some-of-the-theory-for-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Partly because of its simplicity the theoretical properties of the OLS model have been studied extensively for many decades. We will barely scratch the surface of what is known about the model, but will cover some important practical aspects.</p>
+<p>Suppose that the true regression equation is given by <span class="math display">\[
+Y = \beta_0^* + \sum_{j=1}^p \beta_j^* X_j + \epsilon,
+\]</span>for some “true” regression coefficients <span class="math inline">\(\bbeta^*\)</span>, and where <span class="math inline">\(\epsilon \sim N(0,\sigma_{\epsilon}^2)\)</span>. Then <em>conditional on the observations of the covariates</em> (i.e. by treating the observations of <span class="math inline">\(X\)</span> as fixed) we have</p>
+<p><span class="math display">\[
+\hbbeta \sim N\left(\bbeta^*, \sigma^2_{\epsilon}\left(\X^\top \X\right)^{-1}\right),
+\]</span></p>
+<p>where <span class="math inline">\(\X\)</span> is again the <em>design matrix</em> with <span class="math inline">\(i\)</span>-th row <span class="math inline">\((1, \x_i^\top)\)</span>. That is, <span class="math inline">\(\hbbeta\)</span> as an estimator has a multivariate normal distribution and</p>
+<ul>
+<li><p><span class="math inline">\(E[\hbbeta] = \bbeta^*\)</span>, i.e. <span class="math inline">\(\hbbeta\)</span> is an <em>unbiased</em> estimator of the true coefficients</p></li>
+<li><p><span class="math inline">\(Cov(\hbbeta) = \sigma^2_{\epsilon}\left(\X^\top\X\right)^{-1}\)</span>, i.e. the variance of <span class="math inline">\(\hbbeta\)</span> depends on the variance of the residuals (this should not be surprising; the more noise the “harder” it is to estimate the signal) and also depends on how “spread out” and also how correlated the observations of <span class="math inline">\(X\)</span> are</p>
+<ul>
+<li><p>It is easy to show that the prediction for the mean of the observations of <span class="math inline">\(X\)</span> is equal to the mean of the observations of <span class="math inline">\(Y\)</span>. Loosely speaking we can think of the point <span class="math inline">\((\bar \x, \bar y)\)</span> as a “pivot” for the fitted function, and in order to fit closely to the observations it is, in a sense, held in place by them. To ensure it doesn’t “wobble” too much on its pivot, we need anchors (observed values for <span class="math inline">\(X\)</span>) which are quite spread out.</p>
+<p>The following R code will create two scenarios; one with the values of <span class="math inline">\(X\)</span> relatively closer together and the other with them more spread out. Everything else is exactly the same. Run the code multiple times. You should see more variability in the first scenario than the second.</p></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="linear.html#cb374-1" tabindex="-1"></a><span class="do">### Scenario 1: X ranges from -0.5 to 0.5</span></span>
+<span id="cb374-2"><a href="linear.html#cb374-2" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">20</span>)</span>
+<span id="cb374-3"><a href="linear.html#cb374-3" tabindex="-1"></a></span>
+<span id="cb374-4"><a href="linear.html#cb374-4" tabindex="-1"></a><span class="do">### Scenario2: X ranges from -1 to 1</span></span>
+<span id="cb374-5"><a href="linear.html#cb374-5" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">20</span>)</span>
+<span id="cb374-6"><a href="linear.html#cb374-6" tabindex="-1"></a></span>
+<span id="cb374-7"><a href="linear.html#cb374-7" tabindex="-1"></a><span class="do">### Residuals: We can even use exactly the same values of the residuals</span></span>
+<span id="cb374-8"><a href="linear.html#cb374-8" tabindex="-1"></a>epsilon <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb374-9"><a href="linear.html#cb374-9" tabindex="-1"></a></span>
+<span id="cb374-10"><a href="linear.html#cb374-10" tabindex="-1"></a><span class="do">### Y: We now produce the different observations for Y</span></span>
+<span id="cb374-11"><a href="linear.html#cb374-11" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> x1 <span class="sc">+</span> epsilon</span>
+<span id="cb374-12"><a href="linear.html#cb374-12" tabindex="-1"></a></span>
+<span id="cb374-13"><a href="linear.html#cb374-13" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> x2 <span class="sc">+</span> epsilon</span>
+<span id="cb374-14"><a href="linear.html#cb374-14" tabindex="-1"></a></span>
+<span id="cb374-15"><a href="linear.html#cb374-15" tabindex="-1"></a><span class="do">### Fitted models: Finally we fit the two linear models and plot</span></span>
+<span id="cb374-16"><a href="linear.html#cb374-16" tabindex="-1"></a></span>
+<span id="cb374-17"><a href="linear.html#cb374-17" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y1<span class="sc">~</span>., <span class="fu">data.frame</span>(x1, y1))</span>
+<span id="cb374-18"><a href="linear.html#cb374-18" tabindex="-1"></a></span>
+<span id="cb374-19"><a href="linear.html#cb374-19" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2<span class="sc">~</span>., <span class="fu">data.frame</span>(x2, y2))</span>
+<span id="cb374-20"><a href="linear.html#cb374-20" tabindex="-1"></a></span>
+<span id="cb374-21"><a href="linear.html#cb374-21" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb374-22"><a href="linear.html#cb374-22" tabindex="-1"></a></span>
+<span id="cb374-23"><a href="linear.html#cb374-23" tabindex="-1"></a><span class="fu">plot</span>(x1, y1, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), <span class="at">xlab =</span> <span class="st">&#39;X&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Y&#39;</span>, <span class="at">main =</span> <span class="st">&#39;X values close together&#39;</span>)</span>
+<span id="cb374-24"><a href="linear.html#cb374-24" tabindex="-1"></a><span class="fu">abline</span>(lm1<span class="sc">$</span>coefficients)</span>
+<span id="cb374-25"><a href="linear.html#cb374-25" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb374-26"><a href="linear.html#cb374-26" tabindex="-1"></a></span>
+<span id="cb374-27"><a href="linear.html#cb374-27" tabindex="-1"></a><span class="fu">plot</span>(x2, y2, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), <span class="at">xlab =</span> <span class="st">&#39;X&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Y&#39;</span>, <span class="at">main =</span> <span class="st">&#39;X values spread out&#39;</span>)</span>
+<span id="cb374-28"><a href="linear.html#cb374-28" tabindex="-1"></a><span class="fu">abline</span>(lm2<span class="sc">$</span>coefficients)</span>
+<span id="cb374-29"><a href="linear.html#cb374-29" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-158-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Returning to the distribution of <span class="math inline">\(\hbbeta\)</span>, if we look at each of the coefficients separately we have that <span class="math inline">\((\hat \beta_j - \beta^*_j)\big/\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\)</span> has a standard normal distribution. But in practice we do not know the value of <span class="math inline">\(\sigma_{\epsilon}^2\)</span> and need to estimate it. We will not go into any of the details for why, as these are beyond the scope of the module, but if we estimate <span class="math inline">\(\sigma_{\epsilon}^2\)</span> using <span class="math inline">\(\frac{1}{n-p-1}\sum_{i=1}^n r_i^2\)</span>, where <span class="math inline">\(r_1, ..., r_n\)</span> are the residuals from the fitted model, then <span class="math inline">\((\hat \beta_j - \beta^*_j)\big/\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\)</span> has a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-p-1\)</span> degrees of freedom. This becomes important when we want to make inference about the true values of the coefficients since it allows us to obtain confidence intervals for the regression coefficients. Specifically we can obtain a <span class="math inline">\((1-\alpha)\times 100\%\)</span> confidence interval using <span class="math display">\[
+\left(\hat \beta_j + t_{\alpha/2}\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}, \hat \beta_j + t_{1-\alpha/2}\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\right),
+\]</span> where <span class="math inline">\(t_{q}\)</span> is the <span class="math inline">\(q\)</span> quantile of the <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-p-1\)</span> degrees of freedom.</p>
+<ul>
+<li>Hopefully it is clear that this is only a valid confidence interval if the modelling assumptions hold.</li>
+</ul>
+</div>
+<div id="ordinary-least-squares-in-r" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Ordinary Least Squares in R<a href="linear.html#ordinary-least-squares-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We already saw that the <code>lm</code> function allowed us to fit linear models, and in fact it does so based on the squared error loss function and hence the coefficients we get out are the <span class="math inline">\(\hbbeta\)</span> above. The output of <code>lm</code> contains much more than just the regression coefficients, however, and here we will briefly discuss some of these by way of an example.</p>
+<p>The <code>Auto</code> data set in the <code>ISLR2</code> package contains information on 392 cars developed between 1970 and 1982. We may be interested in the relationship between its fuel efficiency (miles per gallon, <code>mpg</code>) and various other characteristics.</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="linear.html#cb375-1" tabindex="-1"></a><span class="do">### Load the ISLR2 library and then the data set</span></span>
+<span id="cb375-2"><a href="linear.html#cb375-2" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb375-3"><a href="linear.html#cb375-3" tabindex="-1"></a><span class="fu">data</span>(Auto)</span>
+<span id="cb375-4"><a href="linear.html#cb375-4" tabindex="-1"></a></span>
+<span id="cb375-5"><a href="linear.html#cb375-5" tabindex="-1"></a><span class="do">### Inspect the data set variables</span></span>
+<span id="cb375-6"><a href="linear.html#cb375-6" tabindex="-1"></a><span class="fu">head</span>(Auto)</span></code></pre></div>
+<pre><code>##   mpg cylinders displacement horsepower weight acceleration year origin                      name
+## 1  18         8          307        130   3504         12.0   70      1 chevrolet chevelle malibu
+## 2  15         8          350        165   3693         11.5   70      1         buick skylark 320
+## 3  18         8          318        150   3436         11.0   70      1        plymouth satellite
+## 4  16         8          304        150   3433         12.0   70      1             amc rebel sst
+## 5  17         8          302        140   3449         10.5   70      1               ford torino
+## 6  15         8          429        198   4341         10.0   70      1          ford galaxie 500</code></pre>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="linear.html#cb377-1" tabindex="-1"></a><span class="do">### We see the response variable mpg, and eight other variables</span></span>
+<span id="cb377-2"><a href="linear.html#cb377-2" tabindex="-1"></a><span class="do">### which could be used as predictors. Most of these appear sensibly</span></span>
+<span id="cb377-3"><a href="linear.html#cb377-3" tabindex="-1"></a><span class="do">### treated as numeric, and potentially useful predictors. However</span></span>
+<span id="cb377-4"><a href="linear.html#cb377-4" tabindex="-1"></a><span class="do">### the car name should not be predictive (although the make of car</span></span>
+<span id="cb377-5"><a href="linear.html#cb377-5" tabindex="-1"></a><span class="do">### could be, and as an extension we could create a factor variable</span></span>
+<span id="cb377-6"><a href="linear.html#cb377-6" tabindex="-1"></a><span class="do">### which groups the cars by make). In addition the origin variable</span></span>
+<span id="cb377-7"><a href="linear.html#cb377-7" tabindex="-1"></a><span class="do">### is curious. If you call help(Auto) you will see this is a numeric</span></span>
+<span id="cb377-8"><a href="linear.html#cb377-8" tabindex="-1"></a><span class="do">### encoding of the region in which the car was developed. We should</span></span>
+<span id="cb377-9"><a href="linear.html#cb377-9" tabindex="-1"></a><span class="do">### certainly treat this as a factor variable.</span></span>
+<span id="cb377-10"><a href="linear.html#cb377-10" tabindex="-1"></a></span>
+<span id="cb377-11"><a href="linear.html#cb377-11" tabindex="-1"></a>Auto<span class="sc">$</span>origin <span class="ot">&lt;-</span> <span class="fu">factor</span>(Auto<span class="sc">$</span>origin, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb377-12"><a href="linear.html#cb377-12" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;American&quot;</span>, <span class="st">&quot;European&quot;</span>, <span class="st">&quot;Japanese&quot;</span>))</span>
+<span id="cb377-13"><a href="linear.html#cb377-13" tabindex="-1"></a></span>
+<span id="cb377-14"><a href="linear.html#cb377-14" tabindex="-1"></a><span class="do">### We can now fit a model but exclude the name covariate</span></span>
+<span id="cb377-15"><a href="linear.html#cb377-15" tabindex="-1"></a>lin_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>., <span class="at">data =</span> Auto[,<span class="fu">names</span>(Auto)<span class="sc">!=</span><span class="st">&quot;name&quot;</span>])</span>
+<span id="cb377-16"><a href="linear.html#cb377-16" tabindex="-1"></a></span>
+<span id="cb377-17"><a href="linear.html#cb377-17" tabindex="-1"></a><span class="do">### The summary function will provide much of the information</span></span>
+<span id="cb377-18"><a href="linear.html#cb377-18" tabindex="-1"></a><span class="do">### we may wish to inspect for understanding the properties</span></span>
+<span id="cb377-19"><a href="linear.html#cb377-19" tabindex="-1"></a><span class="do">### of the model</span></span>
+<span id="cb377-20"><a href="linear.html#cb377-20" tabindex="-1"></a><span class="fu">summary</span>(lin_mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ ., data = Auto[, names(Auto) != &quot;name&quot;])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.0095 -2.0785 -0.0982  1.9856 13.3608 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    -1.795e+01  4.677e+00  -3.839 0.000145 ***
+## cylinders      -4.897e-01  3.212e-01  -1.524 0.128215    
+## displacement    2.398e-02  7.653e-03   3.133 0.001863 ** 
+## horsepower     -1.818e-02  1.371e-02  -1.326 0.185488    
+## weight         -6.710e-03  6.551e-04 -10.243  &lt; 2e-16 ***
+## acceleration    7.910e-02  9.822e-02   0.805 0.421101    
+## year            7.770e-01  5.178e-02  15.005  &lt; 2e-16 ***
+## originEuropean  2.630e+00  5.664e-01   4.643 4.72e-06 ***
+## originJapanese  2.853e+00  5.527e-01   5.162 3.93e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.307 on 383 degrees of freedom
+## Multiple R-squared:  0.8242, Adjusted R-squared:  0.8205 
+## F-statistic: 224.5 on 8 and 383 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>In addition to the estimated coefficients, we see a number of other columns in table output from <code>summary</code>. These include <code>Std. Error</code> (the estimated standard error of the coefficients), and two additional columns named <code>t value</code> and <code>Pr(&gt;|t|)</code>. We saw previously that the estimated standard errors are the quantities <span class="math inline">\(\hat \sigma_{\epsilon}\sqrt{(\X^\top\X)^{-1}_{jj}}\)</span>. The other two columns are associated with statistical “hypothesis tests” for whether or not the true coefficients are zero or not. The reason we are interested in this is that if a coefficient is zero then the associated covariate does not have any effect on the model.</p>
+<p>Now, since we know (if the assumptions hold) that our regression estimates are realisations of continuous random variables, the probability that we see <span class="math inline">\(\hat \beta_j\)</span> exactly equal to zero is zero, regardless of whether or not the true coefficient is zero or not. So we need to ask ourselves “is our observed value of <span class="math inline">\(\hat \beta_j\)</span> <em>sufficiently far from zero</em> to conclude that the true value is not zero?”. Although we can never be absolutely certain, we may be able to quantify <em>how unlikely it is to see an estimated coefficient</em> <span class="math inline">\(\hat \beta_j\)</span> <em>“like ours” if</em> <span class="math inline">\(\beta_j^*\)</span> <em>is actually equal to zero</em>. If it is very unlikely, then we could say with reasonable confidence that the true value is not zero.</p>
+<p>So how could we achieve such a thing? Well, we could look to the sampling distribution of <span class="math inline">\(\hat \beta_j\)</span>. We already know that if our modelling assumptions hold then <span class="math display">\[
+\frac{\hat\beta_j - \beta_j^*}{\hat \sigma_{\epsilon}\sqrt{(\X^\top\X)^{-1}_{jj}}} \sim t_{n-p-1}.
+\]</span></p>
+<p>And herein lies a beautiful thing about hypothesis tests. The above expression depends on <span class="math inline">\(\beta_j^*\)</span>, which we don’t know. But because we are only interested in this sampling distribution <em>under the specific scenario where</em> <span class="math inline">\(\beta_j^*\)</span> <em>is equal to zero</em>, that doesn’t matter. That is, <em>if</em> <span class="math inline">\(\beta^*_j = 0\)</span> then <span class="math inline">\(\hat \beta_j\big/\hat \sigma_{\epsilon}\sqrt{(\X^\top\X)^{-1}_{jj}}\)</span> has a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-p-1\)</span> degrees of freedom. We can therefore evaluate the probability</p>
+<p><span class="math display">\[\begin{align*}
+P&amp;\left(\mbox{I could have seen a sample with } \frac{\hat \beta_j}{\hat \sigma_{\epsilon}\sqrt{(\X^\top\X)^{-1}_{jj}}} \mbox{ further from zero than the one from my specific sample} \Bigg | \beta_j^* = 0\right)\\
+&amp;= P\left(T &gt; \left|t_{obs}\right|\right),
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(t_{obs}\)</span> is the observed value of <span class="math inline">\(\hat \beta_j\big/\hat \sigma_{\epsilon}\sqrt{(\X^\top\X)^{-1}_{jj}}\)</span> from my sample and <span class="math inline">\(T\)</span> is a random variable with a <span class="math inline">\(t_{n-p-1}\)</span> distribution. These probabilities, or “<span class="math inline">\(p\)</span>-values”, are the quantities reported in the <code>Pr(&gt;|t|)</code> column in the linear model summary, and the statistics <span class="math inline">\(t_{obs}\)</span> are reported in the column headed <code>t value</code>. The summary also indicates the “significance level” of these <span class="math inline">\(p\)</span>-values where <code>***</code> signifies a negligible probability (i.e. it is “extremely unlikely” that <span class="math inline">\(\beta_j^*\)</span> is zero, since if it was we would almost never see an observed coefficient so far from zero); <code>**</code> signifies that less than <span class="math inline">\(1\%\)</span> of samples would lead to an observation at least as far from zero as our own; <code>*</code> signifies less than <span class="math inline">\(5\%\)</span> of samples; and <code>.</code> signifies less than <span class="math inline">\(10\%\)</span> of samples with an estimated coefficient as far from zero.</p>
+<p>Looking at the above output we see that only <code>cylinders</code> (the number of cylinders in the engine); <code>horsepower</code> (a measure of the total engine power output); and <code>acceleration</code> (the time, in seconds, to accelerate from standstill to <span class="math inline">\(60mph\)</span>) do not have any of these significance codes. This may well be surprising, since we certainly associate larger, more powerful engines with worse fuel efficiency. We will park that for now, and return to it a little later. Now, note that</p>
+<ul>
+<li><p>These <span class="math inline">\(p\)</span>-values are only appropriate reflections of “significance” if the modelling assumptions hold.</p></li>
+<li><p>Hypothesis tests are notoriously hard to grasp when first encountered, and so if you found the above (very brief) overview of what is going on a little overwhelming, you are not alone. Another, possibly far more accessible approach for achieving essentially the same practicalities is to decide for yourselves what constitutes a “significant finding” from the point of view of what we referred to previously as a “level of confidence in your conclusions”. You can then construct an associated confidence interval based on this confidence level, and check whether zero lies within it. If not, then you should conclude that zero is not a “plausible value” for the coefficient.</p></li>
+</ul>
+<p><strong><span class="math inline">\(R^2\)</span> and the F-statistic</strong></p>
+<p>In addition to the tabular summary from the linear model is a number of comments in the footnotes. The <span class="math inline">\(R^2\)</span> (<code>R-squared</code>) statistic quantifies the proportion of the variation in the responses which are captured by the model. This is a standardised measure of how well the model fits the data, since if we can “explain” the vast majority of the differences (variations) in the responses through the model, then it must be fitting well to the data. Formally it is defined as the ratio <span class="math inline">\(\sum_{i=1}^n r_i^2/\sum_{i=1}^n (y_i - \bar y)^2\)</span>, where again <span class="math inline">\(r_1, ..., r_n\)</span> are the residuals from the model. The adjusted <span class="math inline">\(R^2\)</span> (<code>Adjusted R-squared</code>) takes into account the amount of flexibility in the model, where the more coefficients we have the better we will be able to fit to the data, potentially leading to overfitting. Adjusted <span class="math inline">\(R^2\)</span> is therefore a more appropriate statistic from an inference point of view, whereas raw <span class="math inline">\(R^2\)</span> is more of a descriptive statistic.</p>
+<p>It is very much possible, especially when there is a reasonably large number of covariates, that none of the individual variables contributes substantially to the prediction of the response, and that none is “significant” in the model (based on the <span class="math inline">\(p\)</span>-value meaning of significance). We may in such situations question whether the model is actually capturing any relationship at all, or if the fit is just picking up on the noise. We can always look at the adjusted <span class="math inline">\(R^2\)</span> for an indication of whether the model captures an appreciable amount of the variation in the responses, however any general threshold above which we decide “the model is picking up on some relationship between the covariates and the response” would be fairly arbitrary. But as with all other statistics, we could turn to the sampling distribution of the <span class="math inline">\(R^2\)</span> and/or adjusted <span class="math inline">\(R^2\)</span> to see if it is “significantly” above zero. As it turns out, if the modelling assumptions hold, then the quantity <span class="math inline">\(\left(1/(1 - R^2) - 1\right)\frac{n-p-1}{p}\)</span> has what is known as an <span class="math inline">\(F\)</span> distribution, with <span class="math inline">\(p\)</span> numerator degrees of freedom and <span class="math inline">\(n-p-1\)</span> denominator degrees of freedom. This statistic is reported as the <code>F-statistic</code> in the linear model summary, and its significance can be interpreted as indicating that the covariates <em>overall</em> (i.e. combined) are relevant to the prediction of the response, or that the model is not just capturing noise.</p>
+</div>
+<div id="some-regression-diagnostics" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> (Some) Regression Diagnostics<a href="linear.html#some-regression-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As we have hinted at, reliance on the confidence intervals and <span class="math inline">\(p\)</span>-values should be done with caution due to their validity relying on the modelling assumptions that <span class="math inline">\(Y\)</span> is expressible as a linear function of the covariates plus a normally distributed residual.</p>
+<p>There are very many diagnostics which can be considered which can, to some extent, “test” the validity of these assumptions.</p>
+<p><strong>Linearity</strong></p>
+<p>If the model has appropriately captured the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(E[Y|X]\)</span>, then plotting (estimates of) <span class="math inline">\(Y-E[Y|X]\)</span> against <span class="math inline">\(E[Y|X]\)</span> should just look like “noise”, with no discernible relationships between the “signal” component <span class="math inline">\(E[Y|X]\)</span> and the “noise” (residual) component <span class="math inline">\(Y-E[Y|X]\)</span>. If there <em>is</em> a relationship then what we think are just the residuals actually contain some of the “signal”.</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="linear.html#cb379-1" tabindex="-1"></a><span class="do">### Let&#39;s return to the Auto data set and the linear model we fit</span></span>
+<span id="cb379-2"><a href="linear.html#cb379-2" tabindex="-1"></a><span class="fu">plot</span>(lin_mod<span class="sc">$</span>fitted.values, lin_mod<span class="sc">$</span>residuals,</span>
+<span id="cb379-3"><a href="linear.html#cb379-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Fitted values&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-160-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>It should be clear that there is a relationship between the fitted values (estimated signal component) and the residuals (estimated noise component). In addition to the “U”-shape, we can also see that the residual variance is larger for larger fitted values, which would also violate the assumption that the residuals are independent of <span class="math inline">\(X\)</span>.</p>
+<p>Note that although we can use such a plot to determine if the linear model is “incorrect”, we cannot reasonably rely on such a plot to “confirm” that the true model is linear. Nonetheless, if there is no apparent relationship present then it is certainly not unreasonable to rely on the model for prediction.</p>
+<p><strong>Normality of Residuals</strong></p>
+<p>Even if we cannot see any clear relationship between the fitted values and the residuals, if the residual distribution is far from normal then the confidence intervals and hypothesis tests are no longer valid. We can assess normality either with the use of a histogram or, more appropriately, with a quantile-quantile or “QQ” plot, which plots the residuals (or indeed any vector of numbers) sorted in increasing order against the quantiles of a normal distribution. If the residuals are approximately normally distributed we should see a more-or-less straight line.</p>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="linear.html#cb380-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb380-2"><a href="linear.html#cb380-2" tabindex="-1"></a><span class="fu">hist</span>(lin_mod<span class="sc">$</span>residuals, <span class="at">main =</span> <span class="st">&quot;Residual distribution&quot;</span>)</span>
+<span id="cb380-3"><a href="linear.html#cb380-3" tabindex="-1"></a><span class="fu">qqnorm</span>(lin_mod<span class="sc">$</span>residuals, <span class="at">main =</span> <span class="st">&quot;Normal Quantile-Qauntile plot of residuals&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-161-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Both the histogram and the QQ-plot show deviations from normality, in particular with a long right tail.</p>
+</div>
+<div id="multicollinearity" class="section level3 hasAnchor" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Multicollinearity<a href="linear.html#multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that the covariance of the regression coefficients <span class="math inline">\(\hbbeta\)</span> is <span class="math inline">\(\sigma_{\epsilon}^2 (\X^\top\X)^{-1}\)</span>. This comes from the fact that the coefficients can be expressed as <span class="math inline">\(\hbbeta = (\X^\top\X)^{-1}\X^\top \mathbf{Y}\)</span>, where <span class="math inline">\(\mathbf{Y}\)</span> is the vector of responses <span class="math inline">\((Y_1, ..., Y_n)\)</span>. However, we have had a hidden assumption all along that <span class="math inline">\(\X^\top \X\)</span> is actually invertible. Otherwise there OLS coefficients are not well defined.</p>
+<p>The matrix <span class="math inline">\(\X^\top\X\)</span> will be invertible as long as none of the columns of <span class="math inline">\(\X\)</span> can be expressed as a linear combination of the others. However, even when <span class="math inline">\(\X^\top\X\)</span> <em>is</em> invertible, it may be that some of the columns are <em>almost</em> expressible as linear combinations of the others. What this would mean is that at least one of the columns (say the column associated with <span class="math inline">\(X_j\)</span>) can be <em>predicted with low error</em> by a linear model using the other covariates as predictors. Intuitively if one of the covariates can be predicted almost exactly using the others, then that covariate doesn’t provide much <em>unique</em> information for predicting <span class="math inline">\(Y\)</span>. When this occurs, it leads to the corresponding diagonal element in <span class="math inline">\((\X^\top\X)^{-1}\)</span> being potentially very small, and therefore the variance of <span class="math inline">\(\hat \beta_j\)</span> being very large.</p>
+<p>The presence of covariates which are highly linearly dependent on the rest is known as <em>multicollinearity</em> and can wreak havoc on our inference. Most often this will simply, due to it leading to very large variance in the regression coefficients, mask potential significance of some of the covariates. However, it can also have the opposite effect, that it leads to some covariates being seen as significant in the model even when they are not, and to a much greater extent than would happen by chance if actually this multicollinearity were not present.</p>
+<p><em>Variance Inflation Factors</em> (VIFs) can be used to assess the level of multicollinearity, and the VIF for variable <span class="math inline">\(X_j\)</span> is equal to <span class="math inline">\(1/(1-R^2_j)\)</span> where <span class="math inline">\(R^2_j\)</span> is the R-squared value from regression <span class="math inline">\(X_j\)</span> on the other covariates using a linear model. The function <code>vif</code> in the package <code>car</code> computes Generalised VIFs which, for numeric covariates are the same as standard VIFs, but for categorical covariates combine the VIFs from each of the associated dummy variables.</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="linear.html#cb381-1" tabindex="-1"></a><span class="do">### Load the car library</span></span>
+<span id="cb381-2"><a href="linear.html#cb381-2" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## 
+## Attaching package: &#39;car&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="linear.html#cb385-1" tabindex="-1"></a><span class="do">### Compute the (Generalised) VIFs from our linear model from the Auto data</span></span>
+<span id="cb385-2"><a href="linear.html#cb385-2" tabindex="-1"></a><span class="fu">vif</span>(lin_mod)</span></code></pre></div>
+<pre><code>##                   GVIF Df GVIF^(1/(2*Df))
+## cylinders    10.737771  1        3.276854
+## displacement 22.937950  1        4.789358
+## horsepower    9.957265  1        3.155513
+## weight       11.074349  1        3.327814
+## acceleration  2.625906  1        1.620465
+## year          1.301373  1        1.140777
+## origin        2.096060  2        1.203236</code></pre>
+<p>Although there is no universally agreed upon threshold for when VIFs indicate problems, a rough rule of thumb is GVIF<span class="math inline">\(^{1/2df} &gt; 3\)</span> may be a problem where <span class="math inline">\(df\)</span> is the number of degrees of freedom introduced by the variable, and is <span class="math inline">\(1\)</span> for numeric covariates and the number of dummy variables used for categorical variables. In the above example we see that the first four covariates have large (G)VIFs, and this <em>could</em> be a reason why some of the otherwise apparently relevant covariates (<code>cylinders</code> and <code>horsepower</code>) were not significant in the model. However, in the exercises at the end of this chapter you will investigate some extensions of this model and see if there is another cause.</p>
+</div>
+</div>
+<div id="regularisation-for-linear-models" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Regularisation for Linear Models<a href="linear.html#regularisation-for-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Regularisation typically refers to modifications of an estimator which reduces its variance; or makes the realisations of the estimator “more regular”. Although the linear model is a relatively <em>simple</em> model, and typically has comparatively low variance, this does not mean that regularisation of linear models will not still be beneficial. Moreover, as we just discussed, the variance of the linear regression coefficients may be very large when there is multicollinearity between the covariates.</p>
+<p>Here we investigate some common approaches for inducing regularisation in linear models. However, the high level ideas are not restricted to linear models and in fact the same sorts of ideas are applicable more generally.</p>
+<div id="regularisation-through-constraints" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Regularisation Through Constraints<a href="linear.html#regularisation-through-constraints" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A very direct approach to reduce the variance of the regression coefficients is simply to force them not to take very large values (either positive or negative). For example, suppose that instead of choosing <span class="math inline">\(\hbbeta\)</span> to minimise the training error over all possible vectors of coefficients, we could instead consider the <em>constrained optimisation problem</em></p>
+<p><span class="math display">\[\begin{align*}
+\min_{\bbeta} &amp; \ \frac{1}{n}\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2\\
+s.t. &amp; \ \sum_{j=1}^p \beta_j^2 \leq t,
+\end{align*}\]</span></p>
+<p>for some chosen value of <span class="math inline">\(t &gt; 0\)</span>.</p>
+<p>This constrained optimisation says that we choose as our estimate the coefficients which minimise the training error, but not from all vectors in <span class="math inline">\(\Rr^{p+1}\)</span> as in the OLS case, instead only from among those for which the <em>constraint</em> <span class="math inline">\(\sum_{j=1}^p \beta_j^2 \leq t\)</span> is satisfied.</p>
+<ul>
+<li><p>The value of <span class="math inline">\(t\)</span> must be chosen somehow, but we have already seen how we might go about selecting from multiple models and each setting of <span class="math inline">\(t\)</span> corresponds with a different model</p></li>
+<li><p>Smaller <span class="math inline">\(t\)</span> constrains the regression coefficients to a greater extent, leading to smaller variance</p></li>
+<li><p>As <span class="math inline">\(t \to \infty\)</span> we simply return to the OLS solution.</p></li>
+</ul>
+</div>
+<div id="regularisation-through-penalisation" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Regularisation Through Penalisation<a href="linear.html#regularisation-through-penalisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Although intuitively setting up constraints in this way may be effective in inducing regularity in an estimator, it turns out there is a much more convenient approach. Mathematically there is a <em>duality</em> between constrained optimisation and so-called “penalised” optimisation. Specifically, if the functions <span class="math inline">\(f\)</span> and <span class="math inline">\(h\)</span> are “nice” (we won’t go into details of what that means here since all we need is the intuition) then for every <span class="math inline">\(t &gt; 0\)</span> there is a <span class="math inline">\(\lambda(t) \geq 0\)</span> for which the solutions to</p>
+<p><span class="math display">\[\begin{align*}
+\min_{\bbeta} &amp; \ f(\bbeta)\\
+s.t. &amp; \ h(\bbeta) \leq t
+\end{align*}\]</span> and <span class="math display">\[
+\min_{\bbeta} f(\bbeta) + \lambda(t) h(\bbeta)
+\]</span> are exactly the same.</p>
+<p>How this translates to our context is that instead of solving the problem of minimising the Least Squares objective subject to the constraint <span class="math inline">\(\sum_j \beta_j^2 \leq t\)</span> we could be solving</p>
+<p><span class="math display">\[
+\min_\bbeta \frac{1}{n}\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2
+\]</span> for some value of <span class="math inline">\(\lambda\)</span>.</p>
+<p>This is a penalised optimisation problem, where instead of explicitly excluding the possibility of having an output/solution not satisfying the constraint, instead there is a “penalty” associated with solutions which might violate the constraint (i.e. with a large value of <span class="math inline">\(\sum_{j} \beta_j^2\)</span>).</p>
+<ul>
+<li>The optimisation theory essentially says that if the OLS solution satisfied the constraint, then <span class="math inline">\(\lambda = 0\)</span>, and otherwise there is an appropriate amount of penalisation (value for <span class="math inline">\(\lambda\)</span>) to ensure the constraint is met exactly and the solutions will be the same</li>
+</ul>
+<p>But here is the crux: We don’t know <em>a priori</em> what an appropriate value for <span class="math inline">\(t\)</span> (in the constrained formulation of the problem) is anyway. In practice we would consider a variety of values for <span class="math inline">\(t\)</span> and select one using one of the model selection approaches we covered in the previous lecture. But if we would be trying out a whole lot of values for <span class="math inline">\(t\)</span>, we could equally just bypass this step and jump straight to the penalised formulation above; trying out a range of values for <span class="math inline">\(\lambda\)</span> and selecting using one of our model selection techniques.</p>
+<ul>
+<li>There are a number of benefits of jumping straight to the penalised formulation: (i) solving the penalised problem is much easier than solving the constrained formulation (in fact typically constrained optimisation is solved by converting to a penalised problem); and (ii) the statistical properties of the solution to the penalised problem are much better understood than those of the constrained problem.</li>
+</ul>
+<p>Arguably the main reason for describing the constraint formulation at all is that it conveys an intuitive interpretation of how regularisation is achieved more directly: We simply “trap” the potential solutions inside a “small ball”, so they can’t vary too much. However, the penalised formulation can also offer some intuition: Informally we may think of the “effort” in optimising the penalised objective as being split between minimising the training error and minimising the term <span class="math inline">\(\sum_j \beta_j^2\)</span>, and the larger the value of <span class="math inline">\(\lambda\)</span> the more effort is placed on minimising <span class="math inline">\(\sum_j \beta_j^2\)</span>. We also saw that overfitting and high variance estimation comes about if we focus too heavily on the “details” (i.e. the noise) in the observations. By diverting some of the “attention” away from minimising the training error the estimation is less affected by the minutiae in the observations, and so less prone to overfitting.</p>
+<div id="a-quick-comment-on-standardisation" class="section level5 hasAnchor" number="6.3.2.0.1">
+<h5><span class="header-section-number">6.3.2.0.1</span> A Quick Comment on Standardisation<a href="linear.html#a-quick-comment-on-standardisation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Notice that the scale of the regression coefficients is typically inversely related to the scale on which the corresponding covariates are measured.</p>
+<p>For example, suppose we were using people’s biometric information in order to assess their risk of certain conditions developing. If we had stored their weight in grams we would need to have a much smaller coefficient for weight then if we had stored their weight in kilograms.</p>
+<p>If we apply the same amount of penalisation to a coefficient which “should be very large” and one which “should” not, purely because of how we stored the data and not because of their intrinsic relevance to the model, then this will have a much greater effect on the first than the second. When performing regularisation in this way it is therefore important to first standardise the coefficients to have similar (or the same) scale/variance. This must of course be taken into account when it comes to predicting the response on new “test cases”.</p>
+</div>
+<div id="visualising-the-effects-of-regularisation" class="section level4 hasAnchor" number="6.3.2.1">
+<h4><span class="header-section-number">6.3.2.1</span> Visualising the Effects of Regularisation<a href="linear.html#visualising-the-effects-of-regularisation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s consider just a very simple scenario, where <span class="math inline">\(Y = X_1 + X_2 + \epsilon\)</span>, and <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are uncorrelated. The true coefficients are therefore each equal to one (and the intercept is equal to zero). At a population level the true regression coefficients are equal to <span class="math inline">\(\argmin_{\bbeta} E[(Y-\beta_1 X_1 - \beta_2 X_2)^2]\)</span>, and the following plot shows the <em>contours</em> of the function <span class="math inline">\(E[(Y-\beta_1 X_1 - \beta_2 X_2)^2]\)</span>. We can see the optimal solution at <span class="math inline">\((1, 1)\)</span> and the value of the objective increasing quadratically as we move away from this point in any direction.</p>
+<p><img src="figures/lm_contours.png" style="width:33.0%" /></p>
+<p>Any sample of observations of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, say <span class="math inline">\(\{(y_1, \x_n), ..., (y_n, \x_n)\}\)</span>, will, however, not show us these <em>population level contours</em> but only those of the training error objective. The following figure shows three potential training error contours:</p>
+<p><img src="figures/lm_contours_OLS_1.png" style="width:30.0%" /> <img src="figures/lm_contours_OLS_4.png" style="width:30.0%" /> <img src="figures/lm_contours_OLS_5.png" style="width:30.0%" /></p>
+<p>In each case the population level contours are overlayed with the training error contours in red, and the minimisers of the training error are the corresponding OLS solutions.</p>
+<p>If we had included a penalty on the training error, then this would modify the objective function and its contours. For example, the following figure shows both the population level and training error contours overlayed with the contours of the penalised training error with <span class="math inline">\(\lambda = 1\)</span>, shown in green:</p>
+<p><img src="figures/ridge_lambda1_contours_1.png" style="width:30.0%" /> <img src="figures/ridge_lambda1_contours_4.png" style="width:30.0%" /> <img src="figures/ridge_lambda1_contours_5.png" style="width:30.0%" /></p>
+<p>We can see the effect is that the OLS solutions have been shifted closer to the origin. Although from only these three instances we cannot clearly see the effect on the bias and variance, in the following figure the OLS and penalised solutions are shown from 100 different samples:</p>
+<p><img src="figures/lm_contours_OLS_all.png" style="width:30.0%" /> <img src="figures/ridge_lambda1_contours_all.png" style="width:30.0%" /> <img src="figures/ridge_lambda1_contours_all_2.png" style="width:30.0%" /></p>
+<p>The OLS solutions in the left plot are distributed more or less symmetrically about the true coefficients, consistent with the fact we know they are unbiased. However, they are quite spread out. The solutions from the penalised training error are substantially biased, underestimating the true coefficients (they have been “shrunken” towards the origin), but they have considerably less variance than the OLS solutions. If we had used a smaller value for <span class="math inline">\(\lambda\)</span> then there would have been less bias, but not as drastic a reduction in variance. If <span class="math inline">\(\lambda\)</span> had been larger then there would have been even more bias, but even less variance. For example, below are the solutions for <span class="math inline">\(\lambda = 0.1\)</span> (left) and <span class="math inline">\(\lambda = 10\)</span> (right):</p>
+<p><img src="figures/ridge_lambda0.1_contours_all_2.png" style="width:30.0%" /> <img src="figures/ridge_lambda10_contours_all_2.png" style="width:30.0%" /></p>
+<p>We are unlikely to be able to see clearly the advantages of regularisation in a two-dimensional example, however these have hopefully given some intuition for how regularisation affects the bias and variance of the estimators. In the next subsection we also explore the effects of regularisation in a more appropriate setting, where the number of covariates is much larger.</p>
+</div>
+</div>
+<div id="ridge-regression" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Ridge Regression<a href="linear.html#ridge-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The regression model associated with the <em>penalised</em> version of the OLS objective which we saw above is more commonly known as <em>ridge regression</em>.</p>
+<p>As mentioned before, the penalised approach to regularisation has a number of advantages over the constrained approach, and in the case of ridge regression these largely stem (at least indirectly) from the fact that it has a closed form solution; <span class="math display">\[
+\hbr(\lambda) = \left(\X^\top \X + n \lambda \I_0\right)^{-1}\X^\top \y
+\]</span> where as before <span class="math inline">\(\X\)</span> is the “design matrix” and <span class="math inline">\(\y\)</span> is the vector of observed responses, and here <span class="math inline">\(\I_0\)</span> is equal to the identity matrix except that it has a zero in the first diagonal.</p>
+<div id="notes" class="section level6 hasAnchor" number="6.3.3.0.0.1">
+<h6><span class="header-section-number">6.3.3.0.0.1</span> Notes<a href="linear.html#notes" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<ul>
+<li><p>The reason for the zero in the first diagonal of <span class="math inline">\(\I_0\)</span> is that we typically do not constrain/penalise/regularise the intercept term</p></li>
+<li><p>The formulation above may differ slightly in how it is expressed from some other texts.</p>
+<ul>
+<li><p>For example one can equivalently formulate the ridge and OLS procedures by first <em>centering</em> both the covariates and response as this has the effect of implicitly setting the intercept term. As long as everything is done correctly the resulting models will be the same, and the centering is typically done as a mathematical convenience more than anything else.</p></li>
+<li><p>Some formulations also describe the ridge objective as the <em>total</em> training loss (not the average) plus the penalty term, in which case there will be just <span class="math inline">\(\lambda \I_0\)</span> (or <span class="math inline">\(\lambda \I\)</span> if centering is done) instead of <span class="math inline">\(n\lambda\I_0\)</span>. Again, since we don’t know the best value of <span class="math inline">\(\lambda\)</span> anyway, these are ultimately equivalent.</p></li>
+</ul></li>
+</ul>
+<p>One of the benefits of ridge over OLS is that the solution is always unique (provided <span class="math inline">\(\lambda &gt; 0\)</span> and none of the covariates are exactly constant). Operationally this is important since if we try to find the OLS solution by setting <span class="math inline">\(\hbbeta = (\X^\top \X)^{-1}\X^\top \y\)</span> when the solution isn’t unique we will get an error since <span class="math inline">\(\X^\top\X\)</span> is not invertible. On the other hand (as long as none of the covariates is constant) <span class="math inline">\(\X^\top \X + n\lambda \I_0\)</span> <em>is</em> invertible.</p>
+</div>
+<div id="ridge-regression-in-r" class="section level4 hasAnchor" number="6.3.3.1">
+<h4><span class="header-section-number">6.3.3.1</span> Ridge Regression in R<a href="linear.html#ridge-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The <code>glmnet</code> package includes hyper efficient implementations of ridge regression as well as the variants which follow later in the lecture. It effectively solves the entire “path” of solutions, for “all” values of <span class="math inline">\(\lambda\)</span> over a broad range. The package also includes the function <code>cv.glmnet</code> which can be used for efficient cross-validation for ridge and variants. We can also access <code>glmnet</code> functionality using <code>caret</code>.</p>
+<p><strong>Example: “High Dimensional” Regression Simulation</strong></p>
+<p>Here we will look at the estimation of regression coefficients in a situation where the number of observations is only moderately greater than the number of covariates. The reason for this is so that we can compare the ridge estimates with the OLS estimates, and the OLS solution does not exist (or more precisely there is no unique solution) when <span class="math inline">\(n \leq p\)</span>.</p>
+<p>In particular in the following R code we will simulate <span class="math inline">\(n = 250\)</span> observations with <span class="math inline">\(p = 200\)</span> covariates, and in such a way that only twenty covariates have a substantial influence on the response (with coefficients equal to 1); eighty have a very slight influence (with coefficients equal to 0.1) and the remaining 100 are not related to the response (with coefficients equal to 0).</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="linear.html#cb387-1" tabindex="-1"></a><span class="do">### We need to load the glmnet library</span></span>
+<span id="cb387-2"><a href="linear.html#cb387-2" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span></code></pre></div>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Loaded glmnet 4.1-10</code></pre>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="linear.html#cb390-1" tabindex="-1"></a><span class="do">### As always we also need to start by setting up what is constant</span></span>
+<span id="cb390-2"><a href="linear.html#cb390-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb390-3"><a href="linear.html#cb390-3" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb390-4"><a href="linear.html#cb390-4" tabindex="-1"></a></span>
+<span id="cb390-5"><a href="linear.html#cb390-5" tabindex="-1"></a>beta_true <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">100</span>))</span>
+<span id="cb390-6"><a href="linear.html#cb390-6" tabindex="-1"></a></span>
+<span id="cb390-7"><a href="linear.html#cb390-7" tabindex="-1"></a>sigma_residual <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb390-8"><a href="linear.html#cb390-8" tabindex="-1"></a></span>
+<span id="cb390-9"><a href="linear.html#cb390-9" tabindex="-1"></a><span class="do">### Now we can simulate observations</span></span>
+<span id="cb390-10"><a href="linear.html#cb390-10" tabindex="-1"></a></span>
+<span id="cb390-11"><a href="linear.html#cb390-11" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>p), n, p)</span>
+<span id="cb390-12"><a href="linear.html#cb390-12" tabindex="-1"></a>y <span class="ot">&lt;-</span> X<span class="sc">%*%</span>beta_true <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_residual)</span>
+<span id="cb390-13"><a href="linear.html#cb390-13" tabindex="-1"></a></span>
+<span id="cb390-14"><a href="linear.html#cb390-14" tabindex="-1"></a><span class="do">### ... and fit OLS and ridge models</span></span>
+<span id="cb390-15"><a href="linear.html#cb390-15" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>., <span class="fu">data.frame</span>(X, y))</span>
+<span id="cb390-16"><a href="linear.html#cb390-16" tabindex="-1"></a></span>
+<span id="cb390-17"><a href="linear.html#cb390-17" tabindex="-1"></a>ridge <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">0</span>, )</span>
+<span id="cb390-18"><a href="linear.html#cb390-18" tabindex="-1"></a><span class="co"># Notice that the glmnet function does not take a formula argument but rather requires</span></span>
+<span id="cb390-19"><a href="linear.html#cb390-19" tabindex="-1"></a><span class="co"># the matrix or data frame of covariates and vector of responses separately.</span></span>
+<span id="cb390-20"><a href="linear.html#cb390-20" tabindex="-1"></a><span class="co"># You may ignore the alpha = 0 component for now. Ultimately this is just telling glmnet to</span></span>
+<span id="cb390-21"><a href="linear.html#cb390-21" tabindex="-1"></a><span class="co"># fit ridge models and not LASSO or other elastic net models (which we still have to cover)</span></span>
+<span id="cb390-22"><a href="linear.html#cb390-22" tabindex="-1"></a></span>
+<span id="cb390-23"><a href="linear.html#cb390-23" tabindex="-1"></a><span class="do">### We can now investigate the estimated coefficients by plotting them along with the actual values</span></span>
+<span id="cb390-24"><a href="linear.html#cb390-24" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb390-25"><a href="linear.html#cb390-25" tabindex="-1"></a></span>
+<span id="cb390-26"><a href="linear.html#cb390-26" tabindex="-1"></a><span class="fu">plot</span>(ols<span class="sc">$</span>coefficients[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;OLS coefficients&#39;</span>) </span>
+<span id="cb390-27"><a href="linear.html#cb390-27" tabindex="-1"></a><span class="co"># we exclude the intercept as we are not interested in that for now</span></span>
+<span id="cb390-28"><a href="linear.html#cb390-28" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb390-29"><a href="linear.html#cb390-29" tabindex="-1"></a></span>
+<span id="cb390-30"><a href="linear.html#cb390-30" tabindex="-1"></a><span class="co"># glmnet fits a large number of models by default, for a range of 100 different values for lambda</span></span>
+<span id="cb390-31"><a href="linear.html#cb390-31" tabindex="-1"></a><span class="co"># These are stored in the columns of the output field $beta</span></span>
+<span id="cb390-32"><a href="linear.html#cb390-32" tabindex="-1"></a><span class="co"># For example</span></span>
+<span id="cb390-33"><a href="linear.html#cb390-33" tabindex="-1"></a><span class="fu">plot</span>(ridge<span class="sc">$</span>beta[,<span class="dv">90</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge coefficients&#39;</span>)</span>
+<span id="cb390-34"><a href="linear.html#cb390-34" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-163-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>It should be clear that the ridge estimates are much closer to the actual values of the coefficients. However, choosing an inappropriate value for <span class="math inline">\(\lambda\)</span> may lead to either too little or too much “shrinkage”. As mentioned previously the <code>glmnet</code> package also provides the function <code>cv.glmnet</code> which will run cross-validation and perform model selection for us.</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="linear.html#cb391-1" tabindex="-1"></a><span class="do">### First let&#39;s simply run cross-validation with the default settings (except</span></span>
+<span id="cb391-2"><a href="linear.html#cb391-2" tabindex="-1"></a><span class="do">### that we set alpha = 0).</span></span>
+<span id="cb391-3"><a href="linear.html#cb391-3" tabindex="-1"></a><span class="do">### As always you can learn more about these using help(glmnet)</span></span>
+<span id="cb391-4"><a href="linear.html#cb391-4" tabindex="-1"></a>ridge_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb391-5"><a href="linear.html#cb391-5" tabindex="-1"></a></span>
+<span id="cb391-6"><a href="linear.html#cb391-6" tabindex="-1"></a><span class="do">### Plotting the ridge_cv object will produce a visualisation of the (square root of the)</span></span>
+<span id="cb391-7"><a href="linear.html#cb391-7" tabindex="-1"></a><span class="do">### estimated prediction error for different lambda, along with standard error bars</span></span>
+<span id="cb391-8"><a href="linear.html#cb391-8" tabindex="-1"></a><span class="do">### The two vertical lines show the value for lambda which gave the smallest estimate</span></span>
+<span id="cb391-9"><a href="linear.html#cb391-9" tabindex="-1"></a><span class="do">### of prediction error and the simplest model (largest lambda) with estimated</span></span>
+<span id="cb391-10"><a href="linear.html#cb391-10" tabindex="-1"></a><span class="do">### prediction error within one standard error of the lowest.</span></span>
+<span id="cb391-11"><a href="linear.html#cb391-11" tabindex="-1"></a><span class="do">### Note that lambda is plotted on a -log(lambda) transformation, and so the values</span></span>
+<span id="cb391-12"><a href="linear.html#cb391-12" tabindex="-1"></a><span class="do">### close to the left correspond with the largest values of lambda (most regularisation)</span></span>
+<span id="cb391-13"><a href="linear.html#cb391-13" tabindex="-1"></a><span class="fu">plot</span>(ridge_cv)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-164-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="linear.html#cb392-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
+<span id="cb392-2"><a href="linear.html#cb392-2" tabindex="-1"></a>ridge_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
+<pre><code>## [1] 2.206135</code></pre>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="linear.html#cb394-1" tabindex="-1"></a>ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se <span class="co"># using 1 standard error rule</span></span></code></pre></div>
+<pre><code>## [1] 9.774551</code></pre>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="linear.html#cb396-1" tabindex="-1"></a><span class="do">### To extract a specific solution we can use the function coef(model, s = lambda).</span></span>
+<span id="cb396-2"><a href="linear.html#cb396-2" tabindex="-1"></a><span class="do">### Let&#39;s plot the solutions selected using cross-validation</span></span>
+<span id="cb396-3"><a href="linear.html#cb396-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb396-4"><a href="linear.html#cb396-4" tabindex="-1"></a></span>
+<span id="cb396-5"><a href="linear.html#cb396-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge by minimum CV error&#39;</span>) </span>
+<span id="cb396-6"><a href="linear.html#cb396-6" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb396-7"><a href="linear.html#cb396-7" tabindex="-1"></a></span>
+<span id="cb396-8"><a href="linear.html#cb396-8" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge by 1 standard error rule&#39;</span>) </span>
+<span id="cb396-9"><a href="linear.html#cb396-9" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-164-2.png" width="576" style="display: block; margin: auto;" /></p>
+<p>We can see that the solutions are heavily shrunk compared with the OLS solution, but this has resulted in overall much better estimation. We can, for example, consider the differences between the estimated coefficients and the true coefficients</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="linear.html#cb397-1" tabindex="-1"></a><span class="do">### Squared error of OLS coefficients</span></span>
+<span id="cb397-2"><a href="linear.html#cb397-2" tabindex="-1"></a><span class="fu">sum</span>((ols<span class="sc">$</span>coefficients[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 45.42456</code></pre>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="linear.html#cb399-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from minimum CV error</span></span>
+<span id="cb399-2"><a href="linear.html#cb399-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 8.318845</code></pre>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="linear.html#cb401-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from 1 standard error rule</span></span>
+<span id="cb401-2"><a href="linear.html#cb401-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 12.44804</code></pre>
+<p><strong>Degrees of Freedom/Covariance Penalties for Ridge Regression</strong></p>
+<p>Because the ridge model has a “nice” (closed form) solution, many of its statistical properties are relatively well understood. In particular, when the linear model assumptions are met it is known that</p>
+<p><span class="math display">\[
+\sum_{i=1}^n Cov(Y_i, \hat Y_i) = 1 + \sum_{j=1}^p \frac{d_j^2}{d_j^2 + n\lambda},
+\]</span></p>
+<p>where <span class="math inline">\(d_1 &gt; d_2 &gt; ... &gt; d_p\)</span> are the singular values of the <span class="math inline">\(\X_0\)</span>, the design matrix but excluding the column of ones (i.e. just the matrix of observations of the covariates). However, because estimation is conducted after standardising the covariates this needs to be taken into account.</p>
+<p>Let’s see how selection based on the covariance penalty approach we looked at in the previous section performs:</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="linear.html#cb403-1" tabindex="-1"></a><span class="do">### First we standardise the covariates</span></span>
+<span id="cb403-2"><a href="linear.html#cb403-2" tabindex="-1"></a>X_stand <span class="ot">&lt;-</span> <span class="fu">scale</span>(X, <span class="at">center =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb403-3"><a href="linear.html#cb403-3" tabindex="-1"></a></span>
+<span id="cb403-4"><a href="linear.html#cb403-4" tabindex="-1"></a><span class="do">### Now we compute the singular value decomposition</span></span>
+<span id="cb403-5"><a href="linear.html#cb403-5" tabindex="-1"></a>SVD <span class="ot">&lt;-</span> <span class="fu">svd</span>(X_stand)</span>
+<span id="cb403-6"><a href="linear.html#cb403-6" tabindex="-1"></a></span>
+<span id="cb403-7"><a href="linear.html#cb403-7" tabindex="-1"></a><span class="do">### We can now compute estimates for the expected in sample error</span></span>
+<span id="cb403-8"><a href="linear.html#cb403-8" tabindex="-1"></a><span class="do">### over the range of values by computing the training error for each</span></span>
+<span id="cb403-9"><a href="linear.html#cb403-9" tabindex="-1"></a><span class="do">### value of lambda and then adding the covariance penalty</span></span>
+<span id="cb403-10"><a href="linear.html#cb403-10" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(ridge, X), <span class="dv">2</span>, <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb403-11"><a href="linear.html#cb403-11" tabindex="-1"></a></span>
+<span id="cb403-12"><a href="linear.html#cb403-12" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ridge<span class="sc">$</span>lambda, <span class="cf">function</span>(lambda)</span>
+<span id="cb403-13"><a href="linear.html#cb403-13" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>lambda))))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
+<span id="cb403-14"><a href="linear.html#cb403-14" tabindex="-1"></a><span class="co"># note multiplying lambda by 2 to align with the glmnet implementation</span></span>
+<span id="cb403-15"><a href="linear.html#cb403-15" tabindex="-1"></a></span>
+<span id="cb403-16"><a href="linear.html#cb403-16" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
+<span id="cb403-17"><a href="linear.html#cb403-17" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
+<span id="cb403-18"><a href="linear.html#cb403-18" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> ridge<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
+<span id="cb403-19"><a href="linear.html#cb403-19" tabindex="-1"></a>lambda_select</span></code></pre></div>
+<pre><code>## [1] 1.520604</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="linear.html#cb405-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
+<span id="cb405-2"><a href="linear.html#cb405-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 8.093744</code></pre>
+<p>The accuracy of the solution is similar to that selected using cross validation, but requires much less computation.</p>
+</div>
+</div>
+<div id="the-least-angle-shrinkage-and-selection-operator-lasso" class="section level3 hasAnchor" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> The Least Angle Shrinkage and Selection Operator (LASSO)<a href="linear.html#the-least-angle-shrinkage-and-selection-operator-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The LASSO has become one of the most influential developments in “modern” statistics. Although already almost thirty years old it remains extremely influential and has spawned innumerable other developments since.</p>
+<p>At face value the formulations of LASSO and the ridge appear extremely similar. Ultimately whenever there was a <span class="math inline">\(\sum_j \beta_j^2\)</span> in the formulation of the ridge (either in a constraint or penalty), in the LASSO we replace this with another quantification of the “magnitude” of the coefficients through <span class="math inline">\(\sum_j |\beta_j|\)</span>.</p>
+<p>For example, in the penalised form we have</p>
+<p><span class="math display">\[
+\hbl(\lambda) = \argmin_\bbeta \frac{1}{n} \sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p |\beta_j|.
+\]</span></p>
+<p>Yet, despite their marked similarity at face value, the solutions one actually obtains from the LASSO and ridge are typically quite different. The main reason for this is that the absolute value penalty used by the LASSO has the ability to implicitly “select” covariates for inclusion in/exclusion from the final model. How this is achieved is that as <span class="math inline">\(\lambda\)</span> is increased the LASSO absolute value penalty has the effect of actually setting some coefficients to exactly zero. A coefficient equal to zero means the corresponding covariate has no influence on the outputs of the model; it has been excluded or “unselected”.</p>
+<ul>
+<li>Although we have seen the ridge squared penalty shrinks the coefficients towards zero as <span class="math inline">\(\lambda\)</span> is increased, none of them actually every reaches exactly zero. As a result all covariates are still “in” the model; none have been excluded.</li>
+</ul>
+<p>Because of its popularity and influence, the LASSO has also been extensively studied. However, as it does not have a “nice” (closed form) solution the statistical properties of the LASSO estimator are harder to pin down than those of the ridge.</p>
+<div id="visualising-the-lasso-shrinkage-and-selection" class="section level4 hasAnchor" number="6.3.4.1">
+<h4><span class="header-section-number">6.3.4.1</span> Visualising the LASSO Shrinkage and Selection<a href="linear.html#visualising-the-lasso-shrinkage-and-selection" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The following plots show the same three examples we saw for the ridge penalisation, but with the absolute penalty of the LASSO and with <span class="math inline">\(\lambda = 0.5\)</span>. Although subtle, it is possible to see that, unlike for the OLS and ridge contours, the LASSO contours are not quite elliptical.</p>
+<p><img src="figures/lasso_0.5_contours_1.png" style="width:30.0%" /> <img src="figures/lasso_0.5_contours_4.png" style="width:30.0%" /> <img src="figures/lasso_0.5_contours_5.png" style="width:30.0%" /></p>
+<p>Again, however, only three examples does not clearly show the effect on the distribution of the LASSO coefficients as an estimator. The following figure therefore shows the results from the same 100 samples we saw previously, and their comparison with the OLS solutions:</p>
+<p><img src="figures/lm_contours_OLS_all.png" style="width:30.0%" /> <img src="figures/lasso_0.5_contours_all.png" style="width:30.0%" /> <img src="figures/lasso_0.5_contours_all_2.png" style="width:30.0%" /></p>
+<p>Even in this small example, there is some evidence of the variable selection capabilities of the LASSO, where some of the solutions have “lined up” along the horizontal <span class="math inline">\(\hat \beta_2 = 0\)</span> axis.</p>
+<p>This effect will be more pronounced if we increase <span class="math inline">\(\lambda\)</span>, whereas for smaller <span class="math inline">\(\lambda\)</span> fewer instances will have coefficients shrunk to zero. The following figure has the corresponding sets of solutions for <span class="math inline">\(\lambda = 0.1\)</span> (left) and <span class="math inline">\(\lambda = 2\)</span> (right):</p>
+<p><img src="figures/lasso_0.1_contours_all_2.png" style="width:30.0%" /> <img src="figures/lasso_2_contours_all_2.png" style="width:30.0%" /></p>
+</div>
+<div id="the-lasso-in-r" class="section level4 hasAnchor" number="6.3.4.2">
+<h4><span class="header-section-number">6.3.4.2</span> The LASSO in R<a href="linear.html#the-lasso-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Fitting LASSO models in R is done exactly as it was for ridge except we set the argument <code>alpha</code> to one, rather than to zero.</p>
+<p>Let’s again fit models to our simulated “high dimensional” data in order to (better than in only two dimensions) visualise the selection capabilities of the LASSO, and also see how accurate models selected with cross-validation are in comparison with OLS and ridge. The following chunk of R code is analogous to what we did earlier, with only the very minor modification to <code>alpha</code></p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="linear.html#cb407-1" tabindex="-1"></a><span class="do">### We start by performing cross validation in order to select appropriate</span></span>
+<span id="cb407-2"><a href="linear.html#cb407-2" tabindex="-1"></a><span class="do">### values for lambda</span></span>
+<span id="cb407-3"><a href="linear.html#cb407-3" tabindex="-1"></a>lasso_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb407-4"><a href="linear.html#cb407-4" tabindex="-1"></a></span>
+<span id="cb407-5"><a href="linear.html#cb407-5" tabindex="-1"></a><span class="do">### As before, plotting the lasso_cv object will produce a visualisation</span></span>
+<span id="cb407-6"><a href="linear.html#cb407-6" tabindex="-1"></a><span class="do">### of the (square root of the) estimated prediction error for different</span></span>
+<span id="cb407-7"><a href="linear.html#cb407-7" tabindex="-1"></a><span class="do">### lambda, along with standard error bars, with vertical lines showing</span></span>
+<span id="cb407-8"><a href="linear.html#cb407-8" tabindex="-1"></a><span class="do">### the solution which minimises estimated prediction error and the</span></span>
+<span id="cb407-9"><a href="linear.html#cb407-9" tabindex="-1"></a><span class="do">### solution using the 1 standard error rule</span></span>
+<span id="cb407-10"><a href="linear.html#cb407-10" tabindex="-1"></a><span class="do">### As before lambda is plotted on a -log(lambda) transformation</span></span>
+<span id="cb407-11"><a href="linear.html#cb407-11" tabindex="-1"></a></span>
+<span id="cb407-12"><a href="linear.html#cb407-12" tabindex="-1"></a><span class="fu">plot</span>(lasso_cv)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-167-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="linear.html#cb408-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
+<span id="cb408-2"><a href="linear.html#cb408-2" tabindex="-1"></a>lasso_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
+<pre><code>## [1] 0.1748325</code></pre>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="linear.html#cb410-1" tabindex="-1"></a>lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se <span class="co"># using 1 standard error rule</span></span></code></pre></div>
+<pre><code>## [1] 0.3055247</code></pre>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="linear.html#cb412-1" tabindex="-1"></a><span class="do">### To extract a specific solution we can use the function coef(model, s = lambda).</span></span>
+<span id="cb412-2"><a href="linear.html#cb412-2" tabindex="-1"></a><span class="do">### Let&#39;s plot the solutions selected using cross-validation</span></span>
+<span id="cb412-3"><a href="linear.html#cb412-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb412-4"><a href="linear.html#cb412-4" tabindex="-1"></a></span>
+<span id="cb412-5"><a href="linear.html#cb412-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb412-6"><a href="linear.html#cb412-6" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta),</span>
+<span id="cb412-7"><a href="linear.html#cb412-7" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;LASSO by minimum CV error&#39;</span>) </span>
+<span id="cb412-8"><a href="linear.html#cb412-8" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb412-9"><a href="linear.html#cb412-9" tabindex="-1"></a></span>
+<span id="cb412-10"><a href="linear.html#cb412-10" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb412-11"><a href="linear.html#cb412-11" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta),</span>
+<span id="cb412-12"><a href="linear.html#cb412-12" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;LASSO by 1 standard error rule&#39;</span>) </span>
+<span id="cb412-13"><a href="linear.html#cb412-13" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-167-2.png" width="576" style="display: block; margin: auto;" /></p>
+<p>It should be clear that in both solutions many of the coefficients have been set exactly to zero. It may also be apparent that those associated with the large true coefficients are typically less shrunken compared to the ridge counterparts.</p>
+<p>The overall squared estimation error also shows the good performance of the LASSO</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="linear.html#cb413-1" tabindex="-1"></a><span class="do">### Squared error of LASSO coefficients from minimum CV error</span></span>
+<span id="cb413-2"><a href="linear.html#cb413-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 4.914901</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="linear.html#cb415-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from 1 standard error rule</span></span>
+<span id="cb415-2"><a href="linear.html#cb415-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 5.817716</code></pre>
+<p><strong>Degrees of Freedom and Covariance Penalties?</strong></p>
+<p>It has been shown that for the LASSO with fixed <span class="math inline">\(\lambda\)</span> one has</p>
+<p><span class="math display">\[
+\sum_{i=1}^n Cov(Y_i, \hat Y_i) = E\left[\sum_j I\left(\hbl_j(\lambda) \not = 0\right)\right],
+\]</span></p>
+<p>that is, the covariance between the responses and the fitted values is equal to the <em>expected</em> number of non-zero coefficients (including the intercept). We can in principle use the number of non-zero coefficients in the solution we obtained as an estimate for this:</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="linear.html#cb417-1" tabindex="-1"></a><span class="do">### As before we compute the training error and covariance penalties</span></span>
+<span id="cb417-2"><a href="linear.html#cb417-2" tabindex="-1"></a><span class="do">### However we haven&#39;t simply fit the LASSO for a range of lambda values</span></span>
+<span id="cb417-3"><a href="linear.html#cb417-3" tabindex="-1"></a><span class="do">### as we only called to cv.glmnet so far. However, the lasso_cv object</span></span>
+<span id="cb417-4"><a href="linear.html#cb417-4" tabindex="-1"></a><span class="do">### has a field $glmnet.fit which contains exactly the same as the output</span></span>
+<span id="cb417-5"><a href="linear.html#cb417-5" tabindex="-1"></a><span class="do">### from a call to glmnet</span></span>
+<span id="cb417-6"><a href="linear.html#cb417-6" tabindex="-1"></a></span>
+<span id="cb417-7"><a href="linear.html#cb417-7" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(lasso_cv<span class="sc">$</span>glmnet.fit, X), <span class="dv">2</span>,</span>
+<span id="cb417-8"><a href="linear.html#cb417-8" tabindex="-1"></a>                         <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb417-9"><a href="linear.html#cb417-9" tabindex="-1"></a></span>
+<span id="cb417-10"><a href="linear.html#cb417-10" tabindex="-1"></a><span class="do">### Now the covariance penalties depend on the estimated coefficients</span></span>
+<span id="cb417-11"><a href="linear.html#cb417-11" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">apply</span>(lasso_cv<span class="sc">$</span>glmnet.fit<span class="sc">$</span>beta, <span class="dv">2</span>,</span>
+<span id="cb417-12"><a href="linear.html#cb417-12" tabindex="-1"></a>                       <span class="cf">function</span>(beta) <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(beta<span class="sc">!=</span><span class="dv">0</span>)))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
+<span id="cb417-13"><a href="linear.html#cb417-13" tabindex="-1"></a><span class="co"># note above we have 1 + sum(beta!=0) since the intercept is not included</span></span>
+<span id="cb417-14"><a href="linear.html#cb417-14" tabindex="-1"></a><span class="co"># in $beta</span></span>
+<span id="cb417-15"><a href="linear.html#cb417-15" tabindex="-1"></a></span>
+<span id="cb417-16"><a href="linear.html#cb417-16" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
+<span id="cb417-17"><a href="linear.html#cb417-17" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
+<span id="cb417-18"><a href="linear.html#cb417-18" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> lasso_cv<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
+<span id="cb417-19"><a href="linear.html#cb417-19" tabindex="-1"></a>lambda_select</span></code></pre></div>
+<pre><code>## [1] 0.1322543</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="linear.html#cb419-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
+<span id="cb419-2"><a href="linear.html#cb419-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 5.031624</code></pre>
+</div>
+<div id="ridge-or-lasso" class="section level4 hasAnchor" number="6.3.4.3">
+<h4><span class="header-section-number">6.3.4.3</span> Ridge or LASSO?<a href="linear.html#ridge-or-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As with all things there is no “one size fits all” and whether the ridge or LASSO should be preferred is very much dependent on the situation. We saw in the previous simulations that <em>for that context</em> the LASSO gave more accurate estimation. However, we had simulated the situation where some of the coefficients (in fact half of them) are actually exactly zero and so the LASSO’s selection capabilities made it superior.</p>
+<p>Some relevant points are, however, that</p>
+<ul>
+<li><p>If a simpler/more interpretable model is desired, the LASSO is preferable as it can eliminate covariates if they are not contributing sufficiently to the prediction of the response</p>
+<ul>
+<li><p>Fewer non-zero coefficients means understanding the predictions from the model is more straightforward, and inclusion of a variable in the model gives a sense of its significant relevance to the response</p>
+<ul>
+<li>Having said this, when there is strong correlation between multiple variables all of which are actually related to the response (i.e. their “true” coefficients are non-zero) the LASSO will often eliminate most of them and only keep one or a few as that is all which is “needed” for predicting the response</li>
+</ul></li>
+<li><p>The non-zero coefficients are also typically closer to their OLS counterparts than in the ridge</p></li>
+</ul></li>
+<li><p>If it is believed all covariates contribute at least somewhat to the response, then the ridge may be preferable</p>
+<ul>
+<li>The ridge also tends to “group” related covariates, assigning them coefficients with similar magnitude rather than eliminating most of them like the LASSO</li>
+</ul></li>
+<li><p>In the absence of any such knowledge or objective, cross-validation can be used to estimate which offers better predictive ability</p>
+<ul>
+<li>If the accuracy of the coefficients themselves (and not the accuracy of prediction) is what is wanted then the bootstrap can be used to estimate the accuracy of the coefficients, however we do not cover this topic here.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="alternatives" class="section level3 hasAnchor" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> Alternatives<a href="linear.html#alternatives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Perhaps a better answer to whether one should choose the ridge or LASSO is that it is a false dilemma; there are alternatives.</p>
+<div id="the-elastic-net" class="section level5 hasAnchor" number="6.3.5.0.1">
+<h5><span class="header-section-number">6.3.5.0.1</span> The Elastic Net<a href="linear.html#the-elastic-net" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The elastic net is a combination of the LASSO and ridge, in that it includes <em>both</em> penalties in the objective. Specifically, for <span class="math inline">\(\lambda \geq 0\)</span> and <span class="math inline">\(\alpha \in [0, 1]\)</span> (remember the parameter <code>alpha</code> from <code>glmnet</code>, well here it is) the elastic net solution is</p>
+<p><span class="math display">\[
+\hbe(\lambda, \alpha) = \argmin_\bbeta \frac{1}{n}\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda\left(\alpha \sum_{j=1}^p |\beta_j| + (1-\alpha)\sum_{j=1}^p\beta_j^2\right).
+\]</span></p>
+<ul>
+<li><p>For <span class="math inline">\(\alpha = 0\)</span> we simply have the ridge and for <span class="math inline">\(\alpha = 1\)</span> we have the LASSO</p></li>
+<li><p>For appropriate values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\lambda\)</span> the elastic net can have the benefits of both</p></li>
+<li><p>It can perform variable selection by shrinking coefficients to exactly zero</p></li>
+<li><p>It can avoid “losing” relevant covariates due to correlation, and can also group correlated variables by the magnitude of the coefficients (like the ridge)</p></li>
+</ul>
+<p>The <code>glmnet</code> function is actually always fitting an elastic net model, and in our previous calls to the function we had simply chosen the specific settings of <span class="math inline">\(\alpha\)</span> which correspond to the ridge and LASSO models.</p>
+</div>
+<div id="the-relaxed-lasso" class="section level5 hasAnchor" number="6.3.5.0.2">
+<h5><span class="header-section-number">6.3.5.0.2</span> The Relaxed LASSO<a href="linear.html#the-relaxed-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Another alternative is to use the LASSO purely for variable selection, and then subsequently fit the OLS model only on those covariates not eliminated through the LASSO. This is known as the relaxed LASSO since it is less constrained than the standard LASSO. Even though the same covariates are included/excluded in the LASSO and its relaxation (whereas the selection of variables with elastic net may differ for intermediate values of <span class="math inline">\(\alpha\)</span>), those which are included do not have their coefficients shrunk.</p>
+<p>There is also a spectrum of models in between the LASSO and its relaxation, by taking a weighted average of the LASSO and relaxed LASSO coefficients. All of these are implemented in the <code>glmnet</code> package.</p>
+</div>
+<div id="subset-selection" class="section level5 hasAnchor" number="6.3.5.0.3">
+<h5><span class="header-section-number">6.3.5.0.3</span> Subset Selection<a href="linear.html#subset-selection" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>An alternative to the penalisation/constraint approach to regularisation is to use some other strategy for variable selection. We will not cover these here, and for the interested student please look to Chapter 6.1 in <em>An Introduction to Statistical Learning</em>.</p>
+</div>
+</div>
+<div id="summary-and-practical-considerations" class="section level3 hasAnchor" number="6.3.6">
+<h3><span class="header-section-number">6.3.6</span> Summary and Practical Considerations<a href="linear.html#summary-and-practical-considerations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Linear models have a number of advantages over some of the more complex models we will encounter later on</p>
+<ul>
+<li><p>They are generally more intuitive and their predictions and the influence of each of the variables are interpretable</p></li>
+<li><p>They are also comparatively low variance estimators and may lead to better accuracy either when the true regression function is close to linear <em>or</em> when the sample size is not large enough to reliably estimate a more complex function</p></li>
+</ul></li>
+<li><p>Regularisation (through constraints or more often penalties on the optimisation of the training error) can have remarkable effect on the accuracy of regression models</p>
+<ul>
+<li>Although we only looked at the “standard” regression problem here, the principles of regularisation as a way to traverse the bias-variance tradeoff is broadly applicable</li>
+</ul></li>
+</ul>
+<!-- -->
+<ul>
+<li>Different forms of the regularisation can dramatically change the fitted models even for similar overall bias and variance
+<ul>
+<li>E.g. the selection capabilities of the LASSO</li>
+</ul></li>
+<li>No single formulation will always be superior to others, and knowing what is needed from the model and/or any relevant domain knowledge should be incorporated when available</li>
+<li>Remeber that it is important to standardise covariates when regularising a linear model</li>
+<li>The <code>glmnet</code> package is a fantastic piece of software</li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fundamentals2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="glms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

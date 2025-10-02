@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Statistical Background | Introduction to R</title>
+  <meta name="description" content="3 Statistical Background | Introduction to R" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Statistical Background | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Statistical Background | Introduction to R" />
+  
+  
+  
+
+<meta name="author" content="David P. Hofmeyr" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="working-with-data-in-r.html"/>
+<link rel="next" href="fundamentals1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#background-on-r"><i class="fa fa-check"></i><b>1.1</b> Background on R</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-rstudio"><i class="fa fa-check"></i><b>1.2</b> Getting started with RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statements-expressions-and-objects"><i class="fa fa-check"></i><b>1.3</b> Statements, expressions and objects</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plots"><i class="fa fa-check"></i><b>1.4</b> Basic plots</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R scripts</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>1.6</b> R markdown</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.7</b> Functions</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#s:0help"><i class="fa fa-check"></i><b>1.8</b> Getting Help</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loops-and-flow"><i class="fa fa-check"></i><b>1.9</b> Loops and Flow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-frames"><i class="fa fa-check"></i><b>2.1</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>2.2</b> Importing and Exporting Data</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-plotting"><i class="fa fa-check"></i><b>2.3</b> Data Plotting</a></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#exercises-3"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>3</b> Statistical Background</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="background.html"><a href="background.html#probability-basics"><i class="fa fa-check"></i><b>3.1</b> Probability Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="background.html"><a href="background.html#random-variables"><i class="fa fa-check"></i><b>3.2</b> Random Variables</a></li>
+<li class="chapter" data-level="3.3" data-path="background.html"><a href="background.html#samples-and-statistical-modelling"><i class="fa fa-check"></i><b>3.3</b> Samples and Statistical Modelling</a></li>
+<li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
+<li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
+<li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fundamentals1.html"><a href="fundamentals1.html#two-archetypal-problems"><i class="fa fa-check"></i><b>4.1</b> Two Archetypal Problems</a></li>
+<li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
+<li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
+<li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-and-take-aways"><i class="fa fa-check"></i><b>4.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fundamentals2.html"><a href="fundamentals2.html#a-quick-recap"><i class="fa fa-check"></i><b>5.1</b> A Quick Recap</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals2.html"><a href="fundamentals2.html#overfitting"><i class="fa fa-check"></i><b>5.2</b> Overfitting</a></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-and-take-aways-1"><i class="fa fa-check"></i><b>5.5</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear.html"><a href="linear.html#the-linear-model"><i class="fa fa-check"></i><b>6.1</b> The Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-and-take-aways-2"><i class="fa fa-check"></i><b>7.3</b> Summary and Take-aways</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonparametric Smoothing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
+<li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
+<li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-4"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
+<li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-and-take-aways-3"><i class="fa fa-check"></i><b>10.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="background" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Statistical Background<a href="background.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="math display">\[
+\def\x{\mathbf{x}}
+\def\Rr{\mathbb{R}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\def\F{\mathcal{F}}
+\def\hbbeta{\hat{\boldsymbol{\beta}}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\X{\mathbf{X}}
+\def\y{\mathbf{y}}
+\def\hg{\hat g}
+\]</span></p>
+<p>The purpose of this chapter is to introduce you to some basic and fundamental concepts in statistics and probability, as these will be important in understanding the main topics to come.</p>
+<p>We will cover the material only at a high level, so that we can familiarise ourselves with the notation and some of the fundamental ideas. Many of the topics we will be touching on go far deeper than we can in so short a space of time, and it will also be the case that from time to time things will be described in ways which are not quite precise at the deepest level but this is done only to convey the ideas at the level they are required for the content of this module.</p>
+<div id="probability-basics" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Probability Basics<a href="background.html#probability-basics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We all have an innate understanding of what probability means. Indeed very little in life is certain, but we all need to make decisions about how to conduct our lives based on our perceived beliefs about how likely different possible truths are, or futures are to be.</p>
+<p>In studying probability, however, we need to break things down to their essence. To do so we think of a single “chance event”, which we refer to as a <em>random experiment</em>. A random experiment is simply an “experiment” (somewhat loosely defined) whose outcome is not predetermined; multiple possible outcomes could take place, and we cannot predict exactly which.</p>
+<p>Simple examples of random experiments include rolling a die, flipping a coin, choosing an individual at random from the class, etc.</p>
+<p>Importantly it is not necessarily the case that all outcomes are equally: When Steph Curry takes a free throw there are two outcomes, either he scores or he misses, and the probability he scores is somewhere around 0.9</p>
+<ul>
+<li><p>We express probabilities as values between 0 and 1, with a probability 0 essentially being “impossible” and a probability of 1 essentially being “certain”</p></li>
+<li><p>Some people are more comfortable with speaking in percentages, and a probability of 0.9 may be thought of as 90%</p></li>
+</ul>
+<p><strong>Sample Space</strong></p>
+<p>We refer to the set of all possible outcomes of a random experiment as the <em>sample space</em>, and it is often denoted by <span class="math inline">\(\Omega\)</span> (the Greek “O”, pronounced “omega”).</p>
+<p>For example, in our coin flip experiment we have <span class="math inline">\(\Omega = \{heads, tails\}\)</span> or <span class="math inline">\(\{H, T\}\)</span> for short. When rolling a (regular) die we have <span class="math inline">\(\Omega = \{1, 2, ..., 6\}\)</span>.</p>
+<p><strong>Event</strong></p>
+<p>An <em>event</em> may simply be seen as a subset of the sample space, i.e., a collection of potential outcomes to the experiment.</p>
+<p>For example, if we are choosing someone randomly from the class we could have events “selecting a female”, “selecting someone who is older than 30”, etc.</p>
+<p>When rolling a die we could have as events “rolling an even number”, “rolling a number below three”, etc.</p>
+<p><strong>A Simple Definition of Probability</strong></p>
+<p>For any event <span class="math inline">\(E\)</span>, we could imagine conducting the random experiment <span class="math inline">\(n = 1, 2, 3, ...\)</span> times, and counting in how many of these experiments the event occurs. The probability of <span class="math inline">\(E\)</span>, denoted <span class="math inline">\(P(E)\)</span>, may then be seen as</p>
+<p><span class="math display">\[
+P(E) = \lim_{n \to \infty} \frac{\mbox{Number of times E occurred in first $n$ trials}}{n}
+\]</span></p>
+<p>It should be intuitively the case that the probability of an event is closely linked to the proportion of times the event occurs if we conduct the experiment lots of times. But obviously we can’t actually perform the experiment infinitely many times, and sometimes we don’t need to conduct the experiment at all and can reasonably assume what the propobabilities of different events are, or come up with analytical expressions for these probabilities.</p>
+<ul>
+<li><p>Example: When flipping a coin we can usually assume that <span class="math inline">\(P(H) = P(T) = 0.5\)</span></p></li>
+<li><p>Example: When choosing an individual at random from the class, the probability of selecting someone older than 30 is simply the proportion of people in the class who are older than 30 (which could be zero, I’m not sure).</p></li>
+</ul>
+<p>If the sample space is <em>countable</em> (either finite or countably infinite, like the natural numbers <span class="math inline">\(\{1, 2, 3, ...\}\)</span>), and we know the probabilities of each of the individual outcomes, then we can easily determine the probability of an event <span class="math inline">\(E\)</span> as</p>
+<p><span class="math display">\[
+P(E) = \sum_{o \in E} P(\{o\})
+\]</span></p>
+<ul>
+<li><p>In general if <span class="math inline">\(E\)</span> is the union of <em>mutually exclusive</em> events <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span>, i.e. <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> cannot occur together, then <span class="math display">\[
+P(E) = P(E_1 \cup E_2) = P(E_1) + P(E_2)
+\]</span></p>
+<ul>
+<li>The union notation <span class="math inline">\(E_1 \cup E_2\)</span> means “<span class="math inline">\(E_1\)</span> or <span class="math inline">\(E_2\)</span>”, and the event <span class="math inline">\(E_1 \cup E_2\)</span> occurs if at least one of <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> occurs</li>
+<li>A more general form for the above is <span class="math display">\[
+P(E) = P(E_1) + P(E_2) - P(E_1 \cap E_2),
+\]</span> where <span class="math inline">\(E_1 \cap E_2\)</span> means “<span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span>” and the event <span class="math inline">\(E_1 \cap E_2\)</span> occurs if and only if both <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> occur</li>
+</ul></li>
+<li><p>An important consequence is that for any event <span class="math inline">\(E\)</span> we have <span class="math display">\[
+P(E) = 1-P(\overline E),
+\]</span> where <span class="math inline">\(\overline E\)</span> is the <em>complement</em> of <span class="math inline">\(E\)</span>, and is every outcome not in <span class="math inline">\(E\)</span>.</p></li>
+</ul>
+<div id="conditional-probability-and-independence" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Conditional Probability and Independence<a href="background.html#conditional-probability-and-independence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For two events <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> we may talk about <span class="math inline">\(E_1\)</span> occurring <em>given</em> that <span class="math inline">\(E_2\)</span> occurs, and we have the <em>conditional</em> probability of <span class="math inline">\(E_1\)</span> given <span class="math inline">\(E_2\)</span> defined as</p>
+<p><span class="math display">\[
+P(E_1|E_2) = \frac{P(E_1 \mbox{ and } E_2)}{P(E_2)} = \frac{P(E_1 \cap E_2)}{P(E_2)}
+\]</span></p>
+<p>For the above to be defined, we have to assume that <span class="math inline">\(P(E_2) &gt; 0\)</span>, however we would not be (practically) interested in conditional probabilities where the event on which we are conditioning “cannot happen”.</p>
+<p><strong>Independence</strong></p>
+<p>Events <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> are said to be <em>independent</em> if</p>
+<p><span class="math display">\[
+P(E_1 \cap E_2) = P(E_1)P(E_2).
+\]</span> This implies (as long as <span class="math inline">\(P(E_2)&gt;0\)</span>) that <span class="math inline">\(P(E_1|E_2) = P(E_1)\)</span>, i.e. if we know that <span class="math inline">\(E_2\)</span> happens it doesn’t influence the probability that <span class="math inline">\(E_1\)</span> also happens.</p>
+</div>
+</div>
+<div id="random-variables" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Random Variables<a href="background.html#random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The main reason for studying the basics of probability, within the context of statistical learning, is for its importance for understanding <em>Random Variables</em> (RV’s). A random variable <span class="math inline">\(X\)</span> is simply a real-valued function on the sample space of a random experiment.</p>
+<p>Every time we conduct the random experiment, it has an outcome <span class="math inline">\(o\)</span>, and the random variable assumes its corresponding value <span class="math inline">\(X(o)\)</span>. In fact the importance of random variables so supersedes the underlying random experiment that, for our purposes, we will typically not even mention the experiment, and simply think of a random variable as being a “quantity” whose value is determined randomly.</p>
+<p>Some simple examples of random variables (and their underlying random experiment) include</p>
+<ul>
+<li><p>For the experiment of flipping two coins, with sample space <span class="math inline">\(\{HH, HT , TH, TT\}\)</span>, we could define a number of different random variables</p>
+<ul>
+<li><p><span class="math inline">\(X = 1\)</span> if first flip is heads, and 0 otherwise</p></li>
+<li><p><span class="math inline">\(X = 1\)</span> if both flips are the same, and 0 otherwise</p></li>
+<li><p><span class="math inline">\(X\)</span> = total number of heads</p></li>
+</ul></li>
+<li><p>For the experiment of choosing an individual randomly from the class, we could define</p>
+<ul>
+<li><p><span class="math inline">\(X\)</span> = their height (in cm)</p></li>
+<li><p><span class="math inline">\(X\)</span> = their weight (in kg)</p></li>
+<li><p><span class="math inline">\(X\)</span> = 1 if they have brown eyes, and 0 otherwise</p></li>
+<li><p>etc.</p></li>
+</ul></li>
+</ul>
+<p>Random variables like the number of heads out of two coin flips are <em>discrete</em>, as they can only take separate distinct values (0, 1 and 2 in this example). Technically a random variable is discrete if it can only take on <em>countably many</em> values (again either a finite number, or something like the integers or whole numbers).</p>
+<p>Continuous random variables, on the other hand, can take any value over a range/interval, or a collection (union) of ranges/intervals. Examples include the weights/heights of people, or the time at which the first bus departs from the underpass on a given day.</p>
+<ul>
+<li><p>The first bus is scheduled for 06h20, so it will most likely depart around that time, perhaps in the interval 06h15 to 06h30.</p></li>
+<li><p>It may be reasonable to assume the most likely departure time is the scheduled time, and that this likelihood decreases as we move away either forwards or backwards in time.</p></li>
+</ul>
+<div id="probability-distributions-discrete" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Probability Distributions (Discrete)<a href="background.html#probability-distributions-discrete" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a discrete random variable <span class="math inline">\(X\)</span> which can take values in a set <span class="math inline">\(S\)</span> (called the <em>support</em> of <span class="math inline">\(X\)</span>).</p>
+<p>A <em>realisation</em> of the random variable is the actual value it assumes as a result of a <em>particular instance of the random experiment</em>. Typically we use lower case “<span class="math inline">\(x\)</span>” to denote the (variable) value of the realisation of <span class="math inline">\(X\)</span>.</p>
+<p>Note that for a given <span class="math inline">\(x\)</span>, “<span class="math inline">\(X = x\)</span>” is an event, containing all outcomes of the experiment which lead <span class="math inline">\(X\)</span> to assume the value <span class="math inline">\(x\)</span>. As an event, we must be able to quantify its probability. The <em>probability mass function</em> (pmf) of <span class="math inline">\(X\)</span> is the function <span class="math display">\[
+p_X(x) = P(X=x); x \in S
+\]</span>and satisfies</p>
+<ul>
+<li><p><span class="math inline">\(0 \leq p_X(x) \leq 1; x \in S\)</span> (a probability of 1 is “certain”, and we can’t have negative probabilities)</p></li>
+<li><p><span class="math inline">\(\sum_{x \in S} p_X(x) = 1\)</span> (the random variable has to take on <em>some</em> value, and cannot take on multiple different values at the same time).</p></li>
+</ul>
+<p>The <em>cumulative distribution function</em> (cdf) of a random variable <span class="math inline">\(X\)</span>, often denoted <span class="math inline">\(F_X\)</span> is defined as</p>
+<p><span class="math display">\[
+  F_X(x) = P(X \leq x) = \sum_{t \in S, t \leq x} p_X(t)
+\]</span></p>
+<p><strong>Example: Counting Heads</strong></p>
+<p>We flip three “unbiased” coins, and let <span class="math inline">\(X\)</span> be the total number of heads we observe. Write out the probability mass function of <span class="math inline">\(X\)</span>.</p>
+<ul>
+<li><p>The simplest (at least conceptually) approach is to enumerate the entire set of possible outcomes, giving a sample space: <span class="math inline">\(\{HHH, HHT, HTH, THH, HTT, THT, TTH, TTT\}\)</span></p></li>
+<li><p>Since each of these eight is equally likely (we have the same probability of seeing a heads/tails in each of the three flips) we can simply count how many of the eight outcomes aligns with the events <span class="math inline">\(X = 0, X = 1, X = 2\)</span>, and <span class="math inline">\(X = 3\)</span></p></li>
+</ul>
+<p>But what if <span class="math inline">\(n\)</span>, the number of coins flipped, had been much larger? Actually enumerating all possibilities would have been tedious (or practically impossible if <span class="math inline">\(n\)</span> is very large).</p>
+<p>There is a much more efficient way, which uses combinatorics.</p>
+<ul>
+<li><p>Consider the example above, and the event <span class="math inline">\(X = 1\)</span>, which is equivalent to <span class="math inline">\(\{HTT, THT, TTH\}\)</span></p>
+<ul>
+<li><p>The only thing differentiating them is where we place the single <span class="math inline">\(H\)</span></p></li>
+<li><p>The number of outcomes associated with <span class="math inline">\(X=1\)</span> is therefore just how many ways we could choose where to place the one <span class="math inline">\(H\)</span>, out of a potential three places</p></li>
+<li><p>More generally the number of outcomes in the event <span class="math inline">\(X=x\)</span>, when <span class="math inline">\(X\)</span> is the number of heads in <span class="math inline">\(n\)</span> flips, is simply the number of ways we can choose <span class="math inline">\(x\)</span> locations for these heads, out of the total potential <span class="math inline">\(n\)</span></p></li>
+<li><p>Mathematically we denote this by <span class="math inline">\({n \choose x}\)</span> and it is equal to <span class="math inline">\(\frac{n!}{x!(n-x)!}\)</span>, where the “<span class="math inline">\(n!\)</span>” means “<span class="math inline">\(n\)</span>factorial” and is equal to <span class="math inline">\(n\times (n-1)\times (n-2)\times ... \times 2 \times 1\)</span></p></li>
+</ul></li>
+</ul>
+<p>We will come back to this idea when we introduce the Binomial distribution.</p>
+<p>Don’t stress, you will not need to derive any formulations which rely on combinatorics yourselves.</p>
+<div id="expected-value" class="section level4 hasAnchor" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> Expected Value<a href="background.html#expected-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The mean (or expected value) of a (discrete) random variable is defined as <span class="math display">\[
+  E[X] = \sum_{x \in S} x \ p_X(x).
+\]</span>Intuitively the expected value can be thought of as the average value we’d see from infinitely many realisations of <span class="math inline">\(X\)</span>.</p>
+<p>We often denote the mean by <span class="math inline">\(\mu\)</span>, or <span class="math inline">\(\mu_X\)</span> if we want to be explicit about which RV’s mean is being referred to.</p>
+<p>The expected value is what’s called a <em>linear operator</em>, meaning if <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are real numbers (or more generally scalars) then <span class="math display">\[
+  E[a + bX] = a + bE[X]
+\]</span></p>
+<p>Also, if we have two random variables, say <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, then <span class="math display">\[
+E[X + Y] = E[X] + E[Y].
+\]</span></p>
+</div>
+<div id="variance-and-standard-deviation" class="section level4 hasAnchor" number="3.2.1.2">
+<h4><span class="header-section-number">3.2.1.2</span> Variance and Standard Deviation<a href="background.html#variance-and-standard-deviation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Sometimes it is useful to <em>transform</em> a random variable <span class="math inline">\(X\)</span> into a new one, say by applying a function <span class="math inline">\(g\)</span>. We then have <span class="math display">\[
+  E[g(X)] = \sum_{x \in S} g(x) p_X(x).
+\]</span></p>
+<p>An important example gives rise to the variance, defined as <span class="math display">\[
+  Var(X) = E[(X-\mu_X)^2] = \sum_{x \in S} (x-\mu_X)^2 p_X(x).
+\]</span></p>
+<p>The variance captures how spread out realisations of <span class="math inline">\(X\)</span> tend to be around their mean, and is often denoted by <span class="math inline">\(\sigma^2\)</span> (or sometimes <span class="math inline">\(\sigma^2_X\)</span>)</p>
+<p>The square root of the variance is referred to as the <em>standard deviation</em>, <span class="math inline">\(\sigma\)</span> (or <span class="math inline">\(\sigma_X\)</span>).</p>
+</div>
+<div id="the-binomial-distribution" class="section level4 hasAnchor" number="3.2.1.3">
+<h4><span class="header-section-number">3.2.1.3</span> The Binomial Distribution<a href="background.html#the-binomial-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When counting the number of “successes” from <span class="math inline">\(n\)</span> independent trials, when each trial is a success with probability <span class="math inline">\(p\)</span>:</p>
+<p>We write <span class="math inline">\(X \sim Binom(n, p)\)</span>, and <span class="math display">\[
+  p_X(x) = {n \choose x} p^x(1-p)^{n-x}; \ x = 0, 1, 2, ..., n
+\]</span></p>
+<ul>
+<li><p>Note that when <span class="math inline">\(p = 0.5\)</span> we have <span class="math inline">\(p^x(1 − p)^{n−x} = 0.5^n\)</span>, as in the unbiased coin example</p></li>
+<li><p>For <span class="math inline">\(n = 1\)</span> we have the Bernoulli distribution; <span class="math inline">\(X \sim Bern(p)\)</span></p></li>
+</ul>
+<p>We have <span class="math inline">\(E[X] = np\)</span> and <span class="math inline">\(Var(X) = np(1 − p)\)</span>.</p>
+<p>The binomial distribution is useful in modelling for classification (which we will see a lot of later on in the module)</p>
+<p><strong>The Binomial Distribution in R</strong></p>
+<p>The pmfs of random variables in R use the prefix “d”, so that if we want to evaluate <span class="math inline">\(P(X = x)\)</span>, when <span class="math inline">\(X \sim Binom(n, p)\)</span>, we use <code>dbinom(x, n, p)</code>. Similarly the cdf uses the prefix “p”, i.e. <code>pbinom(x, n, p)</code>.</p>
+<p><strong>Example: Daffodil bulbs</strong></p>
+<p>Twenty daffodil bulbs are planted in a tub. The probability that a given bulb germinates is 0.32. Calculate</p>
+<ul>
+<li>the probability that exactly 7 bulbs germinate</li>
+</ul>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="background.html#cb324-1" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">7</span>, <span class="dv">20</span>, <span class="fl">0.32</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1770433</code></pre>
+<ul>
+<li>the probability that at most 5 bulbs germinate</li>
+</ul>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="background.html#cb326-1" tabindex="-1"></a><span class="do">### Fill in the gaps to complete</span></span>
+<span id="cb326-2"><a href="background.html#cb326-2" tabindex="-1"></a><span class="fu">pbinom</span>(, , )</span>
+<span id="cb326-3"><a href="background.html#cb326-3" tabindex="-1"></a></span>
+<span id="cb326-4"><a href="background.html#cb326-4" tabindex="-1"></a><span class="do">### How could you get the same answer by combining</span></span>
+<span id="cb326-5"><a href="background.html#cb326-5" tabindex="-1"></a><span class="do">### the dbinom() and sum() functions?</span></span></code></pre></div>
+</div>
+<div id="the-poisson-distribution" class="section level4 hasAnchor" number="3.2.1.4">
+<h4><span class="header-section-number">3.2.1.4</span> The Poisson Distribution<a href="background.html#the-poisson-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Poisson distribution is also often used to represent “counts”, however in this context we are not conducting a fixed number of trials but rather counting the number of occurrences of interest; like the number of cars passing a point in a road over a chosen time interval, or the number of molecules of a gas in a chosen region.</p>
+<ul>
+<li><p>We write <span class="math inline">\(X\sim Pois(\lambda)\)</span>, where <span class="math inline">\(\lambda\)</span> is the only parameter of the distrbiution, and <span class="math display">\[
+p_X(x) = e^{-\lambda}\frac{\lambda^x}{x!}; x = 0, 1, 2, ...
+\]</span></p></li>
+<li><p>Both <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(Var(X)\)</span> are equal to <span class="math inline">\(\lambda\)</span></p>
+<ul>
+<li><p>In the above examples <span class="math inline">\(\lambda\)</span> would be equal to the average rate cars pass that point times the length of time it’s being observed, and the average density of the molecules times the volume of the region being studied.</p></li>
+<li><p>Sometimes the observations we make are not consistent with <span class="math inline">\(E[X] = Var(X)\)</span>, meaning that using a Poisson distribution to “model our problem” is inappropriate</p>
+<ul>
+<li>A popular alternative “counting distribution” is the negative binomial, however that is beyond the scope of this module</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>The Poisson Distribution in R</strong></p>
+<p><strong>Example: Coffee Customers</strong></p>
+<p>Customers arrive to a coffee shop at a constant rate of fifteen per hour between 08h30 and 11h00 so that the number of customers in any time interval may be treated as a Poisson random variable. Calculate</p>
+<ul>
+<li>the probability that exactly five customers arrive between 08h30 and 09h00: The <span class="math inline">\(\lambda\)</span> parameter is 15 × 0.5 = 7.5, and again we use the prefix “d” for the pmf, i.e. the function <code>dpois(x, lambda)</code></li>
+</ul>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="background.html#cb327-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">5</span>, <span class="fl">7.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1093746</code></pre>
+<ul>
+<li>the probability that at least forty customers arrive between 08h30 and 11h00: Note that <span class="math inline">\(P(X \geq x) = 1-P(X &lt; x)\)</span> (recall the rules for probabability)</li>
+</ul>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="background.html#cb329-1" tabindex="-1"></a><span class="do">### Fill in to complete</span></span>
+<span id="cb329-2"><a href="background.html#cb329-2" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">ppois</span>(, )</span></code></pre></div>
+</div>
+</div>
+<div id="probability-distributions-continuous" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Probability Distributions (Continuous)<a href="background.html#probability-distributions-continuous" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that a continuous random variable <span class="math inline">\(X\)</span> is one which can take any value in an interval, or union of intervals.</p>
+<p>Although <span class="math inline">\(X\)</span> <em>can</em> take any value in its support, when it comes to assigning a probability <span class="math inline">\(P(X = x)\)</span>, for some specific value of <span class="math inline">\(x\)</span>, we have to conclude that it is zero, since the “=” means to infinite precision</p>
+<p>We therefore describe how we expect realisations of <span class="math inline">\(X\)</span> to arise through what is called a probability density function (pdf), <span class="math inline">\(f_X\)</span>, which satisfies</p>
+<p><span class="math display">\[
+  P(X \leq t) = \int_{-\infty}^t f_X(x)dx
+\]</span></p>
+<p>The pdf, similar to the pmf, satisfies</p>
+<ul>
+<li><p><span class="math inline">\(f_X(x) \geq 0\)</span> (otherwise we could have negative probabilities)</p></li>
+<li><p><span class="math inline">\(\int_{-\infty}^\infty f_X(x)dx = 1\)</span> (the random variable must take on some value)</p></li>
+</ul>
+<p>Generally speaking we take sums involving the pmf of a discrete random variable, and integrals involving the pdf of a continuous one.</p>
+<p>For example, if <span class="math inline">\(X\)</span> is a continuous random variable we have</p>
+<ul>
+<li><p><span class="math display">\[
+\mu_X = E[X] = \int_{-\infty}^\infty x \ f_X(x)dx
+\]</span></p></li>
+<li><p><span class="math display">\[
+\sigma^2_X = Var(X) = \int_{-\infty}^\infty (x-\mu_X)^2 \ f_X(x)dx
+\]</span></p></li>
+</ul>
+<p>but the intuitive interpretations of these <em>moments</em> are the same as before.</p>
+<div id="the-normal-distribution" class="section level4 hasAnchor" number="3.2.2.1">
+<h4><span class="header-section-number">3.2.2.1</span> The Normal Distribution<a href="background.html#the-normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>By far the most important continuous distribution is the Normal (or Gaussian) distribution. It is the well-known “bell-shaped” distribution, and is parameterised by its mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<ul>
+<li><p>We write <span class="math inline">\(X\sim N(\mu, \sigma^2)\)</span> and <span class="math display">\[
+f_X(x) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{1}{2\sigma^2}(x-\mu)^2\right); \ -\infty &lt; x &lt; \infty
+\]</span></p></li>
+<li><p>The cdf does not have an explicit form</p></li>
+<li><p>The density is symmetric, with its maximum at <span class="math inline">\(\mu\)</span>, and although it is strictly positive for all <span class="math inline">\(x\)</span> it decreases very quickly to zero as we move away from <span class="math inline">\(\mu\)</span> in either direction</p>
+<ul>
+<li>It has “short tails”</li>
+</ul></li>
+<li><p>If we add normal random variables together, we get another normal random variable</p>
+<ul>
+<li>Remarkably even if the variables being added aren’t themselves normal, the sum typically looks “more normally distributed” than the individual variables themselves (we’ll revisit this a bit later)</li>
+</ul></li>
+</ul>
+<p><strong>The Standard Normal Distribution</strong></p>
+<p>If <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> then <span class="math inline">\(Z = \frac{X-\mu}{\sigma}\)</span> has what’s called a <em>standard normal distribution</em></p>
+<ul>
+<li>Sometimes informally called a “<span class="math inline">\(Z\)</span>” distribution</li>
+<li>Arises in “<span class="math inline">\(Z\)</span> tests”, but we will not go into hypothesis testing in any great depth in this module</li>
+</ul>
+<p>The density of a standard normal random variable is often denoted <span class="math inline">\(\phi\)</span>, and its cdf <span class="math inline">\(\Phi\)</span> (the Greek “f” and “F”)</p>
+<p><img src="figures/normal_1.png" width="50%"/></p>
+<p>The above figure shows the pdf of the standard normal distribution, while the following figures show the probabilities that <span class="math inline">\(Z\)</span> lies within the intervals <span class="math inline">\((-1, 1)\)</span>, <span class="math inline">\((-2, 2)\)</span> and <span class="math inline">\((-3, 3)\)</span></p>
+<p><img src="figures/normal_2.png" width="33%"/> <img src="figures/normal_3.png" width="33%"/> <img src="figures/normal_4.png" width="33%"/></p>
+<p>Note that the cdf <span class="math inline">\(\Phi\)</span> does not have a “nice” form, but numerical integration techniques have been used to obtain extremely close approximations. Moreover, these approximations only need to be known for the standard normal, since for <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> we have</p>
+<p><span class="math display">\[\begin{align}
+P(X \leq x) &amp;= P((X-\mu)/\sigma \leq (x-\mu)/\sigma)\\
+&amp;= P(Z \leq (x-\mu)/\sigma)\\
+&amp;= \Phi((x-\mu)/\sigma).
+\end{align}\]</span></p>
+<p>This also means that in general when <span class="math inline">\(X\)</span> is normally distributed we have</p>
+<p><span class="math display">\[\begin{align}
+P(\mu - \sigma \leq X \leq \mu + \sigma) &amp;= 0.6827\\
+P(\mu - 2\sigma \leq X \leq \mu + 2\sigma) &amp;= 0.9545\\
+P(\mu - 3\sigma \leq X \leq \mu + 3\sigma) &amp;= 0.9973.
+\end{align}\]</span></p>
+<p><strong>The Normal Distribution in R</strong></p>
+<p><strong>Example: Midday Temperatures</strong></p>
+<p>The temperature at midday in Lancaster has mean <span class="math inline">\(14^\circ\)</span>C and standard deviation <span class="math inline">\(10^\circ\)</span> C. Assuming that daily temperatures follow a normal distribution, what is the probability that the temperature on a randomly chosen day is</p>
+<ul>
+<li>lower than <span class="math inline">\(0^\circ\)</span>C? This can be obtained directly from the cdf,</li>
+</ul>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="background.html#cb330-1" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">14</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.08075666</code></pre>
+<ul>
+<li>higher than <span class="math inline">\(20^\circ\)</span>C? For this we are looking for the <em>complement</em> of <span class="math inline">\(X \leq 20\)</span></li>
+</ul>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="background.html#cb332-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="dv">20</span>, <span class="dv">14</span>, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2742531</code></pre>
+<ul>
+<li><p>Note that when dealing with discrete random variables which take on only integer values we have for integer <span class="math inline">\(x\)</span> that <span class="math inline">\(P(X \leq x) = 1-P(X&gt;x) = 1 - P(X \geq x+1)\)</span> since the event <span class="math inline">\(X &gt; x\)</span> includes only values for <span class="math inline">\(X\)</span> which are at least <span class="math inline">\(x+1\)</span></p></li>
+<li><p>On the other hand for continuous random variables the event <span class="math inline">\(X &gt; x\)</span> includes all values in the interval <span class="math inline">\((x, \infty)\)</span>. Also, since <span class="math inline">\(P(X=x) = 0\)</span> and hence <span class="math inline">\(P(X \geq x) = P(X &gt; x)\)</span>, we therefore have <span class="math inline">\(P(X\leq x) = 1- P(X&gt;x) = 1-P(X\geq x)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="samples-and-statistical-modelling" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Samples and Statistical Modelling<a href="background.html#samples-and-statistical-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>So where does this study of random variables get us?</p>
+<p>In statistics we refer to “our sample of data” or “sample of observations”, and generally this is drawn from some larger population</p>
+<ul>
+<li><p>This could be a physical population of objects (often people or animals), but could also only exist in principle:</p>
+<ul>
+<li>Example: Suppose we repeated a chemistry experiment multiple times to understand properties of the reagents. The outcomes of the experiments I didn’t conduct, but could have if I had continued or if I had conducted my experiments at different times, don’t actually exist, but they represent other potential members of the <em>population of outcomes I could have seen and included in my sample</em>.</li>
+</ul></li>
+</ul>
+<p>By treating the elements of our sample as realisations of random variables, we can use the theory of probability in order to make appropriate conclusions, which account for the inherent randomness in the sampling process.</p>
+<div id="models-and-assumptions" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Models and Assumptions<a href="background.html#models-and-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We often talk about <em>modelling assumptions</em>, which are assumptions about the population from which our sample came, and also about the “sampling process” (i.e. the way in which elements were taken from the population and added to our sample)</p>
+<p>Examples include:</p>
+<ul>
+<li><p>A form for the population distribution, e.g. Poisson, Normal, etc.</p></li>
+<li><p>Independence, i.e., that knowing the value of one (or some) of the values in the sample should not give you any additional information about the other values</p></li>
+<li><p>Later on we will talk about assumptions on the relationships between multiple variables (not the same as relationships/dependence between different elements in the sample)</p></li>
+</ul>
+<p>But what exactly is a “model”? Just as in the case of a model airplane, or car, a model is a simplified representation of something.</p>
+<p>In the context of statistics we may not be able to “solve problems” directly for the true population/process/system we are studying, but if a model of this phenomenon is a reasonable enough reflection of reality <em>and</em> we are able to solve the problem for the model version then it is useful without necessarily being precise or optimal</p>
+<p>This idea is captured well by the famous quote:</p>
+<p>“<em>All models are wrong, but some are useful</em>” ~ George Box</p>
+<p>With reference to our <em>modelling assumptions</em>, if these assumptions are all reasonable AND they are sufficient to allow us to solve our problem then our model <em>may</em> be useful</p>
+<ul>
+<li><p>If the assumptions are not sufficient, we cannot solve the problem anyway</p></li>
+<li><p>If our assumptions are not reasonable, then even if we can get a “solution”, it is questionable whether we can trust it</p></li>
+</ul>
+<p>Going forward we will typically refer to our sample of observations, <span class="math inline">\(x_1, x_2, …, x_n\)</span>, as assumed to have been drawn independently from a common probability (population) distribution, the latter condition essentially meaning identically distributed.</p>
+<p>What this assumption means is that our sample may be seen as a realisation of a <em>random sample</em>, <span class="math inline">\(X_1, X_2, …, X_n\)</span>, of independent and identically distributed (i.i.d.) random variables.</p>
+<p>It is by understanding the <em>statistical properties</em> of such random samples that we can appropriately use our observed sample to make decisions and infer properties of the overall population.</p>
+</div>
+</div>
+<div id="statistical-estimation" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Statistical Estimation<a href="background.html#statistical-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s begin our study of statistical estimation with an example scenario:</p>
+<p><strong>Coffee Customers (again):</strong></p>
+<p>Consider again the coffee shop example we described in relation to the Poisson distribution. Imagine that we now start to see that actually the probabilities we calculated did not seem to match very well with our observations, and that actually there were often considerably more customers than we anticipated and staff are barely coping with the demand.</p>
+<p>If we took note of the numbers of customers arriving during the busy morning session, over multiple days, we would have a sample of realisations from the population of potential numbers we might see in the near future</p>
+<ul>
+<li>Although the demand for coffee at our shop may change again going forward, meaning that the observations we make now may not be from the same distribution as those in a few years, it might be <em>reasonable to assume</em> that over the period of a year the demand will not change very dramatically.</li>
+</ul>
+<p>Using our sample we could obtain an <em>estimate</em> of the actual arrival rate, and then use this to answer questions about what we might expect on future days, like how busy the shop is likely to be at its busiest, or the number of days on which the shop makes a loss.</p>
+<p>It is important to note, however, that <em>even if our assumptions are reasonable</em> that does not necessarily make our estimate suddenly equal to the true value. Had we chosen a different set of days on which to record the arrivals, we would have arrived at a different value for our estimate. Both of these would be valid and useful, despite being different.</p>
+<p>This is a fundamental consideration in statistical estimation; that the <em>statistics</em> we compute from our sample (like the average arrival rate from our coffee shop over a sample of days) are themselves realisations of random variables.</p>
+<div id="estimates-and-estimators" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Estimates and Estimators<a href="background.html#estimates-and-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This notion, that our entire sample, and therefore any statistics taken from it, could have been different, leads us to question to what extent we can “trust” the conclusions/inferences we make from them.</p>
+<p>It is sensible to use our observed arrival rate as a proxy for the actual arrival rate, but we are still uncertain about what the true value is, and how far we expect this estimate might be from the actual rate may influence any decisions we make as a result.</p>
+<p>As statisticians we may therefore like to ask questions like “if I had observed infinitely many samples, what proportion of them would have led to an estimate which is within a certain (chosen) distance from the true value being estimated?”</p>
+<p>To answer this question we are ultimately interested in the probability distribution of an <em>estimator</em>.</p>
+<p>Any way of combining the elements of a random sample to produce an estimate for something about the underlying population, is itself a random variable, and called an estimator. For example,</p>
+<ul>
+<li>The sample mean and variance</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\bar X &amp;= \frac{1}{n}\sum_{i=1}^n X_i,\\
+S_X^2 &amp;= \frac{1}{n-1}\sum_{i=1}^n \left(X_i - \bar X\right)^2
+\end{align}\]</span></p>
+<p>are estimators for the population mean and variance, <span class="math inline">\(\mu_X\)</span> and <span class="math inline">\(\sigma^2_X\)</span></p>
+<p>Both <span class="math inline">\(\bar X\)</span> and <span class="math inline">\(S_X^2\)</span> are indeed random variables, and so have probability distributions in their own right, called <em>sampling distributions</em>.</p>
+<p>Our particular sample <span class="math inline">\(x_1, ..., x_n\)</span> (as opposed to the random sample <span class="math inline">\(X_1, ..., X_n\)</span> of which our sample is a realisation) gives rise to our corresponding <em>estimates</em> or <em>sample statistics</em></p>
+<p><span class="math display">\[\begin{align}
+  \bar x &amp;= \frac{1}{n} \sum_{i=1}^n x_i\\
+  s_X^2 &amp;= \frac{1}{n-1}\sum_{i=1}^n \left(x_i - \bar x\right)^2
+\end{align}\]</span></p>
+<p>and these can be seen simply as realisations of the random variables <span class="math inline">\(\bar X\)</span> and <span class="math inline">\(S_X^2\)</span></p>
+<ul>
+<li>If you’re confused about the denominator <span class="math inline">\(n-1\)</span> for <span class="math inline">\(S_X^2\)</span> and <span class="math inline">\(s_X^2\)</span> it is primarily in place so that <span class="math inline">\(S_X^2\)</span> is an <em>unbiased</em> estimator for <span class="math inline">\(\sigma_X^2\)</span>. We will discuss the topic of bias shortly.</li>
+</ul>
+<p>To summarise: <span class="math inline">\(\bar X\)</span> and <span class="math inline">\(S_X^2\)</span> are <em>estimATORS</em>; rules for combining the elements of a (random) sample in order to obtain an estimate for a characteristic of the underlying population distribution.</p>
+<ul>
+<li>The <em>underlying population</em> meaning the population which gave rise to each element in our sample</li>
+</ul>
+<p>Applying the rule/procedure associated with an estimator to an observed sample gives us our <em>estimATE</em>, and the thing we are trying to estimate is called the <em>estimAND</em>.</p>
+<ul>
+<li><p><span class="math inline">\(\bar X\)</span> is an estimator for the population mean <span class="math inline">\(\mu_X\)</span> (our estimand) and <span class="math inline">\(\bar x\)</span> is our estimate for it</p></li>
+<li><p><span class="math inline">\(S_X^2\)</span> is an estimator for the population variance <span class="math inline">\(\sigma_X^2\)</span> and <span class="math inline">\(s_X^2\)</span> is our estimate for it</p></li>
+</ul>
+<div id="properties-of-estimators" class="section level4 hasAnchor" number="3.4.1.1">
+<h4><span class="header-section-number">3.4.1.1</span> Properties of Estimators<a href="background.html#properties-of-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The above examples were estimators specifically for the mean and variance of the underlying population. More generally, we use the notation <span class="math inline">\(\theta\)</span> to denote an arbitrary quantity related to the underlying population.</p>
+<p>It is common to use the “hat” notation, <span class="math inline">\(\hat \theta\)</span>, “theta hat”, to denote an estimator for <span class="math inline">\(\theta\)</span>. If it is not ambiguous, we may also use <span class="math inline">\(\hat \theta\)</span> to be a particular estimate from an observed sample, and when it is needed we can differentiate the two by using <span class="math inline">\(\hat \theta_{obs}\)</span> to be the observed estimate.</p>
+<ul>
+<li>For example <span class="math inline">\(\bar X = \hat \mu\)</span> and <span class="math inline">\(\bar x = \hat \mu_{obs}\)</span>, etc.</li>
+</ul>
+<p>If we can understand the <em>probability distribution of an estimator</em>, <span class="math inline">\(\hat \theta\)</span>, we can quantify our uncertainty about the actual <span class="math inline">\(\theta\)</span> when using <span class="math inline">\(\hat \theta_{obs}\)</span> as a “proxy” for it.</p>
+<p><strong>Standard Error</strong></p>
+<p>A direct way of quantifying this uncertainty is through the variance or standard deviation of the estimator</p>
+<ul>
+<li><p>If an estimator has high variance, then realisations of it tend to be quite spread out</p></li>
+<li><p>Believing that any single realisation is close to the true value is therefore prone to risk</p>
+<ul>
+<li>It is very important to note, however, that having high variance is not a limitation of an estimator, <em>per se</em>, but knowing that it has high variance allows us to appropriately incorporate this information in any decision making.</li>
+</ul></li>
+</ul>
+<p>The <em>standard error</em> of an estimate is simply the standard deviation of the estimator of which it is a realisation</p>
+<p><strong>Bias</strong></p>
+<p>The variance of a random variable quantifies how spread out it tends to be about its <em>mean</em>. In the context of estimation, therefore, knowing only the variance of an estimator is not always useful on its own</p>
+<ul>
+<li>In an absurd example we could design an estimator which always takes the value zero, regardless of the sample values. Such an estimator has zero variance, but it is clearly not of much use since it doesn’t actually use any information from the sample</li>
+</ul>
+<p>The <em>bias</em> of an estimator is a measure of how far off the mean of the estimator is from the estimand. Specifically</p>
+<p><span class="math display">\[
+  Bias(\hat \theta) = E[\hat \theta] - \theta.
+\]</span></p>
+<p>Bias is therefore signed, i.e.</p>
+<ul>
+<li><p>Positive bias means the estimator <em>tends to overestimate</em> the target</p></li>
+<li><p>Negative bias means the estimator <em>tends to underestimate</em> the target</p></li>
+</ul>
+</div>
+<div id="confidence-intervals" class="section level4 hasAnchor" number="3.4.1.2">
+<h4><span class="header-section-number">3.4.1.2</span> Confidence Intervals<a href="background.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Although the variance and expected value of an estimator can give us a good sense of how accurate our estimate is likely to be, while also giving a sense of uncertainty, <em>confidence intervals</em> communicate this information extremely effectively.</p>
+<p>At a high level a confidence interval may be seen as a set of <em>plausible</em> values for the true parameter. Whereas a <em>point estimate</em>, say <span class="math inline">\(\hat \theta_{obs}\)</span> may be thought of as in a sense the “most plausible”, we never really believe that <span class="math inline">\(\hat \theta_{obs} = \theta\)</span>, only that it is <em>likely that</em> <span class="math inline">\(\hat \theta_{obs} \approx \theta\)</span>. But how rough or precise this approximation is may have far reaching consequences, and though the standard error of <span class="math inline">\(\hat \theta_{obs}\)</span> gives a sense of this “roughness” a confidence interval is far more explicit.</p>
+<p>Imagine we could access values <span class="math inline">\(l\)</span> and <span class="math inline">\(u\)</span> having the property that</p>
+<p><span class="math display">\[
+P(l &lt; \theta - \hat \theta &lt; u) = 0.95.
+\]</span></p>
+<p>Since <span class="math inline">\(\hat \theta_{obs}\)</span> is just a realisation of the random variable <span class="math inline">\(\hat \theta\)</span>, this would mean that of all potential samples I could see, <span class="math inline">\(95\%\)</span> of them would lead to an estimate <span class="math inline">\(\hat \theta_{obs}\)</span> which satisfies <span class="math inline">\(\hat \theta_{obs} + l &lt; \theta &lt; \hat \theta_{obs} + u\)</span>.</p>
+<p>If I know that of all potential samples I could see, <span class="math inline">\(95\%\)</span> of them would give me an interval of the form <span class="math inline">\((\hat \theta_{obs} + l, \hat \theta_{obs} + u)\)</span> which contains the <em>true</em> parameter <span class="math inline">\(\theta\)</span>, then surely I can be pretty “confident” that the sample I actually have is one of these “nice” ones. After all, only <span class="math inline">\(5\%\)</span> of all possible samples would “let me down” in this regard.</p>
+<ul>
+<li>Think of the analogy of pulling a ball from a bag. If I know that <span class="math inline">\(95\%\)</span> of the balls are blue, and I take one ball out of the bag with my eyes closed, even before I look at the ball I can be very confident that I have a blue ball.</li>
+</ul>
+<p>Why are intervals like this useful, you may ask? To answer, let’s consider the basic reproduction number of a disease (you probably all remember the famous <span class="math inline">\(R_0\)</span> from the COVID pandemic). Suppose a group of statisticians estimates that <span class="math inline">\(R_0\)</span> is <span class="math inline">\(0.93\)</span>. If you remember the pandemic well, you’ll remember that the critical value is <span class="math inline">\(R_0 = 1\)</span>, with a smaller value meaning the infection is “dying out” and a greater value meaning it will continue to spread. So, great, right? We’re told that “someone” thinks <span class="math inline">\(R_0\)</span> is <span class="math inline">\(0.93 &lt; 1\)</span> and everyone is happy and society can begin to “re-start”. But wait, <span class="math inline">\(R_0\)</span> is a tricky thing to estimate and there is a lot of uncertainty. Actually the statisticians communicate in addition that their <span class="math inline">\(95\%\)</span> confidence interval for <span class="math inline">\(R_0\)</span> is <span class="math inline">\((0.82, 1.09)\)</span>. Because of the potentially disastrous outcomes if actually <span class="math inline">\(R_0\)</span> is above one, it may be prudent to behave as though <span class="math inline">\(R_0\)</span> is actually <span class="math inline">\(1.09\)</span> since the statisticians think this is also a plausible value.</p>
+<p><strong>Statistical “Errors”</strong></p>
+<p>Let’s quickly take an aside.</p>
+<p>It may be that some of you are uncomfortable about the fact that there is still a <span class="math inline">\(5\%\)</span> of being “wrong”. Unfortunately we can never completely eliminate uncertainty without losing practicality. We could always say “we are <span class="math inline">\(100\%\)</span> confident that <span class="math inline">\(R_0\)</span> is greater than zero”. But a statement like this is completely useless since <span class="math inline">\(R_0\)</span> is greater than zero by its definition, not because of some fancy statistical procedure which produced a “<span class="math inline">\(100\%\)</span> confidence interval”.</p>
+<p>Because we are dealing in the realms of randomness, it is always possible to get “unlucky” and be led to a conclusion which is misleading. This doesn’t mean that a mistake was made. The best statisticians in the world, asked to produce a whole lot of <span class="math inline">\(95\%\)</span> confidence intervals, will “get unlucky” <span class="math inline">\(5\%\)</span> of the time.</p>
+<p><strong>Why</strong> <span class="math inline">\(95\%\)</span>?</p>
+<p>The choice of going with <span class="math inline">\(95\%\)</span> confidence intervals in the above description was completely arbitrary. In fact we can choose to have any level of confidence between <span class="math inline">\(0\)</span> and <span class="math inline">\(100\%\)</span>. However, there is a “cost”. If we want to have a high degree of confidence then we cannot be very <em>precise</em>. What this means is that we could increase our level of confidence, say to <span class="math inline">\(99\%\)</span>, but this would mean that the confidence interval would have to be wider than the <span class="math inline">\(95\%\)</span> confidence interval. There is no “correct answer” for the level of confidence and it will often depend on the context. In the “high risk” pandemic context we may want to have a high degree of confidence, even if it means we are led to be overly risk averse.</p>
+</div>
+<div id="the-central-limit-theorem-and-the-bootstrap" class="section level4 hasAnchor" number="3.4.1.3">
+<h4><span class="header-section-number">3.4.1.3</span> The Central Limit Theorem and the Bootstrap<a href="background.html#the-central-limit-theorem-and-the-bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now to the hard part. Constructing confidence intervals is contingent on being able to access the values <span class="math inline">\(l\)</span> and <span class="math inline">\(u\)</span> which allowed us to actually obtain our interval <span class="math inline">\((\hat\theta_{obs} + l, \hat \theta_{obs} + u)\)</span>.</p>
+<p>It should be clear that knowing the sampling distribution of an estimator can be crucial for any decision making on the basis of an observed estimate, and would allow us to at obtain the values <span class="math inline">\(l\)</span> and <span class="math inline">\(u\)</span>. However, it is rare that an exact sampling distribution is known and frequently we must rely on (at best) approximations.</p>
+<p>One of the most fundamental results in statistics is called the <em>central limit theorem</em> (CLT), and in its simplest form states that the sampling distribution of the sample mean, <span class="math inline">\(\bar X\)</span>, is approximately normal, and formally we have that</p>
+<p><span class="math display">\[
+\sqrt{n}\frac{\bar X - \mu_X}{\sigma_X}
+\]</span> has a distribution well approximated by the standard normal distribution provided only</p>
+<ul>
+<li><p>The sample is “reasonably large”. The actual theory is asymptotitic, meaning that the distribution tends to a normal distribution as the sample size tends towards infinity. A working rule of thumb people use is <span class="math inline">\(n \geq 30\)</span> is sufficient provided the underlying distribution is at least very roughly symmetric</p></li>
+<li><p>The population variance, <span class="math inline">\(\sigma_X^2\)</span>, is finite. This is absolutely vital for the central limit theorem to apply, but for the vast majority of applications is not something we really need to concern ourselves with. More important in most cases is whether an appropriate estimate for <span class="math inline">\(\sigma_X^2\)</span> is available</p>
+<ul>
+<li><p>When the population itself is normally distributed, we always have that <span class="math inline">\(\sqrt{n}(\bar X - \mu_X)/S_X\)</span> has what is known as a “t-distribution” with <span class="math inline">\(n-1\)</span> degrees of freedom.</p></li>
+<li><p>The t-distributions are similar to the normal distribution, in that they are symmetric, but the density tends to zero much more slowly as one moves away from the mean in either direction.</p></li>
+<li><p>As the number of degrees of freedom increases, however, the t-distribution gets closer and closer to a standard normal</p></li>
+<li><p>If the sample is particularly large (some suggest <span class="math inline">\(n \geq 100\)</span> as a rule of thumb) then regardless of the underlying population we can assume that <span class="math inline">\(\sqrt{n}(\bar X - \mu_X)/S_X\)</span> has an approximate (standard) normal distribution.</p></li>
+</ul></li>
+</ul>
+<p>There are many extensions and generalisations of the CLT, with one particularly important one being that (under some conditions beyond the scope of this module) estimators based on the principle of maximum likelihood, which we will se shortly, are approximately normally distributed provided the sample is reasonably large.</p>
+<p>But what about when we cannot use this theory? The bootstrap is a remarkably simple but beautiful idea. Suppose we have an estimator <span class="math inline">\(\hat \theta\)</span> whose sampling distribution we would like to understand. <em>If</em> we were able to obtain a large number of samples from the underlying population, then we could compute all of the resulting estimates, and this would give us a <em>sample of realisations of</em> <span class="math inline">\(\hat \theta\)</span>. We could then use <em>this</em> sample to estimate features of the sampling distribution of <span class="math inline">\(\hat \theta\)</span></p>
+<ul>
+<li>We of course cannot just obtain more samples from the underlying population; we only get one.</li>
+</ul>
+<p>The <strong>bootstrap</strong> simply says <em>“let’s pretend like the distribution of values in our single sample is a good representation of the population distribution”</em>. If this is the case then we can <em>re-sample</em> from these values to obtain “pseudo-samples”, or bootstrap samples. Bootstrap theory says that the distribution of the <em>difference between</em> the estimates we obtain on these bootstrap samples and the estimate we obtain on our actual sample approximates the distribution of <span class="math inline">\(\hat \theta - \theta\)</span>.</p>
+<p>Practically then, the booststrap works as follows. Suppose our sample is <span class="math inline">\(x_1, ..., x_n\)</span>, and we choose some large <span class="math inline">\(B\)</span> (the number of bootstrap samples we plan to use). We then do, for each <span class="math inline">\(b = 1, 2, ..., B\)</span>:</p>
+<ul>
+<li>Re-sample from <span class="math inline">\(x_1, ..., x_n\)</span> with replacement to obtain <span class="math inline">\(x_{1,b}^*, ..., x_{n, b}^*\)</span></li>
+<li>Compute <span class="math inline">\(\hat \theta^*_b\)</span>, the estimate arising from the bootstrap sample <span class="math inline">\(x_{1,b}^*, ..., x_{n, b}^*\)</span></li>
+</ul>
+<p>Then take the collection of values <span class="math inline">\(\hat \theta^*_1-\hat \theta_{obs}, ..., \hat \theta^*_B-\hat \theta_{obs}\)</span> to approximate the distribution of <span class="math inline">\(\hat \theta - \theta\)</span>.</p>
+<ul>
+<li>Recall that <span class="math inline">\(\hat \theta_{obs}\)</span> is the particular estimate we obtain from our original sample</li>
+</ul>
+<p>An approximate confidence interval for <span class="math inline">\(\theta\)</span> can then simply be obtained by taking the quantiles of the distribution of <span class="math inline">\(2\hat\theta_{obs} - \hat \theta^*_b; b = 1, ..., B\)</span>.</p>
+<p><strong>Examples in R</strong></p>
+<ol style="list-style-type: decimal">
+<li>Let’s begin by seeing the central limit theorem in action. We will simulate multiple samples from a standard <em>exponential distribution</em> (with density function <span class="math inline">\(\exp(-x)\)</span>) and investigate the distribution of the sample means, after appropriate standardisation. Just as the prefices <code>d</code> and <code>p</code> were used to evaluate the pmf/pdf and cdf respectively, the prefix <code>r</code> is used to denote functions used for simulating/generating random realisations from a distribution. For example <code>rexp(n)</code> will generate a sample of size <span class="math inline">\(n\)</span> from a standard exponential distribution.</li>
+</ol>
+<p>Now, the mean and variance of the standard exponential are both one, and so we should see the distribution of all the <span class="math inline">\(\sqrt{n}(\bar x - 1)\)</span> values looking close to a standard normal, provided the sample size is large enough.</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="background.html#cb334-1" tabindex="-1"></a><span class="do">### We will use three sample sizes, 10 (too small for the CLT), 30 (the apparent border of what is</span></span>
+<span id="cb334-2"><a href="background.html#cb334-2" tabindex="-1"></a><span class="do">### large enough although the exponential distribution is quite heavily skewed) and 100 </span></span>
+<span id="cb334-3"><a href="background.html#cb334-3" tabindex="-1"></a><span class="do">### (should be large enough even for a very skew distribution).</span></span>
+<span id="cb334-4"><a href="background.html#cb334-4" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb334-5"><a href="background.html#cb334-5" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb334-6"><a href="background.html#cb334-6" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb334-7"><a href="background.html#cb334-7" tabindex="-1"></a></span>
+<span id="cb334-8"><a href="background.html#cb334-8" tabindex="-1"></a><span class="do">### To compute the sample means efficiently we can store the different samples in the rows of a matrix</span></span>
+<span id="cb334-9"><a href="background.html#cb334-9" tabindex="-1"></a><span class="do">### and then use the function rowMeans. Let&#39;s generate nsamp = 10000 samples of each of the different sample</span></span>
+<span id="cb334-10"><a href="background.html#cb334-10" tabindex="-1"></a><span class="do">### sizes and calculate the means</span></span>
+<span id="cb334-11"><a href="background.html#cb334-11" tabindex="-1"></a>nsamp <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb334-12"><a href="background.html#cb334-12" tabindex="-1"></a>xbar_n1 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n1), nsamp, n1))</span>
+<span id="cb334-13"><a href="background.html#cb334-13" tabindex="-1"></a>xbar_n2 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n2), nsamp, n2))</span>
+<span id="cb334-14"><a href="background.html#cb334-14" tabindex="-1"></a>xbar_n3 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n3), nsamp, n3))</span>
+<span id="cb334-15"><a href="background.html#cb334-15" tabindex="-1"></a></span>
+<span id="cb334-16"><a href="background.html#cb334-16" tabindex="-1"></a><span class="do">### We can use a histogram to estimate the densities of the sample means (after standardisation).</span></span>
+<span id="cb334-17"><a href="background.html#cb334-17" tabindex="-1"></a><span class="do">### Histograms chop up the interval of the sample into equal width &quot;bins&quot; and then present the</span></span>
+<span id="cb334-18"><a href="background.html#cb334-18" tabindex="-1"></a><span class="do">### density as proportional to the number of points falling in each bin</span></span>
+<span id="cb334-19"><a href="background.html#cb334-19" tabindex="-1"></a><span class="do">### We can also overlay the standard normal density to see how good the approximation is</span></span>
+<span id="cb334-20"><a href="background.html#cb334-20" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb334-21"><a href="background.html#cb334-21" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n1)<span class="sc">*</span>(xbar_n1<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 10&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb334-22"><a href="background.html#cb334-22" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb334-23"><a href="background.html#cb334-23" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n2)<span class="sc">*</span>(xbar_n2<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 30&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb334-24"><a href="background.html#cb334-24" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb334-25"><a href="background.html#cb334-25" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n3)<span class="sc">*</span>(xbar_n3<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 100&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb334-26"><a href="background.html#cb334-26" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-134-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The histogram for <span class="math inline">\(n = 10\)</span> shows very clear skewness, and the approximation of the normal density is not good. For <span class="math inline">\(n=30\)</span> the approximation is better, but the skewness is still evident especially in the tails. When <span class="math inline">\(n = 100\)</span> the approximation becomes much better.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The skewness of a random variable <span class="math inline">\(X\)</span> is equal to <span class="math inline">\(E[(X - \mu_X)^3]/\sigma_X^3\)</span> and a large positive value indicates the <em>tail</em> of the distribution on the right is longer than that on the left, and a large negative value indicates the reverse. If <span class="math inline">\(X\)</span> has what is known as a <em>Gamma distribution</em>, with shape parameter <span class="math inline">\(\alpha\)</span> and scale parameter <span class="math inline">\(\sigma\)</span> then its skewness is <span class="math inline">\(2/\sqrt{\alpha}\)</span>. The distribution of sample skewness is close to normal for large <span class="math inline">\(n\)</span>, but nonetheless we can use the bootstrap in order to obtain an estimate for a <span class="math inline">\(95\%\)</span> confidence interval. Below we simulate a sample of size <span class="math inline">\(n=50\)</span> from a Gamma<span class="math inline">\((3, 1)\)</span> distribution and then estimate a confidence interval from <span class="math inline">\(B = 1000\)</span> bootstrap samples.</li>
+</ol>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="background.html#cb335-1" tabindex="-1"></a><span class="do">### Start with settings of the sample size, and shape and scale parameters</span></span>
+<span id="cb335-2"><a href="background.html#cb335-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb335-3"><a href="background.html#cb335-3" tabindex="-1"></a>shape <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb335-4"><a href="background.html#cb335-4" tabindex="-1"></a>scale <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb335-5"><a href="background.html#cb335-5" tabindex="-1"></a></span>
+<span id="cb335-6"><a href="background.html#cb335-6" tabindex="-1"></a><span class="do">### Generate a sample from the Gamma(shape, scale) distribution</span></span>
+<span id="cb335-7"><a href="background.html#cb335-7" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(n, <span class="at">shape =</span> shape, <span class="at">scale =</span> scale)</span>
+<span id="cb335-8"><a href="background.html#cb335-8" tabindex="-1"></a></span>
+<span id="cb335-9"><a href="background.html#cb335-9" tabindex="-1"></a><span class="do">### Define a function to calculate the sample skewness</span></span>
+<span id="cb335-10"><a href="background.html#cb335-10" tabindex="-1"></a>skew <span class="ot">&lt;-</span> <span class="cf">function</span>(z) <span class="fu">mean</span>((z<span class="sc">-</span><span class="fu">mean</span>(z))<span class="sc">^</span><span class="dv">3</span>)<span class="sc">/</span><span class="fu">mean</span>((z<span class="sc">-</span><span class="fu">mean</span>(z))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="fl">1.5</span></span>
+<span id="cb335-11"><a href="background.html#cb335-11" tabindex="-1"></a></span>
+<span id="cb335-12"><a href="background.html#cb335-12" tabindex="-1"></a><span class="do">### Now we can conduct the bootstrap procedure</span></span>
+<span id="cb335-13"><a href="background.html#cb335-13" tabindex="-1"></a><span class="do">### Set up a vector in which to store the skewness values from the</span></span>
+<span id="cb335-14"><a href="background.html#cb335-14" tabindex="-1"></a><span class="do">### bootstrap samples</span></span>
+<span id="cb335-15"><a href="background.html#cb335-15" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb335-16"><a href="background.html#cb335-16" tabindex="-1"></a>skews_B <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb335-17"><a href="background.html#cb335-17" tabindex="-1"></a></span>
+<span id="cb335-18"><a href="background.html#cb335-18" tabindex="-1"></a><span class="do">### Now loop over b in 1:B</span></span>
+<span id="cb335-19"><a href="background.html#cb335-19" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B){</span>
+<span id="cb335-20"><a href="background.html#cb335-20" tabindex="-1"></a>  <span class="co"># Resample from x with replacement</span></span>
+<span id="cb335-21"><a href="background.html#cb335-21" tabindex="-1"></a>  x_b <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb335-22"><a href="background.html#cb335-22" tabindex="-1"></a>  <span class="co"># Calculate the sample skewness for the bootstrap sample</span></span>
+<span id="cb335-23"><a href="background.html#cb335-23" tabindex="-1"></a>  skews_B[b] <span class="ot">&lt;-</span> <span class="fu">skew</span>(x_b)</span>
+<span id="cb335-24"><a href="background.html#cb335-24" tabindex="-1"></a>}</span>
+<span id="cb335-25"><a href="background.html#cb335-25" tabindex="-1"></a></span>
+<span id="cb335-26"><a href="background.html#cb335-26" tabindex="-1"></a><span class="do">### Compute the 95% confidence interval using the quantile function</span></span>
+<span id="cb335-27"><a href="background.html#cb335-27" tabindex="-1"></a><span class="do">### on the distribution of 2*skew(x) - skews_B</span></span>
+<span id="cb335-28"><a href="background.html#cb335-28" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
+<pre><code>##        2.5%       97.5% 
+## -0.07491774  0.75574581</code></pre>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="background.html#cb337-1" tabindex="-1"></a><span class="do">### We can also visualise the estimated distribution whose quantiles define</span></span>
+<span id="cb337-2"><a href="background.html#cb337-2" tabindex="-1"></a><span class="do">### confidence interval</span></span>
+<span id="cb337-3"><a href="background.html#cb337-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="at">main =</span> <span class="st">&quot;Bootstrap Distribution&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb337-4"><a href="background.html#cb337-4" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="dv">2</span><span class="sc">~</span><span class="fu">hat</span>(theta)[obs]<span class="sc">~-</span><span class="er">~</span><span class="fu">hat</span>(theta)<span class="sc">^</span>{<span class="st">&quot;*&quot;</span>}))</span>
+<span id="cb337-5"><a href="background.html#cb337-5" tabindex="-1"></a></span>
+<span id="cb337-6"><a href="background.html#cb337-6" tabindex="-1"></a><span class="do">### We can also add vertical lines to show the estimated value and the</span></span>
+<span id="cb337-7"><a href="background.html#cb337-7" tabindex="-1"></a><span class="do">### boundaries of the confidence interval</span></span>
+<span id="cb337-8"><a href="background.html#cb337-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">skew</span>(x), <span class="at">col =</span> <span class="dv">2</span>) <span class="co"># estimated value</span></span>
+<span id="cb337-9"><a href="background.html#cb337-9" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="co"># confidence interval</span></span>
+<span id="cb337-10"><a href="background.html#cb337-10" tabindex="-1"></a></span>
+<span id="cb337-11"><a href="background.html#cb337-11" tabindex="-1"></a><span class="do">### We can also add the true skewness</span></span>
+<span id="cb337-12"><a href="background.html#cb337-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">2</span><span class="sc">/</span><span class="fu">sqrt</span>(shape), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-135-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="maximum-likelihood-estimation" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Maximum Likelihood Estimation<a href="background.html#maximum-likelihood-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the previous section we spoke a lot about estimators in general, and a few specific examples being the sample mean and sample variance, where we simply described their expressions explicitly. However it is not always obvious how to actually go about finding these expressions which allow us to estimate properties of the distribution, and sometimes there may not be <em>explicit</em> expressions like these at all.</p>
+<p>The theory associated with <em>maximum likelihood estimation</em> and <em>maximum likelihood estimators</em> is extremely deep, but for the purpose of this course we will only introduce maximum likelihood estimation as a concept as it becomes relevant to some of the predictive modelling we cover later on.</p>
+<p>Suppose as before that our sample is denoted <span class="math inline">\(x_1, ..., x_n\)</span>, and suppose that we are modelling the population distribution with a particular form (e.g. binomial, Poisson, etc.) which has parameter <span class="math inline">\(\theta\)</span>, and for simplicity to start let’s assume the distribution is discrete. To begin we may not, as alluded to above, know how to go about obtaining an estimate for <span class="math inline">\(\theta\)</span> from our sample.</p>
+<p>The principle of maximum likelihood simply says that the most appropriate estimate is that which, <em>if it were the true value of</em> <span class="math inline">\(\theta\)</span>, would maximise the probability of seeing our particular sample. In other words one should choose the estimate which is <em>most consistent</em> with the sample observations. If we write <span class="math inline">\(P(X=x|\theta) = p_X(x|\theta)\)</span> to be the probability mass function for a particular setting of <span class="math inline">\(\theta\)</span> then the probability of observing our sample is <span class="math display">\[
+P(X_1 = x_1, ..., X_n = x_n|\theta) = \prod_{i=1}^n p_X(x_i|\theta),
+\]</span> where <span class="math inline">\(\prod\)</span> is the notation for the <em>product</em> of all the terms, i.e. of multiplying them all together. The reason we can turn the probability <span class="math inline">\(P(X_1 = x_1, ..., X_n = x_n|\theta)\)</span> into this form is (i) we assume the variables <span class="math inline">\(X_1, ..., X_n\)</span> are independent, and so we can turn <span class="math inline">\(P(X_1 = x_1, ..., X_n = x_n|\theta)\)</span> into <span class="math inline">\(P(X_1=x_1|\theta)P(X_2=x_2|\theta)...P(X_n=x_n|\theta)\)</span> and (ii) we assume the observations came from the same population, i.e. <span class="math inline">\(P(X_i=x_i|\theta) = p_X(x_i|\theta)\)</span> for each <span class="math inline">\(i\)</span>. We refer to this term above as the <em>likeilhood</em> of the data, and is a function of <span class="math inline">\(\theta\)</span>.</p>
+<p>Now, it is typically hard to maximise products directly, but a useful trick allows us to circumvent this. Specifically for two real numbers <span class="math inline">\(z_1, z_2\)</span> we have <span class="math inline">\(z_1 &gt; z_2 \iff \log(z_1) &gt; \log(z_2)\)</span> and as a result finding the maximum value of <span class="math inline">\(\prod_{i=1}^n p_X(x_i|\theta)\)</span> is the same as finding the maximum value of <span class="math inline">\(\log\left(\prod_{i=1}^n p_X(x_i|\theta)\right) = \sum_{i=1}^n \log(p_X(x_i|\theta))\)</span>, and maximising sums is far more straightforward. This trick is essentially universal and so you will often see reference not to the likelihood but to the log-likelihood.</p>
+<p>The convenience of looking first at discrete distributions is ultimately because it is sensible to talk about the probability of our sample, whereas we know that the probability of <em>any</em> specific value of a continuous random variable is zero. However, we can refer to the likelihood as the probability of seeing a sample “like” our sample, i.e., one with observations very close to our own. This allows us to simply use the density function in place of the mass function, and so our likelihood becomes <span class="math inline">\(\prod_{i=1}^n f_X(x_i|\theta)\)</span>.</p>
+<p>For the purpose of this course we essentially just need the concept of maximum likelihood, and will not be deriving any solutions to maximum likelihood problems. However you will encounter optimisation as a topic in your <em>Foundations of Data Science and AI</em> module (and those on the MSc stats will be very familiar with the concept already).</p>
+</div>
+</div>
+<div id="multivariate-random-variables-and-dependence" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Multivariate Random Variables and Dependence<a href="background.html#multivariate-random-variables-and-dependence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Although much of what we have already seen translates directly to the multivariate context, it has certainly been from the perspective that realisations of random variables are numbers, and not vectors (or even more elaborately structured objects).</p>
+<p>As we now get closer to studying our main topic for this module, that of predictive modelling, it becomes important to think more in depth about how multiple (random) variables may be dependent on one another. Although we have at least considered <em>whether or not there is a relationship at all</em>, i.e. are random variables independent or not, we have not seen how we may describe or quantify the relationships between them when they are present.</p>
+<p>When speaking about only a few random variables we may name them specifically, e.g. <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in the case of two, but when we want to be more general we may talk about <em>multivariate</em> random variables as <em>random vectors</em> of the form <span class="math inline">\(X = (X_1, X_2, ..., X_p)^\top\)</span>. That is <span class="math inline">\(X\)</span> is just a list of <span class="math inline">\(p\)</span> separate random variables. Unlike when we spoke about a random sample <span class="math inline">\(X_1, X_2, ..., X_n\)</span> however, we make no assumptions that the different entries in <span class="math inline">\(X\)</span> have the same distribution, and certainly not that they are independent.</p>
+<div id="joint-and-conditional-distributions" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Joint and Conditional Distributions<a href="background.html#joint-and-conditional-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Just as we had probability mass and density functions for single random variables, we have analogous functions in the context of multivariate random variables. For example, if we are in the general setting of a random vector <span class="math inline">\(X\)</span>, if all of the elements in <span class="math inline">\(X\)</span> are discrete then the <em>joint</em> probability mass function is given by <span class="math display">\[
+p_X(\x) = P(X_1 = x_1, ..., X_p = x_p) = P(X_1 = x_1 \cap \ ... \ \cap X_p = x_p),
+\]</span> where we distinguish numbers <span class="math inline">\(x\)</span> from vectors <span class="math inline">\(\x = (x_1, ..., x_p)^\top\)</span> by faint vs bold font. The same rules (summing to one and being non-negative) apply here as they did for single (univariate) random variables.</p>
+<p>When we wish to speak about the <em>conditional distribution</em> of one entry (or even multiple entries) in <span class="math inline">\(X\)</span>, given values for the others, the same rules as we had for conditional probability apply, i.e.</p>
+<p><span class="math display">\[\begin{align*}
+p_{X_i|X_{-i}}(x_i|\x_{-i}) &amp;= P(X_i = x_i|X_1=x_1, ..., X_{i-1}=x_{i-1}, X_{i+1}=x_{i+1}, ..., X_p=x_p)\\
+&amp;= \frac{P(X_1=x_1, ..., X_p=x_p)}{P(X_1=x_1, ..., X_{i-1}=x_{i-1}, X_{i+1}=x_{i+1}, ..., X_p=x_p)}\\
+&amp;= \frac{P(X=\x)}{P(X_{-i}=\x_{-i})}\\
+&amp;= \frac{p_X(\x)}{p_{X_{-i}}(\x_{-i})}
+\end{align*}\]</span></p>
+<p>In the above we’ve used the subscript <span class="math inline">\(_{-i}\)</span> to mean “all except index <span class="math inline">\(i\)</span>”.</p>
+<p>Similarly if all entries in <span class="math inline">\(X\)</span> are continuous then we have joint and conditional density functions, which have analogous interpretations. That is, although we don’t think about probabilities specifically when thinking about density functions we can intuit the density <span class="math inline">\(f_X(\x)\)</span> as capturing the <em>relative likelihood/probability</em> of “seeing <span class="math inline">\(X\)</span> close to <span class="math inline">\(\x\)</span>”.</p>
+<p>In more complex situations we have have the situation where some of the entries in <span class="math inline">\(X\)</span> are discrete and others continuous, and all the intuitive interpretations carry over.</p>
+</div>
+<div id="moments-of-multivariate-random-variables" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Moments of Multivariate Random Variables<a href="background.html#moments-of-multivariate-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The mean of a vector random variable is also a vector, and is simply equal to the vector of means of each of the entries. That is</p>
+<p><span class="math display">\[
+E[X] = (E[X_1], E[X_2], ..., E[X_p])^\top = (\mu_{X_1}, ..., \mu_{X_p})^\top = \mu_X.
+\]</span> When talking about the “variance” of a multivariate random variable then we need to be precise about what we mean. Certainly the vector <span class="math inline">\((\sigma^2_{X_1}, ..., \sigma^2_{X_p})\)</span> has meaning and is relevant. However when we talk the “square” of a vector <span class="math inline">\(\x\)</span> we typically mean either the <em>inner or outer product</em> of <span class="math inline">\(\x\)</span> with itself. However since some of you will not be familiar with these terms, we will simply describe the meaning of that with which we typically describe the second moment of a vector random variable, called the <em>variance-covariance matrix</em> (or simply <em>covariance matrix</em>): <span class="math display">\[
+\Sigma_X = Cov(X) = E\left[(X-\mu_X)(X-\mu_X)^\top\right].
+\]</span> This is the <span class="math inline">\(p\times p\)</span> matrix (like a square table of numbers) and in the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column we have the quantity <span class="math inline">\(E\left[(X_i-\mu_{X_i})(X_j-\mu_{X_j})\right]\)</span>, which is the covariance between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span>.</p>
+<ul>
+<li><p>Note that the covariance of a random variable with itself is just its variance</p></li>
+<li><p>A positive covariance suggests that <span class="math inline">\(X_i\)</span> tends to be large/small when <span class="math inline">\(X_j\)</span> is large/small</p>
+<ul>
+<li>By large/small we mean “well above/below their respective means”</li>
+<li>Why is this the case? If <span class="math inline">\(X_i &gt; \mu_{X_i}\)</span> tends to happen along with <span class="math inline">\(X_j &gt; \mu_j\)</span> and <span class="math inline">\(X_i &lt; \mu_{X_i}\)</span> tends to happen along with <span class="math inline">\(X_j &lt; \mu_{X_j}\)</span> then the terms <span class="math inline">\((X_i-\mu_{X_i})(X_j-\mu_{X_j})\)</span> are usually either positive times positive and negative times negative, i.e., are positive.</li>
+</ul></li>
+<li><p>On the other hand if <span class="math inline">\(X_i\)</span> tends to be large/small when <span class="math inline">\(X_j\)</span> is small/large, then terms in the product are usually one positive and one negative, leading to negative covariance.</p></li>
+</ul>
+</div>
+<div id="measures-of-dependence" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Measures of Dependence<a href="background.html#measures-of-dependence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Although the sign of the covariance gives an indication that there may be a positive/negative relationship between two random variables, it does not on its own give a sense of how strong the relationship is. The reason for this is that it depends on the <em>scale</em> of the random variables.</p>
+<p>In the following <code>x</code> and <code>y</code> are very weakly related to and have a large covariance, whereas <code>w</code> and <code>z</code> are very strongly related to one another but have a comparatively minuscule covariance.</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="background.html#cb338-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb338-2"><a href="background.html#cb338-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">100</span>)</span>
+<span id="cb338-3"><a href="background.html#cb338-3" tabindex="-1"></a></span>
+<span id="cb338-4"><a href="background.html#cb338-4" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="fl">0.1</span>)</span>
+<span id="cb338-5"><a href="background.html#cb338-5" tabindex="-1"></a>z <span class="ot">&lt;-</span> w <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="fl">0.05</span>)</span>
+<span id="cb338-6"><a href="background.html#cb338-6" tabindex="-1"></a></span>
+<span id="cb338-7"><a href="background.html#cb338-7" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb338-8"><a href="background.html#cb338-8" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Covariance = &quot;</span>, <span class="fu">round</span>(<span class="fu">cov</span>(x, y), <span class="dv">4</span>)))</span>
+<span id="cb338-9"><a href="background.html#cb338-9" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Covariance = &quot;</span>, <span class="fu">round</span>(<span class="fu">cov</span>(w, z), <span class="dv">4</span>)))</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-136-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>Correlation</strong></p>
+<p>The <em>correlation</em> between two random variables is a direct standardisation of the covariance to account for their scale. Specifically the correlation between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by <span class="math inline">\(\rho_{X, Y} = \frac{Cov(X, Y)}{\sigma_X\sigma_Y}\)</span>. Correlation lies between -1 and 1 with values below -0.9 or above 0.9 indicating a very strong <em>linear</em> relationships between the two variables, and anything between about -0.2 and 0.2 suggesting no substantial (linear) relationship is present. Intermediate values indicate some relationship and the relationship gets stronger the closer to -1 or 1 the correlation gets.</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="background.html#cb339-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb339-2"><a href="background.html#cb339-2" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x, y), <span class="dv">4</span>)))</span>
+<span id="cb339-3"><a href="background.html#cb339-3" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(w, z), <span class="dv">4</span>)))</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-137-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>(Normalised) Mutual Information</strong></p>
+<p>Correlation captures linear dependence between random variables extremely well. However, it is possible for two variables to be extremely highly dependent on one another and yet have a correlation of zero.</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="background.html#cb340-1" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb340-2"><a href="background.html#cb340-2" tabindex="-1"></a>v <span class="ot">&lt;-</span> u<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> .<span class="dv">1</span>)</span>
+<span id="cb340-3"><a href="background.html#cb340-3" tabindex="-1"></a><span class="fu">plot</span>(u, v, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(u, v), <span class="dv">4</span>)))</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-138-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in the above is zero at a population level, but because of the randomness in the samples <code>x</code> and <code>y</code> the sample correlation is slightly off zero.</p>
+<p>The <em>mutual information</em> (MI) quantifies the amount of shared “information” is in two random variables. We will not go into information theory in any explicit form, but rather introduce the mutual information only for illustrative purposes. Just like covariance mutual information depends on the scale of the random variables, and various normalised versions of mutual information have been proposed. We will simply use a normalisation which first standardises each of the variables by its standard deviation, i.e. <span class="math inline">\(MI(X/\sigma_X, Y/\sigma_Y)\)</span>. Let’s use the <code>mutinfo</code> function in the package <code>FNN</code> to compute mutual information:</p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="background.html#cb341-1" tabindex="-1"></a><span class="do">### Start by loading the library</span></span>
+<span id="cb341-2"><a href="background.html#cb341-2" tabindex="-1"></a><span class="fu">library</span>(FNN)</span>
+<span id="cb341-3"><a href="background.html#cb341-3" tabindex="-1"></a></span>
+<span id="cb341-4"><a href="background.html#cb341-4" tabindex="-1"></a><span class="do">### Now let&#39;s look at all three pairs we generated before</span></span>
+<span id="cb341-5"><a href="background.html#cb341-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb341-6"><a href="background.html#cb341-6" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(x<span class="sc">/</span><span class="fu">sd</span>(x), y<span class="sc">/</span><span class="fu">sd</span>(y)), <span class="dv">4</span>)))</span>
+<span id="cb341-7"><a href="background.html#cb341-7" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(w<span class="sc">/</span><span class="fu">sd</span>(w), z<span class="sc">/</span><span class="fu">sd</span>(z)), <span class="dv">4</span>)))</span>
+<span id="cb341-8"><a href="background.html#cb341-8" tabindex="-1"></a><span class="fu">plot</span>(u, v, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(u<span class="sc">/</span><span class="fu">sd</span>(u), v<span class="sc">/</span><span class="fu">sd</span>(v)), <span class="dv">4</span>)))</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-139-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Although the (normalised) mutual information is able to capture dependence which is not linear, it cannot describe the nature of the relationship (like positive/negative correlation).</p>
+<p>We can see that the mutual information estimated from <code>x</code> and <code>y</code> is very close to zero and the linearly dependent <code>z</code> and <code>w</code> have a normalised mutual information close to one. The estimated normalised mutual information from <code>u</code> and <code>v</code> is much higher still, even though their correlation is very close to zero.</p>
+</div>
+</div>
+<div id="summary-3" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Summary<a href="background.html#summary-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Probability provides a mathematical framework for understanding the properties of chance events, and random variables allow us to transform the outcomes of these chance events into numbers so that we can use the well explored algebra of the real numbers to even better understand them</p></li>
+<li><p>By treating a sample of data as realisations of a random variable, we can then use the theory of probability and random variables in order to (theoretically) quantify things like estimation uncertainty</p>
+<ul>
+<li><p>Estimation is the task of using the observations in a sample in order to obtain plausible values of population parameters</p></li>
+<li><p>Confidence intervals provide an explicit communication of estimation uncertainty</p></li>
+<li><p>The central limit theorem and the bootstrap are practical ways of approximating confidence intervals and for quantifying estimation uncertainty</p></li>
+</ul></li>
+<li><p>We can study the relationships between different variables in our data by treating each observation as a random vector (multivariate random variable).</p></li>
+</ul>
+</div>
+<div id="exercises-4" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Exercises<a href="background.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>The <code>runif(n, min, max)</code> function will generate <code>n</code> random numbers which are uniformly distributed on the interval <code>min</code> to <code>max</code> (i.e. each realisation is equally likely at every value between <code>min</code> and <code>max</code>).</p>
+<ul>
+<li><p>Write a function which will generate <code>n</code> random vectors which are uniformly distributed in the rectangle with corners <code>(x_min, y_min)</code>, <code>(x_min, y_max)</code>, <code>(x_max, y_max)</code>, <code>(x_max, y_min)</code>.</p></li>
+<li><p>Generate <code>n</code> random</p></li>
+</ul></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Redo the bootstrap but using apply</li>
+<li>Run the bootstrap many times to see the coverage of the CI</li>
+<li>Describe and do the “t” bootstrap</li>
+<li>Bootstrap dependence?</li>
+</ol>
+<ul>
+<li><p>When we cover the main topic of this module, predictive modelling, we will be interested in modelling the dependence between random variables so that we can use these models to “predict” likely values of one of them, given values for the other(s). It may therefore be useful to actually try to ascertain whether there is a relationship at all, since otherwise trying to model the relationship is actually a fruitless endeavour. <em>Permutation tests</em> are ways of assessing whether or not a relationship is actually present or not.</p>
+<ul>
+<li></li>
+</ul></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="working-with-data-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fundamentals1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

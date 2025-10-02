@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 The Fundamentals of Predictive Modelling I | Introduction to R</title>
+  <meta name="description" content="4 The Fundamentals of Predictive Modelling I | Introduction to R" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 The Fundamentals of Predictive Modelling I | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 The Fundamentals of Predictive Modelling I | Introduction to R" />
+  
+  
+  
+
+<meta name="author" content="David P. Hofmeyr" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="background.html"/>
+<link rel="next" href="fundamentals2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#background-on-r"><i class="fa fa-check"></i><b>1.1</b> Background on R</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-rstudio"><i class="fa fa-check"></i><b>1.2</b> Getting started with RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statements-expressions-and-objects"><i class="fa fa-check"></i><b>1.3</b> Statements, expressions and objects</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plots"><i class="fa fa-check"></i><b>1.4</b> Basic plots</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R scripts</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>1.6</b> R markdown</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.7</b> Functions</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#s:0help"><i class="fa fa-check"></i><b>1.8</b> Getting Help</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loops-and-flow"><i class="fa fa-check"></i><b>1.9</b> Loops and Flow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-frames"><i class="fa fa-check"></i><b>2.1</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>2.2</b> Importing and Exporting Data</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-plotting"><i class="fa fa-check"></i><b>2.3</b> Data Plotting</a></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#exercises-3"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>3</b> Statistical Background</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="background.html"><a href="background.html#probability-basics"><i class="fa fa-check"></i><b>3.1</b> Probability Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="background.html"><a href="background.html#random-variables"><i class="fa fa-check"></i><b>3.2</b> Random Variables</a></li>
+<li class="chapter" data-level="3.3" data-path="background.html"><a href="background.html#samples-and-statistical-modelling"><i class="fa fa-check"></i><b>3.3</b> Samples and Statistical Modelling</a></li>
+<li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
+<li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
+<li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fundamentals1.html"><a href="fundamentals1.html#two-archetypal-problems"><i class="fa fa-check"></i><b>4.1</b> Two Archetypal Problems</a></li>
+<li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
+<li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
+<li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-and-take-aways"><i class="fa fa-check"></i><b>4.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fundamentals2.html"><a href="fundamentals2.html#a-quick-recap"><i class="fa fa-check"></i><b>5.1</b> A Quick Recap</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals2.html"><a href="fundamentals2.html#overfitting"><i class="fa fa-check"></i><b>5.2</b> Overfitting</a></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-and-take-aways-1"><i class="fa fa-check"></i><b>5.5</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear.html"><a href="linear.html#the-linear-model"><i class="fa fa-check"></i><b>6.1</b> The Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-and-take-aways-2"><i class="fa fa-check"></i><b>7.3</b> Summary and Take-aways</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonparametric Smoothing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
+<li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
+<li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-4"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
+<li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-and-take-aways-3"><i class="fa fa-check"></i><b>10.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fundamentals1" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> The Fundamentals of Predictive Modelling I<a href="fundamentals1.html#fundamentals1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="math display">\[
+\def\x{\mathbf{x}}
+\def\Rr{\mathbb{R}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\def\F{\mathcal{F}}
+\def\hbbeta{\hat{\boldsymbol{\beta}}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\X{\mathbf{X}}
+\def\y{\mathbf{y}}
+\]</span></p>
+<p>In the last chapter we discussed how multiple random variables may be dependent on one another, as
+well as some ways to quantify the strength of dependence.</p>
+<p>So far, however, none of the variables had any special “importance” over
+the others.</p>
+<p>We now turn to our main focus for this module, where we are particularly
+interested in using the dependence between variables in order to predict
+likely/reasonable values for a specific one of them, often called the
+<em>response variable</em>.</p>
+<ul>
+<li><p>We will denote the response variable by <span class="math inline">\(Y\)</span>, and all <span class="math inline">\(p\)</span> other
+variables are grouped as <span class="math inline">\(X = (X_1, X_2, ..., X_p)\)</span>, and are
+referred to as a vector of <em>covariates</em>.</p></li>
+<li><p>We would like to use a sample of observations of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> in
+order to <em>estimate a function</em>, into which we can put new values for
+the covariates and obtain a prediction for what the response might
+be.</p></li>
+<li><p>The response is sometimes called the <em>dependent</em> variable or
+<em>target</em> variable, while the covariates may be referred to as
+<em>predictors</em>.</p></li>
+</ul>
+<p>A fundamental point worth making is that we generally cannot expect the
+covariates to “explain” absolutely everything about the response</p>
+<ul>
+<li><p>Example: We may wish to predict a person’s lifespan (the response
+variable, <span class="math inline">\(Y\)</span>) given their current age, blood pressure, BMI, whether
+they have diabetes, etc. (our covariates, <span class="math inline">\(X\)</span>)</p>
+<ul>
+<li><p>But we do not assume that everyone who is 47 years old; has BP
+128/83 and BMI 27.2 and is not diabetic will survive for exactly
+the same amount of time</p></li>
+<li><p>Rather, there is a <em>distribution</em> of lifespans for people with
+these characteristics: the <em>conditional distribution of</em> <span class="math inline">\(Y\)</span>
+given <span class="math inline">\(X\)</span></p></li>
+</ul></li>
+</ul>
+<p>Predictive modelling is therefore about estimating functions which
+capture features of the conditional distribution(s) of <span class="math inline">\(Y|X\)</span></p>
+<ul>
+<li>E.g. these could be the most likely outcome, or the expected value
+(i.e., mean) of the outcome</li>
+<li>In more complex examples we may wish to estimate the entire
+conditional distribution(s) of <span class="math inline">\(Y|X\)</span>, which would allow us to answer
+very detailed questions. As with everything, however, there is a
+cost, and the more detail we want to estimate about a distribution
+the more variance we have to accept in our estimator</li>
+</ul>
+<div id="two-archetypal-problems" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Two Archetypal Problems<a href="fundamentals1.html#two-archetypal-problems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Just as we distinguished discrete and continuous random variables, so
+too is it necessary to distinguish between what are the two archetypal
+predictive modelling problems</p>
+<ul>
+<li><p><em>Regression</em> typically refers to the context where the response
+variable is numeric</p>
+<ul>
+<li>Some would argue that all predictive modelling is a form of
+regression, but we will use this term to refer to the “standard”
+regression problem, where we assume the response variable takes
+on numeric values, usually continuous over some range.</li>
+</ul></li>
+<li><p><em>Classification</em> refers to the context where the response variable
+is <em>categorical</em></p>
+<ul>
+<li><p>Categorical variables take on a finite set of values, and
+typically we do not assume there is any ordering of categories</p></li>
+<li><p>Typical examples include demographic characteristics like
+gender, race, etc.</p></li>
+<li><p>Categorical variables are discrete, but even if we happen to
+name the categories as 1, 2 and 3 (for example) we do not
+necessarily interpret these as numbers in the real sense, since
+we can’t, for example, add two instances of category one and get a category two</p></li>
+<li><p>Although we do not treat categories as numbers, whether we name
+them with the names of numbers or not, in some contexts it is
+sensible to invoke an ordering on categories</p>
+<ul>
+<li>For example we may wish to predict the grades (A, B, C,
+etc.) of statistics students. It is sensible to say “A is
+better than B is better than C” etc., but we still cannot
+add two B’s to get some other grade</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>We will start by focusing primarily on regression, as some of the
+fundamental principles associated with predictive modelling are most
+easily communicated in the regression context.</p>
+<p><strong>A Simple Example: Car Stopping Distances</strong></p>
+<p>The <code>cars</code> data set (included in R’s base distribution) contains
+information documenting the distance needed to bring a car to halt (in
+feet) for a variety of different initial speeds (in miles per hour,
+mph).</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="fundamentals1.html#cb342-1" tabindex="-1"></a><span class="fu">data</span>(cars, <span class="at">package =</span> <span class="st">&quot;datasets&quot;</span>)</span>
+<span id="cb342-2"><a href="fundamentals1.html#cb342-2" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-140-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Unsurprisingly the distance needed to stop a car increases with speed.
+Unsurprisingly, also, there is variability in the distances even for the
+same initial speeds. This would be the case even for the same drivers
+and the same models of car, due to variations in temperature, road
+surface, etc.</p>
+<p>In the interest of safety we may wish to model this relationship, so
+that drivers may be aware of, for example, appropriate following
+distances depending on speed.</p>
+<p>The function <code>lm(formula, data)</code> will fit the “line of best fit” to
+these data. A <code>formula</code> object in R has the form <code>y~x1 + x2 + …</code> where
+here <code>y</code> is the name of the response variable within the data frame
+argument <code>data</code>, and <code>x1</code> etc. are the names of the covariates we want
+to include in our model. Here we only have a single covariate <code>speed</code>.</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="fundamentals1.html#cb343-1" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span>speed, <span class="at">data =</span> cars)</span>
+<span id="cb343-2"><a href="fundamentals1.html#cb343-2" tabindex="-1"></a>model</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Coefficients:
+## (Intercept)        speed  
+##     -17.579        3.932</code></pre>
+<p>Printing the model shows that the line of best fit has an intercept at
+-17.579 and a slope of 3.932. We can add this line to our plot using the
+function <code>abline</code></p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="fundamentals1.html#cb345-1" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb345-2"><a href="fundamentals1.html#cb345-2" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-142-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Although the model does a reasonable job capturing the trend of the
+relationship, it has some obvious limitations. For one, it has a
+negative intercept and yet we know that distances must be non-negative.
+There are multiple ways to ensure we do not obtain such a result. Note
+that the intercept corresponds with the predicted value when all
+covariates are equal to zero. In the current example it should be clear
+that if the speed is zero (i.e. the car is not moving) then the distance
+needed to stop is also zero. We can force R to set the intercept to zero
+by modifying the formula as <code>y~0 + x1 + x2 +…</code> :</p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="fundamentals1.html#cb346-1" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>speed, <span class="at">data =</span> cars)</span>
+<span id="cb346-2"><a href="fundamentals1.html#cb346-2" tabindex="-1"></a>model0</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ 0 + speed, data = cars)
+## 
+## Coefficients:
+## speed  
+## 2.909</code></pre>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="fundamentals1.html#cb348-1" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb348-2"><a href="fundamentals1.html#cb348-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, model0<span class="sc">$</span>coefficients)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-144-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>It may be clear to you that the first model “looks better”. The line
+fits closer to the data points, on average. This is because the first
+model (despite giving some negative predictions) was allowed to <em>choose</em>
+the “best” value for the intercept, whereas the second model did not
+have such a choice. The first model had one extra <em>degree of freedom</em>,
+and is a <em>more flexible model</em>.</p>
+<p>It is worth considering what the purpose of this modelling problem is,
+however. Given that we may be more concerned about stopping distances
+for <em>high</em> speeds, a model which gives negative predictions for <em>small</em>
+speeds may not be a problem if it is more accurate over the sorts of
+values we really care about. Recall that models do not have to be
+“right” in order to be useful.</p>
+</div>
+<div id="some-preliminaries" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Some Preliminaries<a href="fundamentals1.html#some-preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This is an appropriate place to pause briefly, before we continue to
+learn more about how to <em>fit</em> and assess predictive models, as there are
+important components of the “predictive modelling pipeline” which
+precede these phases.</p>
+<p>However, as these are not the main focus of the module, and most of
+these are covered elsewhere in your degrees, we will only cover these
+superficially here. It is also the case that some of the reasons for
+<em>why</em> things are done the way they are will not be clear until we cover
+material which comes later on in the module.</p>
+<div id="problem-objectives" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Problem Objectives<a href="fundamentals1.html#problem-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It is crucial to be aware of what the problem to be addressed actually
+is, as well as what a “success” means in this context. This should
+inform which sort of models we might wish to consider, as well as which
+criteria we should use to select a final model (or models).</p>
+<p>In the previous example whether we would have preferred the first or
+second model would have depended on whether we needed the model to
+appropriately “respect” physical laws (like not giving negative
+predictions for a distance) or whether we were willing to concede some
+“impossible” predictions for better accuracy “where it matters”.</p>
+<p>It is hopefully clear that we want a predictive model to at least fairly
+accurately predict the target variable. However in some circumstances we
+may care more about <em>why</em> a model is giving the predictions it is.</p>
+<ul>
+<li>Let’s return to our diabetes example. It is undeniable that being
+able to predict whether someone is likely to develop type II
+diabetes is a useful thing. However, unless we are able to also
+propose interventions which can reduce this risk for high risk
+individuals, such information becomes less useful.</li>
+</ul>
+<p>Some models have a fairly simple “structure”, in that the way they
+capture the relationships between the covariates and the response are
+easy to understand and sometimes quantify. We typically use the word
+“interpretable” in this context.</p>
+<p>Although there are certainly many exceptions to this, it is <em>generally</em>
+the case that the more flexible/complex models (which are less
+interpretable) are able to provide more accurate predictions. As with
+everything, there is a trade-off.</p>
+</div>
+<div id="data-acquisition" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Data Acquisition<a href="fundamentals1.html#data-acquisition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Historically statisticians would design experiments with a particular
+goal in mind, and then subsequently have to go out “into the field” to
+collect their own data, which would allow them to address the problem
+they face. In this way the data could be gathered in a way which made
+them as amenable as possible to analysis; avoiding any deviations from
+what we previously referred to as “our modelling assumptions”.
+This <em>experimental design</em> remains extremely important, and necessary in fields
+like medicine and pharmaceuticals. However, these days many
+statisticians and data scientists working in industry will never
+actually be involved in the data collection process, nor in the design of the procedure by which the data are collected. More often data are
+“just collected” because “companies know that data are extremely
+valuable”. Very often the problems to be addressed, or experiments to
+conduct, or analyses to be done, only arise long after the data have
+been collected.</p>
+<p>Nonetheless it is very important to be aware (wherever possible) of how
+data have been obtained as this will allow one to assess whether/which
+modelling assumptions are reasonable. It is also important to be aware
+of potential pitfalls associated with such instances. One important
+consideration is that one should not use the same data in order to
+decide on your problem objectives AND to perform the subsequent analysis
+unless one knows and fully understands the potential implications</p>
+<ul>
+<li>This is a form of what is known as <em>data leakage</em>, and can lead to
+substantial bias and poor decisions.</li>
+</ul>
+</div>
+<div id="exploratory-data-analysis" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Exploratory Data Analysis<a href="fundamentals1.html#exploratory-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once the data have been collected, there is typically an initial
+<em>inspection</em>, often referred to as Exploratory Data Analaysis (EDA).
+There are two types of EDA (i) an initial superficial inspection of data
+types, data integrity issues, and at most checking univariate statistics
+associated with the variables; and (ii) more in-depth inspection which
+may include checking relationships between variables, choosing potential
+transformations, checking for “outliers”, etc.</p>
+<p>The more in-depth type of EDA should more appropriately be paired with the actual modelling phase, and should respect the boundaries associated with <em>data splitting</em>, which we come to in the next chapter. For now we only consider the initial EDA, briefly.</p>
+<div id="initial-eda" class="section level4 hasAnchor" number="4.2.3.1">
+<h4><span class="header-section-number">4.2.3.1</span> Initial EDA<a href="fundamentals1.html#initial-eda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The initial EDA is in place primarily to “get a feel for the data”, and
+to ensure they can actually be processed appropriately by the software
+we are choosing to use. This may include</p>
+<ul>
+<li><p>Checking the types of variables:</p>
+<ul>
+<li><p>How many numeric variables do I have, and how many categorical
+variables?</p></li>
+<li><p>Are categorical variables nominal or ordinal?</p></li>
+<li><p>Are categories within nominal variables all well enough
+represented, or are there some categories which only arise in
+one or a few data points?</p></li>
+</ul></li>
+<li><p>Checking data integrity:</p>
+<ul>
+<li><p>Are there any obvious erroneous data points? For example
+distances/volumes/etc. which have negative values.</p></li>
+<li><p>Are there <em>missing data</em>? It is common that data sets have some
+entries which are missing, and handling missing data is an
+entire field of statistics. Missing data can simply be due to
+human (or digital) error in data capturing, but are also common
+in survey data where respondents may either not have information
+relevant to some questions or may <em>choose to withhold</em> that
+information.</p></li>
+</ul></li>
+<li><p>Univariate statistics:</p>
+<ul>
+<li><p>Simple summary statistics, like five-number-summaries, etc:
+These may highlight data integrity issues, such as implausible or impossible values.</p></li>
+<li><p>Histograms: All other things being equal, numeric variables
+whose distributions are at least roughly symmetric and unimodal
+(have a single maximum or maximal region) are more amenable to
+analysis and inclusion in predictive models than very skewed
+ones. Sometimes simple transformations of variables which lead to “nicer” marginal distributions is beneficial.</p></li>
+</ul></li>
+</ul>
+<p>Initial EDA should be fairly superficial, and in fact if not there is a
+risk of <em>over analysis</em> which can lead to problematic data leakage.
+Ultimately the initial EDA should ideally only be for checking data
+integrity and useability, and should <em>not</em> include steps which
+investigate the relationships between the covariates and the response.</p>
+<p>We will cover some of the basic EDA tasks in the context of practical
+examples later on.</p>
+</div>
+</div>
+<div id="data-cleaning-and-pre-processing" class="section level3 hasAnchor" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Data Cleaning and Pre-processing<a href="fundamentals1.html#data-cleaning-and-pre-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Based on the outcomes of the EDA, we then go on to perform any tasks
+which are deemed important either to be able to process/handle the data,
+or to appropriately model the relationships therein.</p>
+<p>Common steps include</p>
+<ul>
+<li><p>Imputation of missing entries: As mentioned previously handling
+missing data is itself a broad field, and we will not go into much
+depth on the topic.</p></li>
+<li><p>Removal of “problematic” cases: Some models are very sensitive (i.e. not
+<em>robust</em>) to observations which are far removed from the rest, or
+which don’t respect the general relationships between the variables among the
+other observations.</p>
+<ul>
+<li>Removal of observations is a controversial topic, and ultimately
+it is down to the person conducting the modelling whether to
+remove points or to modify the model to make it more robust to
+these cases.</li>
+</ul></li>
+<li><p>Scaling: Some models are sensitive to the scale on which covariates
+are measured/captured. What this means is that, unless appropriately
+scaled to have similar overall variation, the variables which have
+larger scale will have a greater influence on the model purely by
+nature of how they were captured and not because they are
+intrinsically important to the prediction task.</p></li>
+</ul>
+<p><strong>Categorical Covariates and Dummy Variables</strong></p>
+<p>Because of the frequency with which categorical covariates arise in practice is so high, and the potentially very misleading results which could arise if we incorrectly handle them, we will look in a little bit of depth at the pre-processing needed to handle them.</p>
+<p>Although we spoke about the distinction between regression and classification when the <em>response</em> variable is either numeric or categorical, many models in their standard formulation do not handle categorical covariates directly.</p>
+<ul>
+<li><p>It should be pointed out that we can “force the issue” artificially by naming our categories with numbers, and then treating the categorical variables as though they are numeric. This will not stop R from processing the data as instructed, however it should be clear that this is inappropriate, not least of all because by treating the categories as numbers we are imposing some ordering on them which may be totally inappropriate.</p>
+<ul>
+<li>For example: If we had data related to difference species of animal and one of our covariates described the family of species as, e.g. feline, canine and ovine, then if we decided to encode these as <code>feline = 1</code>, <code>canine = 2</code> and <code>ovine = 3</code>, if we treated these as numbers we would be saying that a cat plus a sheep is equal to two dogs!</li>
+</ul></li>
+<li><p>It is also worth pointing out that in some case categorical variables will have been stored as numeric and we have to convert these to categorical in order for R to “do the right thing”. We will encounter some instances of this as we go forward.</p></li>
+</ul>
+<p>The most common approach for handling categorical variables is with the use of <em>dummy variables</em>. Specifically, suppose one of the covariates, say <span class="math inline">\(X_j\)</span>, is a categorical variable with <span class="math inline">\(K\)</span> different categories. To capture the information in this variable we can replace <span class="math inline">\(X_j\)</span> with <span class="math inline">\(K-1\)</span> 0/1 (binary) variables so that if an observation of <span class="math inline">\(X_j\)</span> is in the <span class="math inline">\(k\)</span>-th category (for <span class="math inline">\(k = 1, ..., K-1\)</span>) we set all of these 0/1 variables except the <span class="math inline">\(k\)</span>-th equal to zero, and the <span class="math inline">\(k\)</span>-th equal to one. And if the observation is in category <span class="math inline">\(K\)</span> we simply set them all to zero.</p>
+<p>Hopefully it can be seen that the information in these <span class="math inline">\(K-1\)</span> dummy variables is equivalent to the single categorical variable since we can easily recreate each perfectly from the other. It should also be clear that encoding the data in this way does not impose any ordering on the categories.</p>
+</div>
+<div id="feature-engineering-and-transformation" class="section level3 hasAnchor" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> Feature Engineering and Transformation<a href="fundamentals1.html#feature-engineering-and-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In some situations the data are not in an appropriate format for
+modelling using standard approaches. For example <em>longitudinal data</em>
+include measurements taken over time, and the timing and number of
+measurements may differ by individual. Other examples include image and
+text data, which do not fit the format of a response variable <span class="math inline">\(Y\)</span> and a
+vector of covariates <span class="math inline">\(X\)</span>, a format typically referred to as “tabular data”.</p>
+<p>Historically <em>feature engineering</em>, that is the derivation of covariates
+from either multiple other covariates or these “non-standard” data
+formats, was frequently achieved using domain knowledge or common sense
+approaches. The advent of neural networks, which build the feature
+engineering into the model training process, however, has utlimately
+eclipsed these “manual” approaches in many contexts.</p>
+</div>
+</div>
+<div id="model-training" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Model Training<a href="fundamentals1.html#model-training" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>From the point of view of statistical learning, the primary topics of
+interest relate to the tasks of model training and model selection. These are strongly related topics, and we cover the basics of training from the point of view of regression in this chapter. Training is a term which emerged in the machine learning literature, which ultimately refers to the process of estimating, or fitting a predictive model.</p>
+<div id="regression" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Regression<a href="fundamentals1.html#regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For simplicity we focus, for now, on the context where <span class="math inline">\(Y\)</span> is a numeric
+variable, and the problem of predicting <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span> is called
+regression.</p>
+<p>Since we cannot expect <span class="math inline">\(X\)</span> to explain everything about <span class="math inline">\(Y\)</span>, we typically
+describe the relationship between them via the regression equation: <span class="math display">\[
+  Y = g^*(X) + \epsilon,
+\]</span> where <span class="math inline">\(g^*\)</span> is the “true” regression function and <span class="math inline">\(\epsilon\)</span> is
+called the <em>residual</em> and characterises what <span class="math inline">\(X\)</span> does not
+explain/capture about <span class="math inline">\(Y\)</span></p>
+<p>Statistically we treat <span class="math inline">\(\epsilon\)</span> as a random variable, and assume that
+it has mean zero (<span class="math inline">\(E[\epsilon] = 0\)</span>) and is independent of <span class="math inline">\(X\)</span></p>
+<ul>
+<li><p>When <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(X\)</span> are not independent, for example the
+variance of the residual may be different for different <span class="math inline">\(X\)</span>, we can
+sometimes transform <span class="math inline">\(Y\)</span> (and hence <span class="math inline">\(\epsilon\)</span>) in such a way that
+they become closer to independent</p>
+<ul>
+<li>Recall: “all models are wrong, but some are useful”</li>
+</ul></li>
+<li><p>Note that <span class="math inline">\(E[\epsilon] = 0 \Rightarrow E[Y|X] = g^*(X)\)</span>. That is, the function <span class="math inline">\(g^*(X)\)</span> captures the <em>conditional expectation of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span>.</em></p></li>
+<li><p>In fact very often we make the further assumption that <span class="math inline">\(\epsilon\)</span> has a normal distribution.</p>
+<ul>
+<li>Why might a normal distribution be a reasonable assumption? One way to think of the reason why we have a residual term at all, i.e. why the covariates don’t explain absolutely everything about <span class="math inline">\(Y\)</span>, is simply that there are other factors which contribute to the variation in the values of <span class="math inline">\(Y\)</span> which we have not measured (i.e. factors which are not included in the covariates we actually have). If we think of the residual as being the sum of all the contributions from these <em>unmeasured factors</em>, and we know that summing random variables together often results in a roughly normal distribution, we can see that the treating the overall effect of these unmeasured factors as normally distributed is not unreasonable. There are many other arguments, such as the fact that for fixed variance the normal distribution is the “most uncertain” in an information theory sense and it may be prudent to presume the least amount of knowledge about the residual; as well as the fact that mathematically the normal distribution is “nice to work with”.</li>
+</ul></li>
+</ul>
+<p><strong>A Simulated Example</strong></p>
+<p>The following piece of code simulates potential values of the response
+variable for pairing with values of a single covariate, <span class="math inline">\(X\)</span>, which are
+equally spaced on the interval <span class="math inline">\((0, 1)\)</span>, and where the regression
+equation is given by <span class="math display">\[
+Y = 1+4X-3X^2-X^3+2X^4 + \epsilon,
+\]</span> where <span class="math inline">\(\epsilon \sim N(0, 1/25)\)</span>. That is, the regression function
+<span class="math inline">\(g^*\)</span> is a degree four polynomial and the residual term is a normal
+random variable with standard deviation <span class="math inline">\(1/5\)</span>.</p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="fundamentals1.html#cb349-1" tabindex="-1"></a><span class="do">### The regression function, a degree 4 polynomial</span></span>
+<span id="cb349-2"><a href="fundamentals1.html#cb349-2" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb349-3"><a href="fundamentals1.html#cb349-3" tabindex="-1"></a></span>
+<span id="cb349-4"><a href="fundamentals1.html#cb349-4" tabindex="-1"></a><span class="do">### For now we will fix thiry values of X equally spaced</span></span>
+<span id="cb349-5"><a href="fundamentals1.html#cb349-5" tabindex="-1"></a><span class="do">### in the interval (0, 1)</span></span>
+<span id="cb349-6"><a href="fundamentals1.html#cb349-6" tabindex="-1"></a></span>
+<span id="cb349-7"><a href="fundamentals1.html#cb349-7" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span><span class="sc">/</span><span class="dv">31</span></span>
+<span id="cb349-8"><a href="fundamentals1.html#cb349-8" tabindex="-1"></a></span>
+<span id="cb349-9"><a href="fundamentals1.html#cb349-9" tabindex="-1"></a><span class="do">### We can simulate potential values for Y associated with</span></span>
+<span id="cb349-10"><a href="fundamentals1.html#cb349-10" tabindex="-1"></a><span class="do">### these, by adding residuals. We will simulate residuals</span></span>
+<span id="cb349-11"><a href="fundamentals1.html#cb349-11" tabindex="-1"></a><span class="do">### from a N(0, 1/25) distribution</span></span>
+<span id="cb349-12"><a href="fundamentals1.html#cb349-12" tabindex="-1"></a></span>
+<span id="cb349-13"><a href="fundamentals1.html#cb349-13" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(X) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">sd =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>)</span>
+<span id="cb349-14"><a href="fundamentals1.html#cb349-14" tabindex="-1"></a></span>
+<span id="cb349-15"><a href="fundamentals1.html#cb349-15" tabindex="-1"></a><span class="fu">plot</span>(X, y, <span class="at">xlab =</span> <span class="st">&#39;x&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">3.25</span>))</span>
+<span id="cb349-16"><a href="fundamentals1.html#cb349-16" tabindex="-1"></a></span>
+<span id="cb349-17"><a href="fundamentals1.html#cb349-17" tabindex="-1"></a><span class="do">### We can also add the line showing the true regression function</span></span>
+<span id="cb349-18"><a href="fundamentals1.html#cb349-18" tabindex="-1"></a></span>
+<span id="cb349-19"><a href="fundamentals1.html#cb349-19" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">length =</span> <span class="dv">100</span>), <span class="fu">g</span>(<span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">length =</span> <span class="dv">100</span>)), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-145-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>But the realisations of <span class="math inline">\(Y\)</span> could be different even if the values of <span class="math inline">\(X\)</span>
+didn’t change, since for each <span class="math inline">\(X\)</span> there is an entire distribution of
+<span class="math inline">\(Y|X\)</span>. If you re-run the code you will see a different set of potential
+realisations.</p>
+<div id="fitting-regression-models" class="section level4 hasAnchor" number="4.3.1.1">
+<h4><span class="header-section-number">4.3.1.1</span> Fitting Regression Models<a href="fundamentals1.html#fitting-regression-models" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In practice we have access to a sample of realisations of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>,
+<span class="math inline">\(\{(y_1, \mathbf{x}_1), (y_n, \mathbf{x}_n)\}\)</span>, and from this we want to
+<em>estimate</em> the regression function <span class="math inline">\(g^*\)</span></p>
+<ul>
+<li><p>In predictive modelling we often talk about <em>fitting</em> models, or in
+the machine learning context “training” them</p></li>
+<li><p>The sample of observations used to estimate/fit/train the model is
+often called the “training set”, and this terminology will become
+more important in the following chapter</p></li>
+</ul>
+<p>Estimating functions is, however, in general not as straightforward as
+estimating the parameters of a distribution.</p>
+<p>We need to first ask ourselves “what do we want from our model?”</p>
+<p>Ultimately we want to use our regression model in order to predict
+likely/appropriate values for the response: We would like for our
+predictions to be close to the actual values.</p>
+<ul>
+<li>Although the importance of interpretability of the model must in some contexts
+not be overlooked, a model which doesn’t actually predict the
+response accurately at all is not really modelling the
+relationships between the response and covariates appropriately, and
+hence the interpretations it offers may be meaningless.</li>
+</ul>
+<p>The first step is therefore to ensure that the predicted values for the
+responses in our <em>training set</em> are in general similar to their actual
+values</p>
+<ul>
+<li><p>If they aren’t then we couldn’t reasonably expect the predictions
+for new sets of covariates to be close to their corresponding
+responses</p>
+<ul>
+<li>We already know the values for <span class="math inline">\(Y\)</span> in our sample, and our
+ultimate goal is to use our model to obtain predictions on sets
+of covariates from other members of the population from which
+our sample came</li>
+</ul></li>
+</ul>
+<p>We thus seek to quantify how similar/dissimilar our predictions are
+to/from the actual values, by way of a <em>loss function</em>.</p>
+<p><strong>Some Notation:</strong></p>
+<p>Returning to the “hat” notation, we will refer to our fitted regression
+model/function as <span class="math inline">\(\hat g\)</span>, and for a specific prediction (i.e. for a
+fixed <span class="math inline">\(\mathbf{x}\)</span>) we sometimes use <span class="math inline">\(\hat y\)</span> to be the predicted value,
+<span class="math inline">\(\hat y = \hat g(\mathbf{x})\)</span></p>
+<ul>
+<li><p>When considering the statistical properties of <span class="math inline">\(\hat g\)</span>, we again
+(as in Chatper <a href="background.html#background">3</a>) think of a random sample (random
+training set), <span class="math inline">\((Y_i , X_i); i = 1, ..., n\)</span>, and <span class="math inline">\(\hat g\)</span> becomes a
+random function</p></li>
+<li><p>We differentiate the notation for a prediction by using <span class="math inline">\(\hat Y\)</span> to
+be the predicted value from the random function <span class="math inline">\(\hat g\)</span> , i.e. the
+one trained on the random sample</p></li>
+</ul>
+<p>We will use <span class="math inline">\(L\)</span> to denote the (generic) loss function, and it takes two
+arguments: <span class="math inline">\(y\)</span> and <span class="math inline">\(\hat y\)</span> (or <span class="math inline">\(Y\)</span> and <span class="math inline">\(\hat Y\)</span>, depending on context)</p>
+<p>Returning to the fact that we want the predictions on our training
+sample, i.e. <span class="math inline">\(\hat y_i = \hat g (\x_i); i = 1, ..., n\)</span> to be close to
+the actual <span class="math inline">\(y_i\)</span>’s, we can seek to characterise how different they are
+overall by the <em>average training loss</em> <span class="math display">\[
+L_{train}(\hat g) = \frac{1}{n}\sum_{i=1}^n L(y_i, \hat g(\x_i))
+\]</span></p>
+<ul>
+<li><p>We will typically refer to this as the <em>training error</em></p></li>
+<li><p><span class="math inline">\(L_{train}\)</span> is a function of <span class="math inline">\(\hat g\)</span> since if we had a different
+<span class="math inline">\(\hat g\)</span> we’d have a different training error</p></li>
+</ul>
+<p>Given our objective, it would be sensible to choose our fitted model as
+that which gives the smallest training error <span class="math display">\[
+\hat g = \argmin_{g \in \mathcal{F}} \frac{1}{n} \sum_{i=1}^n L(y_i, g(\x_i)).
+\]</span></p>
+<ul>
+<li>There are crucial subtleties at play, which we get into in Chapter
+<a href="fundamentals2.html#fundamentals2">5</a>, but for now we will work with this objective
+of minimising training error</li>
+</ul>
+<p><strong>Explaining the notation:</strong></p>
+<ul>
+<li>The object <span class="math inline">\(\mathcal{F}\)</span> is a collection of functions from which we
+are allowed to select our fitted model, and we will go into this
+more later on</li>
+<li>“argmin” means an element in this collection which gives the lowest
+possible training error</li>
+<li><span class="math inline">\(g^*\)</span> vs <span class="math inline">\(g\)</span> vs <span class="math inline">\(\hat g\)</span>: <span class="math inline">\(g^*\)</span> is the “TRUE” regression function,
+<span class="math inline">\(g\)</span> is an arbitrary function in <span class="math inline">\(\mathcal{F}\)</span> (a “potential
+candidate for <span class="math inline">\(\hat g\)</span>”), and <span class="math inline">\(\hat g\)</span> is the actual member of
+<span class="math inline">\(\mathcal{F}\)</span> which we choose</li>
+</ul>
+</div>
+</div>
+<div id="a-concrete-example-simple-linear-regression" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> A Concrete Example: Simple Linear Regression<a href="fundamentals1.html#a-concrete-example-simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So far we have considered things at a very high level. We now consider a
+very straightforward example, the simple linear regression model. At this stage the main decision points when facing a regression problem are (i) “which loss function should I use?”, and (ii) “from which collection of functions should I select my estimate?”.</p>
+<p>In the context of regression it is sensible to quantify the dissimilarity between the true and predicted responses with some measure of the distance between them. For example, we may define our loss function to be either the <em>squared error</em>, <span class="math inline">\(L(y, \hat y) = (y- \hat y)^2\)</span>; or the <em>absolute error</em>, <span class="math inline">\(L(y, \hat y) = |y - \hat y|\)</span>. As it turns out the function which minimises the squared error loss <em>over the entire distribution of potential values for <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></em> is the function <span class="math inline">\(g^*(\x) = E[Y|X=\x]\)</span>. It is for this reason (as well as some others) that the squared error loss is by far the most commonly used loss function in the standard regression context.</p>
+<ul>
+<li>The function which minimises the absolute error over the whole distribution is the function whose output is the conditional <em>median</em> of <span class="math inline">\(Y|X\)</span>.</li>
+</ul>
+<p>Now, in the “simple” regression context we have only a single covariate, <span class="math inline">\(X\)</span>, and when we talk about <em>linear regression</em> we mean that the class of functions from which we select our estimate, <span class="math inline">\(\mathcal{F}\)</span>, is specifically all linear (or more correctly affine) functions of the covariate, i.e. each <span class="math inline">\(g\)</span> in
+<span class="math inline">\(\mathcal{F}\)</span> may be written as <span class="math display">\[
+    g(x) = \beta_0 + \beta_1 x,
+    \]</span>
+for some real numbers <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> <em>parameterise</em> the function <span class="math inline">\(g\)</span> and we
+say that <span class="math inline">\(\F\)</span> is a parametric class, since all the functions in
+<span class="math inline">\(\F\)</span> have the same general form, and as long as we know the values of the
+parameters we can combine them with this general form
+in order to express/define the function fully</li>
+</ul>
+<p>Since each candidate for <span class="math inline">\(\hat g\)</span> can be written in this form, we must
+also have <span class="math display">\[
+\hat g(x) = \hat \beta_0 + \hat \beta_1 x,
+\]</span> where <span class="math display">\[
+\hbbeta = \argmin_{\bbeta \in \Rr^2} \frac{1}{n}\sum_{i=1}^n \left(y_i - \beta_0 - \beta_1 x_i\right)^2.
+\]</span></p>
+<p>We refer to <span class="math inline">\(\hbbeta\)</span> as the (estimated) vector of regression
+coefficients, with <span class="math inline">\(\hat \beta_0\)</span> called the <em>intercept</em> term as this is
+the point where the function <span class="math inline">\(\hat g\)</span> cuts through the “y-axis”.</p>
+<ul>
+<li>We already saw the simple linear regression model informally when we
+looked at the <code>cars</code> data at the start of this chapter.</li>
+</ul>
+<p>The formulation above is (hopefully) a lot less scary than the general
+problem of choosing the “best” function from a collection of functions,
+since now we are just looking for the “best” two numbers (values for the
+<span class="math inline">\(\hat \beta\)</span>’s).</p>
+<p>Generally speaking optimisation of parametric functions; those which
+only depend on a fixed number of values (the function’s parameters) is
+comparatively more straightforward than general “functional
+optimisation”.</p>
+<ul>
+<li>You will cover the topic of optimisation, how we actually go about
+finding these optimal parameters, in the <em>Foundations of Data
+Science and AI</em> module</li>
+</ul>
+<p>In the case of simple linear regression, there is a closed form solution
+for the optimal parameters, meaning we don’t actually need an
+optimisation algorithm to find them. In particular we have<span class="math display">\[
+\hbbeta = (\X^\top \X)^{-1}\X^\top \y,
+\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\X\)</span> is the <span class="math inline">\(n \times 2\)</span> matrix with <span class="math inline">\(i\)</span>-th row <span class="math inline">\((1, x_i)\)</span>.</li>
+<li><span class="math inline">\(\y\)</span> is the vector <span class="math inline">\((y_1, y_2, ..., y_n)^\top\)</span>.</li>
+</ul>
+<p>In fact even if we had more than one covariate, and so would have our estimated
+linear (affine) function expressed as
+<span class="math inline">\(\hat g(\x) = \hat\beta_0 + \sum_{j=1}^p \hat \beta_j x_j\)</span>, the equation
+above would still provide the optimal solution except <span class="math inline">\(\X\)</span> would change
+so that the rows are of the form <span class="math inline">\((1, \x_i^\top)\)</span>. We will look briefly
+at this <em>multiple linear regression</em> in
+far more depth in Chapter <a href="linear.html#linear">6</a>.</p>
+<ul>
+<li>A quick note on notation. As mentioned in Chapter <a href="background.html#background">3</a> we will use bold font to indicate vectors and faint font for individual values of a variable. For example, when we have a single covariate our observations of that covariate are <span class="math inline">\(x_1, ..., x_n\)</span>. On the other hand if we have multiple covariates then our observations are <span class="math inline">\(\x_1, ..., \x_n\)</span> and the <span class="math inline">\(j\)</span>-th element of <span class="math inline">\(\x_i\)</span> will be written as <span class="math inline">\(x_{ij}\)</span>. In this context we will also need to express our regression function (either estimated or “true”) as taking a generic vector argument <span class="math inline">\(\x = (x_1, ..., x_p)^\top\)</span>, and so there is some overlap between the notation for the <span class="math inline">\(i\)</span>-th element of the generic vector argument <span class="math inline">\(\x\)</span> and the <span class="math inline">\(i\)</span>-th observation of a single covariate. However, there should be no ambiguity as the contexts in which these will arise are distinct.</li>
+</ul>
+<p><strong>Simple Linear Regression in R</strong></p>
+<p>Let’s return to the <code>cars</code> data set we saw earlier. We already saw that
+the function <code>lm</code> produces a “line of best fit”, and in fact is solving
+the optimisation problem which minimises the training error, using the
+squared error loss function. We can validate this by comparing its
+output with the closed form solution described above</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="fundamentals1.html#cb350-1" tabindex="-1"></a><span class="do">### Our X matrix described above has a column of ones followed</span></span>
+<span id="cb350-2"><a href="fundamentals1.html#cb350-2" tabindex="-1"></a><span class="do">### by a column containing the single covariate. We can use</span></span>
+<span id="cb350-3"><a href="fundamentals1.html#cb350-3" tabindex="-1"></a><span class="do">### the cbind function to produce this</span></span>
+<span id="cb350-4"><a href="fundamentals1.html#cb350-4" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, cars<span class="sc">$</span>speed)</span>
+<span id="cb350-5"><a href="fundamentals1.html#cb350-5" tabindex="-1"></a></span>
+<span id="cb350-6"><a href="fundamentals1.html#cb350-6" tabindex="-1"></a><span class="do">### Next we can find the coefficients for the best linear fit to the data</span></span>
+<span id="cb350-7"><a href="fundamentals1.html#cb350-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> cars<span class="sc">$</span>dist</span>
+<span id="cb350-8"><a href="fundamentals1.html#cb350-8" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
+<span id="cb350-9"><a href="fundamentals1.html#cb350-9" tabindex="-1"></a></span>
+<span id="cb350-10"><a href="fundamentals1.html#cb350-10" tabindex="-1"></a>beta_hat</span></code></pre></div>
+<pre><code>##            [,1]
+## [1,] -17.579095
+## [2,]   3.932409</code></pre>
+<p>You may recall these are indeed what we saw from the output of the
+function <code>lm</code>. For the vast majority of the time we will be using
+existing functions in R’s numerous libraries. Many of these will be more
+versatile and efficient than our own code, however being able to
+validate these existing implementations, when possible, is beneficial.</p>
+<p>The output of <code>lm</code> contains more than just the estimates for
+<span class="math inline">\(\hat \beta_0\)</span> and <span class="math inline">\(\hat \beta_1\)</span>. For example, it also contains the
+field <code>$fitted.values</code> which is the vector of values
+<span class="math inline">\((\hat y_i, ..., \hat y_n)^\top\)</span> from the model. We can use this to
+evaluate the training error:</p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="fundamentals1.html#cb352-1" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span>speed, <span class="at">data =</span> cars)</span>
+<span id="cb352-2"><a href="fundamentals1.html#cb352-2" tabindex="-1"></a></span>
+<span id="cb352-3"><a href="fundamentals1.html#cb352-3" tabindex="-1"></a><span class="fu">mean</span>((cars<span class="sc">$</span>dist <span class="sc">-</span> model<span class="sc">$</span>fitted.values)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 227.0704</code></pre>
+<p><strong>A Straightforward Extension: Simple Polynomial Regression</strong></p>
+<p>An obvious question which might arise is “why linear?”.</p>
+<p>We will look to far greater depth at flexible regression models later
+on, but for now we simply engage in a an illustrative experiment using
+polynomials:</p>
+<p>If <span class="math inline">\(\F\)</span> contains all degree <span class="math inline">\(d\)</span> polynomials of our covariate, then we
+will have <span class="math display">\[
+\hat g(x) = \hat \beta_0 + \sum_{j=1}^d \hat \beta_j x^j,
+\]</span> where <span class="math display">\[
+\hbbeta = \argmin_{\bbeta \in \Rr^{d+1}} \frac{1}{n}\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^d \beta_j x_i^j\right)^2.
+\]</span></p>
+<p>Within an R formula we can use the function <code>poly(variable, degree, raw = TRUE)</code> to
+produce a polynomial expression, and so directly fit such a model using
+the <code>lm</code> function.</p>
+<ul>
+<li>The argument <code>raw = TRUE</code> tells the function not to transform the <code>variable</code> argument in any way, which it would do by default otherwise.</li>
+</ul>
+<p>The following code will fit a quadratic (degree 2 polynomial) function
+to the <code>cars</code> data set, and then plot the result and evaluate the
+training error.</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="fundamentals1.html#cb354-1" tabindex="-1"></a><span class="do">### First plot the data again</span></span>
+<span id="cb354-2"><a href="fundamentals1.html#cb354-2" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb354-3"><a href="fundamentals1.html#cb354-3" tabindex="-1"></a></span>
+<span id="cb354-4"><a href="fundamentals1.html#cb354-4" tabindex="-1"></a><span class="do">### Now we fit the model</span></span>
+<span id="cb354-5"><a href="fundamentals1.html#cb354-5" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span><span class="fu">poly</span>(speed, <span class="dv">2</span>, <span class="at">raw =</span> <span class="cn">TRUE</span>), <span class="at">data =</span> cars)</span>
+<span id="cb354-6"><a href="fundamentals1.html#cb354-6" tabindex="-1"></a></span>
+<span id="cb354-7"><a href="fundamentals1.html#cb354-7" tabindex="-1"></a><span class="do">### We now cannot use the abline function to illustrate the fit, but can use</span></span>
+<span id="cb354-8"><a href="fundamentals1.html#cb354-8" tabindex="-1"></a><span class="do">### predict(model, new_data) for a range of speeds (e.g. 0 to 30) and use</span></span>
+<span id="cb354-9"><a href="fundamentals1.html#cb354-9" tabindex="-1"></a><span class="do">### the function lines() to add to the plot. The new data argument must</span></span>
+<span id="cb354-10"><a href="fundamentals1.html#cb354-10" tabindex="-1"></a><span class="do">### have the same covariates as the data used to fit the model:</span></span>
+<span id="cb354-11"><a href="fundamentals1.html#cb354-11" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">speed =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="at">length =</span> <span class="dv">100</span>))</span>
+<span id="cb354-12"><a href="fundamentals1.html#cb354-12" tabindex="-1"></a><span class="fu">lines</span>(new_data<span class="sc">$</span>speed, <span class="fu">predict</span>(model2, new_data))</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-148-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="fundamentals1.html#cb355-1" tabindex="-1"></a><span class="do">### We can use the same command again to evaluate the training error</span></span>
+<span id="cb355-2"><a href="fundamentals1.html#cb355-2" tabindex="-1"></a><span class="fu">mean</span>((cars<span class="sc">$</span>dist <span class="sc">-</span> model2<span class="sc">$</span>fitted.values)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 216.4943</code></pre>
+<ul>
+<li>How does this training error compare with the training error from the
+linear model? Ask yourself “Is this what I expected?”</li>
+</ul>
+<p>Notice that the expression
+<span class="math inline">\(\hat \beta_0 + \sum_{j=1}^d \hat \beta_j x^j\)</span> has remarkable similarity
+to the equation describing the fitted <em>muliple linear regression model</em>
+<span class="math inline">\(\hat \beta_0 + \sum_{j=1}^p \hat \beta_j x_j\)</span>. The only difference is
+that instead of the single covariate raised to power <span class="math inline">\(j\)</span> we have the
+<span class="math inline">\(j\)</span>-th from <span class="math inline">\(p\)</span> total covariates, i.e. we see <span class="math inline">\(x_j\)</span> instead of <span class="math inline">\(x^j\)</span>. Indeed fitting the degree <span class="math inline">\(d\)</span> polynomial regression model is equivalent to fitting the multiple linear
+regression model where we use the “engineered features” <span class="math inline">\(X_2 = X^2, X_3=X^3, ..., X_d=X^d\)</span>. We could therefore equally apply the closed form expression for the multiple linear model after creating these features for ourselves.</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="fundamentals1.html#cb357-1" tabindex="-1"></a><span class="do">### Start by creating our new X matrix with a column of</span></span>
+<span id="cb357-2"><a href="fundamentals1.html#cb357-2" tabindex="-1"></a><span class="do">### ones and then the single covariate raised to each of the</span></span>
+<span id="cb357-3"><a href="fundamentals1.html#cb357-3" tabindex="-1"></a><span class="do">### powers 1 to d, where to match the above we have d=2</span></span>
+<span id="cb357-4"><a href="fundamentals1.html#cb357-4" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb357-5"><a href="fundamentals1.html#cb357-5" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span>d, <span class="cf">function</span>(j) cars<span class="sc">$</span>speed<span class="sc">^</span>j)</span>
+<span id="cb357-6"><a href="fundamentals1.html#cb357-6" tabindex="-1"></a><span class="co"># make sure you understand why this is creating the matrix it should</span></span>
+<span id="cb357-7"><a href="fundamentals1.html#cb357-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> cars<span class="sc">$</span>dist</span>
+<span id="cb357-8"><a href="fundamentals1.html#cb357-8" tabindex="-1"></a></span>
+<span id="cb357-9"><a href="fundamentals1.html#cb357-9" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
+<span id="cb357-10"><a href="fundamentals1.html#cb357-10" tabindex="-1"></a></span>
+<span id="cb357-11"><a href="fundamentals1.html#cb357-11" tabindex="-1"></a><span class="do">### We can check that the solutions are the same:</span></span>
+<span id="cb357-12"><a href="fundamentals1.html#cb357-12" tabindex="-1"></a><span class="fu">cbind</span>(beta_hat, model2<span class="sc">$</span>coefficients)</span></code></pre></div>
+<pre><code>##                                  [,1]      [,2]
+## (Intercept)                 2.4701378 2.4701378
+## poly(speed, 2, raw = TRUE)1 0.9132876 0.9132876
+## poly(speed, 2, raw = TRUE)2 0.0999593 0.0999593</code></pre>
+<ul>
+<li>Using these nonlinear transformations of the covariate(s) as additional features/“covariates” is a principled approach, and we will cover this idea in greater detail in Chapter <a href="nonlinear1.html#nonlinear1">8</a>.</li>
+</ul>
+</div>
+</div>
+<div id="summary-and-take-aways" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Summary and Take-Aways<a href="fundamentals1.html#summary-and-take-aways" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>One of the major components of statistical learning is how we go about “training” predictive models</p>
+<ul>
+<li>Two important decision points are (i) which loss function should we use for training, and (ii) which “sort of functions” should we choose our estimate from?</li>
+</ul></li>
+<li><p>Even before we get to the training phase, however, we should ideally</p>
+<ul>
+<li><p>Be fully aware of what the problem objectives are, as this could inform how we choose our loss function and collection of functions <span class="math inline">\(\F\)</span></p>
+<ul>
+<li>For example, if it is necessary that the model is reasonably interpretable, then we should choose <span class="math inline">\(\F\)</span> to contain only models which allow for interpretation</li>
+</ul></li>
+<li><p>Be aware of how the data have been obtained/collected, as these will help determine which modelling assumptions are reasonable to make</p></li>
+<li><p>Perform appropriate EDA and cleaning/preprocessing to ensure we can actually apply the methods we want during training (and the steps which come later)</p></li>
+</ul></li>
+<li><p>We saw that linear regression is a type of predictive modelling where we fit linear/affine funtions (our class <span class="math inline">\(\F\)</span>) to capture the relationship(s) between <span class="math inline">\(X\)</span> and a numeric response <span class="math inline">\(Y\)</span></p></li>
+<li><p>We saw a simple extension where we introduce non-linearities using “powers” of the covariate (polynomials) using the <code>poly()</code> function within a linear regression model</p>
+<ul>
+<li>We also saw that this is equivalent to adding to our covariate some additional “covariates” which are “engineered” from the original covariate, and then applying linear regression</li>
+</ul></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="background.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fundamentals2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

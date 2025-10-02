@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Nonparametric Smoothing | Introduction to R</title>
+  <meta name="description" content="9 Nonparametric Smoothing | Introduction to R" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Nonparametric Smoothing | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Nonparametric Smoothing | Introduction to R" />
+  
+  
+  
+
+<meta name="author" content="David P. Hofmeyr" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="nonlinear1.html"/>
+<link rel="next" href="ensemble-models.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#background-on-r"><i class="fa fa-check"></i><b>1.1</b> Background on R</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-rstudio"><i class="fa fa-check"></i><b>1.2</b> Getting started with RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statements-expressions-and-objects"><i class="fa fa-check"></i><b>1.3</b> Statements, expressions and objects</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plots"><i class="fa fa-check"></i><b>1.4</b> Basic plots</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R scripts</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>1.6</b> R markdown</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.7</b> Functions</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#s:0help"><i class="fa fa-check"></i><b>1.8</b> Getting Help</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loops-and-flow"><i class="fa fa-check"></i><b>1.9</b> Loops and Flow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-frames"><i class="fa fa-check"></i><b>2.1</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>2.2</b> Importing and Exporting Data</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-plotting"><i class="fa fa-check"></i><b>2.3</b> Data Plotting</a></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#exercises-3"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>3</b> Statistical Background</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="background.html"><a href="background.html#probability-basics"><i class="fa fa-check"></i><b>3.1</b> Probability Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="background.html"><a href="background.html#random-variables"><i class="fa fa-check"></i><b>3.2</b> Random Variables</a></li>
+<li class="chapter" data-level="3.3" data-path="background.html"><a href="background.html#samples-and-statistical-modelling"><i class="fa fa-check"></i><b>3.3</b> Samples and Statistical Modelling</a></li>
+<li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
+<li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
+<li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fundamentals1.html"><a href="fundamentals1.html#two-archetypal-problems"><i class="fa fa-check"></i><b>4.1</b> Two Archetypal Problems</a></li>
+<li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
+<li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
+<li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-and-take-aways"><i class="fa fa-check"></i><b>4.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fundamentals2.html"><a href="fundamentals2.html#a-quick-recap"><i class="fa fa-check"></i><b>5.1</b> A Quick Recap</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals2.html"><a href="fundamentals2.html#overfitting"><i class="fa fa-check"></i><b>5.2</b> Overfitting</a></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-and-take-aways-1"><i class="fa fa-check"></i><b>5.5</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear.html"><a href="linear.html#the-linear-model"><i class="fa fa-check"></i><b>6.1</b> The Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-and-take-aways-2"><i class="fa fa-check"></i><b>7.3</b> Summary and Take-aways</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonparametric Smoothing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
+<li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
+<li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-4"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
+<li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-and-take-aways-3"><i class="fa fa-check"></i><b>10.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="nonlinearity2" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Nonparametric Smoothing<a href="nonlinearity2.html#nonlinearity2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="math display">\[
+\def\R{\mathcal{R}}
+\def\x{\mathbf{x}}
+\def\hg{\hat g}
+\def\w{\mathbf{w}}
+\]</span></p>
+<p>So far in all the models we have investigated there has been (at least implicitly) some <em>parameterised</em> structure. In the (generalised) linear models the regression, coefficients and the distribution family and link function used to model the response fully characterised the model(s). When we looked at basis expansions, even when we applied the kernel trick to bypass many of the calculations, within the feature space there was still the implicit setting of a set of optimal coefficients for the basis functions.</p>
+<p>In this chapter we look at an alternative way of fitting models using what is known as <em>nonparametric smoothing</em>. We then go on to look at a very important group of models known as <em>Decision Trees</em> (DTs), which may be seen as combining the optimisation approach used in parametric models with the local averaging approach of nonparametric smoothing. DTs are highly nonlinear models yet despite this they can be highly interpretable. In addition DTs are by far the most popular models used within <em>ensemble</em> predictive models, which we cover in the next chapter.</p>
+<div id="smoothing-as-local-averaging" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Smoothing as Local Averaging<a href="nonlinearity2.html#smoothing-as-local-averaging" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The appropriateness of estimating a function for prediction using a “local average” is most intuitively communicated from the point of view of regression. Recall that in the standard regression setting we have <span class="math display">\[
+Y = g^*(X) + \epsilon,
+\]</span> where the residual, <span class="math inline">\(\epsilon\)</span>, has mean zero. Let’s also assume that the function <span class="math inline">\(g^*\)</span> is “nicely behaved” in that there is a constant <span class="math inline">\(L\)</span> for which, given any two values <span class="math inline">\(\x_1, \x_2\)</span> in the domain of <span class="math inline">\(g^*\)</span>, we have <span class="math inline">\(|g^*(\x_1)-g^*(\x_2)| \leq L d(\x_1, \x_2)\)</span> where <span class="math inline">\(d(\x_1,\x_2) = \sqrt{(\x_1-\x_2)^\top (\x_1-\x_2)}\)</span>. The quantity <span class="math inline">\(d(\x_1, \x_2) = \sqrt{(\x_1-\x_2)^\top (\x_1-\x_2)}\)</span> may be seen as the distance between <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> and so this condition ultimately says that the gradient of <span class="math inline">\(g^*\)</span> cannot exceed <span class="math inline">\(L\)</span>. A function with this condition is called <em>Lipschitz continuous</em> with Lipschitz constant <span class="math inline">\(L\)</span> (but we don’t need to know what it’s called for this module).</p>
+<p>Now let’s suppose that we are interested in estimating <span class="math inline">\(g^*\)</span> at a particular value for <span class="math inline">\(X\)</span>, say <span class="math inline">\(\x\)</span>. Then let’s suppose we look inside our data set and find all the observations <span class="math inline">\((y_i, \x_i)\)</span> for which <span class="math inline">\(d(\x, \x_i)\)</span> is less than some value <span class="math inline">\(h\)</span>. We could then define our estimate for <span class="math inline">\(g^*(\x)\)</span> as the average value of the associated <span class="math inline">\(y_i\)</span>’s. That is, if <span class="math inline">\(n_{\x,h}\)</span> is the number of sample points within a distance <span class="math inline">\(h\)</span> from <span class="math inline">\(\x\)</span> then we have
+<span class="math display">\[
+\hg(\x):= \frac{1}{n_{\x,h}}\sum_{i:d(\x_i, \x)&lt;h} y_i.
+\]</span></p>
+<p>Why might this be a sensible thing to do? Let’s start by looking at its mean and variance, and we will assume for simplicity that the sample is fixed and we’re looking at the <em>conditional</em> mean and variance, sort of like we did when looking at the theory for the linear model. If we revert to the <em>random sample</em> situation we would have</p>
+<p><span class="math display">\[\begin{align*}
+E[\hg(\x)] &amp;= \frac{1}{n_{\x,h}}\sum_{i:d(\x_i,\x)&lt;h} E[Y_i]\\
+&amp;= \frac{1}{n_{\x,h}}\sum_{i:d(\x_i,\x)&lt;h}E[Y|X=\x_i]\\
+&amp;= \frac{1}{n_{\x,h}}\sum_{i:d(\x_i,\x)&lt;h} g^*(\x_i).
+\end{align*}\]</span>
+But note that this average only includes the function values <span class="math inline">\(g^*(\x_i)\)</span> for those <span class="math inline">\(\x_i\)</span> which are close to <span class="math inline">\(\x\)</span>, and we are assuming that the function doesn’t change dramatically over any small ranges. In particular we have “filtered” our sample so that among those <span class="math inline">\(\x_i\)</span> included in the above average we know <span class="math inline">\(|g^*(\x_i)-g^*(\x)| &lt; hL\)</span>. This tells us immediately that the absolute value of the bias of <span class="math inline">\(\hg(\x_i)\)</span> is no greater than <span class="math inline">\(hL\)</span> (in fact typically in practice it will be considerably smaller than this).</p>
+<p>We also have, since each of the sample points is assumed to be independent, that
+<span class="math display">\[\begin{align*}
+Var(\hg(\x)) &amp;= \frac{1}{n_{\x,h}^2}\sum_{i:d(\x_i,\x)&lt;h} Var(Y_i)\\
+&amp;= \frac{\sigma_{\epsilon}^2}{n_{\x,h}}.
+\end{align*}\]</span></p>
+<p>As always there is a tension between these two quantities. In order to decrease the variance we need to increase <span class="math inline">\(n_{\x, h}\)</span>. In order to do this we need to increase <span class="math inline">\(h\)</span> so that more points will be within a distance <span class="math inline">\(h\)</span> from <span class="math inline">\(\x\)</span>. This means we increase the bias since we need to look “further away”, and the function value may change more from <span class="math inline">\(g^*(\x)\)</span> (our target) if we include in our average values <span class="math inline">\(g^*(\x_i)\)</span> where <span class="math inline">\(d(\x, \x_i)\)</span> is larger.</p>
+<p>Let’s quickly look at a small example to see what’s going on. The following will simulate <span class="math inline">\(n=50\)</span> observations where <span class="math inline">\(X\)</span> is uniformly distributed in <span class="math inline">\((0, 1)\)</span> and <span class="math inline">\(Y = \sin(2\pi X) +2X^2 +\epsilon\)</span>. We will use a setting of <span class="math inline">\(h = 0.05\)</span> to see the effects on estimation of <span class="math inline">\(g^*(X) = \sin(2\pi X) + 2X^*2\)</span>.</p>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="nonlinearity2.html#cb491-1" tabindex="-1"></a><span class="do">### Set up constants</span></span>
+<span id="cb491-2"><a href="nonlinearity2.html#cb491-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb491-3"><a href="nonlinearity2.html#cb491-3" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb491-4"><a href="nonlinearity2.html#cb491-4" tabindex="-1"></a>sigma_resids <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb491-5"><a href="nonlinearity2.html#cb491-5" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">1000</span>) <span class="co"># values at which we will estimate the function</span></span>
+<span id="cb491-6"><a href="nonlinearity2.html#cb491-6" tabindex="-1"></a></span>
+<span id="cb491-7"><a href="nonlinearity2.html#cb491-7" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>x) <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb491-8"><a href="nonlinearity2.html#cb491-8" tabindex="-1"></a></span>
+<span id="cb491-9"><a href="nonlinearity2.html#cb491-9" tabindex="-1"></a><span class="do">### Simulate observations</span></span>
+<span id="cb491-10"><a href="nonlinearity2.html#cb491-10" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb491-11"><a href="nonlinearity2.html#cb491-11" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resids)</span>
+<span id="cb491-12"><a href="nonlinearity2.html#cb491-12" tabindex="-1"></a></span>
+<span id="cb491-13"><a href="nonlinearity2.html#cb491-13" tabindex="-1"></a></span>
+<span id="cb491-14"><a href="nonlinearity2.html#cb491-14" tabindex="-1"></a><span class="do">### The object dmat contains zeroes and ones, with a one in row i column j</span></span>
+<span id="cb491-15"><a href="nonlinearity2.html#cb491-15" tabindex="-1"></a><span class="do">### if the i-th element in x_grid is within a distance h from the j-th</span></span>
+<span id="cb491-16"><a href="nonlinearity2.html#cb491-16" tabindex="-1"></a><span class="do">### observation of x</span></span>
+<span id="cb491-17"><a href="nonlinearity2.html#cb491-17" tabindex="-1"></a>dmat <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>(<span class="fu">abs</span>(x_grid<span class="sc">%*%</span><span class="fu">t</span>(<span class="fu">rep</span>(<span class="dv">1</span>, n))<span class="sc">-</span><span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(x_grid))<span class="sc">%*%</span><span class="fu">t</span>(x)) <span class="sc">&lt;</span> h)</span>
+<span id="cb491-18"><a href="nonlinearity2.html#cb491-18" tabindex="-1"></a></span>
+<span id="cb491-19"><a href="nonlinearity2.html#cb491-19" tabindex="-1"></a><span class="do">### See if you can understand why the evaluation of yhat has the correct form</span></span>
+<span id="cb491-20"><a href="nonlinearity2.html#cb491-20" tabindex="-1"></a><span class="do">### What does dmat%*%y evaluate to?</span></span>
+<span id="cb491-21"><a href="nonlinearity2.html#cb491-21" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> (dmat<span class="sc">%*%</span>y)<span class="sc">/</span><span class="fu">rowSums</span>(dmat)</span>
+<span id="cb491-22"><a href="nonlinearity2.html#cb491-22" tabindex="-1"></a></span>
+<span id="cb491-23"><a href="nonlinearity2.html#cb491-23" tabindex="-1"></a></span>
+<span id="cb491-24"><a href="nonlinearity2.html#cb491-24" tabindex="-1"></a><span class="do">### Now we plot the observations and the estimated function, as well as the true function</span></span>
+<span id="cb491-25"><a href="nonlinearity2.html#cb491-25" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb491-26"><a href="nonlinearity2.html#cb491-26" tabindex="-1"></a><span class="fu">lines</span>(x_grid, yhat, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>) <span class="co"># fitted function</span></span>
+<span id="cb491-27"><a href="nonlinearity2.html#cb491-27" tabindex="-1"></a><span class="fu">lines</span>(x_grid, <span class="fu">g</span>(x_grid)) <span class="co"># true function</span></span></code></pre></div>
+<p><img src="figures/unnamed-chunk-188-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Run the above code multiple times. Change some of the settings, e.g. <code>n</code> and <code>h</code>, and see what happens to the fitted function.</p>
+<p>The fitted values using this simple <em>smoothing</em> technique behaves fairly erratically, but nonetheless is capable of fitting
+reasonably well to the data. However the “filtering” idea of including only those observations within a distance <code>h</code> from each
+point where we want to evaluate the function leads to a “blocky” appearance. We also face the difficulty of how to define <span class="math inline">\(\hg\)</span> if there are <em>no points</em> within a distance <span class="math inline">\(h\)</span> from <span class="math inline">\(\x\)</span>. More generally we can modify this estimation strategy using a <em>weight function</em> <span class="math inline">\(\w(\x) = (w_1(\x), w_2(\x), ..., w_n(\x))^\top\)</span> which takes an input <span class="math inline">\(\x\)</span>, and returns a vector of non-negative weights which determine the “similarity” between <span class="math inline">\(\x\)</span> and each of the observations. In the above example our weight function just had zeroes in the positions where the distance from <span class="math inline">\(\x\)</span> to an observation was greater than <span class="math inline">\(h\)</span> and ones elsewhere. But we could instead use a smooth weight function which gives larger weights to observations close to <span class="math inline">\(\x\)</span> but more gradually decreases to zero for points further away. In the following we modify the <code>dmat</code> object to instead use a weight function with <span class="math inline">\(i\)</span>-th entry <span class="math inline">\(\exp(-(\x-\x_i)^2/2h^2)\)</span>, the Gaussian kernel:</p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="nonlinearity2.html#cb492-1" tabindex="-1"></a><span class="do">### The &quot;smoother&quot; dmat</span></span>
+<span id="cb492-2"><a href="nonlinearity2.html#cb492-2" tabindex="-1"></a>dmat <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>(x_grid<span class="sc">%*%</span><span class="fu">t</span>(<span class="fu">rep</span>(<span class="dv">1</span>, n))<span class="sc">-</span><span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(x_grid))<span class="sc">%*%</span><span class="fu">t</span>(x))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span><span class="sc">/</span>h<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb492-3"><a href="nonlinearity2.html#cb492-3" tabindex="-1"></a></span>
+<span id="cb492-4"><a href="nonlinearity2.html#cb492-4" tabindex="-1"></a><span class="do">### Evaluating the fitted function uses the same idea. It is a weighted average of the</span></span>
+<span id="cb492-5"><a href="nonlinearity2.html#cb492-5" tabindex="-1"></a><span class="do">### observations of the response, placing more weight on those from points nearby</span></span>
+<span id="cb492-6"><a href="nonlinearity2.html#cb492-6" tabindex="-1"></a>yhat_new <span class="ot">&lt;-</span> (dmat<span class="sc">%*%</span>y)<span class="sc">/</span><span class="fu">rowSums</span>(dmat)</span>
+<span id="cb492-7"><a href="nonlinearity2.html#cb492-7" tabindex="-1"></a></span>
+<span id="cb492-8"><a href="nonlinearity2.html#cb492-8" tabindex="-1"></a></span>
+<span id="cb492-9"><a href="nonlinearity2.html#cb492-9" tabindex="-1"></a><span class="do">### Now we plot the observations and the estimated function, as well as the true function</span></span>
+<span id="cb492-10"><a href="nonlinearity2.html#cb492-10" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb492-11"><a href="nonlinearity2.html#cb492-11" tabindex="-1"></a><span class="fu">lines</span>(x_grid, yhat, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>) <span class="co"># old fitted function</span></span>
+<span id="cb492-12"><a href="nonlinearity2.html#cb492-12" tabindex="-1"></a><span class="fu">lines</span>(x_grid, yhat_new, <span class="at">col =</span> <span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb492-13"><a href="nonlinearity2.html#cb492-13" tabindex="-1"></a><span class="fu">lines</span>(x_grid, <span class="fu">g</span>(x_grid)) <span class="co"># true function</span></span></code></pre></div>
+<p><img src="figures/unnamed-chunk-189-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The red line (initial estimate) and the blue line (using the Gaussian kernel) follow very similar trajectories, but the blue line is smoother. It also has the property that there will always be non-zero weights and so even if there are no points within a distance <span class="math inline">\(h\)</span> from one of the evaluation points, there is no lack of definition.</p>
+<p>The “tuning parameter” <span class="math inline">\(h\)</span>, also called the <em>bandwidth</em>, is in a more general sense known as the <em>smoothing parameter</em>. Larger values of the smoothing parameter lead to overall smoother (less wiggly/erratic) fits, but at the expense of more bias. Choosing an appropriate smoothing parameter can be very challenging. Although in this simple univariate example we could get quite nice looking fits to the data with relatively little effort, the problem becomes far more difficult in multivariate settings (with multiple covariates) and when the sample becomes larger (for the resulting computational cost).</p>
+</div>
+<div id="nearest-neighbours" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Nearest Neighbours<a href="nonlinearity2.html#nearest-neighbours" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <em>kernel smoothing</em> described above is highly principled, but there are numerous challenges associated with the approach. As mentioned choosing the <em>bandwidth</em> parameter <span class="math inline">\(h\)</span> is crucial to obtaining a good estimate, and because the computational cost of fitting kernel smoothing models is relatively high, performing cross validation may not be feasible. It may also be that a single value for <span class="math inline">\(h\)</span> doesn’t allow for a good fit over the whole function, especially when the density of observations is not uniform in <span class="math inline">\(X\)</span>.</p>
+<p>Nearest neighbours based estimators are arguably the most popular in the class of simple nonparametric smoothers. They are able to overcome <em>some</em> of the limitations of kernel smoothers: (i) they are practically much more computationally efficient, especially in dimensions between 2 and about 20 and (ii) they have an effectively <em>adaptive</em> smoothing effect, which varies depending on the density of the observations of <span class="math inline">\(X\)</span>.</p>
+<p>The weight function used in “<span class="math inline">\(k\)</span> Nearest Neighbours” (<span class="math inline">\(k\)</span>NN) simply has a one in the positions of the <span class="math inline">\(k\)</span> nearest points to <span class="math inline">\(\x\)</span>, and zero elsewhere. This non-smooth weight function also results in a “blocky” appearance, like the initial smoothing estimator described above, but has the property that where the observations of <span class="math inline">\(X\)</span> are more dense, i.e. where there is more more information from the sample, the distance between <span class="math inline">\(\x\)</span> and the observations with non-zero weights will be smaller. Conversely where the observations of <span class="math inline">\(X\)</span> are more sparse and there is less information, the <span class="math inline">\(k\)</span>NN estimator will “reach further” for its neighbour points to account for this lack of information. The result is that the variance of the estimator is the same (<span class="math inline">\(\sigma^2_\epsilon/k\)</span>) over the whole domain.</p>
+<p>There are multiple implementations of <span class="math inline">\(k\)</span>NN in R, and we will simply use the method linked to by the <code>caret</code> package.</p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="nonlinearity2.html#cb493-1" tabindex="-1"></a><span class="do">### Load the library</span></span>
+<span id="cb493-2"><a href="nonlinearity2.html#cb493-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb493-3"><a href="nonlinearity2.html#cb493-3" tabindex="-1"></a></span>
+<span id="cb493-4"><a href="nonlinearity2.html#cb493-4" tabindex="-1"></a><span class="do">### Fit the model</span></span>
+<span id="cb493-5"><a href="nonlinearity2.html#cb493-5" tabindex="-1"></a>knn_model <span class="ot">&lt;-</span> <span class="fu">train</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y), <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb493-6"><a href="nonlinearity2.html#cb493-6" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="st">&quot;none&quot;</span>), <span class="at">tuneGrid =</span> <span class="fu">expand.grid</span>(<span class="at">k=</span><span class="dv">5</span>))</span>
+<span id="cb493-7"><a href="nonlinearity2.html#cb493-7" tabindex="-1"></a></span>
+<span id="cb493-8"><a href="nonlinearity2.html#cb493-8" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb493-9"><a href="nonlinearity2.html#cb493-9" tabindex="-1"></a><span class="fu">lines</span>(x_grid, <span class="fu">predict</span>(knn_model, <span class="fu">data.frame</span>(<span class="at">x =</span> x_grid)), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb493-10"><a href="nonlinearity2.html#cb493-10" tabindex="-1"></a><span class="fu">lines</span>(x_grid, <span class="fu">g</span>(x_grid))</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-190-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div id="classification-with-knn" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Classification with <span class="math inline">\(k\)</span>NN<a href="nonlinearity2.html#classification-with-knn" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The same ideas of <em>local estimation</em> are used when performing classification as regression, however unlike in a regression context we cannot simply take the average of the responses when they represent class labels</p>
+<ul>
+<li>If we had a problem where our classes were encoded <span class="math inline">\(\{cat = 1, dog = 2, goat = 3\}\)</span> we shouldn’t be thinking that the average of a cat and a goat is a dog (<span class="math inline">\((1+3)/2 = 2\)</span>).</li>
+</ul>
+<p>Instead what we can do is compute the <em>class proportions</em> among the neighbours of an evaluation point <span class="math inline">\(\x\)</span>. That is, suppose <span class="math inline">\(\{\x_{(1)}, ..., \x_{(k)}\}\)</span> are the <span class="math inline">\(k\)</span> nearest sample observations of <span class="math inline">\(X\)</span> to the reference point <span class="math inline">\(\x\)</span>. We then compute the proportions of <span class="math inline">\(\{y_{(1)}, ..., y_{(k)}\}\)</span> which fall in each class. A final classification can then be achieved by taking the class with the highest proportion, or, as we described in Chapter <a href="glms.html#glms">7</a>, depending on the relative importance of some misclassifications over others we may wish to adjust the thresholds for classification depending on the problem context.</p>
+<p><strong>Categorical Covariates and Scaling</strong></p>
+<p>Nonparametric smoothing techniques rely on distances between observations, where typical distance metrics require only numerical data. Although there are some distance functions which can combine numeric and categorical variables a straightforward approach is to use dummy variables as we described in Chapter <a href="fundamentals1.html#fundamentals1">4</a>. Since the <span class="math inline">\(k\)</span>NN model linked to in <code>caret</code> does not automatically handle this for us we need to explicitly do so.</p>
+<p>In addition, if variables are captured on extremely varying scales then those with larger scale will dominate the distances between points. In order to combat this it is preferable to scale the covariates when using purely distance based approaches.</p>
+</div>
+<div id="tuning-knn-models-in-r" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Tuning <span class="math inline">\(k\)</span>NN models in R<a href="nonlinearity2.html#tuning-knn-models-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As may have been very apparent already, we can tune/perform model selection for <span class="math inline">\(k\)</span>NN models using the <code>train</code> function in <code>caret</code>. We will perform classification on the <code>SAheart</code> data set, which can be downloaded from &lt;“<a href="https://hastie.su.domains/ElemStatLearn/datasets/SAheart.data" class="uri">https://hastie.su.domains/ElemStatLearn/datasets/SAheart.data</a>”&gt; directly from within R using the <code>readr</code> package.</p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="nonlinearity2.html#cb494-1" tabindex="-1"></a><span class="do">### Load the libraries needed and then load the data</span></span>
+<span id="cb494-2"><a href="nonlinearity2.html#cb494-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb494-3"><a href="nonlinearity2.html#cb494-3" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb494-4"><a href="nonlinearity2.html#cb494-4" tabindex="-1"></a></span>
+<span id="cb494-5"><a href="nonlinearity2.html#cb494-5" tabindex="-1"></a>SAheart <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://hastie.su.domains/ElemStatLearn/datasets/SAheart.data&quot;</span>,</span>
+<span id="cb494-6"><a href="nonlinearity2.html#cb494-6" tabindex="-1"></a>                    <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># remove first column as this is just a row index</span></span>
+<span id="cb494-7"><a href="nonlinearity2.html#cb494-7" tabindex="-1"></a></span>
+<span id="cb494-8"><a href="nonlinearity2.html#cb494-8" tabindex="-1"></a><span class="do">### In order for train to perform classification we need to ensure</span></span>
+<span id="cb494-9"><a href="nonlinearity2.html#cb494-9" tabindex="-1"></a><span class="do">### the response is a factor variable. In addition, caret (as well</span></span>
+<span id="cb494-10"><a href="nonlinearity2.html#cb494-10" tabindex="-1"></a><span class="do">### as some other packages) do not like for us to use numeric values</span></span>
+<span id="cb494-11"><a href="nonlinearity2.html#cb494-11" tabindex="-1"></a><span class="do">### for the class labels/names.</span></span>
+<span id="cb494-12"><a href="nonlinearity2.html#cb494-12" tabindex="-1"></a><span class="do">### Also recall that caret treats the reference class differently</span></span>
+<span id="cb494-13"><a href="nonlinearity2.html#cb494-13" tabindex="-1"></a><span class="do">### from some other packages/functions. Specifically the outcome</span></span>
+<span id="cb494-14"><a href="nonlinearity2.html#cb494-14" tabindex="-1"></a><span class="do">### of interest and not the baseline must be set to the reference class</span></span>
+<span id="cb494-15"><a href="nonlinearity2.html#cb494-15" tabindex="-1"></a><span class="do">### otherwise we may have the sensitivity and specificity muddled</span></span>
+<span id="cb494-16"><a href="nonlinearity2.html#cb494-16" tabindex="-1"></a><span class="do">### As always, as long as you as the practicioner are aware how to</span></span>
+<span id="cb494-17"><a href="nonlinearity2.html#cb494-17" tabindex="-1"></a><span class="do">### interpret the results then it doesn&#39;t matter how R actually</span></span>
+<span id="cb494-18"><a href="nonlinearity2.html#cb494-18" tabindex="-1"></a><span class="do">### treats them</span></span>
+<span id="cb494-19"><a href="nonlinearity2.html#cb494-19" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(SAheart<span class="sc">$</span>chd, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Neg&quot;</span>, <span class="st">&quot;Pos&quot;</span>)),</span>
+<span id="cb494-20"><a href="nonlinearity2.html#cb494-20" tabindex="-1"></a>             <span class="at">ref =</span> <span class="st">&quot;Pos&quot;</span>)</span>
+<span id="cb494-21"><a href="nonlinearity2.html#cb494-21" tabindex="-1"></a></span>
+<span id="cb494-22"><a href="nonlinearity2.html#cb494-22" tabindex="-1"></a></span>
+<span id="cb494-23"><a href="nonlinearity2.html#cb494-23" tabindex="-1"></a><span class="do">### The data contains one categorical variable (famhist) which has</span></span>
+<span id="cb494-24"><a href="nonlinearity2.html#cb494-24" tabindex="-1"></a><span class="do">### not already been converted to numeric. Note that sometimes</span></span>
+<span id="cb494-25"><a href="nonlinearity2.html#cb494-25" tabindex="-1"></a><span class="do">### data sets will have their categorical variables encoded with</span></span>
+<span id="cb494-26"><a href="nonlinearity2.html#cb494-26" tabindex="-1"></a><span class="do">### integers and it is important wherever possible to investigate</span></span>
+<span id="cb494-27"><a href="nonlinearity2.html#cb494-27" tabindex="-1"></a><span class="do">### what the variables actually represent to determine if any conversion is needed.</span></span>
+<span id="cb494-28"><a href="nonlinearity2.html#cb494-28" tabindex="-1"></a><span class="do">### In this instance all other categorical variables are binary and so it is not</span></span>
+<span id="cb494-29"><a href="nonlinearity2.html#cb494-29" tabindex="-1"></a><span class="do">### important.</span></span>
+<span id="cb494-30"><a href="nonlinearity2.html#cb494-30" tabindex="-1"></a><span class="do">### We can use the dummyVars function to encode our data using predict</span></span>
+<span id="cb494-31"><a href="nonlinearity2.html#cb494-31" tabindex="-1"></a><span class="do">### Remember not to include the response variable!</span></span>
+<span id="cb494-32"><a href="nonlinearity2.html#cb494-32" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="fu">dummyVars</span>(<span class="sc">~</span>., <span class="at">data =</span> SAheart[,<span class="fu">names</span>(SAheart)<span class="sc">!=</span><span class="st">&quot;chd&quot;</span>]),</span>
+<span id="cb494-33"><a href="nonlinearity2.html#cb494-33" tabindex="-1"></a>             <span class="at">newdata =</span> SAheart[,<span class="fu">names</span>(SAheart)<span class="sc">!=</span><span class="st">&quot;chd&quot;</span>])</span>
+<span id="cb494-34"><a href="nonlinearity2.html#cb494-34" tabindex="-1"></a></span>
+<span id="cb494-35"><a href="nonlinearity2.html#cb494-35" tabindex="-1"></a><span class="do">### Now we can split our data into training and test splits and then perform</span></span>
+<span id="cb494-36"><a href="nonlinearity2.html#cb494-36" tabindex="-1"></a><span class="do">### cross validation for selection.</span></span>
+<span id="cb494-37"><a href="nonlinearity2.html#cb494-37" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(y, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb494-38"><a href="nonlinearity2.html#cb494-38" tabindex="-1"></a></span>
+<span id="cb494-39"><a href="nonlinearity2.html#cb494-39" tabindex="-1"></a>X.tr <span class="ot">&lt;-</span> X[train_ix,]</span>
+<span id="cb494-40"><a href="nonlinearity2.html#cb494-40" tabindex="-1"></a>y.tr <span class="ot">&lt;-</span> y[train_ix]</span>
+<span id="cb494-41"><a href="nonlinearity2.html#cb494-41" tabindex="-1"></a>X.te <span class="ot">&lt;-</span> X[<span class="sc">-</span>train_ix,]</span>
+<span id="cb494-42"><a href="nonlinearity2.html#cb494-42" tabindex="-1"></a>y.te <span class="ot">&lt;-</span> y[<span class="sc">-</span>train_ix]</span>
+<span id="cb494-43"><a href="nonlinearity2.html#cb494-43" tabindex="-1"></a></span>
+<span id="cb494-44"><a href="nonlinearity2.html#cb494-44" tabindex="-1"></a><span class="do">### Let&#39;s consider a number of neighbours from 1 to 20</span></span>
+<span id="cb494-45"><a href="nonlinearity2.html#cb494-45" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">k =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb494-46"><a href="nonlinearity2.html#cb494-46" tabindex="-1"></a></span>
+<span id="cb494-47"><a href="nonlinearity2.html#cb494-47" tabindex="-1"></a><span class="do">### We will perform ten fold cross validation</span></span>
+<span id="cb494-48"><a href="nonlinearity2.html#cb494-48" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb494-49"><a href="nonlinearity2.html#cb494-49" tabindex="-1"></a></span>
+<span id="cb494-50"><a href="nonlinearity2.html#cb494-50" tabindex="-1"></a></span>
+<span id="cb494-51"><a href="nonlinearity2.html#cb494-51" tabindex="-1"></a><span class="do">### As we described in a previous chapter all preprocessing should ideally be</span></span>
+<span id="cb494-52"><a href="nonlinearity2.html#cb494-52" tabindex="-1"></a><span class="do">### done within each train/validation step in cross validation, and this can</span></span>
+<span id="cb494-53"><a href="nonlinearity2.html#cb494-53" tabindex="-1"></a><span class="do">### be achieved with the argument preProcess.</span></span>
+<span id="cb494-54"><a href="nonlinearity2.html#cb494-54" tabindex="-1"></a>knn_model <span class="ot">&lt;-</span> <span class="fu">train</span>(y<span class="sc">~</span>., <span class="at">data =</span> <span class="fu">data.frame</span>(X.tr, <span class="at">y=</span>y.tr), <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb494-55"><a href="nonlinearity2.html#cb494-55" tabindex="-1"></a>                   <span class="at">tuneGrid =</span> tune_grid, <span class="at">trControl =</span> trControl,</span>
+<span id="cb494-56"><a href="nonlinearity2.html#cb494-56" tabindex="-1"></a>                   <span class="at">preProcess =</span> <span class="st">&quot;scale&quot;</span>)</span>
+<span id="cb494-57"><a href="nonlinearity2.html#cb494-57" tabindex="-1"></a></span>
+<span id="cb494-58"><a href="nonlinearity2.html#cb494-58" tabindex="-1"></a>knn_model<span class="sc">$</span>results</span></code></pre></div>
+<pre><code>##     k  Accuracy     Kappa AccuracySD    KappaSD
+## 1   1 0.6827652 0.2764486 0.10603054 0.22428099
+## 2   2 0.6517992 0.2079168 0.08366989 0.18460220
+## 3   3 0.6789773 0.2576122 0.05074517 0.11350130
+## 4   4 0.6790720 0.2523038 0.02486464 0.07743035
+## 5   5 0.6697917 0.1995049 0.04701704 0.12831657
+## 6   6 0.6482955 0.1495437 0.07562225 0.16945244
+## 7   7 0.7037879 0.2618657 0.05226342 0.15755397
+## 8   8 0.7007576 0.2574582 0.04908434 0.14293743
+## 9   9 0.6913826 0.2196349 0.04579403 0.12765890
+## 10 10 0.7005682 0.2449109 0.06403364 0.16807632
+## 11 11 0.7005682 0.2414756 0.05326427 0.14619089
+## 12 12 0.7284091 0.3142221 0.05019793 0.14704077
+## 13 13 0.7129735 0.2683626 0.05466503 0.16919763
+## 14 14 0.6972538 0.2230234 0.05155948 0.16486612
+## 15 15 0.7067235 0.2428096 0.04218488 0.14001602
+## 16 16 0.7191288 0.2792015 0.04698980 0.15496133
+## 17 17 0.7159091 0.2799539 0.04179083 0.12809442
+## 18 18 0.7160038 0.2830170 0.05451902 0.15265600
+## 19 19 0.7126894 0.2644026 0.03515626 0.10902599
+## 20 20 0.7221591 0.2950399 0.02957148 0.09281690</code></pre>
+<p>We can now inspect the performance of the model on the test data using the statistics from the confusion matrix</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="nonlinearity2.html#cb496-1" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(knn_model, X.te), y.te, <span class="at">positive =</span> <span class="st">&quot;Pos&quot;</span>)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Pos Neg
+##        Pos  19   9
+##        Neg  29  81
+##                                           
+##                Accuracy : 0.7246          
+##                  95% CI : (0.6422, 0.7972)
+##     No Information Rate : 0.6522          
+##     P-Value [Acc &gt; NIR] : 0.042891        
+##                                           
+##                   Kappa : 0.3277          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.002055        
+##                                           
+##             Sensitivity : 0.3958          
+##             Specificity : 0.9000          
+##          Pos Pred Value : 0.6786          
+##          Neg Pred Value : 0.7364          
+##              Prevalence : 0.3478          
+##          Detection Rate : 0.1377          
+##    Detection Prevalence : 0.2029          
+##       Balanced Accuracy : 0.6479          
+##                                           
+##        &#39;Positive&#39; Class : Pos             
+## </code></pre>
+<p>As is often the case with imblanced data where the outcome of interest is less prevalent than the baseline, the sensitivity is quite low. When fitting <span class="math inline">\(k\)</span>NN models using case weights and/or upsampling the minority class is less effective than it is in models based on optimisation. In such cases one can consider changing the threshold for classification or using a different criterion for selecting a model. The latter can be achieved by designing ones own <code>summaryFunction</code>.</p>
+</div>
+</div>
+<div id="decision-trees" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Decision Trees<a href="nonlinearity2.html#decision-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Decision trees also use the idea of a “local average” in order to fit predictive models, however instead of using a fixed “smoothing parameter” (like the <span class="math inline">\(k\)</span> in <span class="math inline">\(k\)</span>NN), they split up the input space into non-overlapping regions in a semi-optimal way; using the training data in order to choose how the splits are determined. They then use the averages from the training data in each of these regions in order to make predictions.</p>
+<ul>
+<li>It is certainly possible to have more complex models within each of the regions than just choosing the average value, but this is beyond the scope of the course</li>
+</ul>
+<p>The reason the models are referred to as decision <em>trees</em>, is that the partitioning of the covariate (input) space can be described in relation to a tree in the <em>graph theory</em> sense (don’t worry, you don’t have to know anything about graph theory). We can also think of them as trees in that, starting from a “root” <em>node</em>, observations are subjected to a rule/decision which results in a “branching” (splitting the observations based on the outcome of the rule/decision), after which the observations face another rule/decision which leads to further “branching”, and a further division of the input space, etc.</p>
+<p>The following figure (taken from <em>Introduction to Statistical Learning</em>, James et al.) shows (left) a division of the two-dimensional space in <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> into five non-overlapping rectangular regions; (middle) a pictoral representation of the decisions/rules which lead to this partition (like an upside-down tree, with the root node at the top and the branches heading downwards); (right) the corresponding fitted function where the vertical direction shows the values the function assumes in each of the five regions.</p>
+<p><img src="figures/isl_cart.png" /></p>
+<ul>
+<li>If you choose a pair of values for <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> and then apply the rules in the tree in the middle figure above (starting from the top), following the left “branch” if the result of applying the rule is true and the right “branch” if it is false, until you reach one of the terminal nodes (called <em>leaves</em>), you will see that the tree representation agrees with the “flat” representation of the different regions in the left figure.</li>
+</ul>
+<p>Notice that the rectangular regions into which a decision tree partitions the input space have their sides parallel with the variable axes. The reasons for this, as opposed to allowing diagonal splits, are (i) it is much more computationally efficient to fit trees in this way even if it may not lead to as good a fit to the data and (ii) the interpretation of the outputs of decision trees is made far simpler when each of the decisions/rules is based only on one of the variables.</p>
+<div id="fitting-and-pruning-decision-trees" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Fitting and Pruning Decision Trees<a href="nonlinearity2.html#fitting-and-pruning-decision-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As mentioned previously decision trees are fit in a semi-optimal manner. What this means is that the pairs of variables and <em>split points</em> which determine the different regions, are chosen in order to minimise a loss function. However the final fitted model is very far from guaranteed to contain the best possible splitting of the input space even if we are restricted to axis-parallel rectangles. The reason for this is that the <em>Classification And Regression Trees</em> (CART) algorithm uses a <em>greedy optimisation</em> approach in which the rules in the tree are determined sequentially, and once a rule/split is added it cannot be removed. That is, first the pair of covariate and split point for the root node is chosen, and then it is kept fixed as the next splits are chosen, which are then fixed, and the next are chosen, etc.</p>
+<p>Let’s suppose we have the regions in a tree denoted as <span class="math inline">\(\R_1, ..., \R_R\)</span>, and for any potential vector of covariates, <span class="math inline">\(\x\)</span>, let’s write <span class="math inline">\(\R(\x)\)</span> to be the region into which <span class="math inline">\(\x\)</span> falls. Since there is a single fixed value predicted in each region (determined from the averages of the responses from the points falling in these regions), we can write the training error as
+<span class="math display">\[
+\frac{1}{n}\sum_{i=1}^n L(y_i, \hat y_{\R(\x_i)}),
+\]</span>
+where <span class="math inline">\(\hat y_{\R}\)</span> is the fitted value in region <span class="math inline">\(\R\)</span>. But since <span class="math inline">\(\hat y_{\R(\x)}\)</span> is the same for all <span class="math inline">\(\x \in \R\)</span> we can also write this as</p>
+<p><span class="math display">\[
+\frac{1}{n}\sum_{r=1}^R \sum_{i:\x_i \in \R_r} L(y_i, \hat y_{\R_r}).
+\]</span>
+In other words the training error can be split into the errors/losses from each of the regions/leaf nodes in the tree. The total loss from a leaf node is often referred to as the <em>impurity</em> of the node. When choosing which split to add next during the sequential fitting of a tree, then, one just needs to find the region whose impurity can be improved the most by splitting it into two new regions.</p>
+<p>It should be clear that as more and more splits/regions are added to a tree, the resulting model will be able to fit better and better to the training data. Indeed if eventually every single point is in its own leaf node, then the training error will be zero. However, we know that fitting too well to the training data will very likely lead to overfitting and poor generalisation performance. The simplest approach for limiting the complexity of a decision tree is simply to terminate the sequential splitting either when a maximum number of leaf nodes is reached, or the <em>depth</em> (the maximum number of rules/splits taken from the root node to any leaf node) reaches some chosen maximum. Given our understanding of how regularisation can be used to fit models with good generalisation, an alternative is to use a penalised objective function
+<span class="math display">\[
+\frac{1}{n}\sum_{r=1}^R \sum_{i:\x_i \in \R_r} L(y_i, \hat y_{\R_r}) + \lambda R.
+\]</span>
+In the above <span class="math inline">\(R\)</span> is simply the number of splits/leaves/regions, and the penalty for increasing the complexity of the tree by adding an additional split is fixed equal to <span class="math inline">\(\lambda\)</span>. That is, there is no fixed maximum number of regions, and new regions can be added provided they improve the fit (i.e. reduce the training error) by at least <span class="math inline">\(\lambda\)</span>.</p>
+<p>But here we reach a potential problem which comes about as a result of the <em>semi</em>-optimal manner in which trees are fit. What if by adding a “not-so-great” split fairly high up in the tree one is able to find a subsequent split which massively improves the overall fit? It is certainly possible that the high quality second split is not possible until the “not-so-great” split is added. A way around this is known as <em>pruning</em>. First a very deep/complex tree is fit, and then some of the branches are “pruned away” leaving a simpler tree in its place which gives a better penalised objective value. In this way it is possible to add the combination of a “not-so-great” split followed by a fantastic split instead of two mediocre splits (and, of course, more complex combinations of splits of varying quality).</p>
+<p>In the context of what is known as <em>cost-complexity pruning</em> the penalty parameter <span class="math inline">\(\lambda\)</span> is often referred to as the <em>complexity parameter</em>, and this can simply be chosen using our ubiquitous cross validation.</p>
+<div id="regression-trees" class="section level4 hasAnchor" number="9.3.1.1">
+<h4><span class="header-section-number">9.3.1.1</span> Regression Trees<a href="nonlinearity2.html#regression-trees" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Describing regression trees, given the above and what we already know about the standard regression problem, is relatively straightforward. As before a natural loss function to use when fitting regression trees is the squared error loss function, and we also learned when looking at likelihood based estimation in generalised linear models that minimising the squared error is equivalent to maximum likelihood when the response is normally distributed, i.e. when <span class="math inline">\(Y = g^*(X) + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0, \sigma_{\epsilon}^2)\)</span>.</p>
+<ul>
+<li>The squared error loss function is also computationally preferred in the context of decision trees since when scanning over the potential splits along one of the covariate axes calculation of the total loss can be done recursively.</li>
+</ul>
+<p><strong>Regression Trees in R</strong></p>
+<p>The <code>caret</code> package can be used to fit (and tune) decision trees, however we will also be making use of the <code>rpart</code> package. We will also use the package <code>rpart.plot</code> which provides nice visualisations of fitted decision trees.</p>
+<p>Let’s fit a regression tree which models the salaries of baseball players based on various career statistics, using the <code>Hitters</code> data set in the <code>ISLR2</code> package.</p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="nonlinearity2.html#cb498-1" tabindex="-1"></a><span class="do">### Start by loading the libraries we need</span></span>
+<span id="cb498-2"><a href="nonlinearity2.html#cb498-2" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb498-3"><a href="nonlinearity2.html#cb498-3" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb498-4"><a href="nonlinearity2.html#cb498-4" tabindex="-1"></a></span>
+<span id="cb498-5"><a href="nonlinearity2.html#cb498-5" tabindex="-1"></a><span class="do">### Let&#39;s quickly inspect</span></span>
+<span id="cb498-6"><a href="nonlinearity2.html#cb498-6" tabindex="-1"></a><span class="fu">str</span>(Hitters)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    322 obs. of  20 variables:
+##  $ AtBat    : int  293 315 479 496 321 594 185 298 323 401 ...
+##  $ Hits     : int  66 81 130 141 87 169 37 73 81 92 ...
+##  $ HmRun    : int  1 7 18 20 10 4 1 0 6 17 ...
+##  $ Runs     : int  30 24 66 65 39 74 23 24 26 49 ...
+##  $ RBI      : int  29 38 72 78 42 51 8 24 32 66 ...
+##  $ Walks    : int  14 39 76 37 30 35 21 7 8 65 ...
+##  $ Years    : int  1 14 3 11 2 11 2 3 2 13 ...
+##  $ CAtBat   : int  293 3449 1624 5628 396 4408 214 509 341 5206 ...
+##  $ CHits    : int  66 835 457 1575 101 1133 42 108 86 1332 ...
+##  $ CHmRun   : int  1 69 63 225 12 19 1 0 6 253 ...
+##  $ CRuns    : int  30 321 224 828 48 501 30 41 32 784 ...
+##  $ CRBI     : int  29 414 266 838 46 336 9 37 34 890 ...
+##  $ CWalks   : int  14 375 263 354 33 194 24 12 8 866 ...
+##  $ League   : Factor w/ 2 levels &quot;A&quot;,&quot;N&quot;: 1 2 1 2 2 1 2 1 2 1 ...
+##  $ Division : Factor w/ 2 levels &quot;E&quot;,&quot;W&quot;: 1 2 2 1 1 2 1 2 2 1 ...
+##  $ PutOuts  : int  446 632 880 200 805 282 76 121 143 0 ...
+##  $ Assists  : int  33 43 82 11 40 421 127 283 290 0 ...
+##  $ Errors   : int  20 10 14 3 4 25 7 9 19 0 ...
+##  $ Salary   : num  NA 475 480 500 91.5 750 70 100 75 1100 ...
+##  $ NewLeague: Factor w/ 2 levels &quot;A&quot;,&quot;N&quot;: 1 2 1 2 2 1 1 1 2 1 ...</code></pre>
+<p>Similar to the function <code>train</code> in <code>caret</code> the <code>rpart</code> function uses a “control” object which tells it how to perform fitting and pruning. For starters we will simply use a fixed complexity parameter (<code>cp</code>) and set the minimum number of observations allowed in any terminal node (<code>minbucket</code>).</p>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="nonlinearity2.html#cb500-1" tabindex="-1"></a><span class="do">### Set up the control object</span></span>
+<span id="cb500-2"><a href="nonlinearity2.html#cb500-2" tabindex="-1"></a>contr <span class="ot">&lt;-</span> <span class="fu">rpart.control</span>(<span class="at">minbucket =</span> <span class="dv">10</span>, <span class="at">cp =</span> <span class="fl">0.001</span>)</span>
+<span id="cb500-3"><a href="nonlinearity2.html#cb500-3" tabindex="-1"></a></span>
+<span id="cb500-4"><a href="nonlinearity2.html#cb500-4" tabindex="-1"></a><span class="do">### Now we can fit our model, setting the seed to ensure</span></span>
+<span id="cb500-5"><a href="nonlinearity2.html#cb500-5" tabindex="-1"></a><span class="do">### reproducibility</span></span>
+<span id="cb500-6"><a href="nonlinearity2.html#cb500-6" tabindex="-1"></a><span class="do">### We will regress the log salary since the raw salary</span></span>
+<span id="cb500-7"><a href="nonlinearity2.html#cb500-7" tabindex="-1"></a><span class="do">### values are very heavily skewed</span></span>
+<span id="cb500-8"><a href="nonlinearity2.html#cb500-8" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb500-9"><a href="nonlinearity2.html#cb500-9" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="fu">log</span>(Salary)<span class="sc">~</span>., <span class="at">data =</span> Hitters, <span class="at">control =</span> contr)</span></code></pre></div>
+<p>By default when calling the <code>rpart</code> function cross validation is performed and the results for all complexity parameters greater than the value provided are stored. The cross validation results can be seen by using the function <code>plotcp</code>:</p>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="nonlinearity2.html#cb501-1" tabindex="-1"></a><span class="fu">plotcp</span>(tree_model)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-195-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The presentation of the results is slightly different from what we see from <code>caret</code>, where with <code>rpart</code> the <em>Relative Error</em> is shown representing the estimated prediction error relative to the model with no splits (i.e. one which simply uses the average in the entire data set). The horizontal dotted line also indicates the “one standard error rule” threshold. All relevant information is stored in the field <code>$cptable</code>, where the column <code>xerror</code> is the cross validation estimate of relative error and <code>rel error</code> is the <em>training</em> relative error:</p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="nonlinearity2.html#cb502-1" tabindex="-1"></a>tree_model<span class="sc">$</span>cptable</span></code></pre></div>
+<pre><code>##             CP nsplit rel error    xerror       xstd
+## 1  0.568937909      0 1.0000000 1.0072170 0.06567495
+## 2  0.061287729      1 0.4310621 0.4722220 0.05346809
+## 3  0.057784443      2 0.3697744 0.4657209 0.05537989
+## 4  0.030786188      3 0.3119899 0.3964910 0.06113039
+## 5  0.013096781      4 0.2812037 0.3513748 0.06089676
+## 6  0.011700767      5 0.2681069 0.3745273 0.05898447
+## 7  0.010933909      6 0.2564062 0.3691529 0.05819627
+## 8  0.009209713      7 0.2454723 0.3698248 0.05808903
+## 9  0.008216401      8 0.2362626 0.3736554 0.05929000
+## 10 0.005492546      9 0.2280462 0.3898444 0.06430554
+## 11 0.005158254     10 0.2225536 0.3828877 0.06503018
+## 12 0.003910817     11 0.2173954 0.3901558 0.06991258
+## 13 0.003753955     12 0.2134845 0.3914650 0.06991046
+## 14 0.003390561     13 0.2097306 0.3914650 0.06991046
+## 15 0.001000000     14 0.2063400 0.3974447 0.07122065</code></pre>
+<p>To extract a model for a different setting of <code>cp</code> after fitting a first tree with <code>rpart</code> one can use the function <code>prune</code>. For example, for the values of <code>cp</code> which minimise the estimated prediction error and using the 1 standard error rule</p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="nonlinearity2.html#cb504-1" tabindex="-1"></a><span class="do">### Minimum cv error</span></span>
+<span id="cb504-2"><a href="nonlinearity2.html#cb504-2" tabindex="-1"></a>ix_min <span class="ot">&lt;-</span> <span class="fu">which.min</span>(tree_model<span class="sc">$</span>cptable[,<span class="st">&#39;xerror&#39;</span>])</span>
+<span id="cb504-3"><a href="nonlinearity2.html#cb504-3" tabindex="-1"></a>cp_min <span class="ot">&lt;-</span> tree_model<span class="sc">$</span>cptable[ix_min,<span class="st">&#39;CP&#39;</span>]</span>
+<span id="cb504-4"><a href="nonlinearity2.html#cb504-4" tabindex="-1"></a></span>
+<span id="cb504-5"><a href="nonlinearity2.html#cb504-5" tabindex="-1"></a>pruned_tree_min <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree_model, <span class="at">cp =</span> cp_min)</span>
+<span id="cb504-6"><a href="nonlinearity2.html#cb504-6" tabindex="-1"></a></span>
+<span id="cb504-7"><a href="nonlinearity2.html#cb504-7" tabindex="-1"></a><span class="do">### One standard error rule</span></span>
+<span id="cb504-8"><a href="nonlinearity2.html#cb504-8" tabindex="-1"></a>ix_1se <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">which</span>(tree_model<span class="sc">$</span>cptable[,<span class="st">&#39;xerror&#39;</span>] <span class="sc">&lt;=</span> tree_model<span class="sc">$</span>cptable[ix_min,<span class="st">&#39;xerror&#39;</span>] <span class="sc">+</span></span>
+<span id="cb504-9"><a href="nonlinearity2.html#cb504-9" tabindex="-1"></a>                      tree_model<span class="sc">$</span>cptable[ix_min,<span class="st">&#39;xstd&#39;</span>]))</span>
+<span id="cb504-10"><a href="nonlinearity2.html#cb504-10" tabindex="-1"></a>cp_1se <span class="ot">&lt;-</span> tree_model<span class="sc">$</span>cptable[ix_1se,<span class="st">&#39;CP&#39;</span>]</span>
+<span id="cb504-11"><a href="nonlinearity2.html#cb504-11" tabindex="-1"></a></span>
+<span id="cb504-12"><a href="nonlinearity2.html#cb504-12" tabindex="-1"></a>pruned_tree_1se <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree_model, <span class="at">cp =</span> cp_1se)</span></code></pre></div>
+<p><strong>Visualising and Interpreting Decision Trees</strong></p>
+<p>One of the reasons decision trees are favoured by practicioners is the fact that they can very clearly and intuitively be visualised, provided they are not very complex. Let’s investigate the trees we fit above to the <code>Hitters</code> data set using the <code>prp</code> function in the <code>rpart.plot</code> package.</p>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="nonlinearity2.html#cb505-1" tabindex="-1"></a><span class="do">### Load the package</span></span>
+<span id="cb505-2"><a href="nonlinearity2.html#cb505-2" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb505-3"><a href="nonlinearity2.html#cb505-3" tabindex="-1"></a></span>
+<span id="cb505-4"><a href="nonlinearity2.html#cb505-4" tabindex="-1"></a><span class="do">### The two trees selected using cross validation</span></span>
+<span id="cb505-5"><a href="nonlinearity2.html#cb505-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb505-6"><a href="nonlinearity2.html#cb505-6" tabindex="-1"></a><span class="fu">prp</span>(pruned_tree_min, <span class="at">main =</span> <span class="st">&quot;Tree selected by minimum CV error&quot;</span>)</span>
+<span id="cb505-7"><a href="nonlinearity2.html#cb505-7" tabindex="-1"></a></span>
+<span id="cb505-8"><a href="nonlinearity2.html#cb505-8" tabindex="-1"></a><span class="fu">prp</span>(pruned_tree_1se, <span class="at">main =</span> <span class="st">&quot;Tree selected by 1 SE rule&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-198-1.png" width="576" style="display: block; margin: auto;" /></p>
+<ul>
+<li>It is hopefully not surprising that the model selected using the one standard error rule is simpler than the one which gave the lowest cross validation error estimate.</li>
+</ul>
+<p>Both trees clearly indicate how the predictions from the two models come about. For example, in the left tree we can see that the key determining factors (as captured by this model) in achieving the highest predicted salary (bottom right leaf of the tree) is to have variable <code>CAtBat</code> (number of times batting in entire career) at least 1452, <code>Hits</code> (total number of hits in the year 1986) at least 118, and <code>CRBI</code> (total number of runs scored in career) at least 273. None of the other variables affects <em>this particular</em> prediction, but the number of career hits <code>CHits</code> is an important variable for prediction when <code>CAtBat</code> is less than 1452.</p>
+<p>The fact that different variables become more/less important depening on splits higher up the tree mean that decision trees are extremely well suited to capturing complex interactions between covariates. However, as alluded to above, being able to interpret the outputs of a tree model relies on its not being too complex. If we consider the original tree we fit, we see something less appealing</p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="nonlinearity2.html#cb506-1" tabindex="-1"></a><span class="fu">prp</span>(tree_model, <span class="at">main =</span> <span class="st">&quot;Tree with default cp = 0.001&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-199-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Although with only 320 observations and a minimum node size of 10 one cannot ever reach extreme levels of complexity, already in this model interpretation becomes more challenging than in the pruned models.</p>
+</div>
+<div id="classification-trees" class="section level4 hasAnchor" number="9.3.1.2">
+<h4><span class="header-section-number">9.3.1.2</span> Classification Trees<a href="nonlinearity2.html#classification-trees" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The main ideas in fitting and pruning decision trees, whether they are used for regression or for classification, are the same. However, whereas in fitting regression trees the common squared error loss if used, it is common when fitting classification trees to use either the <em>Gini coefficient</em> or the <em>cross-entropy</em> as the measure of impurity which implicitly defines the loss function.</p>
+<ul>
+<li>This is not to say that using a likelihood based loss function is inappropriate, but these measures of impurity generally perform better on multiclass classification problems.</li>
+</ul>
+<p>Suppose that we have a total of <span class="math inline">\(K\)</span> classes, and let <span class="math inline">\(\hat p_1, \hat p_2, ..., \hat p_K\)</span> be the proportions of the observations in a given node from each of the classes. These values therefore define a probability distribution over the classes, and both the Gini coefficient and cross-entropy can be seen as measures of how much uncertainty there is in this distribution. If all of the observations are in a single class (say class <span class="math inline">\(k\)</span>) then we would have <span class="math inline">\(\hat p_k = 1\)</span> and <span class="math inline">\(\hat p_j = 0\)</span> for <span class="math inline">\(j \not = k\)</span>. Such a distribution can be seen as having no uncertainty because all outcomes will be in class <span class="math inline">\(k\)</span>. On the other hand if all <span class="math inline">\(\hat p_k; k = 1, ..., K\)</span> are equal then there is a maximum level of uncertainty since each outcome is equally likely.</p>
+<p>Formally we have
+<span class="math display">\[
+Gini(\hat p_1, ..., \hat p_K) = \sum_{j=1}^K \hat p_j (1- \hat p_j),
+\]</span>
+and
+<span class="math display">\[
+CrossEntropy(\hat p_1, ..., \hat p_K) = -\sum_{j=1}^K \hat p_j \log(\hat p_j),
+\]</span>
+and we set <span class="math inline">\(0\log(0) = 0\)</span>. It should be pointed out, however, that these quantities are not directly dependent on the number of observations in the node and so to quantify the total impurity of a node the Gini coefficient/cross entropy is multiplied by the number of observations in the node.</p>
+<p><strong>Classification Trees in R</strong></p>
+<p>Within the <code>rpart</code> function we can minimise the Gini impurity by specifying <code>parms = list(split = "gini")</code> or the cross-entropy by specifying <code>parms = list(split = "information")</code>, where minimising cross-entropy is equivalent to maximising “information gain”.</p>
+<p>Let’s revisit the <code>satimage</code> data set we saw with the multinomial regression model in Chapter <a href="glms.html#glms">7</a>.</p>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="nonlinearity2.html#cb507-1" tabindex="-1"></a><span class="do">### Loading library</span></span>
+<span id="cb507-2"><a href="nonlinearity2.html#cb507-2" tabindex="-1"></a><span class="fu">library</span>(pmlbr)</span>
+<span id="cb507-3"><a href="nonlinearity2.html#cb507-3" tabindex="-1"></a></span>
+<span id="cb507-4"><a href="nonlinearity2.html#cb507-4" tabindex="-1"></a><span class="do">### The fetch_data function will download and load data sets by name</span></span>
+<span id="cb507-5"><a href="nonlinearity2.html#cb507-5" tabindex="-1"></a>satimage <span class="ot">&lt;-</span> <span class="fu">fetch_data</span>(<span class="st">&quot;satimage&quot;</span>)</span></code></pre></div>
+<pre><code>## Download successful.</code></pre>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="nonlinearity2.html#cb509-1" tabindex="-1"></a><span class="do">### All data sets loaded using pmlbr have the response variable named &quot;target&quot;</span></span>
+<span id="cb509-2"><a href="nonlinearity2.html#cb509-2" tabindex="-1"></a><span class="fu">table</span>(satimage<span class="sc">$</span>target)</span></code></pre></div>
+<pre><code>## 
+##    1    2    3    4    5    7 
+## 1533  703 1358  626  707 1508</code></pre>
+<p>Now let’s begin by splitting the data into training and test sets using <code>caret</code>’s <code>createDataPartition</code> function.</p>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="nonlinearity2.html#cb511-1" tabindex="-1"></a><span class="do">### We must ensure the response is a factor variable</span></span>
+<span id="cb511-2"><a href="nonlinearity2.html#cb511-2" tabindex="-1"></a>satimage<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target)</span>
+<span id="cb511-3"><a href="nonlinearity2.html#cb511-3" tabindex="-1"></a></span>
+<span id="cb511-4"><a href="nonlinearity2.html#cb511-4" tabindex="-1"></a><span class="do">### Recall that createDataPartition requires the response variable</span></span>
+<span id="cb511-5"><a href="nonlinearity2.html#cb511-5" tabindex="-1"></a><span class="do">### and will split the data to approximately respect the class</span></span>
+<span id="cb511-6"><a href="nonlinearity2.html#cb511-6" tabindex="-1"></a><span class="do">### proportions</span></span>
+<span id="cb511-7"><a href="nonlinearity2.html#cb511-7" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(satimage<span class="sc">$</span>target, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb511-8"><a href="nonlinearity2.html#cb511-8" tabindex="-1"></a></span>
+<span id="cb511-9"><a href="nonlinearity2.html#cb511-9" tabindex="-1"></a><span class="do">### We can now index the satimage data set to produce train and test sets</span></span>
+<span id="cb511-10"><a href="nonlinearity2.html#cb511-10" tabindex="-1"></a>satimage.tr <span class="ot">&lt;-</span> satimage[train_ix,]</span>
+<span id="cb511-11"><a href="nonlinearity2.html#cb511-11" tabindex="-1"></a>satimage.te <span class="ot">&lt;-</span> satimage[<span class="sc">-</span>train_ix,]</span>
+<span id="cb511-12"><a href="nonlinearity2.html#cb511-12" tabindex="-1"></a></span>
+<span id="cb511-13"><a href="nonlinearity2.html#cb511-13" tabindex="-1"></a><span class="do">### Now let&#39;s set up the control object. As this is a much bigger data set then</span></span>
+<span id="cb511-14"><a href="nonlinearity2.html#cb511-14" tabindex="-1"></a><span class="do">### we had with the regression problem we include a larger minbucket</span></span>
+<span id="cb511-15"><a href="nonlinearity2.html#cb511-15" tabindex="-1"></a>contr <span class="ot">&lt;-</span> <span class="fu">rpart.control</span>(<span class="at">minbucket =</span> <span class="dv">25</span>, <span class="at">cp =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb511-16"><a href="nonlinearity2.html#cb511-16" tabindex="-1"></a></span>
+<span id="cb511-17"><a href="nonlinearity2.html#cb511-17" tabindex="-1"></a><span class="do">### Now we can fit our models, using both impurity measures</span></span>
+<span id="cb511-18"><a href="nonlinearity2.html#cb511-18" tabindex="-1"></a>tree_gini <span class="ot">&lt;-</span> <span class="fu">rpart</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr,</span>
+<span id="cb511-19"><a href="nonlinearity2.html#cb511-19" tabindex="-1"></a>                   <span class="at">control =</span> contr, <span class="at">parms =</span> <span class="fu">list</span>(<span class="at">split =</span> <span class="st">&quot;gini&quot;</span>))</span>
+<span id="cb511-20"><a href="nonlinearity2.html#cb511-20" tabindex="-1"></a></span>
+<span id="cb511-21"><a href="nonlinearity2.html#cb511-21" tabindex="-1"></a>tree_info <span class="ot">&lt;-</span> <span class="fu">rpart</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr,</span>
+<span id="cb511-22"><a href="nonlinearity2.html#cb511-22" tabindex="-1"></a>                   <span class="at">control =</span> contr, <span class="at">parms =</span> <span class="fu">list</span>(<span class="at">split =</span> <span class="st">&quot;information&quot;</span>))</span>
+<span id="cb511-23"><a href="nonlinearity2.html#cb511-23" tabindex="-1"></a></span>
+<span id="cb511-24"><a href="nonlinearity2.html#cb511-24" tabindex="-1"></a><span class="do">### In both cases the cross validation error continues to decrease with</span></span>
+<span id="cb511-25"><a href="nonlinearity2.html#cb511-25" tabindex="-1"></a><span class="do">### the depth of the tree. We can, however, compare the full models</span></span>
+<span id="cb511-26"><a href="nonlinearity2.html#cb511-26" tabindex="-1"></a><span class="do">### with one another as well as with the pruned trees based on the</span></span>
+<span id="cb511-27"><a href="nonlinearity2.html#cb511-27" tabindex="-1"></a><span class="do">### 1 standard error rule</span></span>
+<span id="cb511-28"><a href="nonlinearity2.html#cb511-28" tabindex="-1"></a></span>
+<span id="cb511-29"><a href="nonlinearity2.html#cb511-29" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb511-30"><a href="nonlinearity2.html#cb511-30" tabindex="-1"></a><span class="fu">plotcp</span>(tree_gini, <span class="at">main =</span> <span class="st">&quot;Gini Coefficient&quot;</span>)</span>
+<span id="cb511-31"><a href="nonlinearity2.html#cb511-31" tabindex="-1"></a><span class="fu">plotcp</span>(tree_info, <span class="at">main =</span> <span class="st">&quot;Cross-Entropy&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-201-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="nonlinearity2.html#cb512-1" tabindex="-1"></a><span class="do">### For the tree fit with the Gini coefficient</span></span>
+<span id="cb512-2"><a href="nonlinearity2.html#cb512-2" tabindex="-1"></a>ix_min <span class="ot">&lt;-</span> <span class="fu">which.min</span>(tree_gini<span class="sc">$</span>cptable[,<span class="st">&#39;xerror&#39;</span>])</span>
+<span id="cb512-3"><a href="nonlinearity2.html#cb512-3" tabindex="-1"></a>ix_1se <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">which</span>(tree_gini<span class="sc">$</span>cptable[,<span class="st">&#39;xerror&#39;</span>] <span class="sc">&lt;=</span> tree_gini<span class="sc">$</span>cptable[ix_min,<span class="st">&#39;xerror&#39;</span>] <span class="sc">+</span></span>
+<span id="cb512-4"><a href="nonlinearity2.html#cb512-4" tabindex="-1"></a>                      tree_gini<span class="sc">$</span>cptable[ix_min,<span class="st">&#39;xstd&#39;</span>]))</span>
+<span id="cb512-5"><a href="nonlinearity2.html#cb512-5" tabindex="-1"></a>cp_1se <span class="ot">&lt;-</span> tree_gini<span class="sc">$</span>cptable[ix_1se,<span class="st">&#39;CP&#39;</span>]</span>
+<span id="cb512-6"><a href="nonlinearity2.html#cb512-6" tabindex="-1"></a></span>
+<span id="cb512-7"><a href="nonlinearity2.html#cb512-7" tabindex="-1"></a>pruned_gini <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree_gini, <span class="at">cp =</span> cp_1se)</span>
+<span id="cb512-8"><a href="nonlinearity2.html#cb512-8" tabindex="-1"></a></span>
+<span id="cb512-9"><a href="nonlinearity2.html#cb512-9" tabindex="-1"></a></span>
+<span id="cb512-10"><a href="nonlinearity2.html#cb512-10" tabindex="-1"></a><span class="do">### For the tree fit with the information gain/cross-entropy</span></span>
+<span id="cb512-11"><a href="nonlinearity2.html#cb512-11" tabindex="-1"></a>ix_min <span class="ot">&lt;-</span> <span class="fu">which.min</span>(tree_info<span class="sc">$</span>cptable[,<span class="st">&#39;xerror&#39;</span>])</span>
+<span id="cb512-12"><a href="nonlinearity2.html#cb512-12" tabindex="-1"></a>ix_1se <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">which</span>(tree_info<span class="sc">$</span>cptable[,<span class="st">&#39;xerror&#39;</span>] <span class="sc">&lt;=</span> tree_info<span class="sc">$</span>cptable[ix_min,<span class="st">&#39;xerror&#39;</span>] <span class="sc">+</span></span>
+<span id="cb512-13"><a href="nonlinearity2.html#cb512-13" tabindex="-1"></a>                      tree_info<span class="sc">$</span>cptable[ix_min,<span class="st">&#39;xstd&#39;</span>]))</span>
+<span id="cb512-14"><a href="nonlinearity2.html#cb512-14" tabindex="-1"></a>cp_1se <span class="ot">&lt;-</span> tree_info<span class="sc">$</span>cptable[ix_1se,<span class="st">&#39;CP&#39;</span>]</span>
+<span id="cb512-15"><a href="nonlinearity2.html#cb512-15" tabindex="-1"></a></span>
+<span id="cb512-16"><a href="nonlinearity2.html#cb512-16" tabindex="-1"></a>pruned_info <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree_info, <span class="at">cp =</span> cp_1se)</span>
+<span id="cb512-17"><a href="nonlinearity2.html#cb512-17" tabindex="-1"></a></span>
+<span id="cb512-18"><a href="nonlinearity2.html#cb512-18" tabindex="-1"></a></span>
+<span id="cb512-19"><a href="nonlinearity2.html#cb512-19" tabindex="-1"></a></span>
+<span id="cb512-20"><a href="nonlinearity2.html#cb512-20" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(tree_gini, satimage.te, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>), satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<pre><code>##  Accuracy 
+## 0.8323819</code></pre>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="nonlinearity2.html#cb514-1" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(pruned_gini, satimage.te, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>), satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<pre><code>##  Accuracy 
+## 0.8354956</code></pre>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="nonlinearity2.html#cb516-1" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(tree_info, satimage.te, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>), satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<pre><code>##  Accuracy 
+## 0.8417229</code></pre>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="nonlinearity2.html#cb518-1" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(pruned_info, satimage.te, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>), satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<pre><code>##  Accuracy 
+## 0.8375714</code></pre>
+</div>
+</div>
+<div id="some-further-comments-on-decision-trees" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Some further Comments on Decision Trees<a href="nonlinearity2.html#some-further-comments-on-decision-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we conclude we will briefly discuss a few more points which are relevant to decision trees.</p>
+<ol style="list-style-type: decimal">
+<li><p>Handling categorical variables with dummy variables can be cumbersome. Decision trees are able to get around this by splitting on categorical variables directly; simply separating all observations in one category from the rest and choosing which category to isolate based on the improvement in the fit.</p></li>
+<li><p>Similar to how they handle categorical variables decision trees can also neatly handle missing values. How this is achieved is that whenever a variable is being screened for potential split points, at each split the tree can check whether placing all the <code>NA</code>’s above/below the split gives the better fit. In this way the missing entries are actually informative rather than a nuisance.</p></li>
+<li><p>The discontinuous splitting of decision trees means they are extremely high variance estimators, even for a given level of bias. Even a few changes to observations on one of the covariates can completely change the structure of the tree if it “disrupts” one of the splits fairly high up. Although this is in general detrimental, as we see in the next chapter this is actually a beneficial thing when it comes to <em>ensemble models</em>.</p></li>
+</ol>
+</div>
+</div>
+<div id="summary-4" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Summary<a href="nonlinearity2.html#summary-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span style="color:red"><span style="font-size:30pt">Under Construction</span></span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nonlinear1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ensemble-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

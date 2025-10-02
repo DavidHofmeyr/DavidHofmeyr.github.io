@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Generalised Linear Models | Introduction to R</title>
+  <meta name="description" content="7 Generalised Linear Models | Introduction to R" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Generalised Linear Models | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Generalised Linear Models | Introduction to R" />
+  
+  
+  
+
+<meta name="author" content="David P. Hofmeyr" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="linear.html"/>
+<link rel="next" href="nonlinear1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#background-on-r"><i class="fa fa-check"></i><b>1.1</b> Background on R</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-rstudio"><i class="fa fa-check"></i><b>1.2</b> Getting started with RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#statements-expressions-and-objects"><i class="fa fa-check"></i><b>1.3</b> Statements, expressions and objects</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plots"><i class="fa fa-check"></i><b>1.4</b> Basic plots</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R scripts</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>1.6</b> R markdown</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>1.7</b> Functions</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#s:0help"><i class="fa fa-check"></i><b>1.8</b> Getting Help</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loops-and-flow"><i class="fa fa-check"></i><b>1.9</b> Loops and Flow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-frames"><i class="fa fa-check"></i><b>2.1</b> Data Frames</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>2.2</b> Importing and Exporting Data</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#data-plotting"><i class="fa fa-check"></i><b>2.3</b> Data Plotting</a></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#summary-2"><i class="fa fa-check"></i><b>2.4</b> Summary</a></li>
+<li class="chapter" data-level="2.5" data-path="working-with-data-in-r.html"><a href="working-with-data-in-r.html#exercises-3"><i class="fa fa-check"></i><b>2.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>3</b> Statistical Background</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="background.html"><a href="background.html#probability-basics"><i class="fa fa-check"></i><b>3.1</b> Probability Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="background.html"><a href="background.html#random-variables"><i class="fa fa-check"></i><b>3.2</b> Random Variables</a></li>
+<li class="chapter" data-level="3.3" data-path="background.html"><a href="background.html#samples-and-statistical-modelling"><i class="fa fa-check"></i><b>3.3</b> Samples and Statistical Modelling</a></li>
+<li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
+<li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
+<li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fundamentals1.html"><a href="fundamentals1.html#two-archetypal-problems"><i class="fa fa-check"></i><b>4.1</b> Two Archetypal Problems</a></li>
+<li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
+<li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
+<li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-and-take-aways"><i class="fa fa-check"></i><b>4.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fundamentals2.html"><a href="fundamentals2.html#a-quick-recap"><i class="fa fa-check"></i><b>5.1</b> A Quick Recap</a></li>
+<li class="chapter" data-level="5.2" data-path="fundamentals2.html"><a href="fundamentals2.html#overfitting"><i class="fa fa-check"></i><b>5.2</b> Overfitting</a></li>
+<li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
+<li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
+<li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-and-take-aways-1"><i class="fa fa-check"></i><b>5.5</b> Summary and Take-Aways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear.html"><a href="linear.html#the-linear-model"><i class="fa fa-check"></i><b>6.1</b> The Linear Model</a></li>
+<li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-and-take-aways-2"><i class="fa fa-check"></i><b>7.3</b> Summary and Take-aways</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonparametric Smoothing</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
+<li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
+<li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-4"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
+<li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-and-take-aways-3"><i class="fa fa-check"></i><b>10.4</b> Summary and Take-Aways</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="glms" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Generalised Linear Models<a href="glms.html#glms" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="math display">\[
+\def\x{\mathbf{x}}
+\def\Rr{\mathbb{R}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\def\F{\mathcal{F}}
+\def\hbbeta{\hat{\boldsymbol{\beta}}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\X{\mathbf{X}}
+\def\y{\mathbf{y}}
+\def\hg{\hat g}
+\]</span></p>
+<p>In the previous chapter we looked at the “standard” linear model, and a variety of regularised variants of the Ordinary Least Squares (OLS) model. Linear models have the advantage of being interpretable, they are computationally efficient to compute/estimate and have comparatively low variance. However, there are some obvious situations where a “standard” linear model is not appropriate</p>
+<p>Naturally when the true function <span class="math inline">\(g^*\)</span> is very far from linear, we may be sacrificing significantly on accuracy by choosing to fit a linear model. But there is something even more fundamental: What if the response variable, <span class="math inline">\(Y\)</span>, is innately unsuited to the standard regression context <span class="math inline">\(Y = g^*(X) + \epsilon\)</span>, regardless of the form of <span class="math inline">\(g^*\)</span>?</p>
+<p><strong>Example: Type II Diabetes Risk</strong></p>
+<p>Suppose we collected information from a group of people not diagnosed with Type II diabetes; pertaining to genetic, biometric and lifestyle factors. We then followed them for a period of ten years and noted whether or not they subsequently developed the condition during that period. As a statistician or data scientist we may wish to use these data in order to understand the key factors (covariates) which made people more likely to develop the condition, or to fit a model which could predict whether or not other individuals in the population are likely to become diabetic in the next decade.</p>
+<p>Our response variable is categorical: Either an individual developed the condition (category 1) or they didn’t (category 0). If we fit a linear model to predict <span class="math inline">\(Y\)</span> from the covariates we collected, the outputs/predictions from the model would not neatly fall into these categories, but would instead span some interval and could even be negative.</p>
+<p>Although there are some simple heuristics we could apply to “transform” the outputs from a linear model into such a categorisation, and perhaps you have even thought of a few yourself, it should be clear that these are not statistically sound and are certainly far from optimal. Fortunately, there is a far more elegant approach and is the topic of this chapter.</p>
+<div id="generalised-predictive-modelling" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Generalised Predictive Modelling<a href="glms.html#generalised-predictive-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now consider a more general setting than we encountered before, and take a step back from the “standard” regression context to the general predictive modelling set-up. That is, we have at our disposal a sample of observations of covariates (still called <span class="math inline">\(X\)</span>) and a response variable (still called <span class="math inline">\(Y\)</span>), and our objective is to use these data to obtain a model which we can use to predict likely/appropriate values for the response when given new sets of values for the covariates.</p>
+<p>Whether such a model is useful or not will depend strongly on how we choose to model the situation, so let’s cast our minds back to our introduction to probability and statistics. There we encountered multiple random variables, and their probability distributions, and situations where they may be appropriate for modelling. We could model our response variable as having one of <em>these</em> distributions, for example.</p>
+<div id="link-functions" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Link Functions<a href="glms.html#link-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As we are in the predictive modelling context, we are ultimately interested in how the response is related to the covariates, and how to use these relationships for prediction.</p>
+<p>As described in Chapter <a href="fundamentals1.html#fundamentals1">4</a>, predictive modelling is ultimately about modelling features of the conditional distribution(s) of <span class="math inline">\(Y|X\)</span>. In particular we may be interested in how the expected value of <span class="math inline">\(Y\)</span> depends on <span class="math inline">\(X\)</span>, however whereas in the standard regression setting where <span class="math inline">\(Y = g^*(X) + \epsilon\)</span> we did not have any limitations on what values <span class="math inline">\(E[Y|X]\)</span> could be (or at least we assumed there was no such limitation), in a more general setting we can connect the valid range of values that <span class="math inline">\(E[Y|X]\)</span> could potentially take to the outputs from a regression function through a <em>link function</em> <span class="math inline">\(h\)</span>, i.e., through a more generalised regression equation</p>
+<p><span class="math display">\[
+h\left(E[Y|X]\right) = g^*(X).
+\]</span></p>
+<ul>
+<li><p>It should be clear that the standard regression setting is a special case of this where the link function is simply the identity <span class="math inline">\(h(y) = y\)</span>.</p></li>
+<li><p>If we knew that <span class="math inline">\(E[Y|X]\)</span> had to be positive then we could set, for example, <span class="math inline">\(h(z) = \exp(z)\)</span>.</p></li>
+</ul>
+<p>There are thus two main ingredients beyond what we had for the standard regression problem:</p>
+<ul>
+<li><p>We need an appropriate probability distribution with which to model the response</p></li>
+<li><p>We need to choose an appropriate link function, <span class="math inline">\(h\)</span>.</p>
+<ul>
+<li><p>Importantly we need <span class="math inline">\(h\)</span> to be invertible so that <span class="math inline">\(E[Y|X] = h^{-1}(g^*(X))\)</span> is well defined.</p>
+<ul>
+<li>We can assume without loss of generality that <span class="math inline">\(h^{-1}\)</span> should be strictly increasing over the range of <span class="math inline">\(g^*\)</span>.</li>
+</ul></li>
+<li><p>We should choose <span class="math inline">\(h\)</span> so that the outputs of <span class="math inline">\(h^{-1}\)</span> cover only the plausible values for <span class="math inline">\(E[Y|X]\)</span>.</p>
+<ul>
+<li>For example <span class="math inline">\(h\)</span> could be the exponential function if we only want positive estimates for <span class="math inline">\(E[Y|X]\)</span> or <span class="math inline">\(h\)</span> could be the <em>logit</em> function if <span class="math inline">\(E[Y|X]\)</span> must lie between zero and one (we will come back to this when we look at logistic regression a little bit later).</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>We also have the ingredients from the standard regression problem: (i) from which collection of functions, <span class="math inline">\(\F\)</span>, should I select my estimate(s) for <span class="math inline">\(g^*\)</span>; and (ii) what loss function should we use for training/fitting/estimation?</p>
+<p>For (i), the same considerations in choosing <span class="math inline">\(\F\)</span> apply regardless of context:</p>
+<ul>
+<li><p>If we choose a limited set of functions then we may not be able to pick up on the complexity of <span class="math inline">\(g^*\)</span>, leading to bias.</p></li>
+<li><p>If <span class="math inline">\(\F\)</span> is a very <em>rich</em> collection of functions, including some with very complex structure, we may suffer from high variance in any fitted models unless we include some regularisation strategy.</p></li>
+</ul>
+<p>The particular setting where <span class="math inline">\(\F\)</span> is the collection of all linear (or affine) functions then we have what are known as <em>Generalised Linear Models (GLMs).</em></p>
+</div>
+<div id="loss-functions-from-the-likelihood" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Loss Functions from the Likelihood<a href="glms.html#loss-functions-from-the-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As statisticians and/or statistical data scientists we should always have at the back of our minds the potential of using maximum likelihood to perform estimation. The same applies in a predictive modelling context.</p>
+<p>Let’s suppose that the density function or mass function (depending on whether <span class="math inline">\(Y\)</span> is continuous or discrete) for <span class="math inline">\(Y\)</span> is given by <span class="math inline">\(f_Y\)</span> and is parameterised by its mean value which we will call <span class="math inline">\(\mu\)</span>. From an estimation perspective, maximising the log-likelihood, over choices of estimates for <span class="math inline">\(g^*\)</span>, would lead to an estimate</p>
+<p><span class="math display">\[
+\hg = \argmax_{g \in \F} \sum_{i=1}^n \log\left(f_Y(y_i | \mu = h^{-1}(g(\x_i)))\right).
+\]</span></p>
+<p>When we talk about training, however, we typically focus on minimising a loss function, and so a natural choice for <span class="math inline">\(L(y, \hat y)\)</span> can be given by <span class="math inline">\(L(y, \hat y) = -\log\left(f_Y(y_i| \mu = \hat y)\right)\)</span>.</p>
+<p>In fact it can easily be shown that maximising the Gaussian likelihood is equivalent to minimising the squared error loss function, and so we had already actually been doing this for the standard regression context.</p>
+</div>
+</div>
+<div id="classification-and-logistic-regression" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Classification and Logistic Regression<a href="glms.html#classification-and-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We spoke briefly about the classification problem when we introduced the predictive modelling framework explicitly in Chapter <a href="fundamentals1.html#fundamentals1">4</a>. In particular classification refers to the situation where the response variable is categorical, and the different categories are typically referred to as <em>classes</em> and the values of the response are often called the <em>class labels</em>. The diabetes example we described above is an example of a <em>binary classification problem</em> since there are exactly two classes. When there are more than two classes we refer to this as a <em>multiclass</em> problem and often we combine the outputs of multiple binary classification models in order to perform multiclass classification. A lot of focus, therefore, is placed on binary classification models.</p>
+<div id="logistic-regression" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Logistic Regression<a href="glms.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Logistic regression is arguably the most commonly encountered generalised linear model, and is a natural application of the generalised predictive modelling framework described above to the binary classification problem.</p>
+<p>Specifically, when a random experiment has only two potential outcomes (e.g. the allocation to one of two classes) then the situation may be modelled using a Bernoulli random variable, i.e. <span class="math inline">\(Y = 0\)</span> if allocation is to the first class and <span class="math inline">\(Y = 1\)</span> if allocation is to the second class, and we have <span class="math inline">\(P(Y=1) = 1-P(Y=0).\)</span> Recall that when we introduced the binomial and Bernoulli random variables we spoke of outcome <span class="math inline">\(1\)</span> being a “success”, however not with any implication that this outcome is necessarily favourable compared with the other outcome, only that it may represent an outcome of interest compared with the alternative. Nonetheless in the classification problem it is ultimately arbitrary which class we label with the value <span class="math inline">\(1\)</span> and which we label with the value <span class="math inline">\(0\)</span> as long as we are consistent and in the end communicate our findings appropriately.</p>
+<ul>
+<li>We return to this a little later, since different functions in R sometimes handle the allocation of which outcome is “of interest” differently.</li>
+</ul>
+<p>Now, notice that when <span class="math inline">\(Y\)</span> has a Bernoulli distribution then <span class="math inline">\(E[Y] = P(Y=1)\)</span>, and so within the GLM framework when we are modelling in terms of <span class="math inline">\(E[Y|X]\)</span> we are actually modelling in terms of <span class="math inline">\(P(Y = 1|X)\)</span>. Since <span class="math inline">\(E[Y|X]\)</span> is equal to a probability we therefore want our inverse link function to map all potential outcomes of the underlying linear model (whose output is the entire real line) to the space of probabilities. All increasing functions with this property are just the cumulative distribution functions of <em>some</em> random variables, and the most popular choices are to use the cdfs of the standard normal (leading to <em>probit</em> regression) and the so-called <em>logistic</em> distribution, leading to name logistic regression.</p>
+<p><strong>The Logistic and Logit Functions</strong></p>
+<p>The logistic function (cdf of the logistic distribution) is also commonly known as the <em>sigmoid</em> function and plays an important role in neural networks (especially earlier versions), and is given by <span class="math inline">\(f(z) = \frac{1}{1 + \exp(-z)}\)</span>, with inverse <span class="math inline">\(f^{-1}(z) = \log\left(\frac{z}{1-z}\right)\)</span> known as the <em>logit</em> function. Since it is the inverse link function which takes the form of the logistic cdf, we have</p>
+<p><span class="math display">\[\begin{align*}
+h(z) = \log\left(\frac{z}{1-z}\right), \ h^{-1}(z) = \frac{1}{1+\exp(-z)}.
+\end{align*}\]</span></p>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="glms.html#cb421-1" tabindex="-1"></a><span class="do">### Plotting the logit and logistic functions</span></span>
+<span id="cb421-2"><a href="glms.html#cb421-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb421-3"><a href="glms.html#cb421-3" tabindex="-1"></a></span>
+<span id="cb421-4"><a href="glms.html#cb421-4" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb421-5"><a href="glms.html#cb421-5" tabindex="-1"></a><span class="fu">plot</span>(z, <span class="fu">log</span>(z<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>z)), <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">h</span>(z)), <span class="at">main =</span> <span class="st">&quot;Logit link function&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
+<span id="cb421-6"><a href="glms.html#cb421-6" tabindex="-1"></a></span>
+<span id="cb421-7"><a href="glms.html#cb421-7" tabindex="-1"></a></span>
+<span id="cb421-8"><a href="glms.html#cb421-8" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb421-9"><a href="glms.html#cb421-9" tabindex="-1"></a><span class="fu">plot</span>(z, <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>z)), <span class="at">ylab =</span> <span class="fu">expression</span>(h<span class="sc">^-</span><span class="dv">1</span><span class="sc">*</span>(z)), <span class="at">main =</span> <span class="st">&quot;Logistic inverse link function&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-170-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>Estimation in Logistic Regression</strong></p>
+<p>Now, in the context of GLMs recall that we are modelling <span class="math inline">\(E[Y|X]\)</span> from the perspective that <span class="math inline">\(h^{-1}(g^*(X)) = E[Y|X]\)</span>, and we are selecting our estimate for <span class="math inline">\(g^*(X)\)</span> from the collection of all linear (affine) functions of <span class="math inline">\(X\)</span>. For convenience let’s use the notation <span class="math inline">\(q(X) = E[Y|X]\)</span>, which in the context of logistic regression is also equal to <span class="math inline">\(P(Y = 1|X)\)</span>. We may therefore write</p>
+<p><span class="math display">\[\begin{align*}
+\hat q(X) = h^{-1}\left(\hat \beta_0 + \sum_{j=1}^p \hat \beta_j X_j\right) = \frac{1}{1 + \exp(-\hat \beta_0 - \sum_{j=1}^p \hat \beta_j X_j)},
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(\hbbeta\)</span> is the solution arising from maximising the log-likelihood (or minimising the negative log-likelihood if we want to think of this as a loss function).</p>
+<p><strong>Interpreting the Logistic Regression Coefficients</strong></p>
+<p>The logit function has a convenient interpretation from the point of view of the <em>odds</em> of an outcome. The odds of an outcome is simply the ratio of the probability that the outcome occurs and the probability it doesn’t occur. For example, in the sporting context we may refer to the odds of one team winning being “five to one” which, assuming no ties or draws, means the team is five times more likely to win than to lose or that the ratio of the probability they win and the probability they lose is equal to five. Now, recall that for <span class="math inline">\(z \in (0, 1)\)</span> the logit link function is equal to <span class="math inline">\(h(z) = \log(\frac{z}{1-z})\)</span>. When applying this function to <span class="math inline">\(q(X) = P(Y=1|X)\)</span> and asserting that our estimate for <span class="math inline">\(h(q(X))\)</span> takes the form of a linear function, we have</p>
+<p><span class="math display">\[
+h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \sum_{j=1}^p \hat \beta_j X_j,
+\]</span></p>
+<p>that is, the linear function on the right hand side above represents the estimate of the log-odds of the event <span class="math inline">\(Y=1\)</span> given <span class="math inline">\(X\)</span>.</p>
+<p>So what exactly does this mean for our coefficients? Firstly, the sign of the coefficients have an analogous interpretation to what they had in the ordinary linear regression context, where now a positive coefficient tells us that the corresponding covariate is positively related to the probability that <span class="math inline">\(Y\)</span> takes the value <span class="math inline">\(1\)</span>. The magnitude in the change of this probability, however, is better interpreted from the point of view of the odds, where a one unit increase in variable <span class="math inline">\(X_j\)</span> is associated with an increases in the log-odds of <span class="math inline">\(Y\)</span> being equal to 1 by an amount equal to <span class="math inline">\(\hat \beta_j\)</span>. Alternatively, and equivalently, we could say that a one unit increase in variable <span class="math inline">\(X_j\)</span> changes the odds of <span class="math inline">\(Y = 1\)</span> by a factor <span class="math inline">\(\exp(\hat \beta_j)\)</span>.</p>
+<div id="logistic-regression-in-r" class="section level4 hasAnchor" number="7.2.1.1">
+<h4><span class="header-section-number">7.2.1.1</span> Logistic Regression in R<a href="glms.html#logistic-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The function <code>glm</code> allows us to fit generalised linear models directly from the contents of R’s base distribution. The main arguments are the same as those passed to the <code>lm</code> function, i.e. a formula, describing which is the response and which are the covariates to be used, and a data frame containing all associated variables. However, we now also need to specify which distribution (or more precisely which distribution “family”) we are using to model the response. The <code>glm</code> function has a default link function for each family of distributions, but this can also be specified. For example when fitting a logistic regression model this can be done by either setting <code>family = "binomial"</code> or <code>family = binomial(link = "logit")</code>.</p>
+<p>Let’s look at a simple example. The <code>Pima.tr</code> data set in the <code>MASS</code> package (included in R’s base distribution) contains data on a group of native American women, including whether or not they have diabetes according to the criteria set out by the World Health Organisation. Note that the <code>.tr</code> refers to “training” and there is an additional <code>Pima.te</code> data set for testing, however we will only look at this later on. First let’s load the data and see what variables are included.</p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="glms.html#cb422-1" tabindex="-1"></a><span class="do">### First load the MASS library and then the data</span></span>
+<span id="cb422-2"><a href="glms.html#cb422-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ISLR2&#39;:
+## 
+##     Boston</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="glms.html#cb426-1" tabindex="-1"></a><span class="fu">data</span>(Pima.tr)</span>
+<span id="cb426-2"><a href="glms.html#cb426-2" tabindex="-1"></a></span>
+<span id="cb426-3"><a href="glms.html#cb426-3" tabindex="-1"></a><span class="do">### We can then look at the names of the variables, and the first few entries</span></span>
+<span id="cb426-4"><a href="glms.html#cb426-4" tabindex="-1"></a><span class="fu">str</span>(Pima.tr)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    200 obs. of  8 variables:
+##  $ npreg: int  5 7 5 0 0 5 3 1 3 2 ...
+##  $ glu  : int  86 195 77 165 107 97 83 193 142 128 ...
+##  $ bp   : int  68 70 82 76 60 76 58 50 80 78 ...
+##  $ skin : int  28 33 41 43 25 27 31 16 15 37 ...
+##  $ bmi  : num  30.2 25.1 35.8 47.9 26.4 35.6 34.3 25.9 32.4 43.3 ...
+##  $ ped  : num  0.364 0.163 0.156 0.259 0.133 ...
+##  $ age  : int  24 55 35 26 23 52 25 24 63 31 ...
+##  $ type : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 2 1 1 1 2 1 1 1 2 ...</code></pre>
+<p>As always if we want more information on something we can use the <code>help</code> function. For example, full descriptions of these variables can be seen by calling <code>help(Pima.tr)</code>.</p>
+<p>Let’s now fit a logistic regression model. Note that the response variable is called <code>type</code> and is already encoded as a factor variable</p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="glms.html#cb428-1" tabindex="-1"></a><span class="do">### We can now fit a logistic regression model to the data</span></span>
+<span id="cb428-2"><a href="glms.html#cb428-2" tabindex="-1"></a>logistic_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb428-3"><a href="glms.html#cb428-3" tabindex="-1"></a><span class="co"># we could equally have used glm(type~., data = Pima.tr, family = binomial(link = &quot;logit))</span></span></code></pre></div>
+<p>The output from <code>glm</code> has many of the same contents as that from <code>lm</code>, including information on the “significance” of each of the variables. However, it should be noted that the same potential issues of multicollinearity apply in the context of all GLMs and care should always be taken when interpreting these.</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="glms.html#cb429-1" tabindex="-1"></a><span class="fu">summary</span>(logistic_mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = type ~ ., family = &quot;binomial&quot;, data = Pima.tr)
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -9.773062   1.770386  -5.520 3.38e-08 ***
+## npreg        0.103183   0.064694   1.595  0.11073    
+## glu          0.032117   0.006787   4.732 2.22e-06 ***
+## bp          -0.004768   0.018541  -0.257  0.79707    
+## skin        -0.001917   0.022500  -0.085  0.93211    
+## bmi          0.083624   0.042827   1.953  0.05087 .  
+## ped          1.820410   0.665514   2.735  0.00623 ** 
+## age          0.041184   0.022091   1.864  0.06228 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 256.41  on 199  degrees of freedom
+## Residual deviance: 178.39  on 192  degrees of freedom
+## AIC: 194.39
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>We can see that a cursory inspection shows the “significant” covariates being <code>glu</code> (a plasma glucose based measurement), <code>ped</code> (a variable derived from the diabetes status of the individuals’ relatives), and to a lesser extent <code>bmi</code> (body mass index) and <code>age</code>. The coefficients of all of these variables are also positive, showing they are positively associated with the likelihood of having diabetes. If we consider the <code>age</code> variable in isolation, we can say that (all other variables being kept fixed) with each passing year the odds of having diabetes typically increases by a factor <code>exp(coef(logistic_mod)['age']) = 1.042043</code>.</p>
+<p><strong>A Quick Aside on the “Reference” Class</strong></p>
+<p>Note that by default <code>glm</code> will treat the first factor level of the response as the so-called “reference” class, associated with <span class="math inline">\(Y = 0\)</span>, and the other class is treated as <span class="math inline">\(Y = 1\)</span>. Unless told otherwise, the levels of a factor will be sorted alphabetically if they are characters, or increasing numerically if they are numerical. So for the variable <code>Pima.tr$type</code> the first level is <code>No</code> since this is prior to <code>Yes</code> alphabetically. This is very important when it comes to interpretation since if the <code>type</code> variable had been stored differently we may have had an inverse interpretation to what is true. If you are ever unsure you can check the order of the levels of a factor variable using <code>levels(factor_variable)</code> and the first level listed will be treated as the reference. Alternatively you can tell R explicitly how to choose the reference class using the function <code>relevel(factor_variable, ref = "&lt;name of factor level you want as reference&gt;")</code>. For example</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="glms.html#cb431-1" tabindex="-1"></a><span class="do">### So as not to overwrite the contents of Pima.tr, let&#39;s copy the type variable</span></span>
+<span id="cb431-2"><a href="glms.html#cb431-2" tabindex="-1"></a>type <span class="ot">&lt;-</span> Pima.tr<span class="sc">$</span>type</span>
+<span id="cb431-3"><a href="glms.html#cb431-3" tabindex="-1"></a></span>
+<span id="cb431-4"><a href="glms.html#cb431-4" tabindex="-1"></a><span class="do">### We check how its values/levels have been ordered by default</span></span>
+<span id="cb431-5"><a href="glms.html#cb431-5" tabindex="-1"></a><span class="fu">levels</span>(type)</span></code></pre></div>
+<pre><code>## [1] &quot;No&quot;  &quot;Yes&quot;</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="glms.html#cb433-1" tabindex="-1"></a><span class="do">### Now we created a modified factor variable with the reference class changed</span></span>
+<span id="cb433-2"><a href="glms.html#cb433-2" tabindex="-1"></a><span class="do">### and check that it has worked as we want</span></span>
+<span id="cb433-3"><a href="glms.html#cb433-3" tabindex="-1"></a>type_releveled <span class="ot">&lt;-</span> <span class="fu">relevel</span>(type, <span class="at">ref =</span> <span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb433-4"><a href="glms.html#cb433-4" tabindex="-1"></a></span>
+<span id="cb433-5"><a href="glms.html#cb433-5" tabindex="-1"></a><span class="fu">levels</span>(type_releveled)</span></code></pre></div>
+<pre><code>## [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
+<p>Unfortunately different functions across different packages sometimes handle the reference class differently, and so it is always important to validate what the functions you’ve used have done before reaching any conclusions.</p>
+</div>
+<div id="evaluation-criteria-for-classification-models" class="section level4 hasAnchor" number="7.2.1.2">
+<h4><span class="header-section-number">7.2.1.2</span> Evaluation Criteria for Classification Models<a href="glms.html#evaluation-criteria-for-classification-models" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><em>Probabilistic classification models</em>, like logistic regression models, do not produce an explicit classification but rather, as we have seen, produce estimates of the <em>probability of membership</em> to class 1. Using the notation from before, it is natural to convert a probability <span class="math inline">\(q(X) = P(Y = 1|X)\)</span> into an explicit classification by simply using the rule <span class="math display">\[
+\hat Y(q(X)) = \left\{\begin{array}{ll}
+1, &amp; q(X) &gt; 0.5\\
+0, &amp; q(X) \leq 0.5.
+\end{array}\right.
+\]</span></p>
+<p>That is, we should allocate the predicted class label, <span class="math inline">\(\hat Y\)</span>, according to which of the two classes is more likely. However depending on the context we may wish to use a different <em>threshold</em> than 0.5 as we may attribute more importance to some misclassifications over others. For example, in the context of treatable but degenerative diseases, a misclassification that someone who is not afflicted (<span class="math inline">\(\hat Y = 0\)</span>) when they actually are (<span class="math inline">\(Y = 1\)</span>) may have far reaching consequences since this would delay their treatment and cause unnecessary damage. On the other hand, although there may be psychological impact if someone is diagnosed with a condition when they don’t actually have it and they may be (at least temporarily) administered treatment for a condition they do not have, often this is less problematic than the reverse. To limit the number of “false negatives” (i.e. a prediction of <span class="math inline">\(\hat Y = 0\)</span> when <span class="math inline">\(Y = 1\)</span>) we may wish to choose a lower threshold than 0.5 and conservatively propose treatment (or at least further tests) even if the estimated probability, <span class="math inline">\(\hat q(X)\)</span>, is substantially lower than 0.5. It is generally not the decision of the statistician or data scientist what threshold to use, nor what emphasis to place on the different types of misclassification, but rather it is their job to ascertain from the problem “owner” what the objectives are (recall the predictive modelling pipeline).</p>
+<p>For the same reason, just reporting the <em>classification accuracy</em> (proportion of correctly classified instances) or <em>misclassification rate</em> (proportion of incorrectly classified instances) may not be very meaningful. Returning to the context of illnesses typically the baseline <em>incidence</em> is very low. For example in our <code>Pima.tr</code> data set about one third of instances were diabetic, but in the general population the incidence of diabetes is more like one in ten. A classifier which simply says “nobody is diabetic” will be right <span class="math inline">\(90\%\)</span> of the time, i.e. will have classification accuracy of <span class="math inline">\(0.9\)</span>. But hopefully it is clear that such a classifier is useless practically.</p>
+<p>It is therefore prudent to communicate <em>which</em> classes are being correctly/incorrectly identified. For this we frequently use the <em>precision</em> and <em>recall</em> statistics. Suppose, as it was alluded to earlier, that we refer to the “reference class” as a negative prediction/outcome and the other class (class 1) as a positive prediction/outcome. The <em>confusion matrix</em> is a tabulation of all the intersections of positive and negative predictions and true classes/outcomes:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(Y = 0\)</span></th>
+<th><span class="math inline">\(Y = 1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hat Y = 0\)</span></td>
+<td>True Negative (TN)</td>
+<td>False Negative (FN)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat Y = 1\)</span></td>
+<td>False Positive (FP)</td>
+<td>True Positive (TP)</td>
+</tr>
+</tbody>
+</table>
+<p>Within this terminology the Positive/Negative refers to the prediction and the True/False refers to the actual class label.</p>
+<p>The function <code>confusionMatrix</code> (provided in the <code>caret</code> package) will produce a confusion matrix from a set of class predictions and associated true class labels. Returning to our <code>logistic_mod</code> from before, let’s make predictions on the test set <code>Pima.te</code> and for now simply use the threshold of 0.5 to decide on final class predictions. Note that the function <code>confusionMatrix</code> will treat the first level of the factor as the “positive” class, which may contrast with how <code>glm</code> treats the different factor levels. We can therefore simply be explicit about which we want to be the “positive” class:</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="glms.html#cb435-1" tabindex="-1"></a><span class="do">### As always we first load the library/ies we need</span></span>
+<span id="cb435-2"><a href="glms.html#cb435-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb435-3"><a href="glms.html#cb435-3" tabindex="-1"></a></span>
+<span id="cb435-4"><a href="glms.html#cb435-4" tabindex="-1"></a><span class="do">### When calling predict on a glm object we need to tell it whether</span></span>
+<span id="cb435-5"><a href="glms.html#cb435-5" tabindex="-1"></a><span class="do">### we want the outputs from the underlying linear model (type = &quot;link&quot;)</span></span>
+<span id="cb435-6"><a href="glms.html#cb435-6" tabindex="-1"></a><span class="do">### or to be the estimates for E[Y|X] (type = &quot;response&quot;)</span></span>
+<span id="cb435-7"><a href="glms.html#cb435-7" tabindex="-1"></a>logistic_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_mod, Pima.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb435-8"><a href="glms.html#cb435-8" tabindex="-1"></a>logistic_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_preds <span class="sc">&lt;=</span> <span class="fl">0.5</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb435-9"><a href="glms.html#cb435-9" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>))</span>
+<span id="cb435-10"><a href="glms.html#cb435-10" tabindex="-1"></a></span>
+<span id="cb435-11"><a href="glms.html#cb435-11" tabindex="-1"></a><span class="do">### We can now produce the confusion matrix, where the first argument</span></span>
+<span id="cb435-12"><a href="glms.html#cb435-12" tabindex="-1"></a><span class="do">### is the predicted classes and the second is the actual classes</span></span>
+<span id="cb435-13"><a href="glms.html#cb435-13" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_class, Pima.te<span class="sc">$</span>type, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  No Yes
+##        No  200  43
+##        Yes  23  66
+##                                           
+##                Accuracy : 0.8012          
+##                  95% CI : (0.7542, 0.8428)
+##     No Information Rate : 0.6717          
+##     P-Value [Acc &gt; NIR] : 1.116e-07       
+##                                           
+##                   Kappa : 0.5271          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.01935         
+##                                           
+##             Sensitivity : 0.6055          
+##             Specificity : 0.8969          
+##          Pos Pred Value : 0.7416          
+##          Neg Pred Value : 0.8230          
+##              Prevalence : 0.3283          
+##          Detection Rate : 0.1988          
+##    Detection Prevalence : 0.2681          
+##       Balanced Accuracy : 0.7512          
+##                                           
+##        &#39;Positive&#39; Class : Yes             
+## </code></pre>
+<p>The output from this function contains a large number of statistics which are calculated from the confusion matrix table itself. Of particular interest are</p>
+<ul>
+<li><p>The overall accuracy (slightly more than <span class="math inline">\(80\%\)</span> of test cases were correctly classified). Although, as described above, the accuracy alone may be meaningless, reported along with other statistics tells a more nuanced story</p></li>
+<li><p>The <em>No Information Rate</em> is the accuracy which would be achieved by a model which just predicts everything is in the most common class overall. The P-Value above gives an indication whether the classifier is actually doing any better than the “no information” classifier.</p></li>
+<li><p>The <em>Sensitivity</em> is defined as the proportion of actual positives which were “detected” (or predicted), and is given by TP/(TP + FN)</p></li>
+<li><p>The <em>Specificity</em> is analogously defined as the proportion of actual negatives which are correctly identified/predicted as such, and is given by TN/(TN + FP)</p></li>
+<li><p>The <em>balanced accuracy</em> is the average of sensitivity and specificity.</p></li>
+</ul>
+<p><strong>The Receiver Operating Characteristic (ROC) Curve</strong></p>
+<p>Even though the statistics computed from the confusion matrix give considerably more information than just the classification accuracy, they do require commitment to a single threshold for classification (we used 0.5 in the previous example). However it may not always be known <em>a priori</em> what the most appropriate threshold is. It should be clear, however, that as we decrease the threshold we have more probabilities exceeding the threshold, and hence more predictions of <span class="math inline">\(\hat Y = 1\)</span>. This leads to higher and higher sensitivity, but lower and lower specificity. If we increase the threshold we have the reverse occurring. What is pertinent, however, is that for each value of the threshold we obtain a pair of values for specificity and sensitivity.</p>
+<p>The <em>Receiver Operating Characteristic</em> curve is a functional representation of the relationship between specificity and sensitivity as the threshold for classification is varied (typically specificity is plotted from 1 to 0 rather than 0 to 1 so that the function is shown as increasing). If there is a threshold leading to both very high sensitivity and very high specificity then the curve will trace close to the top left of the plot before flattening out. The area underneath it will be close to one. On the other hand, a totally random classifier will have an “Area Under the Curve” (AUC) close to a half.</p>
+<p>The function <code>roc</code> in the package <code>pROC</code> will compute the ROC information given a vector of actual class labels and a vector of probabilities arising from a classifier.</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="glms.html#cb437-1" tabindex="-1"></a><span class="do">### First we load the pROC package</span></span>
+<span id="cb437-2"><a href="glms.html#cb437-2" tabindex="-1"></a><span class="fu">library</span>(pROC)</span></code></pre></div>
+<pre><code>## Type &#39;citation(&quot;pROC&quot;)&#39; for a citation.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;pROC&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     cov, smooth, var</code></pre>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="glms.html#cb441-1" tabindex="-1"></a><span class="do">### We then apply the function roc to the predictions from</span></span>
+<span id="cb441-2"><a href="glms.html#cb441-2" tabindex="-1"></a><span class="do">### our logistic regression model and the actual labels from the</span></span>
+<span id="cb441-3"><a href="glms.html#cb441-3" tabindex="-1"></a><span class="do">### test data set</span></span>
+<span id="cb441-4"><a href="glms.html#cb441-4" tabindex="-1"></a>logistic_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, logistic_preds)</span></code></pre></div>
+<pre><code>## Setting levels: control = No, case = Yes</code></pre>
+<pre><code>## Setting direction: controls &lt; cases</code></pre>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="glms.html#cb444-1" tabindex="-1"></a><span class="fu">plot</span>(logistic_roc)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-176-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="glms.html#cb445-1" tabindex="-1"></a>logistic_roc</span></code></pre></div>
+<pre><code>## 
+## Call:
+## roc.default(response = Pima.te$type, predictor = logistic_preds)
+## 
+## Data: logistic_preds in 223 controls (Pima.te$type No) &lt; 109 cases (Pima.te$type Yes).
+## Area under the curve: 0.8659</code></pre>
+<p>As alluded to above a “perfect” classifier will have an AUC of one, whereas a totally random classifier will have an AUC close to a half. As a rule of thumb, anything above 0.75 is considered good; above 0.85 is very good; and above 0.95 is excellent. The AUC of 0.8659 therefore shows that the logistic regression model achieved very good overall performance on the diabetes prediction task.</p>
+</div>
+<div id="glms-within-caret" class="section level4 hasAnchor" number="7.2.1.3">
+<h4><span class="header-section-number">7.2.1.3</span> GLMs Within caret<a href="glms.html#glms-within-caret" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If we want to estimate the performance of a GLM (e.g. a logistic regression model) we can do this very easily using <code>caret</code>. Recall that the function <code>train</code> performs all the “heavy lifting” for us, and all we have to do is tell it how to model the problem (through a formula object), which data set to use, which method to use, and ultimately what we want from it, i.e., just fit a model or do cross-validation, etc. For the last of these we use the <code>trainControl</code> function. We can also use <code>trainControl</code> to tell it what performance metrics we want using the <code>summaryFunction</code> argument. In particular if we want to produce ROC statistics we need to set <code>summaryFunction = twoClassSummary</code>, and in order for it to produce ROC statistics we need to ensure predicted probabilities are computed and saved. Let’s run ten fold cross validation to estimate the performance of the logistic regression model. Note that although we have already checked its performance on the test data (normally we would not do things in this order), but for the purpose of model selection we may wish to compare the ROC statistics as estimated by cross validation, from multiple models.</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="glms.html#cb447-1" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb447-2"><a href="glms.html#cb447-2" tabindex="-1"></a>                          <span class="at">summaryFunction =</span> twoClassSummary,</span>
+<span id="cb447-3"><a href="glms.html#cb447-3" tabindex="-1"></a>                          <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>We can now pass this as our <code>trControl</code> argument to the <code>train</code> function. However, it is important to note that (for some reason) <code>caret</code> and <code>glm</code> handle the reference class differently, essentially reversing them. As a result the sensitivity and specificity values returned by <code>train</code> will be swapped. Importantly the ROC score is independent of the ordering of factor levels.</p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="glms.html#cb448-1" tabindex="-1"></a><span class="do">### We need to tell train that we want to fit a glm and also specify the family</span></span>
+<span id="cb448-2"><a href="glms.html#cb448-2" tabindex="-1"></a>logistic_cv <span class="ot">&lt;-</span> <span class="fu">train</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>,</span>
+<span id="cb448-3"><a href="glms.html#cb448-3" tabindex="-1"></a>                     <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>),</span>
+<span id="cb448-4"><a href="glms.html#cb448-4" tabindex="-1"></a>                     <span class="at">trControl =</span> trControl,</span>
+<span id="cb448-5"><a href="glms.html#cb448-5" tabindex="-1"></a>                     <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span>
+<span id="cb448-6"><a href="glms.html#cb448-6" tabindex="-1"></a></span>
+<span id="cb448-7"><a href="glms.html#cb448-7" tabindex="-1"></a>logistic_cv<span class="sc">$</span>results</span></code></pre></div>
+<pre><code>##   parameter       ROC      Sens      Spec      ROCSD   SensSD    SpecSD
+## 1      none 0.8323129 0.8796703 0.5404762 0.08823444 0.107995 0.1937711</code></pre>
+<p>We can see that the estimated ROC is actually below what we saw on the test data set. This could be a result of bias, since our training sets used in cross validation are slightly smaller than the complete training set, but can also just be a result of the particular training/test split of the overall data set.</p>
+<p><strong>Regularisation in GLMs</strong></p>
+<p>Hopefully it is unsurprising that the same techniques we used in the linear regression framework for regularising estimation of the regression coefficients, are applicable here as well. Perhaps some of you had already expected that the package name <code>glmnet</code> refers to the fact that more than just the standard linear model framework is relevant.</p>
+<p>Let’s fit a LASSO logistic regression model to the <code>Pima.tr</code> data set, and perform cross validation to select an appropriate value for <span class="math inline">\(\lambda\)</span>. We could use either <code>glmnet</code> or <code>caret</code>, and we will use both for illustrative purposes. We can tell <code>cv.glmnet</code> to use the ROC for selection by setting <code>type.measure = "auc"</code></p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="glms.html#cb450-1" tabindex="-1"></a><span class="do">### As always we first load the library/ies we need</span></span>
+<span id="cb450-2"><a href="glms.html#cb450-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb450-3"><a href="glms.html#cb450-3" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb450-4"><a href="glms.html#cb450-4" tabindex="-1"></a></span>
+<span id="cb450-5"><a href="glms.html#cb450-5" tabindex="-1"></a><span class="do">### With glmnet recall that we do not provide a formula, but a matrix x</span></span>
+<span id="cb450-6"><a href="glms.html#cb450-6" tabindex="-1"></a><span class="do">### and vector y.</span></span>
+<span id="cb450-7"><a href="glms.html#cb450-7" tabindex="-1"></a>Pima.tr.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Pima.tr[,<span class="fu">names</span>(Pima.tr)<span class="sc">!=</span><span class="st">&#39;type&#39;</span>])</span>
+<span id="cb450-8"><a href="glms.html#cb450-8" tabindex="-1"></a>Pima.tr.y <span class="ot">&lt;-</span> Pima.tr<span class="sc">$</span>type</span>
+<span id="cb450-9"><a href="glms.html#cb450-9" tabindex="-1"></a></span>
+<span id="cb450-10"><a href="glms.html#cb450-10" tabindex="-1"></a>logistic_lasso_cv_glmnet <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(Pima.tr.x, Pima.tr.y, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
+<span id="cb450-11"><a href="glms.html#cb450-11" tabindex="-1"></a>                                      <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">&quot;auc&quot;</span>)</span>
+<span id="cb450-12"><a href="glms.html#cb450-12" tabindex="-1"></a></span>
+<span id="cb450-13"><a href="glms.html#cb450-13" tabindex="-1"></a><span class="do">### With caret, by default both lambda and alpha (the elastic net) will be</span></span>
+<span id="cb450-14"><a href="glms.html#cb450-14" tabindex="-1"></a><span class="do">### tuned. We can specify only to consider alpha = 1 (the LASSO) by choosing</span></span>
+<span id="cb450-15"><a href="glms.html#cb450-15" tabindex="-1"></a><span class="do">### our own &quot;tuning grid&quot; as follows</span></span>
+<span id="cb450-16"><a href="glms.html#cb450-16" tabindex="-1"></a></span>
+<span id="cb450-17"><a href="glms.html#cb450-17" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span>))</span>
+<span id="cb450-18"><a href="glms.html#cb450-18" tabindex="-1"></a></span>
+<span id="cb450-19"><a href="glms.html#cb450-19" tabindex="-1"></a>logistic_lasso_cv_caret <span class="ot">&lt;-</span> <span class="fu">train</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb450-20"><a href="glms.html#cb450-20" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">trControl =</span> trControl,</span>
+<span id="cb450-21"><a href="glms.html#cb450-21" tabindex="-1"></a>                           <span class="at">tuneGrid =</span> tune_grid, <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span></code></pre></div>
+<p>Although the precise values of <span class="math inline">\(\lambda\)</span> used in each of the implementations will be slightly different, and also the cross validation folds will almost certainly differ because of the random splitting, we should expect fairly similar values to have been selected.</p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="glms.html#cb451-1" tabindex="-1"></a>logistic_lasso_cv_glmnet<span class="sc">$</span>lambda.min</span></code></pre></div>
+<pre><code>## [1] 0.01528595</code></pre>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="glms.html#cb453-1" tabindex="-1"></a>logistic_lasso_cv_caret<span class="sc">$</span>bestTune<span class="sc">$</span>lambda</span></code></pre></div>
+<pre><code>## [1] 0.015625</code></pre>
+<p>We can also inspect the coefficients in the final fitted models:</p>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="glms.html#cb455-1" tabindex="-1"></a><span class="do">### For glmnet we have already seen how to extract the coefficients</span></span>
+<span id="cb455-2"><a href="glms.html#cb455-2" tabindex="-1"></a><span class="fu">coef</span>(logistic_lasso_cv_glmnet, <span class="at">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<pre><code>## 8 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##              lambda.min
+## (Intercept) -8.36944839
+## npreg        0.07721663
+## glu          0.02800434
+## bp           .         
+## skin         .         
+## bmi          0.06236416
+## ped          1.35098882
+## age          0.03425585</code></pre>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="glms.html#cb457-1" tabindex="-1"></a><span class="do">### For caret the final fitted model is stored in the field $finalModel</span></span>
+<span id="cb457-2"><a href="glms.html#cb457-2" tabindex="-1"></a><span class="fu">coef</span>(logistic_lasso_cv_caret<span class="sc">$</span>finalModel,</span>
+<span id="cb457-3"><a href="glms.html#cb457-3" tabindex="-1"></a>     <span class="at">s =</span> logistic_lasso_cv_caret<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)</span></code></pre></div>
+<pre><code>## 8 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##              s=0.015625
+## (Intercept) -8.33928046
+## npreg        0.07670067
+## glu          0.02793236
+## bp           .         
+## skin         .         
+## bmi          0.06202888
+## ped          1.34212777
+## age          0.03415721</code></pre>
+<p>Both models included/excluded the same variables, and if we recall the “significant” variables in the original fit all are included as well as <code>npreg</code> (the number of pregnancies had).</p>
+<p>Finally we can compare the performance on the test data using <code>roc</code> as we did previously.</p>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="glms.html#cb459-1" tabindex="-1"></a><span class="do">### glmnet performance</span></span>
+<span id="cb459-2"><a href="glms.html#cb459-2" tabindex="-1"></a>Pima.te.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Pima.te[,<span class="fu">names</span>(Pima.te)<span class="sc">!=</span><span class="st">&#39;type&#39;</span>])</span>
+<span id="cb459-3"><a href="glms.html#cb459-3" tabindex="-1"></a></span>
+<span id="cb459-4"><a href="glms.html#cb459-4" tabindex="-1"></a>glmnet_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_lasso_cv_glmnet, Pima.te.x,</span>
+<span id="cb459-5"><a href="glms.html#cb459-5" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span>
+<span id="cb459-6"><a href="glms.html#cb459-6" tabindex="-1"></a></span>
+<span id="cb459-7"><a href="glms.html#cb459-7" tabindex="-1"></a>roc_glmnet <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, glmnet_predictions)</span></code></pre></div>
+<pre><code>## Setting levels: control = No, case = Yes</code></pre>
+<pre><code>## Setting direction: controls &lt; cases</code></pre>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="glms.html#cb462-1" tabindex="-1"></a>roc_glmnet</span></code></pre></div>
+<pre><code>## 
+## Call:
+## roc.default(response = Pima.te$type, predictor = glmnet_predictions)
+## 
+## Data: glmnet_predictions in 223 controls (Pima.te$type No) &lt; 109 cases (Pima.te$type Yes).
+## Area under the curve: 0.866</code></pre>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="glms.html#cb464-1" tabindex="-1"></a><span class="do">### caret performance. Note that logistic regression prediction in caret does</span></span>
+<span id="cb464-2"><a href="glms.html#cb464-2" tabindex="-1"></a><span class="do">### not take type = &quot;response&quot; but rather type = &quot;prob&quot;. It also will</span></span>
+<span id="cb464-3"><a href="glms.html#cb464-3" tabindex="-1"></a><span class="do">### return a matrix with probabilities for all classes</span></span>
+<span id="cb464-4"><a href="glms.html#cb464-4" tabindex="-1"></a>caret_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_lasso_cv_caret, Pima.te,</span>
+<span id="cb464-5"><a href="glms.html#cb464-5" tabindex="-1"></a>                             <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[,<span class="dv">1</span>]</span>
+<span id="cb464-6"><a href="glms.html#cb464-6" tabindex="-1"></a></span>
+<span id="cb464-7"><a href="glms.html#cb464-7" tabindex="-1"></a>roc_caret <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, caret_predictions)</span></code></pre></div>
+<pre><code>## Setting levels: control = No, case = Yes</code></pre>
+<pre><code>## Setting direction: controls &gt; cases</code></pre>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="glms.html#cb467-1" tabindex="-1"></a>roc_caret</span></code></pre></div>
+<pre><code>## 
+## Call:
+## roc.default(response = Pima.te$type, predictor = caret_predictions)
+## 
+## Data: caret_predictions in 223 controls (Pima.te$type No) &gt; 109 cases (Pima.te$type Yes).
+## Area under the curve: 0.8662</code></pre>
+<p>Probably unsurprisingly the performance of both models is very similar, and also very similar to the original fitted model. As we will see in the exercises, however, when the number of variables is considerably larger the benefits of regularisation really begin to show.</p>
+</div>
+</div>
+<div id="multiclass-classification" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Multiclass Classification<a href="glms.html#multiclass-classification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Logistic regression is a binary classification model, and does not directly allow us to handle problems with more than two classes. As mentioned previously, however, one can combine multiple binary classification models in order to perform multiclass classification. In fact there are multiple ways in which this can be done. Here we discuss a probabilistic approach which relies on the <em>independence of irrelevant alternatives</em> (IIA) assumption. This assumption essentially says that for any three classes, let’s call them A, B and C for now, the <em>odds</em> of seeing class A over B is independent of whether or not C is also an option. Let’s consider the example of travelling to university. The odds that someone walks to university tomorrow instead of cycling, i.e. <span class="math inline">\(P(walk)/P(cycle)\)</span>, should be the same whether or not taking the bus is also an option. The usefulness of this assumption is that if it holds for all classes we can fit models which estimate <span class="math inline">\(P(walk)/P(cycle)\)</span> and <span class="math inline">\(P(bus)/P(cycle)\)</span> and use these to find <span class="math inline">\(P(bus)/P(walk) = (P(bus)/P(cycle))/(P(walk)/P(cycle))\)</span>, and using the fact that all probabilities must sum to one we can also evaluate <span class="math inline">\(P(walk), P(cycle)\)</span> and <span class="math inline">\(P(bus)\)</span>.</p>
+<p>In <em>multinomial regression</em> in general we have a total of <span class="math inline">\(K\)</span> classes, say <span class="math inline">\(1, 2, ..., K\)</span>. One of these is set to the reference class (let’s say <span class="math inline">\(K\)</span> is chosen as the reference class for this multiclass situation), and then a logistic regression model is fit comparing each of classes <span class="math inline">\(1, 2, ..., K-1\)</span> with class <span class="math inline">\(K\)</span>. Using a similar notation from before, let’s suppose that <span class="math inline">\(q_i(X) = P(Y = i|X, Y \in \{i, K\})\)</span>, i.e. the probability of class <span class="math inline">\(i\)</span> <em>instead of class</em> <span class="math inline">\(k\)</span>, given <span class="math inline">\(X\)</span>. The logistic regression model comparing class <span class="math inline">\(i\)</span> with class <span class="math inline">\(K\)</span> will provide an estimate for <span class="math inline">\(q_i(X)\)</span>, say <span class="math inline">\(\hat q_i(X)\)</span>. Very importantly <span class="math inline">\(\hat q_i(X)\)</span> is not an estimate for <span class="math inline">\(P(Y = i|X)\)</span> since only classes <span class="math inline">\(i\)</span> and <span class="math inline">\(K\)</span> were available as options. However, the independence of irrelevant alternatives allows us to resolve the issue of how to combine these since they tell us <em>how much more/less preferable each class is than class</em> <span class="math inline">\(K\)</span>. We also know that by definition <span class="math inline">\(q_K(X) = 1\)</span>. Combining this with the fact that all probabilities must sum to one, we have</p>
+<p><span class="math display">\[\begin{align*}
+q_i(X) &amp;= P(Y=i|X, Y\in\{i, K\}) = \frac{P(Y = i|X)}{P(Y=i|X)+P(Y=K|X)}\\
+\Rightarrow P(Y=i|X) &amp;= \frac{q_i(X)}{1-q_i(X)}P(Y=K|X)\\
+\Rightarrow 1 &amp;= P(Y=K|X)\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)}{1-q_j(X)}\right)\\
+\Rightarrow P(Y=K|X) &amp;= \frac{1}{1 + \sum_{j=1}^{K-1}\frac{q_j(X)}{1-q_j(X)}},\\
+P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)}{1-q_j(X)}\right)}, i \not = K.
+\end{align*}\]</span></p>
+<p>Recall also that the logarithms of the quantities <span class="math inline">\(q_i(X)/(1-q_i(X))\)</span> are just the linear components of each of the logistic regression models.</p>
+<p><strong>(Another) Aside on Assumptions</strong></p>
+<p>Although IIA is stated as an assumption, practically we can still fit a multinomial regression model even if the assumption is not valid. It will still produce predictions. However, whether or not we should “trust” the probabilities as reflecting the actual likelihood of each class is called into question if the IIA may not hold.</p>
+<p><strong>Multinomial Regression in R</strong></p>
+<p>It is hopefully apparent that one could relatively easily use the function <code>glm(family = "binomial")</code> multiple times in order to fit a multinomial regression model. However, this would require us to code-up all the necessary splitting of the data into different subsets to fit all the <span class="math inline">\(K-1\)</span> models, and then carefully managing the predictions from all of these models to produce a final prediction. Fortunately the <code>glmnet</code> package has the <code>family = multinomial</code> option already implemented for us. However it is worth pointing out that how this is implemented is slightly different, since a model is fit for every class and not for all but the reference class. Since the models are fit with regularisation, the reference class can be favoured/unfavoured somewhat arbitrarily. The <code>glmnet</code> package resolves this issue by estimating a full <span class="math inline">\(K\)</span> binary classification models, under constraints which ensure the probabilities sum to one.</p>
+<p>We will use the <code>satimage</code> data set, which can be loaded from the <code>pmlbr</code> package. This package does not actually store its data sets, but rather provides functionality for downloading them from the Penn Machine Learning Benchmarks repository [<a href="https://epistasislab.github.io/pmlb/" class="uri">https://epistasislab.github.io/pmlb/</a>]. Let’s start by loading the package and “fetching” the data set.</p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="glms.html#cb469-1" tabindex="-1"></a><span class="do">### Loading library</span></span>
+<span id="cb469-2"><a href="glms.html#cb469-2" tabindex="-1"></a><span class="fu">library</span>(pmlbr)</span>
+<span id="cb469-3"><a href="glms.html#cb469-3" tabindex="-1"></a></span>
+<span id="cb469-4"><a href="glms.html#cb469-4" tabindex="-1"></a><span class="do">### The fetch_data function will download and load data sets by name</span></span>
+<span id="cb469-5"><a href="glms.html#cb469-5" tabindex="-1"></a>satimage <span class="ot">&lt;-</span> <span class="fu">fetch_data</span>(<span class="st">&quot;satimage&quot;</span>)</span></code></pre></div>
+<pre><code>## Download successful.</code></pre>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="glms.html#cb471-1" tabindex="-1"></a><span class="do">### All data sets loaded using pmlbr have the response variable named &quot;target&quot;</span></span>
+<span id="cb471-2"><a href="glms.html#cb471-2" tabindex="-1"></a><span class="fu">table</span>(satimage<span class="sc">$</span>target)</span></code></pre></div>
+<pre><code>## 
+##    1    2    3    4    5    7 
+## 1533  703 1358  626  707 1508</code></pre>
+<p>Now let’s begin by splitting the data into training and test sets using <code>caret</code>’s <code>createDataPartition</code></p>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="glms.html#cb473-1" tabindex="-1"></a><span class="do">### The function createDataPartition requires the response variable</span></span>
+<span id="cb473-2"><a href="glms.html#cb473-2" tabindex="-1"></a><span class="do">### and will split the data to approximately respect the class</span></span>
+<span id="cb473-3"><a href="glms.html#cb473-3" tabindex="-1"></a><span class="do">### proportions. Let&#39;s select 70% of the data for training and</span></span>
+<span id="cb473-4"><a href="glms.html#cb473-4" tabindex="-1"></a><span class="do">### model selection and leave 30% for testing.</span></span>
+<span id="cb473-5"><a href="glms.html#cb473-5" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(satimage<span class="sc">$</span>target, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb473-6"><a href="glms.html#cb473-6" tabindex="-1"></a></span>
+<span id="cb473-7"><a href="glms.html#cb473-7" tabindex="-1"></a><span class="do">### We can now index the satimage data set to produce train and test sets</span></span>
+<span id="cb473-8"><a href="glms.html#cb473-8" tabindex="-1"></a><span class="do">### and since we will be using glmnet we explicitly produce the matrix</span></span>
+<span id="cb473-9"><a href="glms.html#cb473-9" tabindex="-1"></a><span class="do">### of covariates and vector of responses</span></span>
+<span id="cb473-10"><a href="glms.html#cb473-10" tabindex="-1"></a>satimage.tr.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage[train_ix,<span class="fu">names</span>(satimage)<span class="sc">!=</span><span class="st">&quot;target&quot;</span>])</span>
+<span id="cb473-11"><a href="glms.html#cb473-11" tabindex="-1"></a>satimage.tr.y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target[train_ix])</span>
+<span id="cb473-12"><a href="glms.html#cb473-12" tabindex="-1"></a></span>
+<span id="cb473-13"><a href="glms.html#cb473-13" tabindex="-1"></a>satimage.te.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage[<span class="sc">-</span>train_ix,<span class="fu">names</span>(satimage)<span class="sc">!=</span><span class="st">&quot;target&quot;</span>])</span>
+<span id="cb473-14"><a href="glms.html#cb473-14" tabindex="-1"></a>satimage.te.y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target[<span class="sc">-</span>train_ix])</span>
+<span id="cb473-15"><a href="glms.html#cb473-15" tabindex="-1"></a></span>
+<span id="cb473-16"><a href="glms.html#cb473-16" tabindex="-1"></a>glmnet_satimage <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(satimage.tr.x, satimage.tr.y, <span class="at">family =</span> <span class="st">&quot;multinomial&quot;</span>)</span>
+<span id="cb473-17"><a href="glms.html#cb473-17" tabindex="-1"></a></span>
+<span id="cb473-18"><a href="glms.html#cb473-18" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(<span class="fu">predict</span>(glmnet_satimage, satimage.te.x, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)),</span>
+<span id="cb473-19"><a href="glms.html#cb473-19" tabindex="-1"></a>                satimage.te.y)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   1   2   3   4   5   7
+##          1 451   0   6   5  13   0
+##          2   0 190   0   0   7   0
+##          3   8   0 375  43   0  14
+##          4   0   1  23  69   4  31
+##          5   6  14   1   1 155  14
+##          7   0   0   2  79  23 393
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.847           
+##                  95% CI : (0.8301, 0.8628)
+##     No Information Rate : 0.2412          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.8097          
+##                                           
+##  Mcnemar&#39;s Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5 Class: 7
+## Sensitivity            0.9699  0.92683   0.9214  0.35025  0.76733   0.8695
+## Specificity            0.9836  0.99594   0.9573  0.96592  0.97914   0.9295
+## Pos Pred Value         0.9495  0.96447   0.8523  0.53906  0.81152   0.7907
+## Neg Pred Value         0.9904  0.99133   0.9785  0.92889  0.97294   0.9588
+## Prevalence             0.2412  0.10633   0.2111  0.10218  0.10477   0.2344
+## Detection Rate         0.2339  0.09855   0.1945  0.03579  0.08039   0.2038
+## Detection Prevalence   0.2464  0.10218   0.2282  0.06639  0.09907   0.2578
+## Balanced Accuracy      0.9767  0.96138   0.9393  0.65808  0.87323   0.8995</code></pre>
+</div>
+<div id="class-imbalance" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Class Imbalance<a href="glms.html#class-imbalance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We briefly touched on the fact that sometimes we may see certain classification errors as more important than others, and also that classification accuracy may be totally misleading if one of the classes represents the vast majority of cases. Although we described some metrics which are more appropriate than classification accuracy when it comes to the assessment of a model, we have not yet considered how we actually go about improving these metrics in the context of <em>class imbalance</em>.</p>
+<p>Although some models are innately better at handling class imbalance than others, there are also some generic approaches which can be applied (almost) universally.</p>
+<div id="case-weights" class="section level4 hasAnchor" number="7.2.3.1">
+<h4><span class="header-section-number">7.2.3.1</span> Case Weights<a href="glms.html#case-weights" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When a model is fit by minimising the training error (perhaps with the addition of a penalty term for inducing regularisation),</p>
+<p><span class="math display">\[\begin{align*}
+\hg = \argmin_{g \in \F} \frac{1}{n}\sum_{i=1}^n L(y_i, g(\x_i)) + P(g),
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(P(g)\)</span> is just an arbitrary penalty term (which could be simply equal to zero if no regularisation is being applied), a straightforward approach for emphasising the relative importance of some observations (e.g. those in the minority class(es)) over others, is with the use of case weights (or simply “weights”) in the objecive function. Recall that when we introduced regularisation through penalisation, we thought of the optimisation above as placing some of its effort on minimising the training error and some of its effort ensuring the penalty term doesn’t get too large. We could take this a step further and think of the above objective as <span class="math inline">\(\frac{1}{n} L(y_1, g(\x_1)) + \frac{1}{n} L(y_2, g(\x_2)) + ... + \frac{1}{n} L(y_n, g(\x_n)) + P(g)\)</span>, i.e. that an equal effort is placed on minimising each term in the training error and the rest of the effort is placed on the penalty term. But there is nothing saying we have to devote the same amount of effort to each term in the training error. We could instead have a vector of weights <span class="math inline">\(\mathbf{w} = (w_1, ..., w_n)^\top\)</span>, one for each observation in our training set, where we allocate larger weights to those observations we want to focus on more. Our fitted model is then given by</p>
+<p><span class="math display">\[\begin{align*}
+\hg = \argmin_{g \in \F} \frac{1}{\sum_{j=1}^n w_j}\sum_{i=1}^n w_i L(y_i, g(\x_i)) + P(g).
+\end{align*}\]</span></p>
+<p>In <code>caret</code>’s <code>train</code> function one can set the case weights using the argument <code>weights</code>. However, it is important to note that not all models implemented will allow this and so it is necessary to check the documentation [<a href="https://topepo.github.io/caret/train-models-by-tag.html#accepts-case-weights" class="uri">https://topepo.github.io/caret/train-models-by-tag.html#accepts-case-weights</a>].</p>
+</div>
+<div id="updownsampling" class="section level4 hasAnchor" number="7.2.3.2">
+<h4><span class="header-section-number">7.2.3.2</span> Up/Downsampling<a href="glms.html#updownsampling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Similar in spirit to setting the weights for the training observations is the process of either <em>upsampling</em> (i.e. replicating some of the) observations in the minority class(es) or <em>downsampling</em> (i.e. removing some of the) observations in the majority class(es). There are also combinations of up/downsampling as well as a number of methods which create artificial training cases in the minority classes by adding a small amount of noise to the upsampled points.</p>
+</div>
+<div id="changing-classification-threshold" class="section level4 hasAnchor" number="7.2.3.3">
+<h4><span class="header-section-number">7.2.3.3</span> Changing Classification Threshold<a href="glms.html#changing-classification-threshold" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Although not all models directly allow for this, whenever a model produces a probability for membership to a class, like a logistic regression model, the threshold for classification can always be modified from the natural “classify to the class with the highest probability” approach.</p>
+<p><strong>Example: Credit Default</strong></p>
+<p>The <code>Default</code> data set in the <code>ISLR2</code> package is a simulated data set containing pronounced class imbalance, and supposed to represent a typical (bank) credit default scenario. There are only three covariates, <code>student</code>: a factor variable stating whether the hypothetical individuals are students or not; <code>balance</code>: the average balance on the individuals’ credit card after monthly payment; and <code>income</code>: the individuals’ annual income.</p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="glms.html#cb475-1" tabindex="-1"></a><span class="do">### First load the package, which will automatically load the data set</span></span>
+<span id="cb475-2"><a href="glms.html#cb475-2" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb475-3"><a href="glms.html#cb475-3" tabindex="-1"></a></span>
+<span id="cb475-4"><a href="glms.html#cb475-4" tabindex="-1"></a><span class="do">### The data set has quite pronounced imbalance, with only about 3.3% in the minority class</span></span>
+<span id="cb475-5"><a href="glms.html#cb475-5" tabindex="-1"></a><span class="fu">table</span>(Default<span class="sc">$</span>default)</span></code></pre></div>
+<pre><code>## 
+##   No  Yes 
+## 9667  333</code></pre>
+<p>As always we will start by splitting the data set into training and test sets. We will then fit logistic regression models as normal and then by setting the case weights. We will also explore up and downsampling, and modifying the threshold, in the exercises.</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="glms.html#cb477-1" tabindex="-1"></a><span class="do">### First we split the data and fit a baseline logistic regression model to</span></span>
+<span id="cb477-2"><a href="glms.html#cb477-2" tabindex="-1"></a><span class="do">### the training set</span></span>
+<span id="cb477-3"><a href="glms.html#cb477-3" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(Default<span class="sc">$</span>default, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb477-4"><a href="glms.html#cb477-4" tabindex="-1"></a></span>
+<span id="cb477-5"><a href="glms.html#cb477-5" tabindex="-1"></a>Default.tr <span class="ot">&lt;-</span> Default[train_ix,]</span>
+<span id="cb477-6"><a href="glms.html#cb477-6" tabindex="-1"></a>Default.te <span class="ot">&lt;-</span> Default[<span class="sc">-</span>train_ix,]</span>
+<span id="cb477-7"><a href="glms.html#cb477-7" tabindex="-1"></a></span>
+<span id="cb477-8"><a href="glms.html#cb477-8" tabindex="-1"></a></span>
+<span id="cb477-9"><a href="glms.html#cb477-9" tabindex="-1"></a>logistic_default0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(default<span class="sc">~</span>., Default.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb477-10"><a href="glms.html#cb477-10" tabindex="-1"></a></span>
+<span id="cb477-11"><a href="glms.html#cb477-11" tabindex="-1"></a><span class="do">### We can now assess its test performance</span></span>
+<span id="cb477-12"><a href="glms.html#cb477-12" tabindex="-1"></a>logistic_default0_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_default0, Default.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb477-13"><a href="glms.html#cb477-13" tabindex="-1"></a>logistic_default0_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_default0_preds <span class="sc">&gt;</span>.<span class="dv">5</span> , <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb477-14"><a href="glms.html#cb477-14" tabindex="-1"></a>                                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb477-15"><a href="glms.html#cb477-15" tabindex="-1"></a></span>
+<span id="cb477-16"><a href="glms.html#cb477-16" tabindex="-1"></a><span class="do">### Using the natural cutoff of 0.5 leads to poor sensitivity</span></span>
+<span id="cb477-17"><a href="glms.html#cb477-17" tabindex="-1"></a><span class="do">### and not great balanced accuracy</span></span>
+<span id="cb477-18"><a href="glms.html#cb477-18" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_default0_class, Default.te<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   No  Yes
+##        No  2889   69
+##        Yes   11   30
+##                                           
+##                Accuracy : 0.9733          
+##                  95% CI : (0.9669, 0.9788)
+##     No Information Rate : 0.967           
+##     P-Value [Acc &gt; NIR] : 0.02642         
+##                                           
+##                   Kappa : 0.4173          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 1.856e-10       
+##                                           
+##             Sensitivity : 0.30303         
+##             Specificity : 0.99621         
+##          Pos Pred Value : 0.73171         
+##          Neg Pred Value : 0.97667         
+##              Prevalence : 0.03301         
+##          Detection Rate : 0.01000         
+##    Detection Prevalence : 0.01367         
+##       Balanced Accuracy : 0.64962         
+##                                           
+##        &#39;Positive&#39; Class : Yes             
+## </code></pre>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="glms.html#cb479-1" tabindex="-1"></a><span class="do">### A high AUC score suggests there is a cutoff which</span></span>
+<span id="cb479-2"><a href="glms.html#cb479-2" tabindex="-1"></a><span class="do">### would give better balanced accuracy</span></span>
+<span id="cb479-3"><a href="glms.html#cb479-3" tabindex="-1"></a>logistic_default0_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Default.te<span class="sc">$</span>default, logistic_default0_preds)</span></code></pre></div>
+<pre><code>## Setting levels: control = No, case = Yes</code></pre>
+<pre><code>## Setting direction: controls &lt; cases</code></pre>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="glms.html#cb482-1" tabindex="-1"></a>logistic_default0_roc</span></code></pre></div>
+<pre><code>## 
+## Call:
+## roc.default(response = Default.te$default, predictor = logistic_default0_preds)
+## 
+## Data: logistic_default0_preds in 2900 controls (Default.te$default No) &lt; 99 cases (Default.te$default Yes).
+## Area under the curve: 0.9424</code></pre>
+<p>The fact that the AUC is high suggests, as mentioned above, that there is a cutoff at which the balanced accuracy would be substantially better. It is very important, however, not to use the test set in order to choose this threshold since this would constitute data leakage. One can, however, of course use the ROC curve from the training set in order to select a threshold and there are multiple criteria beyond balanced accuracy which combine both sensitivity and specificity. It should also be noted that choosing the threshold to optimise a certain criterion represents an additional model parameter, and so increases the complexity of the model.</p>
+<p>To see the effect of modifying the case weights, we will simply set the weights for points in each class inversely proportional to the size of the class. This has the effect that the “effort” in optimisation is applied equally to each class, as opposed to equally to each observation.</p>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="glms.html#cb484-1" tabindex="-1"></a><span class="do">### Weights</span></span>
+<span id="cb484-2"><a href="glms.html#cb484-2" tabindex="-1"></a>wts <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">nrow</span>(Default.tr))</span>
+<span id="cb484-3"><a href="glms.html#cb484-3" tabindex="-1"></a>wts[Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sum</span>(Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb484-4"><a href="glms.html#cb484-4" tabindex="-1"></a>wts[Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;No&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sum</span>(Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;No&quot;</span>)</span>
+<span id="cb484-5"><a href="glms.html#cb484-5" tabindex="-1"></a></span>
+<span id="cb484-6"><a href="glms.html#cb484-6" tabindex="-1"></a>logistic_default_wt <span class="ot">&lt;-</span> <span class="fu">glm</span>(default<span class="sc">~</span>., Default.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
+<span id="cb484-7"><a href="glms.html#cb484-7" tabindex="-1"></a>                               <span class="at">weights =</span> wts)</span>
+<span id="cb484-8"><a href="glms.html#cb484-8" tabindex="-1"></a></span>
+<span id="cb484-9"><a href="glms.html#cb484-9" tabindex="-1"></a>logistic_default_wt_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_default_wt, Default.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb484-10"><a href="glms.html#cb484-10" tabindex="-1"></a>logistic_default_wt_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_default_wt_preds <span class="sc">&gt;</span>.<span class="dv">5</span> , <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb484-11"><a href="glms.html#cb484-11" tabindex="-1"></a>                                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb484-12"><a href="glms.html#cb484-12" tabindex="-1"></a></span>
+<span id="cb484-13"><a href="glms.html#cb484-13" tabindex="-1"></a><span class="do">### The sensitivity is now far superior to what it was when we didn&#39;t include</span></span>
+<span id="cb484-14"><a href="glms.html#cb484-14" tabindex="-1"></a><span class="do">### case weights</span></span>
+<span id="cb484-15"><a href="glms.html#cb484-15" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_default_wt_class, Default.te<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   No  Yes
+##        No  2525   11
+##        Yes  375   88
+##                                           
+##                Accuracy : 0.8713          
+##                  95% CI : (0.8588, 0.8831)
+##     No Information Rate : 0.967           
+##     P-Value [Acc &gt; NIR] : 1               
+##                                           
+##                   Kappa : 0.2737          
+##                                           
+##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
+##                                           
+##             Sensitivity : 0.88889         
+##             Specificity : 0.87069         
+##          Pos Pred Value : 0.19006         
+##          Neg Pred Value : 0.99566         
+##              Prevalence : 0.03301         
+##          Detection Rate : 0.02934         
+##    Detection Prevalence : 0.15438         
+##       Balanced Accuracy : 0.87979         
+##                                           
+##        &#39;Positive&#39; Class : Yes             
+## </code></pre>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="glms.html#cb486-1" tabindex="-1"></a><span class="do">### The AUC score is very similar, however, and this is largely due to the fact</span></span>
+<span id="cb486-2"><a href="glms.html#cb486-2" tabindex="-1"></a><span class="do">### that for a simple model like logistic regression changing the case weights</span></span>
+<span id="cb486-3"><a href="glms.html#cb486-3" tabindex="-1"></a><span class="do">### will have a very similar effect to changing the threshold for classification</span></span>
+<span id="cb486-4"><a href="glms.html#cb486-4" tabindex="-1"></a><span class="do">### and hence the entire ROC curve will be very similar to that from the</span></span>
+<span id="cb486-5"><a href="glms.html#cb486-5" tabindex="-1"></a><span class="do">### previous model</span></span>
+<span id="cb486-6"><a href="glms.html#cb486-6" tabindex="-1"></a>logistic_default_wt_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Default.te<span class="sc">$</span>default, logistic_default_wt_preds)</span></code></pre></div>
+<pre><code>## Setting levels: control = No, case = Yes</code></pre>
+<pre><code>## Setting direction: controls &lt; cases</code></pre>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="glms.html#cb489-1" tabindex="-1"></a>logistic_default_wt_roc</span></code></pre></div>
+<pre><code>## 
+## Call:
+## roc.default(response = Default.te$default, predictor = logistic_default_wt_preds)
+## 
+## Data: logistic_default_wt_preds in 2900 controls (Default.te$default No) &lt; 99 cases (Default.te$default Yes).
+## Area under the curve: 0.942</code></pre>
+</div>
+</div>
+</div>
+<div id="summary-and-take-aways-2" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Summary and Take-aways<a href="glms.html#summary-and-take-aways-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section</p>
+<ul>
+<li><p>we saw how the standard regression framework can be modified with the use of <em>link functions</em> in order to provide a general approach for predictive modelling, when treating the response as though <span class="math inline">\(Y = g^*(X) + \epsilon\)</span> is inappropriate</p></li>
+<li><p>we focused on the specific examples of logistic regression for binary classification and its extension multiclass classification with multinomial regression</p></li>
+<li><p>we explored numerous assessment criteria for classification models</p></li>
+<li><p>we considered how class imbalance can make “detection” of the minority classes challenging, and explored remedies such as case weights and up/down sampling</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nonlinear1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
