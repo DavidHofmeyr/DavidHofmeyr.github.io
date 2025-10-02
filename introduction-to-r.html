@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction to R</title>
-  <meta name="description" content="Introduction to R" />
+  <title>MATH482: Statistical Learning</title>
+  <meta name="description" content="MATH482: Statistical Learning" />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction to R" />
+  <meta property="og:title" content="MATH482: Statistical Learning" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction to R" />
+  <meta name="twitter:title" content="MATH482: Statistical Learning" />
   
   
   
@@ -163,7 +163,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
 <li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
 <li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
-<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
 <ul>
@@ -221,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MATH482: Statistical Learning</a>
           </h1>
         </div>
 
@@ -230,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Introduction to R</h1>
+<h1 class="title">MATH482: Statistical Learning</h1>
 <p class="author"><em>David P. Hofmeyr</em></p>
 </div>
 <div id="introduction-to-r" class="section level1 hasAnchor" number="1">
@@ -948,7 +947,8 @@ f(x; \mu, \sigma) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-{\frac{(x - \mu)^2}{2
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="introduction-to-r.html#cb151-1" tabindex="-1"></a><span class="fu">max</span>(x)</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="introduction-to-r.html#cb153-1" tabindex="-1"></a><span class="fu">sqrt</span>(x)</span></code></pre></div>
-<pre><code>##  [1]      NaN 0.000000 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427 3.000000 3.162278</code></pre>
+<pre><code>##  [1]      NaN 0.000000 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427 3.000000
+## [12] 3.162278</code></pre>
 <p>For the <code>sqrt(x)</code> command, we were giving a warning saying <code>NaNs</code> had been produced. NaN is short for “Not a Number” and in this instance they have occurred because we tried to calculate the square-root of a negative number (which do not exist as real numbers). Once an element becomes Not a Number, that status will persist throughout the rest of our calculations. For example:</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="introduction-to-r.html#cb155-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
 <span id="cb155-2"><a href="introduction-to-r.html#cb155-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">10</span>)</span>
@@ -1297,7 +1297,7 @@ conditional on whether or not a statement is true. The truth of a statement need
 <span id="cb207-5"><a href="introduction-to-r.html#cb207-5" tabindex="-1"></a>} <span class="cf">else</span>{</span>
 <span id="cb207-6"><a href="introduction-to-r.html#cb207-6" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Good Afternoon&quot;</span>)</span>
 <span id="cb207-7"><a href="introduction-to-r.html#cb207-7" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;Good Morning&quot;</code></pre>
+<pre><code>## [1] &quot;Good Afternoon&quot;</code></pre>
 <p>If you run this code multiple times you will see that sometimes it prints “Good Morning” and sometimes “Good Afternoon”. What do you think the following code will do?</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="introduction-to-r.html#cb209-1" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">18</span>)</span>
 <span id="cb209-2"><a href="introduction-to-r.html#cb209-2" tabindex="-1"></a></span>
@@ -1401,8 +1401,8 @@ typically, only one or two parameters (iterators) changing each time.</p>
 <span id="cb215-21"><a href="introduction-to-r.html#cb215-21" tabindex="-1"></a>}</span>
 <span id="cb215-22"><a href="introduction-to-r.html#cb215-22" tabindex="-1"></a></span>
 <span id="cb215-23"><a href="introduction-to-r.html#cb215-23" tabindex="-1"></a>fib</span></code></pre></div>
-<pre><code>##  [1]      1      1      2      3      5      8     13     21     34     55     89    144    233    377    610    987   1597   2584   4181   6765  10946
-## [22]  17711  28657  46368  75025 121393 196418 317811 514229 832040</code></pre>
+<pre><code>##  [1]      1      1      2      3      5      8     13     21     34     55     89    144    233    377    610
+## [16]    987   1597   2584   4181   6765  10946  17711  28657  46368  75025 121393 196418 317811 514229 832040</code></pre>
 <p>In the above our iterator moved through the vector <code>3:n</code> and R ran the chunk of code inside the <code>{}</code> brackets once for each such value of the iterator. We can equally “loop” over the contents of any other vector. For example, we can create a vector containing the names of the planets in the solar system, and then iterate over these.</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="introduction-to-r.html#cb217-1" tabindex="-1"></a>planet_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Mercury&quot;</span>, <span class="st">&quot;Venus&quot;</span>, <span class="st">&quot;Earth&quot;</span>,</span>
 <span id="cb217-2"><a href="introduction-to-r.html#cb217-2" tabindex="-1"></a>        <span class="st">&quot;Mars&quot;</span>, <span class="st">&quot;Jupiter&quot;</span>, <span class="st">&quot;Saturn&quot;</span>,</span>

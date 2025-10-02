@@ -74,7 +74,6 @@ joint-and-conditional-distributions
 moments-of-multivariate-random-variables
 measures-of-dependence
 summary-3
-exercises-4
 fundamentals1
 two-archetypal-problems
 some-preliminaries

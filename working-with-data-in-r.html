@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Working with Data in R | Introduction to R</title>
-  <meta name="description" content="2 Working with Data in R | Introduction to R" />
+  <title>2 Working with Data in R | MATH482: Statistical Learning</title>
+  <meta name="description" content="2 Working with Data in R | MATH482: Statistical Learning" />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Working with Data in R | Introduction to R" />
+  <meta property="og:title" content="2 Working with Data in R | MATH482: Statistical Learning" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Working with Data in R | Introduction to R" />
+  <meta name="twitter:title" content="2 Working with Data in R | MATH482: Statistical Learning" />
   
   
   
@@ -163,7 +163,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
 <li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
 <li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
-<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
 <ul>
@@ -221,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MATH482: Statistical Learning</a>
           </h1>
         </div>
 
@@ -341,7 +340,8 @@ a variable which categorises the planets in this way</p>
 <span id="cb254-2"><a href="working-with-data-in-r.html#cb254-2" tabindex="-1"></a>                    <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb254-3"><a href="working-with-data-in-r.html#cb254-3" tabindex="-1"></a></span>
 <span id="cb254-4"><a href="working-with-data-in-r.html#cb254-4" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
-<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;   &quot;gas_giant&quot;   &quot;ice_giant&quot;   &quot;ice_giant&quot;</code></pre>
+<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;   &quot;gas_giant&quot;   &quot;ice_giant&quot;  
+## [8] &quot;ice_giant&quot;</code></pre>
 <p>Now, as it is currently <code>planets$type</code> is a vector of character objects, and although it clearly delineates which items are in each of the categories we can explicitly convert
 this to a factor using <code>as.factor()</code></p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="working-with-data-in-r.html#cb256-1" tabindex="-1"></a>planets<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(planets<span class="sc">$</span>type)</span>

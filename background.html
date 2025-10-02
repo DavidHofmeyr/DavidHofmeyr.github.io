@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Statistical Background | Introduction to R</title>
-  <meta name="description" content="3 Statistical Background | Introduction to R" />
+  <title>3 Statistical Background | MATH482: Statistical Learning</title>
+  <meta name="description" content="3 Statistical Background | MATH482: Statistical Learning" />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Statistical Background | Introduction to R" />
+  <meta property="og:title" content="3 Statistical Background | MATH482: Statistical Learning" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Statistical Background | Introduction to R" />
+  <meta name="twitter:title" content="3 Statistical Background | MATH482: Statistical Learning" />
   
   
   
@@ -163,7 +163,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
 <li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
 <li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
-<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
 <ul>
@@ -221,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MATH482: Statistical Learning</a>
           </h1>
         </div>
 
@@ -764,8 +763,8 @@ P(l &lt; \theta - \hat \theta &lt; u) = 0.95.
 <span id="cb335-26"><a href="background.html#cb335-26" tabindex="-1"></a><span class="do">### Compute the 95% confidence interval using the quantile function</span></span>
 <span id="cb335-27"><a href="background.html#cb335-27" tabindex="-1"></a><span class="do">### on the distribution of 2*skew(x) - skews_B</span></span>
 <span id="cb335-28"><a href="background.html#cb335-28" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
-<pre><code>##        2.5%       97.5% 
-## -0.07491774  0.75574581</code></pre>
+<pre><code>##      2.5%     97.5% 
+## 0.2422004 1.1211485</code></pre>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="background.html#cb337-1" tabindex="-1"></a><span class="do">### We can also visualise the estimated distribution whose quantiles define</span></span>
 <span id="cb337-2"><a href="background.html#cb337-2" tabindex="-1"></a><span class="do">### confidence interval</span></span>
 <span id="cb337-3"><a href="background.html#cb337-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="at">main =</span> <span class="st">&quot;Bootstrap Distribution&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
@@ -885,28 +884,6 @@ E[X] = (E[X_1], E[X_2], ..., E[X_p])^\top = (\mu_{X_1}, ..., \mu_{X_p})^\top = \
 <li><p>The central limit theorem and the bootstrap are practical ways of approximating confidence intervals and for quantifying estimation uncertainty</p></li>
 </ul></li>
 <li><p>We can study the relationships between different variables in our data by treating each observation as a random vector (multivariate random variable).</p></li>
-</ul>
-</div>
-<div id="exercises-4" class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> Exercises<a href="background.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p>The <code>runif(n, min, max)</code> function will generate <code>n</code> random numbers which are uniformly distributed on the interval <code>min</code> to <code>max</code> (i.e. each realisation is equally likely at every value between <code>min</code> and <code>max</code>).</p>
-<ul>
-<li><p>Write a function which will generate <code>n</code> random vectors which are uniformly distributed in the rectangle with corners <code>(x_min, y_min)</code>, <code>(x_min, y_max)</code>, <code>(x_max, y_max)</code>, <code>(x_max, y_min)</code>.</p></li>
-<li><p>Generate <code>n</code> random</p></li>
-</ul></li>
-</ul>
-<ol style="list-style-type: decimal">
-<li>Redo the bootstrap but using apply</li>
-<li>Run the bootstrap many times to see the coverage of the CI</li>
-<li>Describe and do the “t” bootstrap</li>
-<li>Bootstrap dependence?</li>
-</ol>
-<ul>
-<li><p>When we cover the main topic of this module, predictive modelling, we will be interested in modelling the dependence between random variables so that we can use these models to “predict” likely values of one of them, given values for the other(s). It may therefore be useful to actually try to ascertain whether there is a relationship at all, since otherwise trying to model the relationship is actually a fruitless endeavour. <em>Permutation tests</em> are ways of assessing whether or not a relationship is actually present or not.</p>
-<ul>
-<li></li>
-</ul></li>
 </ul>
 
 </div>
