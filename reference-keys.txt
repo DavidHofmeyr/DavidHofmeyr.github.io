@@ -87,7 +87,7 @@ model-training
 regression
 fitting-regression-models
 a-concrete-example-simple-linear-regression
-summary-and-take-aways
+summary-4
 fundamentals2
 a-quick-recap
 overfitting
@@ -101,7 +101,7 @@ cross-validation
 cross-validation-in-r
 covariance-based-estimates-of-in-sample-error
 test-sets
-summary-and-take-aways-1
+summary-5
 linear
 the-linear-model
 a-quick-aside-on-assumptions
@@ -123,10 +123,7 @@ visualising-the-lasso-shrinkage-and-selection
 the-lasso-in-r
 ridge-or-lasso
 alternatives
-the-elastic-net
-the-relaxed-lasso
-subset-selection
-summary-and-practical-considerations
+summary-6
 glms
 generalised-predictive-modelling
 link-functions
@@ -141,7 +138,7 @@ class-imbalance
 case-weights
 updownsampling
 changing-classification-threshold
-summary-and-take-aways-2
+summary-7
 nonlinear1
 basis-expansions
 examples-of-bases
@@ -159,7 +156,7 @@ fitting-and-pruning-decision-trees
 regression-trees
 classification-trees
 some-further-comments-on-decision-trees
-summary-4
+summary-8
 ensemble-models
 bagging
 variance-reduction-through-model-averaging
@@ -171,4 +168,4 @@ boosting
 gradient-boosting
 extreme-gradient-boosting
 variable-importance
-summary-and-take-aways-3
+summary-9
