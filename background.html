@@ -163,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
 <li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
 <li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
 <ul>
@@ -765,7 +766,7 @@ P(l &lt; \theta - \hat \theta &lt; u) = 0.95.
 <span id="cb335-27"><a href="background.html#cb335-27" tabindex="-1"></a><span class="do">### on the distribution of 2*skew(x) - skews_B</span></span>
 <span id="cb335-28"><a href="background.html#cb335-28" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## 0.3019718 1.0932400</code></pre>
+## 0.3586657 1.3283905</code></pre>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="background.html#cb337-1" tabindex="-1"></a><span class="do">### We can also visualise the estimated distribution whose quantiles define</span></span>
 <span id="cb337-2"><a href="background.html#cb337-2" tabindex="-1"></a><span class="do">### confidence interval</span></span>
 <span id="cb337-3"><a href="background.html#cb337-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="at">main =</span> <span class="st">&quot;Bootstrap Distribution&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
@@ -788,7 +789,7 @@ P(l &lt; \theta - \hat \theta &lt; u) = 0.95.
 <p>Suppose as before that our sample is denoted <span class="math inline">\(x_1, ..., x_n\)</span>, and suppose that we are modelling the population distribution with a particular form (e.g. binomial, Poisson, etc.) which has parameter <span class="math inline">\(\theta\)</span>, and for simplicity to start let’s assume the distribution is discrete. To begin we may not, as alluded to above, know how to go about obtaining an estimate for <span class="math inline">\(\theta\)</span> from our sample.</p>
 <p>The principle of maximum likelihood simply says that the most appropriate estimate is that which, <em>if it were the true value of</em> <span class="math inline">\(\theta\)</span>, would maximise the probability of seeing our particular sample. In other words one should choose the estimate which is <em>most consistent</em> with the sample observations. If we write <span class="math inline">\(P(X=x|\theta) = p_X(x|\theta)\)</span> to be the probability mass function for a particular setting of <span class="math inline">\(\theta\)</span> then the probability of observing our sample is <span class="math display">\[
 P(X_1 = x_1, ..., X_n = x_n|\theta) = \prod_{i=1}^n p_X(x_i|\theta),
-\]</span> where <span class="math inline">\(\prod\)</span> is the notation for the <em>product</em> of all the terms, i.e. of multiplying them all together. The reason we can turn the probability <span class="math inline">\(P(X_1 = x_1, ..., X_n = x_n|\theta)\)</span> into this form is (i) we assume the variables <span class="math inline">\(X_1, ..., X_n\)</span> are independent, and so we can turn <span class="math inline">\(P(X_1 = x_1, ..., X_n = x_n|\theta)\)</span> into <span class="math inline">\(P(X_1=x_1|\theta)P(X_2=x_2|\theta)...P(X_n=x_n|\theta)\)</span> and (ii) we assume the observations came from the same population, i.e. <span class="math inline">\(P(X_i=x_i|\theta) = p_X(x_i|\theta)\)</span> for each <span class="math inline">\(i\)</span>. We refer to this term above as the <em>likeilhood</em> of the data, and is a function of <span class="math inline">\(\theta\)</span>.</p>
+\]</span> where <span class="math inline">\(\prod\)</span> is the notation for the <em>product</em> of all the terms, i.e. of multiplying them all together. The reason we can turn the probability <span class="math inline">\(P(X_1 = x_1, ..., X_n = x_n|\theta)\)</span> into this form is (i) we assume the variables <span class="math inline">\(X_1, ..., X_n\)</span> are independent, and so we can turn <span class="math inline">\(P(X_1 = x_1, ..., X_n = x_n|\theta)\)</span> into <span class="math inline">\(P(X_1=x_1|\theta)P(X_2=x_2|\theta)...P(X_n=x_n|\theta)\)</span> and (ii) we assume the observations came from the same population, i.e. <span class="math inline">\(P(X_i=x_i|\theta) = p_X(x_i|\theta)\)</span> for each <span class="math inline">\(i\)</span>. We refer to this term above as the <em>likelihood</em> of the data, and is a function of <span class="math inline">\(\theta\)</span>.</p>
 <p>Now, it is typically hard to maximise products directly, but a useful trick allows us to circumvent this. Specifically for two real numbers <span class="math inline">\(z_1, z_2\)</span> we have <span class="math inline">\(z_1 &gt; z_2 \iff \log(z_1) &gt; \log(z_2)\)</span> and as a result finding the maximum value of <span class="math inline">\(\prod_{i=1}^n p_X(x_i|\theta)\)</span> is the same as finding the maximum value of <span class="math inline">\(\log\left(\prod_{i=1}^n p_X(x_i|\theta)\right) = \sum_{i=1}^n \log(p_X(x_i|\theta))\)</span>, and maximising sums is far more straightforward. This trick is essentially universal and so you will often see reference not to the likelihood but to the log-likelihood.</p>
 <p>The convenience of looking first at discrete distributions is ultimately because it is sensible to talk about the probability of our sample, whereas we know that the probability of <em>any</em> specific value of a continuous random variable is zero. However, we can refer to the likelihood as the probability of seeing a sample “like” our sample, i.e., one with observations very close to our own. This allows us to simply use the density function in place of the mass function, and so our likelihood becomes <span class="math inline">\(\prod_{i=1}^n f_X(x_i|\theta)\)</span>.</p>
 <p>For the purpose of this course we essentially just need the concept of maximum likelihood, and will not be deriving any solutions to maximum likelihood problems. However you will encounter optimisation as a topic in your <em>Foundations of Data Science and AI</em> module (and those on the MSc stats will be very familiar with the concept already).</p>
@@ -886,6 +887,41 @@ E[X] = (E[X_1], E[X_2], ..., E[X_p])^\top = (\mu_{X_1}, ..., \mu_{X_p})^\top = \
 </ul></li>
 <li><p>We can study the relationships between different variables in our data by treating each observation as a random vector (multivariate random variable).</p></li>
 </ul>
+</div>
+<div id="exercises-4" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Exercises<a href="background.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Refer to the <code>airquality</code> data set.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>Obtain a 95% confidence interval for the mean maximum daily temperature in the month of August. Use the Central Limit Theorem to approximate the confidence interval.</p></li>
+<li><p>Do the same for the month of May. What would you say about the findings?</p></li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>One of the assumptions of the Central Limit Theorem is that the population distribution has finite variance. However, not all random variables have finite variance. The <span class="math inline">\(t\)</span> distributions with degrees of freedom less than two have infinite (or undefined if <code>df</code> is less than or equal to one) variance.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>Generate a sample of size <code>n = 100</code> from a <span class="math inline">\(t\)</span> distribution with <code>df = 1.1</code>. (Use <code>help(rt)</code> to find details) and use this to obtain an approximate 95% confidence interval for the mean of the distribution.</p></li>
+<li><p>Repeat a. above 1000 times, and compute the proportion of times the value zero (the mean of the population distribution) lies within the confidence interval. Does this align with what you expect?</p></li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Repeat the Q2. but using a bootstrap based approach to compute the confidence intervals. Is there a difference?</p></li>
+<li><p>Refer to the bootstrap experiment where we obtained an approximate confidence interval for the skewness, using a sample from a Gamma distribution.</p></li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li><p>Re-do this experiment but by using the function <code>apply</code> instead of using a <code>for</code> loop. (Remember you can always use <code>help(&lt;function name&gt;)</code> to find information on how to use a function in R)</p></li>
+<li><p>Create a loop which repeats the entire experiment (sampling from the Gamma distribution and then applying the bootstrap to approximate a confidence interval) 1000 times. Calculate the proportion of these in which the true value of the population skewness lies inside the confidence interval. Is this more or less what you expected? Try changing the value of <code>n</code> to each of 20 and 200. Did your observations, in terms of the proportion of confidence intervals which contained the true skewness, change?</p></li>
+</ol>
+<!-- -->
+<ol start="5" style="list-style-type: decimal">
+<li>In this chapter we only looked at applying the bootstrap to a univariate sample. What is often of interest, however, is whether or not two variables are dependent or not.</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li><p>Write an R function which takes arguments <code>x</code>, <code>y</code>, <code>B</code>and <code>alpha</code>; where <code>x</code> and <code>y</code> should each be samples with the same number of observations (seen as samples of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> respectively). The function should return an approximate <span class="math inline">\((1-2\alpha)\times 100\%\)</span> confidence interval for the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Use this function to obtain an approximate <span class="math inline">\(99\%\)</span> confidence interval for the correlation between wind speed and temperature, using the <code>airquality</code> data set. You should use <code>B=1000</code> bootstrap samples. Would you say that there is strong evidence that the true correlation is negative based on this?</p></li>
+</ol>
 
 </div>
 </div>
