@@ -163,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
 <li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
 <li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
 <ul>
@@ -341,14 +342,15 @@ a variable which categorises the planets in this way</p>
 <span id="cb254-2"><a href="working-with-data-in-r.html#cb254-2" tabindex="-1"></a>                    <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb254-3"><a href="working-with-data-in-r.html#cb254-3" tabindex="-1"></a></span>
 <span id="cb254-4"><a href="working-with-data-in-r.html#cb254-4" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
-<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;   &quot;gas_giant&quot;   &quot;ice_giant&quot;  
-## [8] &quot;ice_giant&quot;</code></pre>
+<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;  
+## [6] &quot;gas_giant&quot;   &quot;ice_giant&quot;   &quot;ice_giant&quot;</code></pre>
 <p>Now, as it is currently <code>planets$type</code> is a vector of character objects, and although it clearly delineates which items are in each of the categories we can explicitly convert
 this to a factor using <code>as.factor()</code></p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="working-with-data-in-r.html#cb256-1" tabindex="-1"></a>planets<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(planets<span class="sc">$</span>type)</span>
 <span id="cb256-2"><a href="working-with-data-in-r.html#cb256-2" tabindex="-1"></a></span>
 <span id="cb256-3"><a href="working-with-data-in-r.html#cb256-3" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
-<pre><code>## [1] terrestrial terrestrial terrestrial terrestrial gas_giant   gas_giant   ice_giant   ice_giant  
+<pre><code>## [1] terrestrial terrestrial terrestrial terrestrial gas_giant   gas_giant  
+## [7] ice_giant   ice_giant  
 ## Levels: gas_giant ice_giant terrestrial</code></pre>
 <p>Now when we print the <code>type</code> variable we see that it now has what are called <code>Levels</code>, which are the
 labels which give meaning to the category codes. In this example we named the codes with meaningful
@@ -619,7 +621,7 @@ time and is often an iterative process.</p>
 <div id="scatter-plots" class="section level3 hasAnchor" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Scatter Plots<a href="working-with-data-in-r.html#scatter-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A scatter plot is a plot of the values of two variables against one another. When we used the function <code>plot()</code> in the previous chapter, even though we primarily used this to visualise the graphs of functions, what was actually happening is that R was plotting pairs of values of the vector of arguments to the function and the function evaluations against one another (either as points, <code>type = "p"</code> or as a line, <code>type = "l"</code>). Since in general we don’t expect two measured (rather than <em>derived</em>) variables in a data set to fit precisely to some functional form using a scatter plot of two measured variables as points is useful for getting a sense of the <em>general trend</em> in the relationship between the variables, or perhaps to see whether or not there is a relationship at all.</p>
-<p>For example, we may expect that there will be a negative relationship between temperature and wind speed since wind moves from low pressure systems (high temperature) to high pressure (low temperature).</p>
+<p>For example, we may expect that there will be a negative relationship between temperature and wind speed since (i) high wind speeds may have a direct cooling effect; and (ii) high pressure systems (low temperatures) produce high wind speeds</p>
 <div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="working-with-data-in-r.html#cb307-1" tabindex="-1"></a><span class="fu">plot</span>(airquality<span class="sc">$</span>Wind, airquality<span class="sc">$</span>Temp,</span>
 <span id="cb307-2"><a href="working-with-data-in-r.html#cb307-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Wind Speed&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Temperature&quot;</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-119-1.png" width="576" style="display: block; margin: auto;" /></p>

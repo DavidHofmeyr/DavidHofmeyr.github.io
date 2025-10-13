@@ -163,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="background.html"><a href="background.html#statistical-estimation"><i class="fa fa-check"></i><b>3.4</b> Statistical Estimation</a></li>
 <li class="chapter" data-level="3.5" data-path="background.html"><a href="background.html#multivariate-random-variables-and-dependence"><i class="fa fa-check"></i><b>3.5</b> Multivariate Random Variables and Dependence</a></li>
 <li class="chapter" data-level="3.6" data-path="background.html"><a href="background.html#summary-3"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="background.html"><a href="background.html#exercises-4"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="fundamentals1.html"><a href="fundamentals1.html"><i class="fa fa-check"></i><b>4</b> The Fundamentals of Predictive Modelling I</a>
 <ul>
@@ -808,49 +809,48 @@ simple polynomial models on the <code>cars</code> data set we explored previousl
 <div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="fundamentals2.html#cb363-1" tabindex="-1"></a><span class="do">### First we load the package</span></span>
 <span id="cb363-2"><a href="fundamentals2.html#cb363-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
 <pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## Need help getting started? Try the R Graphics Cookbook: https://r-graphics.org</code></pre>
 <pre><code>## Loading required package: lattice</code></pre>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="fundamentals2.html#cb367-1" tabindex="-1"></a><span class="do">### the function train() is the main workhorse of the package</span></span>
-<span id="cb367-2"><a href="fundamentals2.html#cb367-2" tabindex="-1"></a><span class="do">### it takes formula and data arguments, just as we saw with the</span></span>
-<span id="cb367-3"><a href="fundamentals2.html#cb367-3" tabindex="-1"></a><span class="do">### lm() function. Also, since it offers broad functionality we</span></span>
-<span id="cb367-4"><a href="fundamentals2.html#cb367-4" tabindex="-1"></a><span class="do">### to specify what method (type of model) we want to be using.</span></span>
-<span id="cb367-5"><a href="fundamentals2.html#cb367-5" tabindex="-1"></a><span class="do">### Finally we need to provide an argument called trControl which</span></span>
-<span id="cb367-6"><a href="fundamentals2.html#cb367-6" tabindex="-1"></a><span class="do">### tells train() what exactly we want to do, i.e., just fit one</span></span>
-<span id="cb367-7"><a href="fundamentals2.html#cb367-7" tabindex="-1"></a><span class="do">### model on all the data, or do CV (or something else like the</span></span>
-<span id="cb367-8"><a href="fundamentals2.html#cb367-8" tabindex="-1"></a><span class="do">### bootstrap) for model selection. The trControl object is</span></span>
-<span id="cb367-9"><a href="fundamentals2.html#cb367-9" tabindex="-1"></a><span class="do">### produced by the function trainControl. For details on this</span></span>
-<span id="cb367-10"><a href="fundamentals2.html#cb367-10" tabindex="-1"></a><span class="do">### have a look at help(trainControl), remembering to ensure the</span></span>
-<span id="cb367-11"><a href="fundamentals2.html#cb367-11" tabindex="-1"></a><span class="do">### caret package is loaded.</span></span>
-<span id="cb367-12"><a href="fundamentals2.html#cb367-12" tabindex="-1"></a></span>
-<span id="cb367-13"><a href="fundamentals2.html#cb367-13" tabindex="-1"></a><span class="do">### let&#39;s start by setting up the trControl object. We want to do</span></span>
-<span id="cb367-14"><a href="fundamentals2.html#cb367-14" tabindex="-1"></a><span class="do">### cross validation, and let&#39;s choose 10 folds</span></span>
-<span id="cb367-15"><a href="fundamentals2.html#cb367-15" tabindex="-1"></a></span>
-<span id="cb367-16"><a href="fundamentals2.html#cb367-16" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
-<span id="cb367-17"><a href="fundamentals2.html#cb367-17" tabindex="-1"></a></span>
-<span id="cb367-18"><a href="fundamentals2.html#cb367-18" tabindex="-1"></a><span class="do">### For the models linked directly by caret we can perform CV</span></span>
-<span id="cb367-19"><a href="fundamentals2.html#cb367-19" tabindex="-1"></a><span class="do">### across multiple &quot;versions&quot; of the model using a single call.</span></span>
-<span id="cb367-20"><a href="fundamentals2.html#cb367-20" tabindex="-1"></a><span class="do">### However simple polynomial regression is not linked directly</span></span>
-<span id="cb367-21"><a href="fundamentals2.html#cb367-21" tabindex="-1"></a><span class="do">### and so we cannot directly use a single call to run CV for</span></span>
-<span id="cb367-22"><a href="fundamentals2.html#cb367-22" tabindex="-1"></a><span class="do">### all polynomial degrees, and will have to do these in a loop</span></span>
-<span id="cb367-23"><a href="fundamentals2.html#cb367-23" tabindex="-1"></a></span>
-<span id="cb367-24"><a href="fundamentals2.html#cb367-24" tabindex="-1"></a>CV_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb367-25"><a href="fundamentals2.html#cb367-25" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
-<span id="cb367-26"><a href="fundamentals2.html#cb367-26" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb367-27"><a href="fundamentals2.html#cb367-27" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
-<span id="cb367-28"><a href="fundamentals2.html#cb367-28" tabindex="-1"></a>  CV_results[[d]] <span class="ot">&lt;-</span> <span class="fu">train</span>(form, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb367-29"><a href="fundamentals2.html#cb367-29" tabindex="-1"></a>                           <span class="at">data =</span> cars, <span class="at">trControl =</span> trControl)</span>
-<span id="cb367-30"><a href="fundamentals2.html#cb367-30" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="fundamentals2.html#cb366-1" tabindex="-1"></a><span class="do">### the function train() is the main workhorse of the package</span></span>
+<span id="cb366-2"><a href="fundamentals2.html#cb366-2" tabindex="-1"></a><span class="do">### it takes formula and data arguments, just as we saw with the</span></span>
+<span id="cb366-3"><a href="fundamentals2.html#cb366-3" tabindex="-1"></a><span class="do">### lm() function. Also, since it offers broad functionality we</span></span>
+<span id="cb366-4"><a href="fundamentals2.html#cb366-4" tabindex="-1"></a><span class="do">### to specify what method (type of model) we want to be using.</span></span>
+<span id="cb366-5"><a href="fundamentals2.html#cb366-5" tabindex="-1"></a><span class="do">### Finally we need to provide an argument called trControl which</span></span>
+<span id="cb366-6"><a href="fundamentals2.html#cb366-6" tabindex="-1"></a><span class="do">### tells train() what exactly we want to do, i.e., just fit one</span></span>
+<span id="cb366-7"><a href="fundamentals2.html#cb366-7" tabindex="-1"></a><span class="do">### model on all the data, or do CV (or something else like the</span></span>
+<span id="cb366-8"><a href="fundamentals2.html#cb366-8" tabindex="-1"></a><span class="do">### bootstrap) for model selection. The trControl object is</span></span>
+<span id="cb366-9"><a href="fundamentals2.html#cb366-9" tabindex="-1"></a><span class="do">### produced by the function trainControl. For details on this</span></span>
+<span id="cb366-10"><a href="fundamentals2.html#cb366-10" tabindex="-1"></a><span class="do">### have a look at help(trainControl), remembering to ensure the</span></span>
+<span id="cb366-11"><a href="fundamentals2.html#cb366-11" tabindex="-1"></a><span class="do">### caret package is loaded.</span></span>
+<span id="cb366-12"><a href="fundamentals2.html#cb366-12" tabindex="-1"></a></span>
+<span id="cb366-13"><a href="fundamentals2.html#cb366-13" tabindex="-1"></a><span class="do">### let&#39;s start by setting up the trControl object. We want to do</span></span>
+<span id="cb366-14"><a href="fundamentals2.html#cb366-14" tabindex="-1"></a><span class="do">### cross validation, and let&#39;s choose 10 folds</span></span>
+<span id="cb366-15"><a href="fundamentals2.html#cb366-15" tabindex="-1"></a></span>
+<span id="cb366-16"><a href="fundamentals2.html#cb366-16" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb366-17"><a href="fundamentals2.html#cb366-17" tabindex="-1"></a></span>
+<span id="cb366-18"><a href="fundamentals2.html#cb366-18" tabindex="-1"></a><span class="do">### For the models linked directly by caret we can perform CV</span></span>
+<span id="cb366-19"><a href="fundamentals2.html#cb366-19" tabindex="-1"></a><span class="do">### across multiple &quot;versions&quot; of the model using a single call.</span></span>
+<span id="cb366-20"><a href="fundamentals2.html#cb366-20" tabindex="-1"></a><span class="do">### However simple polynomial regression is not linked directly</span></span>
+<span id="cb366-21"><a href="fundamentals2.html#cb366-21" tabindex="-1"></a><span class="do">### and so we cannot directly use a single call to run CV for</span></span>
+<span id="cb366-22"><a href="fundamentals2.html#cb366-22" tabindex="-1"></a><span class="do">### all polynomial degrees, and will have to do these in a loop</span></span>
+<span id="cb366-23"><a href="fundamentals2.html#cb366-23" tabindex="-1"></a></span>
+<span id="cb366-24"><a href="fundamentals2.html#cb366-24" tabindex="-1"></a>CV_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb366-25"><a href="fundamentals2.html#cb366-25" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb366-26"><a href="fundamentals2.html#cb366-26" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb366-27"><a href="fundamentals2.html#cb366-27" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
+<span id="cb366-28"><a href="fundamentals2.html#cb366-28" tabindex="-1"></a>  CV_results[[d]] <span class="ot">&lt;-</span> <span class="fu">train</span>(form, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb366-29"><a href="fundamentals2.html#cb366-29" tabindex="-1"></a>                           <span class="at">data =</span> cars, <span class="at">trControl =</span> trControl)</span>
+<span id="cb366-30"><a href="fundamentals2.html#cb366-30" tabindex="-1"></a>}</span></code></pre></div>
 <p>Setting the seed before each call to the function <code>train</code> was important
 here so that the same CV folds were used each time. In the output of
 <code>train</code> is a list with a field <code>results</code> which contains the performance
 statistics from the cross validation. The result <code>RMSE</code> (Root Mean
 Squared Error) is the square root of the estimate of expected prediction
 error based on the squared error loss function.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="fundamentals2.html#cb368-1" tabindex="-1"></a>CV_results[[<span class="dv">1</span>]]<span class="sc">$</span>results<span class="sc">$</span>RMSE</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="fundamentals2.html#cb367-1" tabindex="-1"></a>CV_results[[<span class="dv">1</span>]]<span class="sc">$</span>results<span class="sc">$</span>RMSE</span></code></pre></div>
 <pre><code>## [1] 15.11234</code></pre>
 <p>If we wish to choose the model which gave the lowest expected prediction
 error, we can inspect them all</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="fundamentals2.html#cb370-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="fundamentals2.html#cb369-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))</span></code></pre></div>
 <pre><code>## [1] 15.11234 14.91259 14.93013 14.83372 15.93608</code></pre>
 <p>We can see that the degree four polynomial gave the smallest estimated
 expected prediction error. However, the differences when compared with
@@ -898,38 +898,38 @@ E_{\tilde Y_1, ..., \tilde Y_n}\left[\frac{1}{n}\sum_{i=1}^n L(\tilde Y_i, \hg(\
 <p>The first term above is just the training error. The second term above may be seen as a “penalty” to avoid selecting models likely to overfit. Models with too much flexibility will fit very closely to the sample, meaning that the fitted values would “follow” the values of the response if we instead had a different set of realisations (a different sample). This leads to a high covariance between each <span class="math inline">\(Y_i\)</span> and its corresponding fitted value, <span class="math inline">\(\hg(\x_i)\)</span>. The more flexibility, the more able the model will be able to follow the variations in the data, leading to higher covariance between the actual responses and the fitted values from the model.</p>
 <p>This doesn’t yet, however, tell us about how to compute or estimate these covariances. It turns out, however, that for some models we can obtain analytical expressions for the covariance between the response and fitted values. For example in a simplified setting (like the linear and quadratic models we have seen) the quantity <span class="math inline">\(\sum_{i=1}^n Cov(Y_i \hat Y_i)\)</span> is equal to <span class="math inline">\(\sigma^2_{\epsilon}\)</span> multiplied by the number of parameters in the model (the model <em>degrees of freedom</em>). As long as we can obtain a reasonable estimate for <span class="math inline">\(\sigma^2_{\epsilon}\)</span> we can use this to obtain estimates of the expected in-sample error and use this as an alternative to something like cross validation to select/tune a model. As a rule-of-thumb estimating <span class="math inline">\(\sigma^2_{\epsilon}\)</span> with the quantity <span class="math inline">\(\frac{1}{n - df(\hg^*)}\sum_{i=1}^n(y_i - \hg^*(\x_i))^2\)</span>, where <span class="math inline">\(\hg^*\)</span> is the most (or one of the most) flexible models which has been fit and <span class="math inline">\(df(\hg^*)\)</span> is its degrees of freedom.</p>
 <p>Let’s apply this to the <code>cars</code> data set to see how it compares with cross validation</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="fundamentals2.html#cb372-1" tabindex="-1"></a><span class="do">### Let&#39;s create a vector to store the training errors of</span></span>
-<span id="cb372-2"><a href="fundamentals2.html#cb372-2" tabindex="-1"></a><span class="do">### the polynomial models for d = 1, 2, ..., 5</span></span>
-<span id="cb372-3"><a href="fundamentals2.html#cb372-3" tabindex="-1"></a>tr_err <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">5</span>)</span>
-<span id="cb372-4"><a href="fundamentals2.html#cb372-4" tabindex="-1"></a></span>
-<span id="cb372-5"><a href="fundamentals2.html#cb372-5" tabindex="-1"></a><span class="do">### Now we can loop of the the degree of the polynomial</span></span>
-<span id="cb372-6"><a href="fundamentals2.html#cb372-6" tabindex="-1"></a><span class="do">### as before</span></span>
-<span id="cb372-7"><a href="fundamentals2.html#cb372-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
-<span id="cb372-8"><a href="fundamentals2.html#cb372-8" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
-<span id="cb372-9"><a href="fundamentals2.html#cb372-9" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(form, <span class="at">data =</span> cars)</span>
-<span id="cb372-10"><a href="fundamentals2.html#cb372-10" tabindex="-1"></a>  </span>
-<span id="cb372-11"><a href="fundamentals2.html#cb372-11" tabindex="-1"></a>  tr_err[d] <span class="ot">&lt;-</span> <span class="fu">mean</span>((mod<span class="sc">$</span>fitted.values <span class="sc">-</span> cars<span class="sc">$</span>dist)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb372-12"><a href="fundamentals2.html#cb372-12" tabindex="-1"></a>}</span>
-<span id="cb372-13"><a href="fundamentals2.html#cb372-13" tabindex="-1"></a></span>
-<span id="cb372-14"><a href="fundamentals2.html#cb372-14" tabindex="-1"></a><span class="do">### Now we can use the training error from the most flexible</span></span>
-<span id="cb372-15"><a href="fundamentals2.html#cb372-15" tabindex="-1"></a><span class="do">### to estimate the residual variance</span></span>
-<span id="cb372-16"><a href="fundamentals2.html#cb372-16" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cars)</span>
-<span id="cb372-17"><a href="fundamentals2.html#cb372-17" tabindex="-1"></a></span>
-<span id="cb372-18"><a href="fundamentals2.html#cb372-18" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> tr_err[<span class="dv">5</span>]<span class="sc">/</span>(n <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">*</span>n</span>
-<span id="cb372-19"><a href="fundamentals2.html#cb372-19" tabindex="-1"></a><span class="co"># Can you see why this is the appropriate estimate?</span></span>
-<span id="cb372-20"><a href="fundamentals2.html#cb372-20" tabindex="-1"></a></span>
-<span id="cb372-21"><a href="fundamentals2.html#cb372-21" tabindex="-1"></a><span class="do">### Now let&#39;s estime the expected in-sample error</span></span>
-<span id="cb372-22"><a href="fundamentals2.html#cb372-22" tabindex="-1"></a><span class="do">### for each model</span></span>
-<span id="cb372-23"><a href="fundamentals2.html#cb372-23" tabindex="-1"></a>eise <span class="ot">&lt;-</span> tr_err <span class="sc">+</span> sig2_hat<span class="sc">*</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span>n</span>
-<span id="cb372-24"><a href="fundamentals2.html#cb372-24" tabindex="-1"></a></span>
-<span id="cb372-25"><a href="fundamentals2.html#cb372-25" tabindex="-1"></a>eise</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="fundamentals2.html#cb371-1" tabindex="-1"></a><span class="do">### Let&#39;s create a vector to store the training errors of</span></span>
+<span id="cb371-2"><a href="fundamentals2.html#cb371-2" tabindex="-1"></a><span class="do">### the polynomial models for d = 1, 2, ..., 5</span></span>
+<span id="cb371-3"><a href="fundamentals2.html#cb371-3" tabindex="-1"></a>tr_err <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">5</span>)</span>
+<span id="cb371-4"><a href="fundamentals2.html#cb371-4" tabindex="-1"></a></span>
+<span id="cb371-5"><a href="fundamentals2.html#cb371-5" tabindex="-1"></a><span class="do">### Now we can loop of the the degree of the polynomial</span></span>
+<span id="cb371-6"><a href="fundamentals2.html#cb371-6" tabindex="-1"></a><span class="do">### as before</span></span>
+<span id="cb371-7"><a href="fundamentals2.html#cb371-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb371-8"><a href="fundamentals2.html#cb371-8" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
+<span id="cb371-9"><a href="fundamentals2.html#cb371-9" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(form, <span class="at">data =</span> cars)</span>
+<span id="cb371-10"><a href="fundamentals2.html#cb371-10" tabindex="-1"></a>  </span>
+<span id="cb371-11"><a href="fundamentals2.html#cb371-11" tabindex="-1"></a>  tr_err[d] <span class="ot">&lt;-</span> <span class="fu">mean</span>((mod<span class="sc">$</span>fitted.values <span class="sc">-</span> cars<span class="sc">$</span>dist)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb371-12"><a href="fundamentals2.html#cb371-12" tabindex="-1"></a>}</span>
+<span id="cb371-13"><a href="fundamentals2.html#cb371-13" tabindex="-1"></a></span>
+<span id="cb371-14"><a href="fundamentals2.html#cb371-14" tabindex="-1"></a><span class="do">### Now we can use the training error from the most flexible</span></span>
+<span id="cb371-15"><a href="fundamentals2.html#cb371-15" tabindex="-1"></a><span class="do">### to estimate the residual variance</span></span>
+<span id="cb371-16"><a href="fundamentals2.html#cb371-16" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cars)</span>
+<span id="cb371-17"><a href="fundamentals2.html#cb371-17" tabindex="-1"></a></span>
+<span id="cb371-18"><a href="fundamentals2.html#cb371-18" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> tr_err[<span class="dv">5</span>]<span class="sc">/</span>(n <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">*</span>n</span>
+<span id="cb371-19"><a href="fundamentals2.html#cb371-19" tabindex="-1"></a><span class="co"># Can you see why this is the appropriate estimate?</span></span>
+<span id="cb371-20"><a href="fundamentals2.html#cb371-20" tabindex="-1"></a></span>
+<span id="cb371-21"><a href="fundamentals2.html#cb371-21" tabindex="-1"></a><span class="do">### Now let&#39;s estime the expected in-sample error</span></span>
+<span id="cb371-22"><a href="fundamentals2.html#cb371-22" tabindex="-1"></a><span class="do">### for each model</span></span>
+<span id="cb371-23"><a href="fundamentals2.html#cb371-23" tabindex="-1"></a>eise <span class="ot">&lt;-</span> tr_err <span class="sc">+</span> sig2_hat<span class="sc">*</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span>n</span>
+<span id="cb371-24"><a href="fundamentals2.html#cb371-24" tabindex="-1"></a></span>
+<span id="cb371-25"><a href="fundamentals2.html#cb371-25" tabindex="-1"></a>eise</span></code></pre></div>
 <pre><code>## [1] 236.4006 230.4896 231.3477 229.2818 233.2552</code></pre>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="fundamentals2.html#cb374-1" tabindex="-1"></a><span class="do">### When we did cross validation the caret package</span></span>
-<span id="cb374-2"><a href="fundamentals2.html#cb374-2" tabindex="-1"></a><span class="do">### returned the square root of the estimated expected</span></span>
-<span id="cb374-3"><a href="fundamentals2.html#cb374-3" tabindex="-1"></a><span class="do">### prediction error</span></span>
-<span id="cb374-4"><a href="fundamentals2.html#cb374-4" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="fundamentals2.html#cb373-1" tabindex="-1"></a><span class="do">### When we did cross validation the caret package</span></span>
+<span id="cb373-2"><a href="fundamentals2.html#cb373-2" tabindex="-1"></a><span class="do">### returned the square root of the estimated expected</span></span>
+<span id="cb373-3"><a href="fundamentals2.html#cb373-3" tabindex="-1"></a><span class="do">### prediction error</span></span>
+<span id="cb373-4"><a href="fundamentals2.html#cb373-4" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 228.3829 222.3852 222.9089 220.0393 253.9585</code></pre>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="fundamentals2.html#cb376-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>eise</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="fundamentals2.html#cb375-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>eise</span></code></pre></div>
 <pre><code>## [1] 0.9660842 0.9648382 0.9635234 0.9596891 1.0887582</code></pre>
 <p>We can see that the estimates for expected in-sample error and the cross validation based estimates of expected prediction error are similar, and in fact aside from the degree five model the ratio of the cross validation and in-sample errors is very close to constant.</p>
 </div>
