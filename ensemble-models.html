@@ -171,6 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
 <li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
 <li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-4"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="fundamentals1.html"><a href="fundamentals1.html#exercises-5"><i class="fa fa-check"></i><b>4.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
 <ul>
@@ -484,30 +485,26 @@ large number of R packages. The <code>caret</code> package alone links to a
 plethora of implementations, but we will be using the <code>randomForestSRC</code>
 package, as a computationally efficient and accurate option.</p>
 <div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="ensemble-models.html#cb530-1" tabindex="-1"></a><span class="do">### Load the randomForestSRC library</span></span>
-<span id="cb530-2"><a href="ensemble-models.html#cb530-2" tabindex="-1"></a><span class="fu">library</span>(randomForestSRC)</span></code></pre></div>
-<pre><code>## 
-##  randomForestSRC 3.4.1 
-##  
-##  Type rfsrc.news() to see new features, changes, and bug fixes. 
-## </code></pre>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="ensemble-models.html#cb532-1" tabindex="-1"></a><span class="do">### Let&#39;s simply use the default settings</span></span>
-<span id="cb532-2"><a href="ensemble-models.html#cb532-2" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">rfsrc</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr)</span>
-<span id="cb532-3"><a href="ensemble-models.html#cb532-3" tabindex="-1"></a></span>
-<span id="cb532-4"><a href="ensemble-models.html#cb532-4" tabindex="-1"></a><span class="do">### The predict function applied to an rfsrc is a list</span></span>
-<span id="cb532-5"><a href="ensemble-models.html#cb532-5" tabindex="-1"></a><span class="do">### with fields $predicted which for regression is the final</span></span>
-<span id="cb532-6"><a href="ensemble-models.html#cb532-6" tabindex="-1"></a><span class="do">### prediction of the response and for classification</span></span>
-<span id="cb532-7"><a href="ensemble-models.html#cb532-7" tabindex="-1"></a><span class="do">### contains the proportion of trees which &quot;voted&quot; for</span></span>
-<span id="cb532-8"><a href="ensemble-models.html#cb532-8" tabindex="-1"></a><span class="do">### each of the classes. To obtain the class predictions</span></span>
-<span id="cb532-9"><a href="ensemble-models.html#cb532-9" tabindex="-1"></a><span class="do">### directly use the field $class</span></span>
-<span id="cb532-10"><a href="ensemble-models.html#cb532-10" tabindex="-1"></a>rf_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, satimage.te)<span class="sc">$</span>class</span>
-<span id="cb532-11"><a href="ensemble-models.html#cb532-11" tabindex="-1"></a></span>
-<span id="cb532-12"><a href="ensemble-models.html#cb532-12" tabindex="-1"></a><span class="do">### Now let&#39;s check the test accuracy</span></span>
-<span id="cb532-13"><a href="ensemble-models.html#cb532-13" tabindex="-1"></a><span class="fu">confusionMatrix</span>(rf_pred, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<span id="cb530-2"><a href="ensemble-models.html#cb530-2" tabindex="-1"></a><span class="fu">library</span>(randomForestSRC)</span>
+<span id="cb530-3"><a href="ensemble-models.html#cb530-3" tabindex="-1"></a></span>
+<span id="cb530-4"><a href="ensemble-models.html#cb530-4" tabindex="-1"></a><span class="do">### Let&#39;s simply use the default settings</span></span>
+<span id="cb530-5"><a href="ensemble-models.html#cb530-5" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">rfsrc</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr)</span>
+<span id="cb530-6"><a href="ensemble-models.html#cb530-6" tabindex="-1"></a></span>
+<span id="cb530-7"><a href="ensemble-models.html#cb530-7" tabindex="-1"></a><span class="do">### The predict function applied to an rfsrc is a list</span></span>
+<span id="cb530-8"><a href="ensemble-models.html#cb530-8" tabindex="-1"></a><span class="do">### with fields $predicted which for regression is the final</span></span>
+<span id="cb530-9"><a href="ensemble-models.html#cb530-9" tabindex="-1"></a><span class="do">### prediction of the response and for classification</span></span>
+<span id="cb530-10"><a href="ensemble-models.html#cb530-10" tabindex="-1"></a><span class="do">### contains the proportion of trees which &quot;voted&quot; for</span></span>
+<span id="cb530-11"><a href="ensemble-models.html#cb530-11" tabindex="-1"></a><span class="do">### each of the classes. To obtain the class predictions</span></span>
+<span id="cb530-12"><a href="ensemble-models.html#cb530-12" tabindex="-1"></a><span class="do">### directly use the field $class</span></span>
+<span id="cb530-13"><a href="ensemble-models.html#cb530-13" tabindex="-1"></a>rf_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, satimage.te)<span class="sc">$</span>class</span>
+<span id="cb530-14"><a href="ensemble-models.html#cb530-14" tabindex="-1"></a></span>
+<span id="cb530-15"><a href="ensemble-models.html#cb530-15" tabindex="-1"></a><span class="do">### Now let&#39;s check the test accuracy</span></span>
+<span id="cb530-16"><a href="ensemble-models.html#cb530-16" tabindex="-1"></a><span class="fu">confusionMatrix</span>(rf_pred, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
 <pre><code>##  Accuracy 
 ## 0.9159315</code></pre>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="ensemble-models.html#cb534-1" tabindex="-1"></a><span class="do">### To obtain the OOB error we can extract the OOB class predictions</span></span>
-<span id="cb534-2"><a href="ensemble-models.html#cb534-2" tabindex="-1"></a><span class="do">### from the model and compare these with the actual class labels</span></span>
-<span id="cb534-3"><a href="ensemble-models.html#cb534-3" tabindex="-1"></a><span class="fu">confusionMatrix</span>(rf<span class="sc">$</span>class.oob, satimage.tr<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="ensemble-models.html#cb532-1" tabindex="-1"></a><span class="do">### To obtain the OOB error we can extract the OOB class predictions</span></span>
+<span id="cb532-2"><a href="ensemble-models.html#cb532-2" tabindex="-1"></a><span class="do">### from the model and compare these with the actual class labels</span></span>
+<span id="cb532-3"><a href="ensemble-models.html#cb532-3" tabindex="-1"></a><span class="fu">confusionMatrix</span>(rf<span class="sc">$</span>class.oob, satimage.tr<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
 <pre><code>##  Accuracy 
 ## 0.9099379</code></pre>
 </div>
@@ -733,88 +730,78 @@ their maximum depth and the minimum size of any of the leaf nodes. It is
 arguable that tuning all of these is “overkill”, however, and that only
 tuning <span class="math inline">\(\eta, B\)</span> and any <em>one</em> of the tuning parameters of the trees is
 sufficient.</p>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="ensemble-models.html#cb536-1" tabindex="-1"></a><span class="do">### Load library</span></span>
-<span id="cb536-2"><a href="ensemble-models.html#cb536-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb536-3"><a href="ensemble-models.html#cb536-3" tabindex="-1"></a></span>
-<span id="cb536-4"><a href="ensemble-models.html#cb536-4" tabindex="-1"></a><span class="do">### Set up to perform five fold cross validation</span></span>
-<span id="cb536-5"><a href="ensemble-models.html#cb536-5" tabindex="-1"></a><span class="do">### As the data set is reasonably large five folds is very reasonable</span></span>
-<span id="cb536-6"><a href="ensemble-models.html#cb536-6" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">5</span>)</span>
-<span id="cb536-7"><a href="ensemble-models.html#cb536-7" tabindex="-1"></a></span>
-<span id="cb536-8"><a href="ensemble-models.html#cb536-8" tabindex="-1"></a></span>
-<span id="cb536-9"><a href="ensemble-models.html#cb536-9" tabindex="-1"></a><span class="do">### We will only vary B (called n.trees) and tree depth (called interaction.depth)</span></span>
-<span id="cb536-10"><a href="ensemble-models.html#cb536-10" tabindex="-1"></a><span class="do">### However as the gbm method has additional hyperparameters eta (called shrinkage)</span></span>
-<span id="cb536-11"><a href="ensemble-models.html#cb536-11" tabindex="-1"></a><span class="do">### and minimum leaf size (called n.minobsinnode) we need to set fixed values for</span></span>
-<span id="cb536-12"><a href="ensemble-models.html#cb536-12" tabindex="-1"></a><span class="do">### these as well</span></span>
-<span id="cb536-13"><a href="ensemble-models.html#cb536-13" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n.trees =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>), <span class="at">shrinkage =</span> <span class="fl">0.1</span>, <span class="at">n.minobsinnode =</span> <span class="dv">10</span>,</span>
-<span id="cb536-14"><a href="ensemble-models.html#cb536-14" tabindex="-1"></a>                         <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb536-15"><a href="ensemble-models.html#cb536-15" tabindex="-1"></a></span>
-<span id="cb536-16"><a href="ensemble-models.html#cb536-16" tabindex="-1"></a></span>
-<span id="cb536-17"><a href="ensemble-models.html#cb536-17" tabindex="-1"></a><span class="do">### We now tune and train the model as always</span></span>
-<span id="cb536-18"><a href="ensemble-models.html#cb536-18" tabindex="-1"></a>gb_model <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr, <span class="at">method =</span> <span class="st">&#39;gbm&#39;</span>,</span>
-<span id="cb536-19"><a href="ensemble-models.html#cb536-19" tabindex="-1"></a>                  <span class="at">tuneGrid =</span> tune_grid,</span>
-<span id="cb536-20"><a href="ensemble-models.html#cb536-20" tabindex="-1"></a>                  <span class="at">trControl =</span> trControl,</span>
-<span id="cb536-21"><a href="ensemble-models.html#cb536-21" tabindex="-1"></a>                  <span class="at">verbose =</span> <span class="cn">FALSE</span>) <span class="co"># stops printing of training progress</span></span>
-<span id="cb536-22"><a href="ensemble-models.html#cb536-22" tabindex="-1"></a></span>
-<span id="cb536-23"><a href="ensemble-models.html#cb536-23" tabindex="-1"></a><span class="do">### We can inspect the results of the cross validation</span></span>
-<span id="cb536-24"><a href="ensemble-models.html#cb536-24" tabindex="-1"></a>gb_model<span class="sc">$</span>results</span></code></pre></div>
-<pre><code>##   shrinkage interaction.depth n.minobsinnode n.trees  Accuracy     Kappa  AccuracySD
-## 1       0.1                 1             10     100 0.8704567 0.8396749 0.005147918
-## 4       0.1                 2             10     100 0.8848772 0.8576698 0.007625226
-## 7       0.1                 3             10     100 0.8968583 0.8725216 0.009026825
-## 2       0.1                 1             10     200 0.8779977 0.8492478 0.005164187
-## 5       0.1                 2             10     200 0.8979637 0.8738788 0.007562932
-## 8       0.1                 3             10     200 0.9024032 0.8793976 0.008225978
-## 3       0.1                 1             10     300 0.8839891 0.8566643 0.008871559
-## 6       0.1                 2             10     300 0.8997413 0.8760905 0.011100185
-## 9       0.1                 3             10     300 0.9026225 0.8796597 0.006896950
-##       KappaSD
-## 1 0.006359900
-## 4 0.009347375
-## 7 0.011066750
-## 2 0.006369456
-## 5 0.009314294
-## 8 0.010157932
-## 3 0.010935541
-## 6 0.013643020
-## 9 0.008477130</code></pre>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="ensemble-models.html#cb538-1" tabindex="-1"></a><span class="do">### Finally we can make predictions on the test set and the assess the</span></span>
-<span id="cb538-2"><a href="ensemble-models.html#cb538-2" tabindex="-1"></a><span class="do">### test accuracy. We see that the performance is similar to the</span></span>
-<span id="cb538-3"><a href="ensemble-models.html#cb538-3" tabindex="-1"></a><span class="do">### bagging models</span></span>
-<span id="cb538-4"><a href="ensemble-models.html#cb538-4" tabindex="-1"></a>gb_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(gb_model, satimage.te)</span>
-<span id="cb538-5"><a href="ensemble-models.html#cb538-5" tabindex="-1"></a></span>
-<span id="cb538-6"><a href="ensemble-models.html#cb538-6" tabindex="-1"></a><span class="fu">confusionMatrix</span>(gb_pred, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="ensemble-models.html#cb534-1" tabindex="-1"></a><span class="do">### Load library</span></span>
+<span id="cb534-2"><a href="ensemble-models.html#cb534-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb534-3"><a href="ensemble-models.html#cb534-3" tabindex="-1"></a></span>
+<span id="cb534-4"><a href="ensemble-models.html#cb534-4" tabindex="-1"></a><span class="do">### Set up to perform five fold cross validation</span></span>
+<span id="cb534-5"><a href="ensemble-models.html#cb534-5" tabindex="-1"></a><span class="do">### As the data set is reasonably large five folds is very reasonable</span></span>
+<span id="cb534-6"><a href="ensemble-models.html#cb534-6" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">5</span>)</span>
+<span id="cb534-7"><a href="ensemble-models.html#cb534-7" tabindex="-1"></a></span>
+<span id="cb534-8"><a href="ensemble-models.html#cb534-8" tabindex="-1"></a></span>
+<span id="cb534-9"><a href="ensemble-models.html#cb534-9" tabindex="-1"></a><span class="do">### We will only vary B (called n.trees) and tree depth (called interaction.depth)</span></span>
+<span id="cb534-10"><a href="ensemble-models.html#cb534-10" tabindex="-1"></a><span class="do">### However as the gbm method has additional hyperparameters eta (called shrinkage)</span></span>
+<span id="cb534-11"><a href="ensemble-models.html#cb534-11" tabindex="-1"></a><span class="do">### and minimum leaf size (called n.minobsinnode) we need to set fixed values for</span></span>
+<span id="cb534-12"><a href="ensemble-models.html#cb534-12" tabindex="-1"></a><span class="do">### these as well</span></span>
+<span id="cb534-13"><a href="ensemble-models.html#cb534-13" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n.trees =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>), <span class="at">shrinkage =</span> <span class="fl">0.1</span>, <span class="at">n.minobsinnode =</span> <span class="dv">10</span>,</span>
+<span id="cb534-14"><a href="ensemble-models.html#cb534-14" tabindex="-1"></a>                         <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb534-15"><a href="ensemble-models.html#cb534-15" tabindex="-1"></a></span>
+<span id="cb534-16"><a href="ensemble-models.html#cb534-16" tabindex="-1"></a></span>
+<span id="cb534-17"><a href="ensemble-models.html#cb534-17" tabindex="-1"></a><span class="do">### We now tune and train the model as always</span></span>
+<span id="cb534-18"><a href="ensemble-models.html#cb534-18" tabindex="-1"></a>gb_model <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr, <span class="at">method =</span> <span class="st">&#39;gbm&#39;</span>,</span>
+<span id="cb534-19"><a href="ensemble-models.html#cb534-19" tabindex="-1"></a>                  <span class="at">tuneGrid =</span> tune_grid,</span>
+<span id="cb534-20"><a href="ensemble-models.html#cb534-20" tabindex="-1"></a>                  <span class="at">trControl =</span> trControl,</span>
+<span id="cb534-21"><a href="ensemble-models.html#cb534-21" tabindex="-1"></a>                  <span class="at">verbose =</span> <span class="cn">FALSE</span>) <span class="co"># stops printing of training progress</span></span>
+<span id="cb534-22"><a href="ensemble-models.html#cb534-22" tabindex="-1"></a></span>
+<span id="cb534-23"><a href="ensemble-models.html#cb534-23" tabindex="-1"></a><span class="do">### We can inspect the results of the cross validation</span></span>
+<span id="cb534-24"><a href="ensemble-models.html#cb534-24" tabindex="-1"></a>gb_model<span class="sc">$</span>results</span></code></pre></div>
+<pre><code>##   shrinkage interaction.depth n.minobsinnode n.trees  Accuracy     Kappa  AccuracySD     KappaSD
+## 1       0.1                 1             10     100 0.8704567 0.8396749 0.005147918 0.006359900
+## 4       0.1                 2             10     100 0.8848772 0.8576698 0.007625226 0.009347375
+## 7       0.1                 3             10     100 0.8968583 0.8725216 0.009026825 0.011066750
+## 2       0.1                 1             10     200 0.8779977 0.8492478 0.005164187 0.006369456
+## 5       0.1                 2             10     200 0.8979637 0.8738788 0.007562932 0.009314294
+## 8       0.1                 3             10     200 0.9024032 0.8793976 0.008225978 0.010157932
+## 3       0.1                 1             10     300 0.8839891 0.8566643 0.008871559 0.010935541
+## 6       0.1                 2             10     300 0.8997413 0.8760905 0.011100185 0.013643020
+## 9       0.1                 3             10     300 0.9026225 0.8796597 0.006896950 0.008477130</code></pre>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="ensemble-models.html#cb536-1" tabindex="-1"></a><span class="do">### Finally we can make predictions on the test set and the assess the</span></span>
+<span id="cb536-2"><a href="ensemble-models.html#cb536-2" tabindex="-1"></a><span class="do">### test accuracy. We see that the performance is similar to the</span></span>
+<span id="cb536-3"><a href="ensemble-models.html#cb536-3" tabindex="-1"></a><span class="do">### bagging models</span></span>
+<span id="cb536-4"><a href="ensemble-models.html#cb536-4" tabindex="-1"></a>gb_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(gb_model, satimage.te)</span>
+<span id="cb536-5"><a href="ensemble-models.html#cb536-5" tabindex="-1"></a></span>
+<span id="cb536-6"><a href="ensemble-models.html#cb536-6" tabindex="-1"></a><span class="fu">confusionMatrix</span>(gb_pred, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
 <pre><code>##  Accuracy 
 ## 0.9060716</code></pre>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="ensemble-models.html#cb540-1" tabindex="-1"></a><span class="do">###</span></span>
-<span id="cb540-2"><a href="ensemble-models.html#cb540-2" tabindex="-1"></a><span class="fu">library</span>(gbm)</span></code></pre></div>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="ensemble-models.html#cb538-1" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb538-2"><a href="ensemble-models.html#cb538-2" tabindex="-1"></a><span class="fu">library</span>(gbm)</span></code></pre></div>
 <pre><code>## Loaded gbm 2.2.2</code></pre>
 <pre><code>## This version of gbm is no longer under development. Consider transitioning to gbm3, https://github.com/gbm-developers/gbm3</code></pre>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="ensemble-models.html#cb543-1" tabindex="-1"></a><span class="do">### Using the gbm package directly allows us to perform cross validation over</span></span>
-<span id="cb543-2"><a href="ensemble-models.html#cb543-2" tabindex="-1"></a><span class="do">### a broad range of values for B, since it tracks the validation error</span></span>
-<span id="cb543-3"><a href="ensemble-models.html#cb543-3" tabindex="-1"></a><span class="do">### for each iteration</span></span>
-<span id="cb543-4"><a href="ensemble-models.html#cb543-4" tabindex="-1"></a></span>
-<span id="cb543-5"><a href="ensemble-models.html#cb543-5" tabindex="-1"></a><span class="do">### It should be noted that the multinomial model in gbm has bugs, and a</span></span>
-<span id="cb543-6"><a href="ensemble-models.html#cb543-6" tabindex="-1"></a><span class="do">### warning is printed to the screen. For a real modelling problem care should</span></span>
-<span id="cb543-7"><a href="ensemble-models.html#cb543-7" tabindex="-1"></a><span class="do">### therefore be taken, and if you happen to love this implementation of</span></span>
-<span id="cb543-8"><a href="ensemble-models.html#cb543-8" tabindex="-1"></a><span class="do">### gbm then you can always fit K-1 binary models as described in the</span></span>
-<span id="cb543-9"><a href="ensemble-models.html#cb543-9" tabindex="-1"></a><span class="do">### section on generalised linear models, and combine the outputs for</span></span>
-<span id="cb543-10"><a href="ensemble-models.html#cb543-10" tabindex="-1"></a><span class="do">### conducting multinomial regression. For illustrative purposes</span></span>
-<span id="cb543-11"><a href="ensemble-models.html#cb543-11" tabindex="-1"></a><span class="do">### on how to use the package for tuning, however, we will accept the</span></span>
-<span id="cb543-12"><a href="ensemble-models.html#cb543-12" tabindex="-1"></a><span class="do">### risk of inappropriate results</span></span>
-<span id="cb543-13"><a href="ensemble-models.html#cb543-13" tabindex="-1"></a>gb_model2 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr, <span class="at">cv.folds =</span> <span class="dv">5</span>,</span>
-<span id="cb543-14"><a href="ensemble-models.html#cb543-14" tabindex="-1"></a>                 <span class="at">n.trees =</span> <span class="dv">300</span>, <span class="at">interaction.depth =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="ensemble-models.html#cb541-1" tabindex="-1"></a><span class="do">### Using the gbm package directly allows us to perform cross validation over</span></span>
+<span id="cb541-2"><a href="ensemble-models.html#cb541-2" tabindex="-1"></a><span class="do">### a broad range of values for B, since it tracks the validation error</span></span>
+<span id="cb541-3"><a href="ensemble-models.html#cb541-3" tabindex="-1"></a><span class="do">### for each iteration</span></span>
+<span id="cb541-4"><a href="ensemble-models.html#cb541-4" tabindex="-1"></a></span>
+<span id="cb541-5"><a href="ensemble-models.html#cb541-5" tabindex="-1"></a><span class="do">### It should be noted that the multinomial model in gbm has bugs, and a</span></span>
+<span id="cb541-6"><a href="ensemble-models.html#cb541-6" tabindex="-1"></a><span class="do">### warning is printed to the screen. For a real modelling problem care should</span></span>
+<span id="cb541-7"><a href="ensemble-models.html#cb541-7" tabindex="-1"></a><span class="do">### therefore be taken, and if you happen to love this implementation of</span></span>
+<span id="cb541-8"><a href="ensemble-models.html#cb541-8" tabindex="-1"></a><span class="do">### gbm then you can always fit K-1 binary models as described in the</span></span>
+<span id="cb541-9"><a href="ensemble-models.html#cb541-9" tabindex="-1"></a><span class="do">### section on generalised linear models, and combine the outputs for</span></span>
+<span id="cb541-10"><a href="ensemble-models.html#cb541-10" tabindex="-1"></a><span class="do">### conducting multinomial regression. For illustrative purposes</span></span>
+<span id="cb541-11"><a href="ensemble-models.html#cb541-11" tabindex="-1"></a><span class="do">### on how to use the package for tuning, however, we will accept the</span></span>
+<span id="cb541-12"><a href="ensemble-models.html#cb541-12" tabindex="-1"></a><span class="do">### risk of inappropriate results</span></span>
+<span id="cb541-13"><a href="ensemble-models.html#cb541-13" tabindex="-1"></a>gb_model2 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr, <span class="at">cv.folds =</span> <span class="dv">5</span>,</span>
+<span id="cb541-14"><a href="ensemble-models.html#cb541-14" tabindex="-1"></a>                 <span class="at">n.trees =</span> <span class="dv">300</span>, <span class="at">interaction.depth =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## Distribution not specified, assuming multinomial ...</code></pre>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="ensemble-models.html#cb545-1" tabindex="-1"></a><span class="do">### The predict method for gbm objects does not directly produce</span></span>
-<span id="cb545-2"><a href="ensemble-models.html#cb545-2" tabindex="-1"></a><span class="do">### a class prediction, but rather the probabilities</span></span>
-<span id="cb545-3"><a href="ensemble-models.html#cb545-3" tabindex="-1"></a>gb_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(gb_model2, satimage.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="ensemble-models.html#cb543-1" tabindex="-1"></a><span class="do">### The predict method for gbm objects does not directly produce</span></span>
+<span id="cb543-2"><a href="ensemble-models.html#cb543-2" tabindex="-1"></a><span class="do">### a class prediction, but rather the probabilities</span></span>
+<span id="cb543-3"><a href="ensemble-models.html#cb543-3" tabindex="-1"></a>gb_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(gb_model2, satimage.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code>## Using 114 trees...</code></pre>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="ensemble-models.html#cb547-1" tabindex="-1"></a><span class="do">### To convert these to class predictions we can take the maximum</span></span>
-<span id="cb547-2"><a href="ensemble-models.html#cb547-2" tabindex="-1"></a><span class="do">### probability, and to ensure the correct class label (factor level)</span></span>
-<span id="cb547-3"><a href="ensemble-models.html#cb547-3" tabindex="-1"></a><span class="do">### is applied we can find these in the names of the columns</span></span>
-<span id="cb547-4"><a href="ensemble-models.html#cb547-4" tabindex="-1"></a>gb_pred2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">colnames</span>(gb_predict[,,<span class="dv">1</span>])[<span class="fu">apply</span>(gb_predict[,,<span class="dv">1</span>], <span class="dv">1</span>, which.max)])</span>
-<span id="cb547-5"><a href="ensemble-models.html#cb547-5" tabindex="-1"></a></span>
-<span id="cb547-6"><a href="ensemble-models.html#cb547-6" tabindex="-1"></a><span class="do">### Again we see the accuracy very similar to the other ensembles</span></span>
-<span id="cb547-7"><a href="ensemble-models.html#cb547-7" tabindex="-1"></a><span class="fu">confusionMatrix</span>(gb_pred2, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="ensemble-models.html#cb545-1" tabindex="-1"></a><span class="do">### To convert these to class predictions we can take the maximum</span></span>
+<span id="cb545-2"><a href="ensemble-models.html#cb545-2" tabindex="-1"></a><span class="do">### probability, and to ensure the correct class label (factor level)</span></span>
+<span id="cb545-3"><a href="ensemble-models.html#cb545-3" tabindex="-1"></a><span class="do">### is applied we can find these in the names of the columns</span></span>
+<span id="cb545-4"><a href="ensemble-models.html#cb545-4" tabindex="-1"></a>gb_pred2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">colnames</span>(gb_predict[,,<span class="dv">1</span>])[<span class="fu">apply</span>(gb_predict[,,<span class="dv">1</span>], <span class="dv">1</span>, which.max)])</span>
+<span id="cb545-5"><a href="ensemble-models.html#cb545-5" tabindex="-1"></a></span>
+<span id="cb545-6"><a href="ensemble-models.html#cb545-6" tabindex="-1"></a><span class="do">### Again we see the accuracy very similar to the other ensembles</span></span>
+<span id="cb545-7"><a href="ensemble-models.html#cb545-7" tabindex="-1"></a><span class="fu">confusionMatrix</span>(gb_pred2, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
 <pre><code>##  Accuracy 
 ## 0.9128179</code></pre>
 <div id="extreme-gradient-boosting" class="section level4 hasAnchor" number="10.2.1.1">
@@ -836,25 +823,25 @@ the standard XGBoost framework). Because of the additional options in
 terms of how the regularisation is applied, XGBoost has more tuning
 parameters than standard gradient boosting. We will only vary the
 learning rate <span class="math inline">\(\eta\)</span> and the number of iterations <span class="math inline">\(B\)</span> (<code>nrounds</code> below), however details of the other tuning parameters can be accessed by using <code>help(xgboost)</code> after loading the <code>xgboost</code> library.</p>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="ensemble-models.html#cb549-1" tabindex="-1"></a><span class="do">### Let&#39;s start by setting up our trainControl and tuning grid objects</span></span>
-<span id="cb549-2"><a href="ensemble-models.html#cb549-2" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">5</span>)</span>
-<span id="cb549-3"><a href="ensemble-models.html#cb549-3" tabindex="-1"></a></span>
-<span id="cb549-4"><a href="ensemble-models.html#cb549-4" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">nrounds =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>), <span class="at">max_depth =</span> <span class="dv">6</span>,</span>
-<span id="cb549-5"><a href="ensemble-models.html#cb549-5" tabindex="-1"></a>                         <span class="at">eta =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>), <span class="at">gamma =</span> <span class="dv">0</span>,</span>
-<span id="cb549-6"><a href="ensemble-models.html#cb549-6" tabindex="-1"></a>                         <span class="at">colsample_bytree =</span> <span class="fl">0.8</span>, <span class="at">subsample =</span> <span class="fl">0.5</span>,</span>
-<span id="cb549-7"><a href="ensemble-models.html#cb549-7" tabindex="-1"></a>                         <span class="at">min_child_weight =</span> <span class="dv">1</span>)</span>
-<span id="cb549-8"><a href="ensemble-models.html#cb549-8" tabindex="-1"></a></span>
-<span id="cb549-9"><a href="ensemble-models.html#cb549-9" tabindex="-1"></a><span class="do">### Now we can tune and train the model</span></span>
-<span id="cb549-10"><a href="ensemble-models.html#cb549-10" tabindex="-1"></a>xgb_model <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr,</span>
-<span id="cb549-11"><a href="ensemble-models.html#cb549-11" tabindex="-1"></a>                   <span class="at">trControl =</span> trControl, <span class="at">tuneGrid =</span> tune_grid,</span>
-<span id="cb549-12"><a href="ensemble-models.html#cb549-12" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">&quot;xgbTree&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="ensemble-models.html#cb550-1" tabindex="-1"></a><span class="do">### The best tuning parameters are</span></span>
-<span id="cb550-2"><a href="ensemble-models.html#cb550-2" tabindex="-1"></a>xgb_model<span class="sc">$</span>bestTune</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="ensemble-models.html#cb547-1" tabindex="-1"></a><span class="do">### Let&#39;s start by setting up our trainControl and tuning grid objects</span></span>
+<span id="cb547-2"><a href="ensemble-models.html#cb547-2" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">5</span>)</span>
+<span id="cb547-3"><a href="ensemble-models.html#cb547-3" tabindex="-1"></a></span>
+<span id="cb547-4"><a href="ensemble-models.html#cb547-4" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">nrounds =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>), <span class="at">max_depth =</span> <span class="dv">6</span>,</span>
+<span id="cb547-5"><a href="ensemble-models.html#cb547-5" tabindex="-1"></a>                         <span class="at">eta =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>), <span class="at">gamma =</span> <span class="dv">0</span>,</span>
+<span id="cb547-6"><a href="ensemble-models.html#cb547-6" tabindex="-1"></a>                         <span class="at">colsample_bytree =</span> <span class="fl">0.8</span>, <span class="at">subsample =</span> <span class="fl">0.5</span>,</span>
+<span id="cb547-7"><a href="ensemble-models.html#cb547-7" tabindex="-1"></a>                         <span class="at">min_child_weight =</span> <span class="dv">1</span>)</span>
+<span id="cb547-8"><a href="ensemble-models.html#cb547-8" tabindex="-1"></a></span>
+<span id="cb547-9"><a href="ensemble-models.html#cb547-9" tabindex="-1"></a><span class="do">### Now we can tune and train the model</span></span>
+<span id="cb547-10"><a href="ensemble-models.html#cb547-10" tabindex="-1"></a>xgb_model <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr,</span>
+<span id="cb547-11"><a href="ensemble-models.html#cb547-11" tabindex="-1"></a>                   <span class="at">trControl =</span> trControl, <span class="at">tuneGrid =</span> tune_grid,</span>
+<span id="cb547-12"><a href="ensemble-models.html#cb547-12" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">&quot;xgbTree&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="ensemble-models.html#cb548-1" tabindex="-1"></a><span class="do">### The best tuning parameters are</span></span>
+<span id="cb548-2"><a href="ensemble-models.html#cb548-2" tabindex="-1"></a>xgb_model<span class="sc">$</span>bestTune</span></code></pre></div>
 <pre><code>##   nrounds max_depth eta gamma colsample_bytree min_child_weight subsample
 ## 4     100         6 0.2     0              0.8                1       0.5</code></pre>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="ensemble-models.html#cb552-1" tabindex="-1"></a>xgb_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(xgb_model, satimage.te)</span>
-<span id="cb552-2"><a href="ensemble-models.html#cb552-2" tabindex="-1"></a></span>
-<span id="cb552-3"><a href="ensemble-models.html#cb552-3" tabindex="-1"></a><span class="fu">confusionMatrix</span>(xgb_pred, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="ensemble-models.html#cb550-1" tabindex="-1"></a>xgb_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(xgb_model, satimage.te)</span>
+<span id="cb550-2"><a href="ensemble-models.html#cb550-2" tabindex="-1"></a></span>
+<span id="cb550-3"><a href="ensemble-models.html#cb550-3" tabindex="-1"></a><span class="fu">confusionMatrix</span>(xgb_pred, satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
 <pre><code>##  Accuracy 
 ## 0.9216399</code></pre>
 <p>Using the <code>xgboost</code> package directly requires that we do some of the hard-coding
@@ -862,58 +849,58 @@ of objects and arguments ourselves. First, the data need to be provided as a
 matrix of covariates and a vector of labels, and the labels need to be numeric
 valued from <span class="math inline">\(0\)</span> to <span class="math inline">\(K-1\)</span>. We also need to be specific about the loss function,
 where either the setting <code>objective = "multi:softmax"</code> or <code>objective = "multi:softprob"</code> can be used for multiclass classification. In addition cross validation is not implemented in the same way as in <code>gbm</code>, but we can use a simple validation approach by providing a so-called “watchlist”, which contains data sets on which evaluation should be performed during training. In this way <code>xgboost</code> is able to stop updating once the validation error stops improving, by providing an argument <code>early_sopping_rounds</code>. Specifically, if the validation error does not improve for <code>early_stopping_rounds</code> iterations then the optimisation terminates.</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="ensemble-models.html#cb554-1" tabindex="-1"></a><span class="do">### Load the library library</span></span>
-<span id="cb554-2"><a href="ensemble-models.html#cb554-2" tabindex="-1"></a><span class="fu">library</span>(xgboost)</span></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="ensemble-models.html#cb552-1" tabindex="-1"></a><span class="do">### Load the library library</span></span>
+<span id="cb552-2"><a href="ensemble-models.html#cb552-2" tabindex="-1"></a><span class="fu">library</span>(xgboost)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;xgboost&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:dplyr&#39;:
 ## 
 ##     slice</code></pre>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="ensemble-models.html#cb557-1" tabindex="-1"></a><span class="do">### Let&#39;s split the training data into 70% training and 30% validation</span></span>
-<span id="cb557-2"><a href="ensemble-models.html#cb557-2" tabindex="-1"></a>valid_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(satimage.tr<span class="sc">$</span>target, <span class="at">p =</span> <span class="fl">0.3</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb557-3"><a href="ensemble-models.html#cb557-3" tabindex="-1"></a></span>
-<span id="cb557-4"><a href="ensemble-models.html#cb557-4" tabindex="-1"></a>X_tr <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage.tr[<span class="sc">-</span>valid_ix,<span class="fu">names</span>(satimage.tr)<span class="sc">!=</span><span class="st">&#39;target&#39;</span>])</span>
-<span id="cb557-5"><a href="ensemble-models.html#cb557-5" tabindex="-1"></a>X_val <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage.tr[valid_ix,<span class="fu">names</span>(satimage.tr)<span class="sc">!=</span><span class="st">&#39;target&#39;</span>])</span>
-<span id="cb557-6"><a href="ensemble-models.html#cb557-6" tabindex="-1"></a></span>
-<span id="cb557-7"><a href="ensemble-models.html#cb557-7" tabindex="-1"></a><span class="do">### Applying as.numeric(as.factor(vector)) will transform the values</span></span>
-<span id="cb557-8"><a href="ensemble-models.html#cb557-8" tabindex="-1"></a><span class="do">### in a vector to the values 1, 2, ..., up to the number of unique</span></span>
-<span id="cb557-9"><a href="ensemble-models.html#cb557-9" tabindex="-1"></a><span class="do">### entries. Since satimage.tr$target is already a factor we can</span></span>
-<span id="cb557-10"><a href="ensemble-models.html#cb557-10" tabindex="-1"></a><span class="do">### use as.numeric(satimage.tr$target)-1 to convert the labels</span></span>
-<span id="cb557-11"><a href="ensemble-models.html#cb557-11" tabindex="-1"></a><span class="do">### to 0, 1, ..., K-1</span></span>
-<span id="cb557-12"><a href="ensemble-models.html#cb557-12" tabindex="-1"></a></span>
-<span id="cb557-13"><a href="ensemble-models.html#cb557-13" tabindex="-1"></a>y_tr <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(satimage.tr<span class="sc">$</span>target[<span class="sc">-</span>valid_ix])<span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb557-14"><a href="ensemble-models.html#cb557-14" tabindex="-1"></a>y_val <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(satimage.tr<span class="sc">$</span>target[valid_ix])<span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb557-15"><a href="ensemble-models.html#cb557-15" tabindex="-1"></a></span>
-<span id="cb557-16"><a href="ensemble-models.html#cb557-16" tabindex="-1"></a><span class="do">### The function xgb.DMatrix allows us to create data objects which xgboost</span></span>
-<span id="cb557-17"><a href="ensemble-models.html#cb557-17" tabindex="-1"></a><span class="do">### will be happy with</span></span>
-<span id="cb557-18"><a href="ensemble-models.html#cb557-18" tabindex="-1"></a></span>
-<span id="cb557-19"><a href="ensemble-models.html#cb557-19" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">xgb.DMatrix</span>(X_tr, <span class="at">label =</span> y_tr)</span>
-<span id="cb557-20"><a href="ensemble-models.html#cb557-20" tabindex="-1"></a>val_data <span class="ot">&lt;-</span> <span class="fu">xgb.DMatrix</span>(X_val, <span class="at">label =</span> y_val)</span>
-<span id="cb557-21"><a href="ensemble-models.html#cb557-21" tabindex="-1"></a></span>
-<span id="cb557-22"><a href="ensemble-models.html#cb557-22" tabindex="-1"></a>watchlist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">train =</span> train_data, <span class="at">eval =</span> val_data)</span>
-<span id="cb557-23"><a href="ensemble-models.html#cb557-23" tabindex="-1"></a></span>
-<span id="cb557-24"><a href="ensemble-models.html#cb557-24" tabindex="-1"></a>xgb_validation <span class="ot">&lt;-</span> <span class="fu">xgb.train</span>(<span class="at">data =</span> train_data,</span>
-<span id="cb557-25"><a href="ensemble-models.html#cb557-25" tabindex="-1"></a>                      <span class="at">watchlist =</span> watchlist,</span>
-<span id="cb557-26"><a href="ensemble-models.html#cb557-26" tabindex="-1"></a>                      <span class="at">nrounds =</span> <span class="dv">200</span>,</span>
-<span id="cb557-27"><a href="ensemble-models.html#cb557-27" tabindex="-1"></a>                      <span class="at">early_stopping_rounds =</span> <span class="dv">10</span>,</span>
-<span id="cb557-28"><a href="ensemble-models.html#cb557-28" tabindex="-1"></a>                      <span class="at">num_class =</span> <span class="dv">6</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
-<span id="cb557-29"><a href="ensemble-models.html#cb557-29" tabindex="-1"></a></span>
-<span id="cb557-30"><a href="ensemble-models.html#cb557-30" tabindex="-1"></a><span class="do">### We now need to train the final model using the number of rounds</span></span>
-<span id="cb557-31"><a href="ensemble-models.html#cb557-31" tabindex="-1"></a><span class="do">### after which this model terminated, since this was based on the</span></span>
-<span id="cb557-32"><a href="ensemble-models.html#cb557-32" tabindex="-1"></a><span class="do">### validation error, but we only used some of the training data to</span></span>
-<span id="cb557-33"><a href="ensemble-models.html#cb557-33" tabindex="-1"></a><span class="do">### actually fit the model</span></span>
-<span id="cb557-34"><a href="ensemble-models.html#cb557-34" tabindex="-1"></a></span>
-<span id="cb557-35"><a href="ensemble-models.html#cb557-35" tabindex="-1"></a>Bopt <span class="ot">&lt;-</span> xgb_validation<span class="sc">$</span>best_iteration</span>
-<span id="cb557-36"><a href="ensemble-models.html#cb557-36" tabindex="-1"></a></span>
-<span id="cb557-37"><a href="ensemble-models.html#cb557-37" tabindex="-1"></a>xgb_model2 <span class="ot">&lt;-</span> <span class="fu">xgb.train</span>(<span class="at">data =</span> <span class="fu">xgb.DMatrix</span>(<span class="fu">rbind</span>(X_tr, X_val), <span class="at">label =</span> <span class="fu">c</span>(y_tr, y_val)),</span>
-<span id="cb557-38"><a href="ensemble-models.html#cb557-38" tabindex="-1"></a>                        <span class="at">nrounds =</span> Bopt, <span class="at">num_class =</span> <span class="dv">6</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
-<span id="cb557-39"><a href="ensemble-models.html#cb557-39" tabindex="-1"></a></span>
-<span id="cb557-40"><a href="ensemble-models.html#cb557-40" tabindex="-1"></a><span class="do">### Finally we can predict on the test set, and convert to an appropriate</span></span>
-<span id="cb557-41"><a href="ensemble-models.html#cb557-41" tabindex="-1"></a><span class="do">### factor variable to evaluate test performance</span></span>
-<span id="cb557-42"><a href="ensemble-models.html#cb557-42" tabindex="-1"></a>xgb_pred2 <span class="ot">&lt;-</span> <span class="fu">levels</span>(satimage.te<span class="sc">$</span>target)[<span class="fu">predict</span>(xgb_model2,</span>
-<span id="cb557-43"><a href="ensemble-models.html#cb557-43" tabindex="-1"></a>                       <span class="fu">as.matrix</span>(satimage.te[,<span class="fu">names</span>(satimage.te)<span class="sc">!=</span><span class="st">&#39;target&#39;</span>]))<span class="sc">+</span><span class="dv">1</span>]</span>
-<span id="cb557-44"><a href="ensemble-models.html#cb557-44" tabindex="-1"></a></span>
-<span id="cb557-45"><a href="ensemble-models.html#cb557-45" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(xgb_pred2), satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="ensemble-models.html#cb555-1" tabindex="-1"></a><span class="do">### Let&#39;s split the training data into 70% training and 30% validation</span></span>
+<span id="cb555-2"><a href="ensemble-models.html#cb555-2" tabindex="-1"></a>valid_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(satimage.tr<span class="sc">$</span>target, <span class="at">p =</span> <span class="fl">0.3</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb555-3"><a href="ensemble-models.html#cb555-3" tabindex="-1"></a></span>
+<span id="cb555-4"><a href="ensemble-models.html#cb555-4" tabindex="-1"></a>X_tr <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage.tr[<span class="sc">-</span>valid_ix,<span class="fu">names</span>(satimage.tr)<span class="sc">!=</span><span class="st">&#39;target&#39;</span>])</span>
+<span id="cb555-5"><a href="ensemble-models.html#cb555-5" tabindex="-1"></a>X_val <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage.tr[valid_ix,<span class="fu">names</span>(satimage.tr)<span class="sc">!=</span><span class="st">&#39;target&#39;</span>])</span>
+<span id="cb555-6"><a href="ensemble-models.html#cb555-6" tabindex="-1"></a></span>
+<span id="cb555-7"><a href="ensemble-models.html#cb555-7" tabindex="-1"></a><span class="do">### Applying as.numeric(as.factor(vector)) will transform the values</span></span>
+<span id="cb555-8"><a href="ensemble-models.html#cb555-8" tabindex="-1"></a><span class="do">### in a vector to the values 1, 2, ..., up to the number of unique</span></span>
+<span id="cb555-9"><a href="ensemble-models.html#cb555-9" tabindex="-1"></a><span class="do">### entries. Since satimage.tr$target is already a factor we can</span></span>
+<span id="cb555-10"><a href="ensemble-models.html#cb555-10" tabindex="-1"></a><span class="do">### use as.numeric(satimage.tr$target)-1 to convert the labels</span></span>
+<span id="cb555-11"><a href="ensemble-models.html#cb555-11" tabindex="-1"></a><span class="do">### to 0, 1, ..., K-1</span></span>
+<span id="cb555-12"><a href="ensemble-models.html#cb555-12" tabindex="-1"></a></span>
+<span id="cb555-13"><a href="ensemble-models.html#cb555-13" tabindex="-1"></a>y_tr <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(satimage.tr<span class="sc">$</span>target[<span class="sc">-</span>valid_ix])<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb555-14"><a href="ensemble-models.html#cb555-14" tabindex="-1"></a>y_val <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(satimage.tr<span class="sc">$</span>target[valid_ix])<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb555-15"><a href="ensemble-models.html#cb555-15" tabindex="-1"></a></span>
+<span id="cb555-16"><a href="ensemble-models.html#cb555-16" tabindex="-1"></a><span class="do">### The function xgb.DMatrix allows us to create data objects which xgboost</span></span>
+<span id="cb555-17"><a href="ensemble-models.html#cb555-17" tabindex="-1"></a><span class="do">### will be happy with</span></span>
+<span id="cb555-18"><a href="ensemble-models.html#cb555-18" tabindex="-1"></a></span>
+<span id="cb555-19"><a href="ensemble-models.html#cb555-19" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">xgb.DMatrix</span>(X_tr, <span class="at">label =</span> y_tr)</span>
+<span id="cb555-20"><a href="ensemble-models.html#cb555-20" tabindex="-1"></a>val_data <span class="ot">&lt;-</span> <span class="fu">xgb.DMatrix</span>(X_val, <span class="at">label =</span> y_val)</span>
+<span id="cb555-21"><a href="ensemble-models.html#cb555-21" tabindex="-1"></a></span>
+<span id="cb555-22"><a href="ensemble-models.html#cb555-22" tabindex="-1"></a>watchlist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">train =</span> train_data, <span class="at">eval =</span> val_data)</span>
+<span id="cb555-23"><a href="ensemble-models.html#cb555-23" tabindex="-1"></a></span>
+<span id="cb555-24"><a href="ensemble-models.html#cb555-24" tabindex="-1"></a>xgb_validation <span class="ot">&lt;-</span> <span class="fu">xgb.train</span>(<span class="at">data =</span> train_data,</span>
+<span id="cb555-25"><a href="ensemble-models.html#cb555-25" tabindex="-1"></a>                      <span class="at">watchlist =</span> watchlist,</span>
+<span id="cb555-26"><a href="ensemble-models.html#cb555-26" tabindex="-1"></a>                      <span class="at">nrounds =</span> <span class="dv">200</span>,</span>
+<span id="cb555-27"><a href="ensemble-models.html#cb555-27" tabindex="-1"></a>                      <span class="at">early_stopping_rounds =</span> <span class="dv">10</span>,</span>
+<span id="cb555-28"><a href="ensemble-models.html#cb555-28" tabindex="-1"></a>                      <span class="at">num_class =</span> <span class="dv">6</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb555-29"><a href="ensemble-models.html#cb555-29" tabindex="-1"></a></span>
+<span id="cb555-30"><a href="ensemble-models.html#cb555-30" tabindex="-1"></a><span class="do">### We now need to train the final model using the number of rounds</span></span>
+<span id="cb555-31"><a href="ensemble-models.html#cb555-31" tabindex="-1"></a><span class="do">### after which this model terminated, since this was based on the</span></span>
+<span id="cb555-32"><a href="ensemble-models.html#cb555-32" tabindex="-1"></a><span class="do">### validation error, but we only used some of the training data to</span></span>
+<span id="cb555-33"><a href="ensemble-models.html#cb555-33" tabindex="-1"></a><span class="do">### actually fit the model</span></span>
+<span id="cb555-34"><a href="ensemble-models.html#cb555-34" tabindex="-1"></a></span>
+<span id="cb555-35"><a href="ensemble-models.html#cb555-35" tabindex="-1"></a>Bopt <span class="ot">&lt;-</span> xgb_validation<span class="sc">$</span>best_iteration</span>
+<span id="cb555-36"><a href="ensemble-models.html#cb555-36" tabindex="-1"></a></span>
+<span id="cb555-37"><a href="ensemble-models.html#cb555-37" tabindex="-1"></a>xgb_model2 <span class="ot">&lt;-</span> <span class="fu">xgb.train</span>(<span class="at">data =</span> <span class="fu">xgb.DMatrix</span>(<span class="fu">rbind</span>(X_tr, X_val), <span class="at">label =</span> <span class="fu">c</span>(y_tr, y_val)),</span>
+<span id="cb555-38"><a href="ensemble-models.html#cb555-38" tabindex="-1"></a>                        <span class="at">nrounds =</span> Bopt, <span class="at">num_class =</span> <span class="dv">6</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb555-39"><a href="ensemble-models.html#cb555-39" tabindex="-1"></a></span>
+<span id="cb555-40"><a href="ensemble-models.html#cb555-40" tabindex="-1"></a><span class="do">### Finally we can predict on the test set, and convert to an appropriate</span></span>
+<span id="cb555-41"><a href="ensemble-models.html#cb555-41" tabindex="-1"></a><span class="do">### factor variable to evaluate test performance</span></span>
+<span id="cb555-42"><a href="ensemble-models.html#cb555-42" tabindex="-1"></a>xgb_pred2 <span class="ot">&lt;-</span> <span class="fu">levels</span>(satimage.te<span class="sc">$</span>target)[<span class="fu">predict</span>(xgb_model2,</span>
+<span id="cb555-43"><a href="ensemble-models.html#cb555-43" tabindex="-1"></a>                       <span class="fu">as.matrix</span>(satimage.te[,<span class="fu">names</span>(satimage.te)<span class="sc">!=</span><span class="st">&#39;target&#39;</span>]))<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb555-44"><a href="ensemble-models.html#cb555-44" tabindex="-1"></a></span>
+<span id="cb555-45"><a href="ensemble-models.html#cb555-45" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(xgb_pred2), satimage.te<span class="sc">$</span>target)<span class="sc">$</span>overall[<span class="st">&#39;Accuracy&#39;</span>]</span></code></pre></div>
 <pre><code>##  Accuracy 
 ## 0.9107421</code></pre>
 </div>

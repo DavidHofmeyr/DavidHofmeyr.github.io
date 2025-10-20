@@ -89,6 +89,7 @@ regression
 fitting-regression-models
 a-concrete-example-simple-linear-regression
 summary-4
+exercises-5
 fundamentals2
 a-quick-recap
 overfitting

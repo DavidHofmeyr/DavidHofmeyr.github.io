@@ -171,6 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
 <li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
 <li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-4"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="fundamentals1.html"><a href="fundamentals1.html#exercises-5"><i class="fa fa-check"></i><b>4.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
 <ul>
@@ -923,6 +924,21 @@ regression model where we use the “engineered features” <span class="math in
 <ul>
 <li>We also saw that this is equivalent to adding to our covariate some additional “covariates” which are “engineered” from the original covariate, and then applying linear regression</li>
 </ul></li>
+</ul>
+</div>
+<div id="exercises-5" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Exercises<a href="fundamentals1.html#exercises-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Refer to the <code>cars</code> data set. Fit polynomial models for degrees up to eight, to predict <code>dist</code> from <code>speed</code>. Compare the fits visually and numerically. What do you think about which model(s) is/are likely to be the best?</li>
+</ol>
+<p>1^*. (optional) Use the bootstrap to estimate the variance of the coefficient estimators for the polynomial models in Q 1. above.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Download the <code>nhanes.RData</code> file in the R Scripts folder on Moodle. Load the data using <code>load(&lt;full path to filename&gt;)</code> or set the working directory to the location where the file lies and use <code>load("nhanes.RData")</code>. This is a small subset of the National Health And <a href="https://odphp.health.gov/healthypeople/objectives-and-data/data-sources-and-methods/data-sources/national-health-and-nutrition-examination-survey-nhanes">Nutrition Examination Survey data set</a>. If you want details on the specific variables which have been included, you can install and load the <code>NHANES</code> package and then call <code>help(NHANES)</code>.</li>
+</ol>
+<p>The goal is to predict Mean Arterial Pressure (MAP; defined as Diastolic Blood Pressure + <span class="math inline">\(\frac{1}{3}\)</span>(Systolic - Diastolic Blood Pressure)) using the non Blood Pressure related variables.</p>
+<p>Perform some EDA and data pre-processing, before fitting a linear regression model (or multiple models) to predict MAP.</p>
+<ul>
+<li>Note that some of the factor variables might reasonably be treated as numeric. That is not to say they should, but if you want to you could consider models which treat them as factors and ones which treat them as numeric.</li>
 </ul>
 
 </div>

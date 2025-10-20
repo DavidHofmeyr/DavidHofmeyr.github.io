@@ -171,6 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="fundamentals1.html"><a href="fundamentals1.html#some-preliminaries"><i class="fa fa-check"></i><b>4.2</b> Some Preliminaries</a></li>
 <li class="chapter" data-level="4.3" data-path="fundamentals1.html"><a href="fundamentals1.html#model-training"><i class="fa fa-check"></i><b>4.3</b> Model Training</a></li>
 <li class="chapter" data-level="4.4" data-path="fundamentals1.html"><a href="fundamentals1.html#summary-4"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="fundamentals1.html"><a href="fundamentals1.html#exercises-5"><i class="fa fa-check"></i><b>4.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="fundamentals2.html"><a href="fundamentals2.html"><i class="fa fa-check"></i><b>5</b> The Fundamentals of Predictive Modelling II</a>
 <ul>
@@ -342,15 +343,15 @@ a variable which categorises the planets in this way</p>
 <span id="cb254-2"><a href="working-with-data-in-r.html#cb254-2" tabindex="-1"></a>                    <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb254-3"><a href="working-with-data-in-r.html#cb254-3" tabindex="-1"></a></span>
 <span id="cb254-4"><a href="working-with-data-in-r.html#cb254-4" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
-<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;  
-## [6] &quot;gas_giant&quot;   &quot;ice_giant&quot;   &quot;ice_giant&quot;</code></pre>
+<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;   &quot;gas_giant&quot;  
+## [7] &quot;ice_giant&quot;   &quot;ice_giant&quot;</code></pre>
 <p>Now, as it is currently <code>planets$type</code> is a vector of character objects, and although it clearly delineates which items are in each of the categories we can explicitly convert
 this to a factor using <code>as.factor()</code></p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="working-with-data-in-r.html#cb256-1" tabindex="-1"></a>planets<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(planets<span class="sc">$</span>type)</span>
 <span id="cb256-2"><a href="working-with-data-in-r.html#cb256-2" tabindex="-1"></a></span>
 <span id="cb256-3"><a href="working-with-data-in-r.html#cb256-3" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
-<pre><code>## [1] terrestrial terrestrial terrestrial terrestrial gas_giant   gas_giant  
-## [7] ice_giant   ice_giant  
+<pre><code>## [1] terrestrial terrestrial terrestrial terrestrial gas_giant   gas_giant   ice_giant  
+## [8] ice_giant  
 ## Levels: gas_giant ice_giant terrestrial</code></pre>
 <p>Now when we print the <code>type</code> variable we see that it now has what are called <code>Levels</code>, which are the
 labels which give meaning to the category codes. In this example we named the codes with meaningful
