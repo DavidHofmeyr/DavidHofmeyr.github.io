@@ -180,6 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
 <li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
 <li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-5"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
+<li class="chapter" data-level="5.6" data-path="fundamentals2.html"><a href="fundamentals2.html#exercises-6"><i class="fa fa-check"></i><b>5.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
 <ul>
@@ -767,7 +768,7 @@ P(l &lt; \theta - \hat \theta &lt; u) = 0.95.
 <span id="cb335-27"><a href="background.html#cb335-27" tabindex="-1"></a><span class="do">### on the distribution of 2*skew(x) - skews_B</span></span>
 <span id="cb335-28"><a href="background.html#cb335-28" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## 0.9410499 3.1730325</code></pre>
+## 0.2422004 1.1211485</code></pre>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="background.html#cb337-1" tabindex="-1"></a><span class="do">### We can also visualise the estimated distribution whose quantiles define</span></span>
 <span id="cb337-2"><a href="background.html#cb337-2" tabindex="-1"></a><span class="do">### confidence interval</span></span>
 <span id="cb337-3"><a href="background.html#cb337-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="at">main =</span> <span class="st">&quot;Bootstrap Distribution&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>

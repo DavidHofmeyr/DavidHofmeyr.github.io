@@ -180,6 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="fundamentals2.html"><a href="fundamentals2.html#prediction-error-and-generalisation"><i class="fa fa-check"></i><b>5.3</b> Prediction Error and Generalisation</a></li>
 <li class="chapter" data-level="5.4" data-path="fundamentals2.html"><a href="fundamentals2.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating (Expected) Prediction Error</a></li>
 <li class="chapter" data-level="5.5" data-path="fundamentals2.html"><a href="fundamentals2.html#summary-5"><i class="fa fa-check"></i><b>5.5</b> Summary</a></li>
+<li class="chapter" data-level="5.6" data-path="fundamentals2.html"><a href="fundamentals2.html#exercises-6"><i class="fa fa-check"></i><b>5.6</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="linear.html"><a href="linear.html"><i class="fa fa-check"></i><b>6</b> Linear Regression: Ordinary Least Squares and Regularised Variants</a>
 <ul>
@@ -317,7 +318,8 @@ pretty useful function to have a first look at a new data frame:</p>
 <span id="cb252-6"><a href="working-with-data-in-r.html#cb252-6" tabindex="-1"></a>planets<span class="sc">$</span>density <span class="ot">&lt;-</span> planets<span class="sc">$</span>mass<span class="sc">/</span>volumes</span>
 <span id="cb252-7"><a href="working-with-data-in-r.html#cb252-7" tabindex="-1"></a></span>
 <span id="cb252-8"><a href="working-with-data-in-r.html#cb252-8" tabindex="-1"></a>planets<span class="sc">$</span>density</span></code></pre></div>
-<pre><code>## [1] 5423.2029 5244.9771 5511.4124 3934.1175 1327.5384  686.7827 1270.5254 1631.7267</code></pre>
+<pre><code>## [1] 5423.2029 5244.9771 5511.4124 3934.1175 1327.5384  686.7827 1270.5254
+## [8] 1631.7267</code></pre>
 <p><strong>Factor Variables</strong></p>
 <p>It is common in statistical data to have categorical variables,
 indicating some subdivision of the data, such as social class, primary
@@ -343,15 +345,15 @@ a variable which categorises the planets in this way</p>
 <span id="cb254-2"><a href="working-with-data-in-r.html#cb254-2" tabindex="-1"></a>                    <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb254-3"><a href="working-with-data-in-r.html#cb254-3" tabindex="-1"></a></span>
 <span id="cb254-4"><a href="working-with-data-in-r.html#cb254-4" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
-<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;   &quot;gas_giant&quot;  
-## [7] &quot;ice_giant&quot;   &quot;ice_giant&quot;</code></pre>
+<pre><code>## [1] &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;terrestrial&quot; &quot;gas_giant&quot;  
+## [6] &quot;gas_giant&quot;   &quot;ice_giant&quot;   &quot;ice_giant&quot;</code></pre>
 <p>Now, as it is currently <code>planets$type</code> is a vector of character objects, and although it clearly delineates which items are in each of the categories we can explicitly convert
 this to a factor using <code>as.factor()</code></p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="working-with-data-in-r.html#cb256-1" tabindex="-1"></a>planets<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(planets<span class="sc">$</span>type)</span>
 <span id="cb256-2"><a href="working-with-data-in-r.html#cb256-2" tabindex="-1"></a></span>
 <span id="cb256-3"><a href="working-with-data-in-r.html#cb256-3" tabindex="-1"></a>planets<span class="sc">$</span>type</span></code></pre></div>
-<pre><code>## [1] terrestrial terrestrial terrestrial terrestrial gas_giant   gas_giant   ice_giant  
-## [8] ice_giant  
+<pre><code>## [1] terrestrial terrestrial terrestrial terrestrial gas_giant   gas_giant  
+## [7] ice_giant   ice_giant  
 ## Levels: gas_giant ice_giant terrestrial</code></pre>
 <p>Now when we print the <code>type</code> variable we see that it now has what are called <code>Levels</code>, which are the
 labels which give meaning to the category codes. In this example we named the codes with meaningful
@@ -579,7 +581,7 @@ like colon separated values, you can setup <code>read.table(, sep = ":")</code> 
 ##  $ weight      : int  3504 3693 3436 3433 3449 4341 4354 4312 4425 3850 ...
 ##  $ acceleration: num  12 11.5 11 12 10.5 10 9 8.5 10 8.5 ...
 ##  $ year        : int  70 70 70 70 70 70 70 70 70 70 ...
-##  $ origin      : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ origin      : Factor w/ 3 levels &quot;American&quot;,&quot;European&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ name        : Factor w/ 304 levels &quot;amc ambassador brougham&quot;,..: 49 36 231 14 161 141 54 223 241 2 ...
 ##  - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:5] 33 127 331 337 355
 ##   ..- attr(*, &quot;names&quot;)= chr [1:5] &quot;33&quot; &quot;127&quot; &quot;331&quot; &quot;337&quot; ...</code></pre>
@@ -673,11 +675,13 @@ other columns. Accessing data can be done using both the dollar
 syntax and the square-bracket syntax:</li>
 </ul>
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="working-with-data-in-r.html#cb314-1" tabindex="-1"></a>planets<span class="sc">$</span>name</span></code></pre></div>
-<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot;  &quot;Neptune&quot;</code></pre>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot; 
+## [8] &quot;Neptune&quot;</code></pre>
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="working-with-data-in-r.html#cb316-1" tabindex="-1"></a>planets<span class="sc">$</span>name[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;</code></pre>
 <div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="working-with-data-in-r.html#cb318-1" tabindex="-1"></a>planets[, <span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot;  &quot;Neptune&quot;</code></pre>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot; 
+## [8] &quot;Neptune&quot;</code></pre>
 <div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="working-with-data-in-r.html#cb320-1" tabindex="-1"></a>planets[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;</code></pre>
 <ul>
