@@ -1,4 +1,4 @@
-fig:unnamed-chunk-70
+fig:unnamed-chunk-71
 introduction-to-r
 background-on-r
 getting-started-with-rstudio
@@ -96,7 +96,7 @@ overfitting
 prediction-error-and-generalisation
 expected-prediction-error
 the-bias-variance-tradeoff
-the-bias-and-variance-of-a-regression-model
+biasvariance
 estimating-expected-prediction-error
 validation-for-estimating-expected-prediction-error
 cross-validation
@@ -104,6 +104,7 @@ cross-validation-in-r
 covariance-based-estimates-of-in-sample-error
 test-sets
 summary-5
+exercises-6
 linear
 the-linear-model
 a-quick-aside-on-assumptions

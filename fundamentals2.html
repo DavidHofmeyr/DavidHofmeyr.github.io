@@ -351,7 +351,7 @@ set of <span class="math inline">\(n = 30\)</span> realisations of <span class="
 <span id="cb359-31"><a href="fundamentals2.html#cb359-31" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb359-32"><a href="fundamentals2.html#cb359-32" tabindex="-1"></a></span>
 <span id="cb359-33"><a href="fundamentals2.html#cb359-33" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-150-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-151-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Try re-running the above code multiple times. You will see how much the fitted function varies from sample to sample. This is because the model is trying to model too much of the data and is capturing a lot of what makes the samples different (the residual “noise” terms) and not only what makes them similar (the actual functional “signal” component).</p>
 <p>Now try changing the degree of the polynomial and run the code multiple times. What do you observe?</p>
 <p>Although we never know the true function in practice, for a comparison like we have here, using simulations like this in order to see how well different types of models <em>tend to perform</em> can be very instructive.</p>
@@ -516,7 +516,7 @@ section. We have the setup where</p>
 <span id="cb360-22"><a href="fundamentals2.html#cb360-22" tabindex="-1"></a></span>
 <span id="cb360-23"><a href="fundamentals2.html#cb360-23" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
 <span id="cb360-24"><a href="fundamentals2.html#cb360-24" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-151-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-152-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Run the above code multiple times. You should not be surprised to see a
 different fitted model each time, since the sample changed. Although no
 single fitted model can show us what the bias and variance are, repeated
@@ -566,7 +566,7 @@ all of the lines fit to the different data sets generated.</p>
 <span id="cb361-35"><a href="fundamentals2.html#cb361-35" tabindex="-1"></a></span>
 <span id="cb361-36"><a href="fundamentals2.html#cb361-36" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb361-37"><a href="fundamentals2.html#cb361-37" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-152-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-153-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Now we are able to see the bias more clearly, where the dashed line is the average fitted value for each value of <span class="math inline">\(x\)</span> over all 500 fitted models. We can also see that that variance increases as we move away from the middle of the range of <span class="math inline">\(x\)</span> values.</p>
 <p>We know that as we increase the flexibility (degree of the polynomial, where a linear/affine function is just a degree one polynomial) we should see the bias decreasing and the variance increasing. Let’s run the same experiment but for degrees two up to five for comparison.</p>
 <div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="fundamentals2.html#cb362-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
@@ -601,7 +601,7 @@ all of the lines fit to the different data sets generated.</p>
 <span id="cb362-30"><a href="fundamentals2.html#cb362-30" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb362-31"><a href="fundamentals2.html#cb362-31" tabindex="-1"></a>  <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb362-32"><a href="fundamentals2.html#cb362-32" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-153-1.png" width="1200px" height="800px" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-154-1.png" width="1200px" height="800px" style="display: block; margin: auto;" /></p>
 <p>We can see that the quadratic (degree two) model still has very obvious
 bias, in that the average fit shown with the dashed line over/underestimates the true function at different values of <span class="math inline">\(x\)</span>. In the extreme left and right we can also see slight bias in the degree three polynomial model.</p>
 <p>Although we can see very slight deviations in the average fit from the true function for degrees four and five, these are down to the fact that we have averaged 500 fitted models and not infinitely many. In fact if the true model is a degree <span class="math inline">\(d\)</span> polynomial (where here we know <span class="math inline">\(d = 4\)</span>) then the bias of all models with degree at least <span class="math inline">\(d\)</span> is theoretically zero.</p>
@@ -894,7 +894,7 @@ E_{\tilde Y_1, ..., \tilde Y_n}\left[\frac{1}{n}\sum_{i=1}^n L(\tilde Y_i, \hg(\
 <p>As it is with prediction error, however, estimating in-sample error is not straightforward and we need to rely on estimates for expected in-sample error. This is just the expected value of in-sample error over potential training sets (and hence different fitted models).</p>
 <p>It turns out that for the squared error loss function we can obtain an unbiased estimate for expected in-sample error from the quantity
 <span class="math display">\[
-\frac{1}{n}\sum_{i=1}^n L(y_i, \hg(\x_i)) + \frac{1}{n}\sum_{i=1}^n Cov(Y_i, \hg(\x_i)).
+\frac{1}{n}\sum_{i=1}^n L(y_i, \hg(\x_i)) + \frac{2}{n}\sum_{i=1}^n Cov(Y_i, \hg(\x_i)).
 \]</span></p>
 <p>The first term above is just the training error. The second term above may be seen as a “penalty” to avoid selecting models likely to overfit. Models with too much flexibility will fit very closely to the sample, meaning that the fitted values would “follow” the values of the response if we instead had a different set of realisations (a different sample). This leads to a high covariance between each <span class="math inline">\(Y_i\)</span> and its corresponding fitted value, <span class="math inline">\(\hg(\x_i)\)</span>. The more flexibility, the more able the model will be able to follow the variations in the data, leading to higher covariance between the actual responses and the fitted values from the model.</p>
 <p>This doesn’t yet, however, tell us about how to compute or estimate these covariances. It turns out, however, that for some models we can obtain analytical expressions for the covariance between the response and fitted values. For example in a simplified setting (like the linear and quadratic models we have seen) the quantity <span class="math inline">\(\sum_{i=1}^n Cov(Y_i \hat Y_i)\)</span> is equal to <span class="math inline">\(\sigma^2_{\epsilon}\)</span> multiplied by the number of parameters in the model (the model <em>degrees of freedom</em>). As long as we can obtain a reasonable estimate for <span class="math inline">\(\sigma^2_{\epsilon}\)</span> we can use this to obtain estimates of the expected in-sample error and use this as an alternative to something like cross validation to select/tune a model. As a rule-of-thumb estimating <span class="math inline">\(\sigma^2_{\epsilon}\)</span> with the quantity <span class="math inline">\(\frac{1}{n - df(\hg^*)}\sum_{i=1}^n(y_i - \hg^*(\x_i))^2\)</span>, where <span class="math inline">\(\hg^*\)</span> is the most (or one of the most) flexible models which has been fit and <span class="math inline">\(df(\hg^*)\)</span> is its degrees of freedom.</p>
@@ -919,20 +919,18 @@ E_{\tilde Y_1, ..., \tilde Y_n}\left[\frac{1}{n}\sum_{i=1}^n L(\tilde Y_i, \hg(\
 <span id="cb368-18"><a href="fundamentals2.html#cb368-18" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> tr_err[<span class="dv">5</span>]<span class="sc">/</span>(n <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">*</span>n</span>
 <span id="cb368-19"><a href="fundamentals2.html#cb368-19" tabindex="-1"></a><span class="co"># Can you see why this is the appropriate estimate?</span></span>
 <span id="cb368-20"><a href="fundamentals2.html#cb368-20" tabindex="-1"></a></span>
-<span id="cb368-21"><a href="fundamentals2.html#cb368-21" tabindex="-1"></a><span class="do">### Now let&#39;s estime the expected in-sample error</span></span>
+<span id="cb368-21"><a href="fundamentals2.html#cb368-21" tabindex="-1"></a><span class="do">### Now let&#39;s estimate the expected in-sample error</span></span>
 <span id="cb368-22"><a href="fundamentals2.html#cb368-22" tabindex="-1"></a><span class="do">### for each model</span></span>
-<span id="cb368-23"><a href="fundamentals2.html#cb368-23" tabindex="-1"></a>eise <span class="ot">&lt;-</span> tr_err <span class="sc">+</span> sig2_hat<span class="sc">*</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span>n</span>
+<span id="cb368-23"><a href="fundamentals2.html#cb368-23" tabindex="-1"></a>eise <span class="ot">&lt;-</span> tr_err <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>sig2_hat<span class="sc">*</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span>n</span>
 <span id="cb368-24"><a href="fundamentals2.html#cb368-24" tabindex="-1"></a></span>
 <span id="cb368-25"><a href="fundamentals2.html#cb368-25" tabindex="-1"></a>eise</span></code></pre></div>
-<pre><code>## [1] 236.4006 230.4896 231.3477 229.2818 233.2552</code></pre>
+<pre><code>## [1] 245.7308 244.4849 250.0081 252.6074 261.2458</code></pre>
 <div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="fundamentals2.html#cb370-1" tabindex="-1"></a><span class="do">### When we did cross validation the caret package</span></span>
 <span id="cb370-2"><a href="fundamentals2.html#cb370-2" tabindex="-1"></a><span class="do">### returned the square root of the estimated expected</span></span>
 <span id="cb370-3"><a href="fundamentals2.html#cb370-3" tabindex="-1"></a><span class="do">### prediction error</span></span>
 <span id="cb370-4"><a href="fundamentals2.html#cb370-4" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 228.3829 222.3852 222.9089 220.0393 253.9585</code></pre>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="fundamentals2.html#cb372-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>eise</span></code></pre></div>
-<pre><code>## [1] 0.9660842 0.9648382 0.9635234 0.9596891 1.0887582</code></pre>
-<p>We can see that the estimates for expected in-sample error and the cross validation based estimates of expected prediction error are similar, and in fact aside from the degree five model the ratio of the cross validation and in-sample errors is very close to constant.</p>
+<p>We can see that the estimates for expected in-sample error and the cross validation based estimates of expected prediction error are quite similar.</p>
 </div>
 <div id="test-sets" class="section level3 hasAnchor" number="5.4.3">
 <h3><span class="header-section-number">5.4.3</span> Test Sets<a href="fundamentals2.html#test-sets" class="anchor-section" aria-label="Anchor link to header"></a></h3>

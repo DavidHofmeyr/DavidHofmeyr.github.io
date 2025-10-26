@@ -317,16 +317,16 @@ h\left(E[Y|X]\right) = g^*(X).
 <p><span class="math display">\[\begin{align*}
 h(z) = \log\left(\frac{z}{1-z}\right), \ h^{-1}(z) = \frac{1}{1+\exp(-z)}.
 \end{align*}\]</span></p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="glms.html#cb414-1" tabindex="-1"></a><span class="do">### Plotting the logit and logistic functions</span></span>
-<span id="cb414-2"><a href="glms.html#cb414-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb414-3"><a href="glms.html#cb414-3" tabindex="-1"></a></span>
-<span id="cb414-4"><a href="glms.html#cb414-4" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
-<span id="cb414-5"><a href="glms.html#cb414-5" tabindex="-1"></a><span class="fu">plot</span>(z, <span class="fu">log</span>(z<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>z)), <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">h</span>(z)), <span class="at">main =</span> <span class="st">&quot;Logit link function&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
-<span id="cb414-6"><a href="glms.html#cb414-6" tabindex="-1"></a></span>
-<span id="cb414-7"><a href="glms.html#cb414-7" tabindex="-1"></a></span>
-<span id="cb414-8"><a href="glms.html#cb414-8" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
-<span id="cb414-9"><a href="glms.html#cb414-9" tabindex="-1"></a><span class="fu">plot</span>(z, <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>z)), <span class="at">ylab =</span> <span class="fu">expression</span>(h<span class="sc">^-</span><span class="dv">1</span><span class="sc">*</span>(z)), <span class="at">main =</span> <span class="st">&quot;Logistic inverse link function&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-170-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="glms.html#cb416-1" tabindex="-1"></a><span class="do">### Plotting the logit and logistic functions</span></span>
+<span id="cb416-2"><a href="glms.html#cb416-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb416-3"><a href="glms.html#cb416-3" tabindex="-1"></a></span>
+<span id="cb416-4"><a href="glms.html#cb416-4" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb416-5"><a href="glms.html#cb416-5" tabindex="-1"></a><span class="fu">plot</span>(z, <span class="fu">log</span>(z<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>z)), <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">h</span>(z)), <span class="at">main =</span> <span class="st">&quot;Logit link function&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
+<span id="cb416-6"><a href="glms.html#cb416-6" tabindex="-1"></a></span>
+<span id="cb416-7"><a href="glms.html#cb416-7" tabindex="-1"></a></span>
+<span id="cb416-8"><a href="glms.html#cb416-8" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb416-9"><a href="glms.html#cb416-9" tabindex="-1"></a><span class="fu">plot</span>(z, <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>z)), <span class="at">ylab =</span> <span class="fu">expression</span>(h<span class="sc">^-</span><span class="dv">1</span><span class="sc">*</span>(z)), <span class="at">main =</span> <span class="st">&quot;Logistic inverse link function&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-171-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Estimation in Logistic Regression</strong></p>
 <p>Now, in the context of GLMs recall that we are modelling <span class="math inline">\(E[Y|X]\)</span> from the perspective that <span class="math inline">\(h^{-1}(g^*(X)) = E[Y|X]\)</span>, and we are selecting our estimate for <span class="math inline">\(g^*(X)\)</span> from the collection of all linear (affine) functions of <span class="math inline">\(X\)</span>. For convenience let’s use the notation <span class="math inline">\(q(X) = E[Y|X]\)</span>, which in the context of logistic regression is also equal to <span class="math inline">\(P(Y = 1|X)\)</span>. We may therefore write</p>
 <p><span class="math display">\[\begin{align*}
@@ -344,12 +344,20 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 <h4><span class="header-section-number">7.2.1.1</span> Logistic Regression in R<a href="glms.html#logistic-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The function <code>glm</code> allows us to fit generalised linear models directly from the contents of R’s base distribution. The main arguments are the same as those passed to the <code>lm</code> function, i.e. a formula, describing which is the response and which are the covariates to be used, and a data frame containing all associated variables. However, we now also need to specify which distribution (or more precisely which distribution “family”) we are using to model the response. The <code>glm</code> function has a default link function for each family of distributions, but this can also be specified. For example when fitting a logistic regression model this can be done by either setting <code>family = "binomial"</code> or <code>family = binomial(link = "logit")</code>.</p>
 <p>Let’s look at a simple example. The <code>Pima.tr</code> data set in the <code>MASS</code> package (included in R’s base distribution) contains data on a group of native American women, including whether or not they have diabetes according to the criteria set out by the World Health Organisation. Note that the <code>.tr</code> refers to “training” and there is an additional <code>Pima.te</code> data set for testing, however we will only look at this later on. First let’s load the data and see what variables are included.</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="glms.html#cb415-1" tabindex="-1"></a><span class="do">### First load the MASS library and then the data</span></span>
-<span id="cb415-2"><a href="glms.html#cb415-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb415-3"><a href="glms.html#cb415-3" tabindex="-1"></a><span class="fu">data</span>(Pima.tr)</span>
-<span id="cb415-4"><a href="glms.html#cb415-4" tabindex="-1"></a></span>
-<span id="cb415-5"><a href="glms.html#cb415-5" tabindex="-1"></a><span class="do">### We can then look at the names of the variables, and the first few entries</span></span>
-<span id="cb415-6"><a href="glms.html#cb415-6" tabindex="-1"></a><span class="fu">str</span>(Pima.tr)</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="glms.html#cb417-1" tabindex="-1"></a><span class="do">### First load the MASS library and then the data</span></span>
+<span id="cb417-2"><a href="glms.html#cb417-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<pre><code>## The following object is masked from &#39;package:ISLR2&#39;:
+## 
+##     Boston</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="glms.html#cb421-1" tabindex="-1"></a><span class="fu">data</span>(Pima.tr)</span>
+<span id="cb421-2"><a href="glms.html#cb421-2" tabindex="-1"></a></span>
+<span id="cb421-3"><a href="glms.html#cb421-3" tabindex="-1"></a><span class="do">### We can then look at the names of the variables, and the first few entries</span></span>
+<span id="cb421-4"><a href="glms.html#cb421-4" tabindex="-1"></a><span class="fu">str</span>(Pima.tr)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    200 obs. of  8 variables:
 ##  $ npreg: int  5 7 5 0 0 5 3 1 3 2 ...
 ##  $ glu  : int  86 195 77 165 107 97 83 193 142 128 ...
@@ -361,11 +369,11 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 ##  $ type : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 2 1 1 1 2 1 1 1 2 ...</code></pre>
 <p>As always if we want more information on something we can use the <code>help</code> function. For example, full descriptions of these variables can be seen by calling <code>help(Pima.tr)</code>.</p>
 <p>Let’s now fit a logistic regression model. Note that the response variable is called <code>type</code> and is already encoded as a factor variable</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="glms.html#cb417-1" tabindex="-1"></a><span class="do">### We can now fit a logistic regression model to the data</span></span>
-<span id="cb417-2"><a href="glms.html#cb417-2" tabindex="-1"></a>logistic_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb417-3"><a href="glms.html#cb417-3" tabindex="-1"></a><span class="co"># we could equally have used glm(type~., data = Pima.tr, family = binomial(link = &quot;logit))</span></span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="glms.html#cb423-1" tabindex="-1"></a><span class="do">### We can now fit a logistic regression model to the data</span></span>
+<span id="cb423-2"><a href="glms.html#cb423-2" tabindex="-1"></a>logistic_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb423-3"><a href="glms.html#cb423-3" tabindex="-1"></a><span class="co"># we could equally have used glm(type~., data = Pima.tr, family = binomial(link = &quot;logit))</span></span></code></pre></div>
 <p>The output from <code>glm</code> has many of the same contents as that from <code>lm</code>, including information on the “significance” of each of the variables. However, it should be noted that the same potential issues of multicollinearity apply in the context of all GLMs and care should always be taken when interpreting these.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="glms.html#cb418-1" tabindex="-1"></a><span class="fu">summary</span>(logistic_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="glms.html#cb424-1" tabindex="-1"></a><span class="fu">summary</span>(logistic_mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = type ~ ., family = &quot;binomial&quot;, data = Pima.tr)
@@ -393,17 +401,17 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 <p>We can see that a cursory inspection shows the “significant” covariates being <code>glu</code> (a plasma glucose based measurement), <code>ped</code> (a variable derived from the diabetes status of the individuals’ relatives), and to a lesser extent <code>bmi</code> (body mass index) and <code>age</code>. The coefficients of all of these variables are also positive, showing they are positively associated with the likelihood of having diabetes. If we consider the <code>age</code> variable in isolation, we can say that (all other variables being kept fixed) with each passing year the odds of having diabetes typically increases by a factor <code>exp(coef(logistic_mod)['age']) = 1.042043</code>.</p>
 <p><strong>A Quick Aside on the “Reference” Class</strong></p>
 <p>Note that by default <code>glm</code> will treat the first factor level of the response as the so-called “reference” class, associated with <span class="math inline">\(Y = 0\)</span>, and the other class is treated as <span class="math inline">\(Y = 1\)</span>. Unless told otherwise, the levels of a factor will be sorted alphabetically if they are characters, or increasing numerically if they are numerical. So for the variable <code>Pima.tr$type</code> the first level is <code>No</code> since this is prior to <code>Yes</code> alphabetically. This is very important when it comes to interpretation since if the <code>type</code> variable had been stored differently we may have had an inverse interpretation to what is true. If you are ever unsure you can check the order of the levels of a factor variable using <code>levels(factor_variable)</code> and the first level listed will be treated as the reference. Alternatively you can tell R explicitly how to choose the reference class using the function <code>relevel(factor_variable, ref = "&lt;name of factor level you want as reference&gt;")</code>. For example</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="glms.html#cb420-1" tabindex="-1"></a><span class="do">### So as not to overwrite the contents of Pima.tr, let&#39;s copy the type variable</span></span>
-<span id="cb420-2"><a href="glms.html#cb420-2" tabindex="-1"></a>type <span class="ot">&lt;-</span> Pima.tr<span class="sc">$</span>type</span>
-<span id="cb420-3"><a href="glms.html#cb420-3" tabindex="-1"></a></span>
-<span id="cb420-4"><a href="glms.html#cb420-4" tabindex="-1"></a><span class="do">### We check how its values/levels have been ordered by default</span></span>
-<span id="cb420-5"><a href="glms.html#cb420-5" tabindex="-1"></a><span class="fu">levels</span>(type)</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="glms.html#cb426-1" tabindex="-1"></a><span class="do">### So as not to overwrite the contents of Pima.tr, let&#39;s copy the type variable</span></span>
+<span id="cb426-2"><a href="glms.html#cb426-2" tabindex="-1"></a>type <span class="ot">&lt;-</span> Pima.tr<span class="sc">$</span>type</span>
+<span id="cb426-3"><a href="glms.html#cb426-3" tabindex="-1"></a></span>
+<span id="cb426-4"><a href="glms.html#cb426-4" tabindex="-1"></a><span class="do">### We check how its values/levels have been ordered by default</span></span>
+<span id="cb426-5"><a href="glms.html#cb426-5" tabindex="-1"></a><span class="fu">levels</span>(type)</span></code></pre></div>
 <pre><code>## [1] &quot;No&quot;  &quot;Yes&quot;</code></pre>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="glms.html#cb422-1" tabindex="-1"></a><span class="do">### Now we created a modified factor variable with the reference class changed</span></span>
-<span id="cb422-2"><a href="glms.html#cb422-2" tabindex="-1"></a><span class="do">### and check that it has worked as we want</span></span>
-<span id="cb422-3"><a href="glms.html#cb422-3" tabindex="-1"></a>type_releveled <span class="ot">&lt;-</span> <span class="fu">relevel</span>(type, <span class="at">ref =</span> <span class="st">&quot;Yes&quot;</span>)</span>
-<span id="cb422-4"><a href="glms.html#cb422-4" tabindex="-1"></a></span>
-<span id="cb422-5"><a href="glms.html#cb422-5" tabindex="-1"></a><span class="fu">levels</span>(type_releveled)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="glms.html#cb428-1" tabindex="-1"></a><span class="do">### Now we created a modified factor variable with the reference class changed</span></span>
+<span id="cb428-2"><a href="glms.html#cb428-2" tabindex="-1"></a><span class="do">### and check that it has worked as we want</span></span>
+<span id="cb428-3"><a href="glms.html#cb428-3" tabindex="-1"></a>type_releveled <span class="ot">&lt;-</span> <span class="fu">relevel</span>(type, <span class="at">ref =</span> <span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb428-4"><a href="glms.html#cb428-4" tabindex="-1"></a></span>
+<span id="cb428-5"><a href="glms.html#cb428-5" tabindex="-1"></a><span class="fu">levels</span>(type_releveled)</span></code></pre></div>
 <pre><code>## [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
 <p>Unfortunately different functions across different packages sometimes handle the reference class differently, and so it is always important to validate what the functions you’ve used have done before reaching any conclusions.</p>
 </div>
@@ -441,19 +449,19 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 </table>
 <p>Within this terminology the Positive/Negative refers to the prediction and the True/False refers to the actual class label.</p>
 <p>The function <code>confusionMatrix</code> (provided in the <code>caret</code> package) will produce a confusion matrix from a set of class predictions and associated true class labels. Returning to our <code>logistic_mod</code> from before, let’s make predictions on the test set <code>Pima.te</code> and for now simply use the threshold of 0.5 to decide on final class predictions. Note that the function <code>confusionMatrix</code> will treat the first level of the factor as the “positive” class, which may contrast with how <code>glm</code> treats the different factor levels. We can therefore simply be explicit about which we want to be the “positive” class:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="glms.html#cb424-1" tabindex="-1"></a><span class="do">### As always we first load the library/ies we need</span></span>
-<span id="cb424-2"><a href="glms.html#cb424-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb424-3"><a href="glms.html#cb424-3" tabindex="-1"></a></span>
-<span id="cb424-4"><a href="glms.html#cb424-4" tabindex="-1"></a><span class="do">### When calling predict on a glm object we need to tell it whether</span></span>
-<span id="cb424-5"><a href="glms.html#cb424-5" tabindex="-1"></a><span class="do">### we want the outputs from the underlying linear model (type = &quot;link&quot;)</span></span>
-<span id="cb424-6"><a href="glms.html#cb424-6" tabindex="-1"></a><span class="do">### or to be the estimates for E[Y|X] (type = &quot;response&quot;)</span></span>
-<span id="cb424-7"><a href="glms.html#cb424-7" tabindex="-1"></a>logistic_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_mod, Pima.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb424-8"><a href="glms.html#cb424-8" tabindex="-1"></a>logistic_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_preds <span class="sc">&lt;=</span> <span class="fl">0.5</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
-<span id="cb424-9"><a href="glms.html#cb424-9" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>))</span>
-<span id="cb424-10"><a href="glms.html#cb424-10" tabindex="-1"></a></span>
-<span id="cb424-11"><a href="glms.html#cb424-11" tabindex="-1"></a><span class="do">### We can now produce the confusion matrix, where the first argument</span></span>
-<span id="cb424-12"><a href="glms.html#cb424-12" tabindex="-1"></a><span class="do">### is the predicted classes and the second is the actual classes</span></span>
-<span id="cb424-13"><a href="glms.html#cb424-13" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_class, Pima.te<span class="sc">$</span>type, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="glms.html#cb430-1" tabindex="-1"></a><span class="do">### As always we first load the library/ies we need</span></span>
+<span id="cb430-2"><a href="glms.html#cb430-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb430-3"><a href="glms.html#cb430-3" tabindex="-1"></a></span>
+<span id="cb430-4"><a href="glms.html#cb430-4" tabindex="-1"></a><span class="do">### When calling predict on a glm object we need to tell it whether</span></span>
+<span id="cb430-5"><a href="glms.html#cb430-5" tabindex="-1"></a><span class="do">### we want the outputs from the underlying linear model (type = &quot;link&quot;)</span></span>
+<span id="cb430-6"><a href="glms.html#cb430-6" tabindex="-1"></a><span class="do">### or to be the estimates for E[Y|X] (type = &quot;response&quot;)</span></span>
+<span id="cb430-7"><a href="glms.html#cb430-7" tabindex="-1"></a>logistic_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_mod, Pima.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb430-8"><a href="glms.html#cb430-8" tabindex="-1"></a>logistic_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_preds <span class="sc">&lt;=</span> <span class="fl">0.5</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb430-9"><a href="glms.html#cb430-9" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>))</span>
+<span id="cb430-10"><a href="glms.html#cb430-10" tabindex="-1"></a></span>
+<span id="cb430-11"><a href="glms.html#cb430-11" tabindex="-1"></a><span class="do">### We can now produce the confusion matrix, where the first argument</span></span>
+<span id="cb430-12"><a href="glms.html#cb430-12" tabindex="-1"></a><span class="do">### is the predicted classes and the second is the actual classes</span></span>
+<span id="cb430-13"><a href="glms.html#cb430-13" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_class, Pima.te<span class="sc">$</span>type, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -493,18 +501,23 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 <p>Even though the statistics computed from the confusion matrix give considerably more information than just the classification accuracy, they do require commitment to a single threshold for classification (we used 0.5 in the previous example). However it may not always be known <em>a priori</em> what the most appropriate threshold is. It should be clear, however, that as we decrease the threshold we have more probabilities exceeding the threshold, and hence more predictions of <span class="math inline">\(\hat Y = 1\)</span>. This leads to higher and higher sensitivity, but lower and lower specificity. If we increase the threshold we have the reverse occurring. What is pertinent, however, is that for each value of the threshold we obtain a pair of values for specificity and sensitivity.</p>
 <p>The <em>Receiver Operating Characteristic</em> curve is a functional representation of the relationship between specificity and sensitivity as the threshold for classification is varied (typically specificity is plotted from 1 to 0 rather than 0 to 1 so that the function is shown as increasing). If there is a threshold leading to both very high sensitivity and very high specificity then the curve will trace close to the top left of the plot before flattening out. The area underneath it will be close to one. On the other hand, a totally random classifier will have an “Area Under the Curve” (AUC) close to a half.</p>
 <p>The function <code>roc</code> in the package <code>pROC</code> will compute the ROC information given a vector of actual class labels and a vector of probabilities arising from a classifier.</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="glms.html#cb426-1" tabindex="-1"></a><span class="do">### First we load the pROC package</span></span>
-<span id="cb426-2"><a href="glms.html#cb426-2" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
-<span id="cb426-3"><a href="glms.html#cb426-3" tabindex="-1"></a></span>
-<span id="cb426-4"><a href="glms.html#cb426-4" tabindex="-1"></a><span class="do">### We then apply the function roc to the predictions from</span></span>
-<span id="cb426-5"><a href="glms.html#cb426-5" tabindex="-1"></a><span class="do">### our logistic regression model and the actual labels from the</span></span>
-<span id="cb426-6"><a href="glms.html#cb426-6" tabindex="-1"></a><span class="do">### test data set</span></span>
-<span id="cb426-7"><a href="glms.html#cb426-7" tabindex="-1"></a>logistic_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, logistic_preds)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="glms.html#cb432-1" tabindex="-1"></a><span class="do">### First we load the pROC package</span></span>
+<span id="cb432-2"><a href="glms.html#cb432-2" tabindex="-1"></a><span class="fu">library</span>(pROC)</span></code></pre></div>
+<pre><code>## Type &#39;citation(&quot;pROC&quot;)&#39; for a citation.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;pROC&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     cov, smooth, var</code></pre>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="glms.html#cb436-1" tabindex="-1"></a><span class="do">### We then apply the function roc to the predictions from</span></span>
+<span id="cb436-2"><a href="glms.html#cb436-2" tabindex="-1"></a><span class="do">### our logistic regression model and the actual labels from the</span></span>
+<span id="cb436-3"><a href="glms.html#cb436-3" tabindex="-1"></a><span class="do">### test data set</span></span>
+<span id="cb436-4"><a href="glms.html#cb436-4" tabindex="-1"></a>logistic_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, logistic_preds)</span></code></pre></div>
 <pre><code>## Setting levels: control = No, case = Yes</code></pre>
 <pre><code>## Setting direction: controls &lt; cases</code></pre>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="glms.html#cb429-1" tabindex="-1"></a><span class="fu">plot</span>(logistic_roc)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-176-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="glms.html#cb430-1" tabindex="-1"></a>logistic_roc</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="glms.html#cb439-1" tabindex="-1"></a><span class="fu">plot</span>(logistic_roc)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-177-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="glms.html#cb440-1" tabindex="-1"></a>logistic_roc</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## roc.default(response = Pima.te$type, predictor = logistic_preds)
@@ -516,52 +529,52 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 <div id="glms-within-caret" class="section level4 hasAnchor" number="7.2.1.3">
 <h4><span class="header-section-number">7.2.1.3</span> GLMs Within caret<a href="glms.html#glms-within-caret" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If we want to estimate the performance of a GLM (e.g. a logistic regression model) we can do this very easily using <code>caret</code>. Recall that the function <code>train</code> performs all the “heavy lifting” for us, and all we have to do is tell it how to model the problem (through a formula object), which data set to use, which method to use, and ultimately what we want from it, i.e., just fit a model or do cross-validation, etc. For the last of these we use the <code>trainControl</code> function. We can also use <code>trainControl</code> to tell it what performance metrics we want using the <code>summaryFunction</code> argument. In particular if we want to produce ROC statistics we need to set <code>summaryFunction = twoClassSummary</code>, and in order for it to produce ROC statistics we need to ensure predicted probabilities are computed and saved. Let’s run ten fold cross validation to estimate the performance of the logistic regression model. Note that although we have already checked its performance on the test data (normally we would not do things in this order), but for the purpose of model selection we may wish to compare the ROC statistics as estimated by cross validation, from multiple models.</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="glms.html#cb432-1" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>,</span>
-<span id="cb432-2"><a href="glms.html#cb432-2" tabindex="-1"></a>                          <span class="at">summaryFunction =</span> twoClassSummary,</span>
-<span id="cb432-3"><a href="glms.html#cb432-3" tabindex="-1"></a>                          <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="glms.html#cb442-1" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb442-2"><a href="glms.html#cb442-2" tabindex="-1"></a>                          <span class="at">summaryFunction =</span> twoClassSummary,</span>
+<span id="cb442-3"><a href="glms.html#cb442-3" tabindex="-1"></a>                          <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>We can now pass this as our <code>trControl</code> argument to the <code>train</code> function. However, it is important to note that (for some reason) <code>caret</code> and <code>glm</code> handle the reference class differently, essentially reversing them. As a result the sensitivity and specificity values returned by <code>train</code> will be swapped. Importantly the ROC score is independent of the ordering of factor levels.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="glms.html#cb433-1" tabindex="-1"></a><span class="do">### We need to tell train that we want to fit a glm and also specify the family</span></span>
-<span id="cb433-2"><a href="glms.html#cb433-2" tabindex="-1"></a>logistic_cv <span class="ot">&lt;-</span> <span class="fu">train</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>,</span>
-<span id="cb433-3"><a href="glms.html#cb433-3" tabindex="-1"></a>                     <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>),</span>
-<span id="cb433-4"><a href="glms.html#cb433-4" tabindex="-1"></a>                     <span class="at">trControl =</span> trControl,</span>
-<span id="cb433-5"><a href="glms.html#cb433-5" tabindex="-1"></a>                     <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span>
-<span id="cb433-6"><a href="glms.html#cb433-6" tabindex="-1"></a></span>
-<span id="cb433-7"><a href="glms.html#cb433-7" tabindex="-1"></a>logistic_cv<span class="sc">$</span>results</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="glms.html#cb443-1" tabindex="-1"></a><span class="do">### We need to tell train that we want to fit a glm and also specify the family</span></span>
+<span id="cb443-2"><a href="glms.html#cb443-2" tabindex="-1"></a>logistic_cv <span class="ot">&lt;-</span> <span class="fu">train</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>,</span>
+<span id="cb443-3"><a href="glms.html#cb443-3" tabindex="-1"></a>                     <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>),</span>
+<span id="cb443-4"><a href="glms.html#cb443-4" tabindex="-1"></a>                     <span class="at">trControl =</span> trControl,</span>
+<span id="cb443-5"><a href="glms.html#cb443-5" tabindex="-1"></a>                     <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span>
+<span id="cb443-6"><a href="glms.html#cb443-6" tabindex="-1"></a></span>
+<span id="cb443-7"><a href="glms.html#cb443-7" tabindex="-1"></a>logistic_cv<span class="sc">$</span>results</span></code></pre></div>
 <pre><code>##   parameter       ROC      Sens      Spec      ROCSD   SensSD    SpecSD
 ## 1      none 0.8323129 0.8796703 0.5404762 0.08823444 0.107995 0.1937711</code></pre>
 <p>We can see that the estimated ROC is actually below what we saw on the test data set. This could be a result of bias, since our training sets used in cross validation are slightly smaller than the complete training set, but can also just be a result of the particular training/test split of the overall data set.</p>
 <p><strong>Regularisation in GLMs</strong></p>
 <p>Hopefully it is unsurprising that the same techniques we used in the linear regression framework for regularising estimation of the regression coefficients, are applicable here as well. Perhaps some of you had already expected that the package name <code>glmnet</code> refers to the fact that more than just the standard linear model framework is relevant.</p>
 <p>Let’s fit a LASSO logistic regression model to the <code>Pima.tr</code> data set, and perform cross validation to select an appropriate value for <span class="math inline">\(\lambda\)</span>. We could use either <code>glmnet</code> or <code>caret</code>, and we will use both for illustrative purposes. We can tell <code>cv.glmnet</code> to use the ROC for selection by setting <code>type.measure = "auc"</code></p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="glms.html#cb435-1" tabindex="-1"></a><span class="do">### As always we first load the library/ies we need</span></span>
-<span id="cb435-2"><a href="glms.html#cb435-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb435-3"><a href="glms.html#cb435-3" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb435-4"><a href="glms.html#cb435-4" tabindex="-1"></a></span>
-<span id="cb435-5"><a href="glms.html#cb435-5" tabindex="-1"></a><span class="do">### With glmnet recall that we do not provide a formula, but a matrix x</span></span>
-<span id="cb435-6"><a href="glms.html#cb435-6" tabindex="-1"></a><span class="do">### and vector y.</span></span>
-<span id="cb435-7"><a href="glms.html#cb435-7" tabindex="-1"></a>Pima.tr.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Pima.tr[,<span class="fu">names</span>(Pima.tr)<span class="sc">!=</span><span class="st">&#39;type&#39;</span>])</span>
-<span id="cb435-8"><a href="glms.html#cb435-8" tabindex="-1"></a>Pima.tr.y <span class="ot">&lt;-</span> Pima.tr<span class="sc">$</span>type</span>
-<span id="cb435-9"><a href="glms.html#cb435-9" tabindex="-1"></a></span>
-<span id="cb435-10"><a href="glms.html#cb435-10" tabindex="-1"></a>logistic_lasso_cv_glmnet <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(Pima.tr.x, Pima.tr.y, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
-<span id="cb435-11"><a href="glms.html#cb435-11" tabindex="-1"></a>                                      <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">&quot;auc&quot;</span>)</span>
-<span id="cb435-12"><a href="glms.html#cb435-12" tabindex="-1"></a></span>
-<span id="cb435-13"><a href="glms.html#cb435-13" tabindex="-1"></a><span class="do">### With caret, by default both lambda and alpha (the elastic net) will be</span></span>
-<span id="cb435-14"><a href="glms.html#cb435-14" tabindex="-1"></a><span class="do">### tuned. We can specify only to consider alpha = 1 (the LASSO) by choosing</span></span>
-<span id="cb435-15"><a href="glms.html#cb435-15" tabindex="-1"></a><span class="do">### our own &quot;tuning grid&quot; as follows</span></span>
-<span id="cb435-16"><a href="glms.html#cb435-16" tabindex="-1"></a></span>
-<span id="cb435-17"><a href="glms.html#cb435-17" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span>))</span>
-<span id="cb435-18"><a href="glms.html#cb435-18" tabindex="-1"></a></span>
-<span id="cb435-19"><a href="glms.html#cb435-19" tabindex="-1"></a>logistic_lasso_cv_caret <span class="ot">&lt;-</span> <span class="fu">train</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
-<span id="cb435-20"><a href="glms.html#cb435-20" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">trControl =</span> trControl,</span>
-<span id="cb435-21"><a href="glms.html#cb435-21" tabindex="-1"></a>                           <span class="at">tuneGrid =</span> tune_grid, <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="glms.html#cb445-1" tabindex="-1"></a><span class="do">### As always we first load the library/ies we need</span></span>
+<span id="cb445-2"><a href="glms.html#cb445-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb445-3"><a href="glms.html#cb445-3" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb445-4"><a href="glms.html#cb445-4" tabindex="-1"></a></span>
+<span id="cb445-5"><a href="glms.html#cb445-5" tabindex="-1"></a><span class="do">### With glmnet recall that we do not provide a formula, but a matrix x</span></span>
+<span id="cb445-6"><a href="glms.html#cb445-6" tabindex="-1"></a><span class="do">### and vector y.</span></span>
+<span id="cb445-7"><a href="glms.html#cb445-7" tabindex="-1"></a>Pima.tr.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Pima.tr[,<span class="fu">names</span>(Pima.tr)<span class="sc">!=</span><span class="st">&#39;type&#39;</span>])</span>
+<span id="cb445-8"><a href="glms.html#cb445-8" tabindex="-1"></a>Pima.tr.y <span class="ot">&lt;-</span> Pima.tr<span class="sc">$</span>type</span>
+<span id="cb445-9"><a href="glms.html#cb445-9" tabindex="-1"></a></span>
+<span id="cb445-10"><a href="glms.html#cb445-10" tabindex="-1"></a>logistic_lasso_cv_glmnet <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(Pima.tr.x, Pima.tr.y, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
+<span id="cb445-11"><a href="glms.html#cb445-11" tabindex="-1"></a>                                      <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">&quot;auc&quot;</span>)</span>
+<span id="cb445-12"><a href="glms.html#cb445-12" tabindex="-1"></a></span>
+<span id="cb445-13"><a href="glms.html#cb445-13" tabindex="-1"></a><span class="do">### With caret, by default both lambda and alpha (the elastic net) will be</span></span>
+<span id="cb445-14"><a href="glms.html#cb445-14" tabindex="-1"></a><span class="do">### tuned. We can specify only to consider alpha = 1 (the LASSO) by choosing</span></span>
+<span id="cb445-15"><a href="glms.html#cb445-15" tabindex="-1"></a><span class="do">### our own &quot;tuning grid&quot; as follows</span></span>
+<span id="cb445-16"><a href="glms.html#cb445-16" tabindex="-1"></a></span>
+<span id="cb445-17"><a href="glms.html#cb445-17" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> <span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span>))</span>
+<span id="cb445-18"><a href="glms.html#cb445-18" tabindex="-1"></a></span>
+<span id="cb445-19"><a href="glms.html#cb445-19" tabindex="-1"></a>logistic_lasso_cv_caret <span class="ot">&lt;-</span> <span class="fu">train</span>(type<span class="sc">~</span>., <span class="at">data =</span> Pima.tr, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb445-20"><a href="glms.html#cb445-20" tabindex="-1"></a>                           <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">trControl =</span> trControl,</span>
+<span id="cb445-21"><a href="glms.html#cb445-21" tabindex="-1"></a>                           <span class="at">tuneGrid =</span> tune_grid, <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span></code></pre></div>
 <p>Although the precise values of <span class="math inline">\(\lambda\)</span> used in each of the implementations will be slightly different, and also the cross validation folds will almost certainly differ because of the random splitting, we should expect fairly similar values to have been selected.</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="glms.html#cb436-1" tabindex="-1"></a>logistic_lasso_cv_glmnet<span class="sc">$</span>lambda.min</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="glms.html#cb446-1" tabindex="-1"></a>logistic_lasso_cv_glmnet<span class="sc">$</span>lambda.min</span></code></pre></div>
 <pre><code>## [1] 0.01528595</code></pre>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="glms.html#cb438-1" tabindex="-1"></a>logistic_lasso_cv_caret<span class="sc">$</span>bestTune<span class="sc">$</span>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="glms.html#cb448-1" tabindex="-1"></a>logistic_lasso_cv_caret<span class="sc">$</span>bestTune<span class="sc">$</span>lambda</span></code></pre></div>
 <pre><code>## [1] 0.015625</code></pre>
 <p>We can also inspect the coefficients in the final fitted models:</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="glms.html#cb440-1" tabindex="-1"></a><span class="do">### For glmnet we have already seen how to extract the coefficients</span></span>
-<span id="cb440-2"><a href="glms.html#cb440-2" tabindex="-1"></a><span class="fu">coef</span>(logistic_lasso_cv_glmnet, <span class="at">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="glms.html#cb450-1" tabindex="-1"></a><span class="do">### For glmnet we have already seen how to extract the coefficients</span></span>
+<span id="cb450-2"><a href="glms.html#cb450-2" tabindex="-1"></a><span class="fu">coef</span>(logistic_lasso_cv_glmnet, <span class="at">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
 <pre><code>## 8 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##              lambda.min
 ## (Intercept) -8.36944839
@@ -572,9 +585,9 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 ## bmi          0.06236416
 ## ped          1.35098882
 ## age          0.03425585</code></pre>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="glms.html#cb442-1" tabindex="-1"></a><span class="do">### For caret the final fitted model is stored in the field $finalModel</span></span>
-<span id="cb442-2"><a href="glms.html#cb442-2" tabindex="-1"></a><span class="fu">coef</span>(logistic_lasso_cv_caret<span class="sc">$</span>finalModel,</span>
-<span id="cb442-3"><a href="glms.html#cb442-3" tabindex="-1"></a>     <span class="at">s =</span> logistic_lasso_cv_caret<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="glms.html#cb452-1" tabindex="-1"></a><span class="do">### For caret the final fitted model is stored in the field $finalModel</span></span>
+<span id="cb452-2"><a href="glms.html#cb452-2" tabindex="-1"></a><span class="fu">coef</span>(logistic_lasso_cv_caret<span class="sc">$</span>finalModel,</span>
+<span id="cb452-3"><a href="glms.html#cb452-3" tabindex="-1"></a>     <span class="at">s =</span> logistic_lasso_cv_caret<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)</span></code></pre></div>
 <pre><code>## 8 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##              s=0.015625
 ## (Intercept) -8.33928046
@@ -587,32 +600,32 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 ## age          0.03415721</code></pre>
 <p>Both models included/excluded the same variables, and if we recall the “significant” variables in the original fit all are included as well as <code>npreg</code> (the number of pregnancies had).</p>
 <p>Finally we can compare the performance on the test data using <code>roc</code> as we did previously.</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="glms.html#cb444-1" tabindex="-1"></a><span class="do">### glmnet performance</span></span>
-<span id="cb444-2"><a href="glms.html#cb444-2" tabindex="-1"></a>Pima.te.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Pima.te[,<span class="fu">names</span>(Pima.te)<span class="sc">!=</span><span class="st">&#39;type&#39;</span>])</span>
-<span id="cb444-3"><a href="glms.html#cb444-3" tabindex="-1"></a></span>
-<span id="cb444-4"><a href="glms.html#cb444-4" tabindex="-1"></a>glmnet_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_lasso_cv_glmnet, Pima.te.x,</span>
-<span id="cb444-5"><a href="glms.html#cb444-5" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span>
-<span id="cb444-6"><a href="glms.html#cb444-6" tabindex="-1"></a></span>
-<span id="cb444-7"><a href="glms.html#cb444-7" tabindex="-1"></a>roc_glmnet <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, glmnet_predictions)</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="glms.html#cb454-1" tabindex="-1"></a><span class="do">### glmnet performance</span></span>
+<span id="cb454-2"><a href="glms.html#cb454-2" tabindex="-1"></a>Pima.te.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Pima.te[,<span class="fu">names</span>(Pima.te)<span class="sc">!=</span><span class="st">&#39;type&#39;</span>])</span>
+<span id="cb454-3"><a href="glms.html#cb454-3" tabindex="-1"></a></span>
+<span id="cb454-4"><a href="glms.html#cb454-4" tabindex="-1"></a>glmnet_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_lasso_cv_glmnet, Pima.te.x,</span>
+<span id="cb454-5"><a href="glms.html#cb454-5" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span>
+<span id="cb454-6"><a href="glms.html#cb454-6" tabindex="-1"></a></span>
+<span id="cb454-7"><a href="glms.html#cb454-7" tabindex="-1"></a>roc_glmnet <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, glmnet_predictions)</span></code></pre></div>
 <pre><code>## Setting levels: control = No, case = Yes</code></pre>
 <pre><code>## Setting direction: controls &lt; cases</code></pre>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="glms.html#cb447-1" tabindex="-1"></a>roc_glmnet</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="glms.html#cb457-1" tabindex="-1"></a>roc_glmnet</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## roc.default(response = Pima.te$type, predictor = glmnet_predictions)
 ## 
 ## Data: glmnet_predictions in 223 controls (Pima.te$type No) &lt; 109 cases (Pima.te$type Yes).
 ## Area under the curve: 0.866</code></pre>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="glms.html#cb449-1" tabindex="-1"></a><span class="do">### caret performance. Note that logistic regression prediction in caret does</span></span>
-<span id="cb449-2"><a href="glms.html#cb449-2" tabindex="-1"></a><span class="do">### not take type = &quot;response&quot; but rather type = &quot;prob&quot;. It also will</span></span>
-<span id="cb449-3"><a href="glms.html#cb449-3" tabindex="-1"></a><span class="do">### return a matrix with probabilities for all classes</span></span>
-<span id="cb449-4"><a href="glms.html#cb449-4" tabindex="-1"></a>caret_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_lasso_cv_caret, Pima.te,</span>
-<span id="cb449-5"><a href="glms.html#cb449-5" tabindex="-1"></a>                             <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[,<span class="dv">1</span>]</span>
-<span id="cb449-6"><a href="glms.html#cb449-6" tabindex="-1"></a></span>
-<span id="cb449-7"><a href="glms.html#cb449-7" tabindex="-1"></a>roc_caret <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, caret_predictions)</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="glms.html#cb459-1" tabindex="-1"></a><span class="do">### caret performance. Note that logistic regression prediction in caret does</span></span>
+<span id="cb459-2"><a href="glms.html#cb459-2" tabindex="-1"></a><span class="do">### not take type = &quot;response&quot; but rather type = &quot;prob&quot;. It also will</span></span>
+<span id="cb459-3"><a href="glms.html#cb459-3" tabindex="-1"></a><span class="do">### return a matrix with probabilities for all classes</span></span>
+<span id="cb459-4"><a href="glms.html#cb459-4" tabindex="-1"></a>caret_predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_lasso_cv_caret, Pima.te,</span>
+<span id="cb459-5"><a href="glms.html#cb459-5" tabindex="-1"></a>                             <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[,<span class="dv">1</span>]</span>
+<span id="cb459-6"><a href="glms.html#cb459-6" tabindex="-1"></a></span>
+<span id="cb459-7"><a href="glms.html#cb459-7" tabindex="-1"></a>roc_caret <span class="ot">&lt;-</span> <span class="fu">roc</span>(Pima.te<span class="sc">$</span>type, caret_predictions)</span></code></pre></div>
 <pre><code>## Setting levels: control = No, case = Yes</code></pre>
 <pre><code>## Setting direction: controls &gt; cases</code></pre>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="glms.html#cb452-1" tabindex="-1"></a>roc_caret</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="glms.html#cb462-1" tabindex="-1"></a>roc_caret</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## roc.default(response = Pima.te$type, predictor = caret_predictions)
@@ -639,37 +652,37 @@ P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)
 <p><strong>Multinomial Regression in R</strong></p>
 <p>It is hopefully apparent that one could relatively easily use the function <code>glm(family = "binomial")</code> multiple times in order to fit a multinomial regression model. However, this would require us to code-up all the necessary splitting of the data into different subsets to fit all the <span class="math inline">\(K-1\)</span> models, and then carefully managing the predictions from all of these models to produce a final prediction. Fortunately the <code>glmnet</code> package has the <code>family = multinomial</code> option already implemented for us. However it is worth pointing out that how this is implemented is slightly different, since a model is fit for every class and not for all but the reference class. Since the models are fit with regularisation, the reference class can be favoured/unfavoured somewhat arbitrarily. The <code>glmnet</code> package resolves this issue by estimating a full <span class="math inline">\(K\)</span> binary classification models, under constraints which ensure the probabilities sum to one.</p>
 <p>We will use the <code>satimage</code> data set, which can be loaded from the <code>pmlbr</code> package. This package does not actually store its data sets, but rather provides functionality for downloading them from the Penn Machine Learning Benchmarks repository [<a href="https://epistasislab.github.io/pmlb/" class="uri">https://epistasislab.github.io/pmlb/</a>]. Let’s start by loading the package and “fetching” the data set.</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="glms.html#cb454-1" tabindex="-1"></a><span class="do">### Loading library</span></span>
-<span id="cb454-2"><a href="glms.html#cb454-2" tabindex="-1"></a><span class="fu">library</span>(pmlbr)</span>
-<span id="cb454-3"><a href="glms.html#cb454-3" tabindex="-1"></a></span>
-<span id="cb454-4"><a href="glms.html#cb454-4" tabindex="-1"></a><span class="do">### The fetch_data function will download and load data sets by name</span></span>
-<span id="cb454-5"><a href="glms.html#cb454-5" tabindex="-1"></a>satimage <span class="ot">&lt;-</span> <span class="fu">fetch_data</span>(<span class="st">&quot;satimage&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="glms.html#cb464-1" tabindex="-1"></a><span class="do">### Loading library</span></span>
+<span id="cb464-2"><a href="glms.html#cb464-2" tabindex="-1"></a><span class="fu">library</span>(pmlbr)</span>
+<span id="cb464-3"><a href="glms.html#cb464-3" tabindex="-1"></a></span>
+<span id="cb464-4"><a href="glms.html#cb464-4" tabindex="-1"></a><span class="do">### The fetch_data function will download and load data sets by name</span></span>
+<span id="cb464-5"><a href="glms.html#cb464-5" tabindex="-1"></a>satimage <span class="ot">&lt;-</span> <span class="fu">fetch_data</span>(<span class="st">&quot;satimage&quot;</span>)</span></code></pre></div>
 <pre><code>## Download successful.</code></pre>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="glms.html#cb456-1" tabindex="-1"></a><span class="do">### All data sets loaded using pmlbr have the response variable named &quot;target&quot;</span></span>
-<span id="cb456-2"><a href="glms.html#cb456-2" tabindex="-1"></a><span class="fu">table</span>(satimage<span class="sc">$</span>target)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="glms.html#cb466-1" tabindex="-1"></a><span class="do">### All data sets loaded using pmlbr have the response variable named &quot;target&quot;</span></span>
+<span id="cb466-2"><a href="glms.html#cb466-2" tabindex="-1"></a><span class="fu">table</span>(satimage<span class="sc">$</span>target)</span></code></pre></div>
 <pre><code>## 
 ##    1    2    3    4    5    7 
 ## 1533  703 1358  626  707 1508</code></pre>
 <p>Now let’s begin by splitting the data into training and test sets using <code>caret</code>’s <code>createDataPartition</code></p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="glms.html#cb458-1" tabindex="-1"></a><span class="do">### The function createDataPartition requires the response variable</span></span>
-<span id="cb458-2"><a href="glms.html#cb458-2" tabindex="-1"></a><span class="do">### and will split the data to approximately respect the class</span></span>
-<span id="cb458-3"><a href="glms.html#cb458-3" tabindex="-1"></a><span class="do">### proportions. Let&#39;s select 70% of the data for training and</span></span>
-<span id="cb458-4"><a href="glms.html#cb458-4" tabindex="-1"></a><span class="do">### model selection and leave 30% for testing.</span></span>
-<span id="cb458-5"><a href="glms.html#cb458-5" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(satimage<span class="sc">$</span>target, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb458-6"><a href="glms.html#cb458-6" tabindex="-1"></a></span>
-<span id="cb458-7"><a href="glms.html#cb458-7" tabindex="-1"></a><span class="do">### We can now index the satimage data set to produce train and test sets</span></span>
-<span id="cb458-8"><a href="glms.html#cb458-8" tabindex="-1"></a><span class="do">### and since we will be using glmnet we explicitly produce the matrix</span></span>
-<span id="cb458-9"><a href="glms.html#cb458-9" tabindex="-1"></a><span class="do">### of covariates and vector of responses</span></span>
-<span id="cb458-10"><a href="glms.html#cb458-10" tabindex="-1"></a>satimage.tr.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage[train_ix,<span class="fu">names</span>(satimage)<span class="sc">!=</span><span class="st">&quot;target&quot;</span>])</span>
-<span id="cb458-11"><a href="glms.html#cb458-11" tabindex="-1"></a>satimage.tr.y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target[train_ix])</span>
-<span id="cb458-12"><a href="glms.html#cb458-12" tabindex="-1"></a></span>
-<span id="cb458-13"><a href="glms.html#cb458-13" tabindex="-1"></a>satimage.te.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage[<span class="sc">-</span>train_ix,<span class="fu">names</span>(satimage)<span class="sc">!=</span><span class="st">&quot;target&quot;</span>])</span>
-<span id="cb458-14"><a href="glms.html#cb458-14" tabindex="-1"></a>satimage.te.y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target[<span class="sc">-</span>train_ix])</span>
-<span id="cb458-15"><a href="glms.html#cb458-15" tabindex="-1"></a></span>
-<span id="cb458-16"><a href="glms.html#cb458-16" tabindex="-1"></a>glmnet_satimage <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(satimage.tr.x, satimage.tr.y, <span class="at">family =</span> <span class="st">&quot;multinomial&quot;</span>)</span>
-<span id="cb458-17"><a href="glms.html#cb458-17" tabindex="-1"></a></span>
-<span id="cb458-18"><a href="glms.html#cb458-18" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(<span class="fu">predict</span>(glmnet_satimage, satimage.te.x, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)),</span>
-<span id="cb458-19"><a href="glms.html#cb458-19" tabindex="-1"></a>                satimage.te.y)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="glms.html#cb468-1" tabindex="-1"></a><span class="do">### The function createDataPartition requires the response variable</span></span>
+<span id="cb468-2"><a href="glms.html#cb468-2" tabindex="-1"></a><span class="do">### and will split the data to approximately respect the class</span></span>
+<span id="cb468-3"><a href="glms.html#cb468-3" tabindex="-1"></a><span class="do">### proportions. Let&#39;s select 70% of the data for training and</span></span>
+<span id="cb468-4"><a href="glms.html#cb468-4" tabindex="-1"></a><span class="do">### model selection and leave 30% for testing.</span></span>
+<span id="cb468-5"><a href="glms.html#cb468-5" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(satimage<span class="sc">$</span>target, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb468-6"><a href="glms.html#cb468-6" tabindex="-1"></a></span>
+<span id="cb468-7"><a href="glms.html#cb468-7" tabindex="-1"></a><span class="do">### We can now index the satimage data set to produce train and test sets</span></span>
+<span id="cb468-8"><a href="glms.html#cb468-8" tabindex="-1"></a><span class="do">### and since we will be using glmnet we explicitly produce the matrix</span></span>
+<span id="cb468-9"><a href="glms.html#cb468-9" tabindex="-1"></a><span class="do">### of covariates and vector of responses</span></span>
+<span id="cb468-10"><a href="glms.html#cb468-10" tabindex="-1"></a>satimage.tr.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage[train_ix,<span class="fu">names</span>(satimage)<span class="sc">!=</span><span class="st">&quot;target&quot;</span>])</span>
+<span id="cb468-11"><a href="glms.html#cb468-11" tabindex="-1"></a>satimage.tr.y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target[train_ix])</span>
+<span id="cb468-12"><a href="glms.html#cb468-12" tabindex="-1"></a></span>
+<span id="cb468-13"><a href="glms.html#cb468-13" tabindex="-1"></a>satimage.te.x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(satimage[<span class="sc">-</span>train_ix,<span class="fu">names</span>(satimage)<span class="sc">!=</span><span class="st">&quot;target&quot;</span>])</span>
+<span id="cb468-14"><a href="glms.html#cb468-14" tabindex="-1"></a>satimage.te.y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target[<span class="sc">-</span>train_ix])</span>
+<span id="cb468-15"><a href="glms.html#cb468-15" tabindex="-1"></a></span>
+<span id="cb468-16"><a href="glms.html#cb468-16" tabindex="-1"></a>glmnet_satimage <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(satimage.tr.x, satimage.tr.y, <span class="at">family =</span> <span class="st">&quot;multinomial&quot;</span>)</span>
+<span id="cb468-17"><a href="glms.html#cb468-17" tabindex="-1"></a></span>
+<span id="cb468-18"><a href="glms.html#cb468-18" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(<span class="fu">predict</span>(glmnet_satimage, satimage.te.x, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)),</span>
+<span id="cb468-19"><a href="glms.html#cb468-19" tabindex="-1"></a>                satimage.te.y)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -729,33 +742,33 @@ P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)
 <p>Although not all models directly allow for this, whenever a model produces a probability for membership to a class, like a logistic regression model, the threshold for classification can always be modified from the natural “classify to the class with the highest probability” approach.</p>
 <p><strong>Example: Credit Default</strong></p>
 <p>The <code>Default</code> data set in the <code>ISLR2</code> package is a simulated data set containing pronounced class imbalance, and supposed to represent a typical (bank) credit default scenario. There are only three covariates, <code>student</code>: a factor variable stating whether the hypothetical individuals are students or not; <code>balance</code>: the average balance on the individuals’ credit card after monthly payment; and <code>income</code>: the individuals’ annual income.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="glms.html#cb460-1" tabindex="-1"></a><span class="do">### First load the package, which will automatically load the data set</span></span>
-<span id="cb460-2"><a href="glms.html#cb460-2" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb460-3"><a href="glms.html#cb460-3" tabindex="-1"></a></span>
-<span id="cb460-4"><a href="glms.html#cb460-4" tabindex="-1"></a><span class="do">### The data set has quite pronounced imbalance, with only about 3.3% in the minority class</span></span>
-<span id="cb460-5"><a href="glms.html#cb460-5" tabindex="-1"></a><span class="fu">table</span>(Default<span class="sc">$</span>default)</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="glms.html#cb470-1" tabindex="-1"></a><span class="do">### First load the package, which will automatically load the data set</span></span>
+<span id="cb470-2"><a href="glms.html#cb470-2" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb470-3"><a href="glms.html#cb470-3" tabindex="-1"></a></span>
+<span id="cb470-4"><a href="glms.html#cb470-4" tabindex="-1"></a><span class="do">### The data set has quite pronounced imbalance, with only about 3.3% in the minority class</span></span>
+<span id="cb470-5"><a href="glms.html#cb470-5" tabindex="-1"></a><span class="fu">table</span>(Default<span class="sc">$</span>default)</span></code></pre></div>
 <pre><code>## 
 ##   No  Yes 
 ## 9667  333</code></pre>
 <p>As always we will start by splitting the data set into training and test sets. We will then fit logistic regression models as normal and then by setting the case weights. We will also explore up and downsampling, and modifying the threshold, in the exercises.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="glms.html#cb462-1" tabindex="-1"></a><span class="do">### First we split the data and fit a baseline logistic regression model to</span></span>
-<span id="cb462-2"><a href="glms.html#cb462-2" tabindex="-1"></a><span class="do">### the training set</span></span>
-<span id="cb462-3"><a href="glms.html#cb462-3" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(Default<span class="sc">$</span>default, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb462-4"><a href="glms.html#cb462-4" tabindex="-1"></a></span>
-<span id="cb462-5"><a href="glms.html#cb462-5" tabindex="-1"></a>Default.tr <span class="ot">&lt;-</span> Default[train_ix,]</span>
-<span id="cb462-6"><a href="glms.html#cb462-6" tabindex="-1"></a>Default.te <span class="ot">&lt;-</span> Default[<span class="sc">-</span>train_ix,]</span>
-<span id="cb462-7"><a href="glms.html#cb462-7" tabindex="-1"></a></span>
-<span id="cb462-8"><a href="glms.html#cb462-8" tabindex="-1"></a></span>
-<span id="cb462-9"><a href="glms.html#cb462-9" tabindex="-1"></a>logistic_default0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(default<span class="sc">~</span>., Default.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb462-10"><a href="glms.html#cb462-10" tabindex="-1"></a></span>
-<span id="cb462-11"><a href="glms.html#cb462-11" tabindex="-1"></a><span class="do">### We can now assess its test performance</span></span>
-<span id="cb462-12"><a href="glms.html#cb462-12" tabindex="-1"></a>logistic_default0_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_default0, Default.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb462-13"><a href="glms.html#cb462-13" tabindex="-1"></a>logistic_default0_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_default0_preds <span class="sc">&gt;</span>.<span class="dv">5</span> , <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
-<span id="cb462-14"><a href="glms.html#cb462-14" tabindex="-1"></a>                                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb462-15"><a href="glms.html#cb462-15" tabindex="-1"></a></span>
-<span id="cb462-16"><a href="glms.html#cb462-16" tabindex="-1"></a><span class="do">### Using the natural cutoff of 0.5 leads to poor sensitivity</span></span>
-<span id="cb462-17"><a href="glms.html#cb462-17" tabindex="-1"></a><span class="do">### and not great balanced accuracy</span></span>
-<span id="cb462-18"><a href="glms.html#cb462-18" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_default0_class, Default.te<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="glms.html#cb472-1" tabindex="-1"></a><span class="do">### First we split the data and fit a baseline logistic regression model to</span></span>
+<span id="cb472-2"><a href="glms.html#cb472-2" tabindex="-1"></a><span class="do">### the training set</span></span>
+<span id="cb472-3"><a href="glms.html#cb472-3" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(Default<span class="sc">$</span>default, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb472-4"><a href="glms.html#cb472-4" tabindex="-1"></a></span>
+<span id="cb472-5"><a href="glms.html#cb472-5" tabindex="-1"></a>Default.tr <span class="ot">&lt;-</span> Default[train_ix,]</span>
+<span id="cb472-6"><a href="glms.html#cb472-6" tabindex="-1"></a>Default.te <span class="ot">&lt;-</span> Default[<span class="sc">-</span>train_ix,]</span>
+<span id="cb472-7"><a href="glms.html#cb472-7" tabindex="-1"></a></span>
+<span id="cb472-8"><a href="glms.html#cb472-8" tabindex="-1"></a></span>
+<span id="cb472-9"><a href="glms.html#cb472-9" tabindex="-1"></a>logistic_default0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(default<span class="sc">~</span>., Default.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb472-10"><a href="glms.html#cb472-10" tabindex="-1"></a></span>
+<span id="cb472-11"><a href="glms.html#cb472-11" tabindex="-1"></a><span class="do">### We can now assess its test performance</span></span>
+<span id="cb472-12"><a href="glms.html#cb472-12" tabindex="-1"></a>logistic_default0_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_default0, Default.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb472-13"><a href="glms.html#cb472-13" tabindex="-1"></a>logistic_default0_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_default0_preds <span class="sc">&gt;</span>.<span class="dv">5</span> , <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb472-14"><a href="glms.html#cb472-14" tabindex="-1"></a>                                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb472-15"><a href="glms.html#cb472-15" tabindex="-1"></a></span>
+<span id="cb472-16"><a href="glms.html#cb472-16" tabindex="-1"></a><span class="do">### Using the natural cutoff of 0.5 leads to poor sensitivity</span></span>
+<span id="cb472-17"><a href="glms.html#cb472-17" tabindex="-1"></a><span class="do">### and not great balanced accuracy</span></span>
+<span id="cb472-18"><a href="glms.html#cb472-18" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_default0_class, Default.te<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -783,12 +796,12 @@ P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)
 ##                                           
 ##        &#39;Positive&#39; Class : Yes             
 ## </code></pre>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="glms.html#cb464-1" tabindex="-1"></a><span class="do">### A high AUC score suggests there is a cutoff which</span></span>
-<span id="cb464-2"><a href="glms.html#cb464-2" tabindex="-1"></a><span class="do">### would give better balanced accuracy</span></span>
-<span id="cb464-3"><a href="glms.html#cb464-3" tabindex="-1"></a>logistic_default0_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Default.te<span class="sc">$</span>default, logistic_default0_preds)</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="glms.html#cb474-1" tabindex="-1"></a><span class="do">### A high AUC score suggests there is a cutoff which</span></span>
+<span id="cb474-2"><a href="glms.html#cb474-2" tabindex="-1"></a><span class="do">### would give better balanced accuracy</span></span>
+<span id="cb474-3"><a href="glms.html#cb474-3" tabindex="-1"></a>logistic_default0_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Default.te<span class="sc">$</span>default, logistic_default0_preds)</span></code></pre></div>
 <pre><code>## Setting levels: control = No, case = Yes</code></pre>
 <pre><code>## Setting direction: controls &lt; cases</code></pre>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="glms.html#cb467-1" tabindex="-1"></a>logistic_default0_roc</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="glms.html#cb477-1" tabindex="-1"></a>logistic_default0_roc</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## roc.default(response = Default.te$default, predictor = logistic_default0_preds)
@@ -797,21 +810,21 @@ P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)
 ## Area under the curve: 0.9424</code></pre>
 <p>The fact that the AUC is high suggests, as mentioned above, that there is a cutoff at which the balanced accuracy would be substantially better. It is very important, however, not to use the test set in order to choose this threshold since this would constitute data leakage. One can, however, of course use the ROC curve from the training set in order to select a threshold and there are multiple criteria beyond balanced accuracy which combine both sensitivity and specificity. It should also be noted that choosing the threshold to optimise a certain criterion represents an additional model parameter, and so increases the complexity of the model.</p>
 <p>To see the effect of modifying the case weights, we will simply set the weights for points in each class inversely proportional to the size of the class. This has the effect that the “effort” in optimisation is applied equally to each class, as opposed to equally to each observation.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="glms.html#cb469-1" tabindex="-1"></a><span class="do">### Weights</span></span>
-<span id="cb469-2"><a href="glms.html#cb469-2" tabindex="-1"></a>wts <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">nrow</span>(Default.tr))</span>
-<span id="cb469-3"><a href="glms.html#cb469-3" tabindex="-1"></a>wts[Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sum</span>(Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>)</span>
-<span id="cb469-4"><a href="glms.html#cb469-4" tabindex="-1"></a>wts[Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;No&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sum</span>(Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;No&quot;</span>)</span>
-<span id="cb469-5"><a href="glms.html#cb469-5" tabindex="-1"></a></span>
-<span id="cb469-6"><a href="glms.html#cb469-6" tabindex="-1"></a>logistic_default_wt <span class="ot">&lt;-</span> <span class="fu">glm</span>(default<span class="sc">~</span>., Default.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
-<span id="cb469-7"><a href="glms.html#cb469-7" tabindex="-1"></a>                               <span class="at">weights =</span> wts)</span>
-<span id="cb469-8"><a href="glms.html#cb469-8" tabindex="-1"></a></span>
-<span id="cb469-9"><a href="glms.html#cb469-9" tabindex="-1"></a>logistic_default_wt_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_default_wt, Default.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb469-10"><a href="glms.html#cb469-10" tabindex="-1"></a>logistic_default_wt_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_default_wt_preds <span class="sc">&gt;</span>.<span class="dv">5</span> , <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
-<span id="cb469-11"><a href="glms.html#cb469-11" tabindex="-1"></a>                                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb469-12"><a href="glms.html#cb469-12" tabindex="-1"></a></span>
-<span id="cb469-13"><a href="glms.html#cb469-13" tabindex="-1"></a><span class="do">### The sensitivity is now far superior to what it was when we didn&#39;t include</span></span>
-<span id="cb469-14"><a href="glms.html#cb469-14" tabindex="-1"></a><span class="do">### case weights</span></span>
-<span id="cb469-15"><a href="glms.html#cb469-15" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_default_wt_class, Default.te<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="glms.html#cb479-1" tabindex="-1"></a><span class="do">### Weights</span></span>
+<span id="cb479-2"><a href="glms.html#cb479-2" tabindex="-1"></a>wts <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">nrow</span>(Default.tr))</span>
+<span id="cb479-3"><a href="glms.html#cb479-3" tabindex="-1"></a>wts[Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sum</span>(Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb479-4"><a href="glms.html#cb479-4" tabindex="-1"></a>wts[Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;No&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sum</span>(Default.tr<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;No&quot;</span>)</span>
+<span id="cb479-5"><a href="glms.html#cb479-5" tabindex="-1"></a></span>
+<span id="cb479-6"><a href="glms.html#cb479-6" tabindex="-1"></a>logistic_default_wt <span class="ot">&lt;-</span> <span class="fu">glm</span>(default<span class="sc">~</span>., Default.tr, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
+<span id="cb479-7"><a href="glms.html#cb479-7" tabindex="-1"></a>                               <span class="at">weights =</span> wts)</span>
+<span id="cb479-8"><a href="glms.html#cb479-8" tabindex="-1"></a></span>
+<span id="cb479-9"><a href="glms.html#cb479-9" tabindex="-1"></a>logistic_default_wt_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_default_wt, Default.te, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb479-10"><a href="glms.html#cb479-10" tabindex="-1"></a>logistic_default_wt_class <span class="ot">&lt;-</span> <span class="fu">factor</span>(logistic_default_wt_preds <span class="sc">&gt;</span>.<span class="dv">5</span> , <span class="at">levels =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb479-11"><a href="glms.html#cb479-11" tabindex="-1"></a>                                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb479-12"><a href="glms.html#cb479-12" tabindex="-1"></a></span>
+<span id="cb479-13"><a href="glms.html#cb479-13" tabindex="-1"></a><span class="do">### The sensitivity is now far superior to what it was when we didn&#39;t include</span></span>
+<span id="cb479-14"><a href="glms.html#cb479-14" tabindex="-1"></a><span class="do">### case weights</span></span>
+<span id="cb479-15"><a href="glms.html#cb479-15" tabindex="-1"></a><span class="fu">confusionMatrix</span>(logistic_default_wt_class, Default.te<span class="sc">$</span>default, <span class="at">positive =</span> <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -839,15 +852,15 @@ P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)
 ##                                           
 ##        &#39;Positive&#39; Class : Yes             
 ## </code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="glms.html#cb471-1" tabindex="-1"></a><span class="do">### The AUC score is very similar, however, and this is largely due to the fact</span></span>
-<span id="cb471-2"><a href="glms.html#cb471-2" tabindex="-1"></a><span class="do">### that for a simple model like logistic regression changing the case weights</span></span>
-<span id="cb471-3"><a href="glms.html#cb471-3" tabindex="-1"></a><span class="do">### will have a very similar effect to changing the threshold for classification</span></span>
-<span id="cb471-4"><a href="glms.html#cb471-4" tabindex="-1"></a><span class="do">### and hence the entire ROC curve will be very similar to that from the</span></span>
-<span id="cb471-5"><a href="glms.html#cb471-5" tabindex="-1"></a><span class="do">### previous model</span></span>
-<span id="cb471-6"><a href="glms.html#cb471-6" tabindex="-1"></a>logistic_default_wt_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Default.te<span class="sc">$</span>default, logistic_default_wt_preds)</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="glms.html#cb481-1" tabindex="-1"></a><span class="do">### The AUC score is very similar, however, and this is largely due to the fact</span></span>
+<span id="cb481-2"><a href="glms.html#cb481-2" tabindex="-1"></a><span class="do">### that for a simple model like logistic regression changing the case weights</span></span>
+<span id="cb481-3"><a href="glms.html#cb481-3" tabindex="-1"></a><span class="do">### will have a very similar effect to changing the threshold for classification</span></span>
+<span id="cb481-4"><a href="glms.html#cb481-4" tabindex="-1"></a><span class="do">### and hence the entire ROC curve will be very similar to that from the</span></span>
+<span id="cb481-5"><a href="glms.html#cb481-5" tabindex="-1"></a><span class="do">### previous model</span></span>
+<span id="cb481-6"><a href="glms.html#cb481-6" tabindex="-1"></a>logistic_default_wt_roc <span class="ot">&lt;-</span> <span class="fu">roc</span>(Default.te<span class="sc">$</span>default, logistic_default_wt_preds)</span></code></pre></div>
 <pre><code>## Setting levels: control = No, case = Yes</code></pre>
 <pre><code>## Setting direction: controls &lt; cases</code></pre>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="glms.html#cb474-1" tabindex="-1"></a>logistic_default_wt_roc</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="glms.html#cb484-1" tabindex="-1"></a>logistic_default_wt_roc</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## roc.default(response = Default.te$default, predictor = logistic_default_wt_preds)
