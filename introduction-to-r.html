@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
 <li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
 <li class="chapter" data-level="6.4" data-path="linear.html"><a href="linear.html#summary-6"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="linear.html"><a href="linear.html#exercises-7"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
 <ul>
@@ -693,23 +694,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The way in which <code>plot()</code> produces a graphic depends on the type of arguments given to it. For example, if we try to plot a vector we will see the values in the vector along the vertical axis, and the positions of these values will be equally spaced on the horizontal axis:</p>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-r.html#cb121-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
 <span id="cb121-2"><a href="introduction-to-r.html#cb121-2" tabindex="-1"></a><span class="fu">plot</span>(x)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-43-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>If we wish to see the relationship between two vectors of equal length, we can provide both as arguments to <code>plot()</code>. Values of the first will be plotted against the horizontal axis and the corresponding values of the second along the vertical axis:</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="introduction-to-r.html#cb122-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
 <span id="cb122-2"><a href="introduction-to-r.html#cb122-2" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-40-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>By default we see this relationship via a set of points in the <span class="math inline">\((x,y)\)</span> plane, but we can also plot the graph of these as we would draw a function by using the argument <code>type = 'l'</code> (<code>l</code> for line). However, note that R will try to connect the points to form this graph in the order they appear.</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-r.html#cb123-1" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-41-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-45-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>To “correct” this behaviour we should provide <code>x</code> in either increasing or decreasing order (and re-order the elements in <code>y</code> appropriately):</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="introduction-to-r.html#cb124-1" tabindex="-1"></a>x_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(x)</span>
 <span id="cb124-2"><a href="introduction-to-r.html#cb124-2" tabindex="-1"></a>y_sorted <span class="ot">&lt;-</span> x_sorted<span class="sc">^</span><span class="dv">2</span></span>
 <span id="cb124-3"><a href="introduction-to-r.html#cb124-3" tabindex="-1"></a><span class="fu">plot</span>(x_sorted, y_sorted, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-42-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-46-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We could also do this by finding the ordering of the indices in <code>x</code> which leads to them being sorted:</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="introduction-to-r.html#cb125-1" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">order</span>(x)</span>
 <span id="cb125-2"><a href="introduction-to-r.html#cb125-2" tabindex="-1"></a><span class="fu">plot</span>(x[ord], y[ord], <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-43-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-47-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div id="example-gravitational-force" class="section level3 hasAnchor" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Example: Gravitational Force<a href="introduction-to-r.html#example-gravitational-force" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Newton’s law of gravitation tells us that the acceleration due to the gravitational force exerted by an object is determined by the equation <span class="math display">\[
@@ -723,12 +724,12 @@ a = G \frac{M}{r^2} \ m.s^{-2},
 <p>Then let’s consider distances up to the distance from Earth to the moon (approximately <span class="math inline">\(3.844\times 10^8 \ m\)</span>)</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="introduction-to-r.html#cb127-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">3.844</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">8</span>, <span class="at">length =</span> <span class="dv">1000</span>)</span>
 <span id="cb127-2"><a href="introduction-to-r.html#cb127-2" tabindex="-1"></a><span class="fu">plot</span>(d, G<span class="sc">*</span>M_earth<span class="sc">/</span>(r_earth<span class="sc">+</span>d)<span class="sc">^</span><span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&#39;Acceleration&#39;</span>, <span class="at">xlab =</span> <span class="st">&#39;Distance above surface of Earth&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-45-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-49-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We can see that as <span class="math inline">\(d\)</span> increases the force quickly decreases towards zero (according to an <em>inverse square law</em>). Without a sense of the scale of <span class="math inline">\(d\)</span>, however, it may be unclear how to interpret this in a realistic sense. We can add vertical or horizontal lines to a plot using the function <code>abline(v = )</code> or <code>abline(h = )</code>. For example, let’s add a vertical line indicating the height at which GPS satellites orbit, approximately <span class="math inline">\(20 200 \ km = 2.02 \times 10^7 \ m\)</span>:</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-r.html#cb128-1" tabindex="-1"></a><span class="fu">plot</span>(d, G<span class="sc">*</span>M_earth<span class="sc">/</span>(r_earth<span class="sc">+</span>d)<span class="sc">^</span><span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&#39;Acceleration&#39;</span>,</span>
 <span id="cb128-2"><a href="introduction-to-r.html#cb128-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;Distance above surface of Earth&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
 <span id="cb128-3"><a href="introduction-to-r.html#cb128-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fl">2.02</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-46-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-50-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We can add more interesting lines to a plot using the function <code>lines()</code>, which behaves similar to <code>plot(, type = 'l')</code> but adds the line to an existing plot rather than creating a new one.</p>
 <ul>
 <li>The function <code>points()</code> can also be used, and behaves almost exactly as <code>plot()</code> only adding its data to an existing plot rather than creating a new one. Specifically, <code>points(, type = 'l')</code> and <code>lines()</code> are functionally equivalent.</li>
@@ -739,7 +740,7 @@ a = G \frac{M}{r^2} \ m.s^{-2},
 <span id="cb129-3"><a href="introduction-to-r.html#cb129-3" tabindex="-1"></a>d_moon_to_earth <span class="ot">&lt;-</span> <span class="fl">3.844</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">8</span></span>
 <span id="cb129-4"><a href="introduction-to-r.html#cb129-4" tabindex="-1"></a><span class="fu">plot</span>(d, G<span class="sc">*</span>M_earth<span class="sc">/</span>(r_earth<span class="sc">+</span>d)<span class="sc">^</span><span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&#39;Acceleration&#39;</span>, <span class="at">xlab =</span> <span class="st">&#39;Distance above surface of Earth&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
 <span id="cb129-5"><a href="introduction-to-r.html#cb129-5" tabindex="-1"></a><span class="fu">lines</span>(d, G<span class="sc">*</span>M_moon<span class="sc">/</span>(r_moon <span class="sc">+</span> (d_moon_to_earth<span class="sc">-</span>d))<span class="sc">^</span><span class="dv">2</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-47-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-51-1.png" width="576" style="display: block; margin: auto;" /></p>
 <ul>
 <li>Try modifying the above by replacing the call to the function <code>lines()</code> with one using the function <code>points()</code>.</li>
 </ul>
@@ -759,7 +760,7 @@ a = G \frac{M}{r^2} \ m.s^{-2},
 <span id="cb132-3"><a href="introduction-to-r.html#cb132-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> r, <span class="at">y =</span> g, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
 <span id="cb132-4"><a href="introduction-to-r.html#cb132-4" tabindex="-1"></a>h <span class="ot">&lt;-</span> g <span class="sc">*</span> <span class="dv">2</span></span>
 <span id="cb132-5"><a href="introduction-to-r.html#cb132-5" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> r, <span class="at">y =</span> h, <span class="at">type =</span> <span class="st">&quot;p&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-49-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-53-1.png" width="576" style="display: block; margin: auto;" /></p>
 <ul>
 <li>The function <code>abline</code> can be used to add a straight line to a plot, either providing arguments <code>a</code> and <code>b</code> for the intercept and slop, or one of <code>v</code> for a vertical line or <code>h</code> for a horizontal line</li>
 </ul>
@@ -767,7 +768,7 @@ a = G \frac{M}{r^2} \ m.s^{-2},
 <span id="cb133-2"><a href="introduction-to-r.html#cb133-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">sin</span>(x)</span>
 <span id="cb133-3"><a href="introduction-to-r.html#cb133-3" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
 <span id="cb133-4"><a href="introduction-to-r.html#cb133-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-50-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-54-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="exercises" class="section level3 hasAnchor" number="1.4.3">
 <h3><span class="header-section-number">1.4.3</span> Exercises<a href="introduction-to-r.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -951,8 +952,8 @@ f(x; \mu, \sigma) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-{\frac{(x - \mu)^2}{2
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="introduction-to-r.html#cb151-1" tabindex="-1"></a><span class="fu">max</span>(x)</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="introduction-to-r.html#cb153-1" tabindex="-1"></a><span class="fu">sqrt</span>(x)</span></code></pre></div>
-<pre><code>##  [1]      NaN 0.000000 1.000000 1.414214 1.732051 2.000000 2.236068
-##  [8] 2.449490 2.645751 2.828427 3.000000 3.162278</code></pre>
+<pre><code>##  [1]      NaN 0.000000 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490
+##  [9] 2.645751 2.828427 3.000000 3.162278</code></pre>
 <p>For the <code>sqrt(x)</code> command, we were giving a warning saying <code>NaNs</code> had been produced. NaN is short for “Not a Number” and in this instance they have occurred because we tried to calculate the square-root of a negative number (which do not exist as real numbers). Once an element becomes Not a Number, that status will persist throughout the rest of our calculations. For example:</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="introduction-to-r.html#cb155-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
 <span id="cb155-2"><a href="introduction-to-r.html#cb155-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">10</span>)</span>
@@ -992,7 +993,7 @@ f(x; \mu, \sigma) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-{\frac{(x - \mu)^2}{2
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="introduction-to-r.html#cb160-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">3.844</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^</span><span class="dv">8</span>, <span class="at">length =</span> <span class="dv">1000</span>)</span>
 <span id="cb160-2"><a href="introduction-to-r.html#cb160-2" tabindex="-1"></a><span class="fu">plot</span>(d, <span class="fu">calc_gravity</span>(d), <span class="at">ylab =</span> <span class="st">&#39;Acceleration&#39;</span>,</span>
 <span id="cb160-3"><a href="introduction-to-r.html#cb160-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;Distance above surface of Earth&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-62-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-66-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Naming functions</strong></p>
 <blockquote>
 <p>There are only two hard things in Computer Science: cache invalidation and naming things.</br> – Phil Carlton</p>
@@ -1102,7 +1103,7 @@ f(x; \mu, \sigma) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-{\frac{(x - \mu)^2}{2
 <pre><code>Hint: Use the &quot;semi-major axis&quot; of
 Phobos&#39; orbit as the orbit height. This is because Phobos has an elliptical
 orbit.</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-71"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-75"></span>
 <img src="week0/Planets2013.jpg" alt="The Sun and planets of the Solar System. Sizes but not distances are to scale. (Image from Wikimedia Commons)" width="50%" />
 <p class="caption">
 Figure 1.1: The Sun and planets of the Solar System. Sizes but not distances are to scale. (Image from Wikimedia Commons)

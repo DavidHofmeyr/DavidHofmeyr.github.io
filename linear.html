@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
 <li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
 <li class="chapter" data-level="6.4" data-path="linear.html"><a href="linear.html#summary-6"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="linear.html"><a href="linear.html#exercises-7"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
 <ul>
@@ -335,7 +336,7 @@ Y = \beta_0^* + \sum_{j=1}^p \beta_j^* X_j + \epsilon,
 <span id="cb372-27"><a href="linear.html#cb372-27" tabindex="-1"></a><span class="fu">plot</span>(x2, y2, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), <span class="at">xlab =</span> <span class="st">&#39;X&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Y&#39;</span>, <span class="at">main =</span> <span class="st">&#39;X values spread out&#39;</span>)</span>
 <span id="cb372-28"><a href="linear.html#cb372-28" tabindex="-1"></a><span class="fu">abline</span>(lm2<span class="sc">$</span>coefficients)</span>
 <span id="cb372-29"><a href="linear.html#cb372-29" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-159-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-163-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Returning to the distribution of <span class="math inline">\(\hbbeta\)</span>, if we look at each of the coefficients separately we have that <span class="math inline">\((\hat \beta_j - \beta^*_j)\big/\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\)</span> has a standard normal distribution. But in practice we do not know the value of <span class="math inline">\(\sigma_{\epsilon}^2\)</span> and need to estimate it. We will not go into any of the details for why, as these are beyond the scope of the module, but if we estimate <span class="math inline">\(\sigma_{\epsilon}^2\)</span> using <span class="math inline">\(\frac{1}{n-p-1}\sum_{i=1}^n r_i^2\)</span>, where <span class="math inline">\(r_1, ..., r_n\)</span> are the residuals from the fitted model, then <span class="math inline">\((\hat \beta_j - \beta^*_j)\big/\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\)</span> has a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-p-1\)</span> degrees of freedom. This becomes important when we want to make inference about the true values of the coefficients since it allows us to obtain confidence intervals for the regression coefficients. Specifically we can obtain a <span class="math inline">\((1-\alpha)\times 100\%\)</span> confidence interval using <span class="math display">\[
 \left(\hat \beta_j + t_{\alpha/2}\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}, \hat \beta_j + t_{1-\alpha/2}\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\right),
 \]</span> where <span class="math inline">\(t_{q}\)</span> is the <span class="math inline">\(q\)</span> quantile of the <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-p-1\)</span> degrees of freedom.</p>
@@ -442,7 +443,7 @@ P\Bigg(&amp;\mbox{I could have seen a sample with } \frac{\hat \beta_j}{\hat \si
 <div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="linear.html#cb377-1" tabindex="-1"></a><span class="do">### Let&#39;s return to the Auto data set and the linear model we fit</span></span>
 <span id="cb377-2"><a href="linear.html#cb377-2" tabindex="-1"></a><span class="fu">plot</span>(lin_mod<span class="sc">$</span>fitted.values, lin_mod<span class="sc">$</span>residuals,</span>
 <span id="cb377-3"><a href="linear.html#cb377-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Fitted values&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-161-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-165-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>It should be clear that there is a relationship between the fitted values (estimated signal component) and the residuals (estimated noise component). In addition to the “U”-shape, we can also see that the residual variance is larger for larger fitted values, which would also violate the assumption that the residuals are independent of <span class="math inline">\(X\)</span>.</p>
 <p>Note that although we can use such a plot to determine if the linear model is “incorrect”, we cannot reasonably rely on such a plot to “confirm” that the true model is linear. Nonetheless, if there is no apparent relationship present then it is certainly not unreasonable to rely on the model for prediction.</p>
 <p><strong>Normality of Residuals</strong></p>
@@ -450,7 +451,7 @@ P\Bigg(&amp;\mbox{I could have seen a sample with } \frac{\hat \beta_j}{\hat \si
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="linear.html#cb378-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb378-2"><a href="linear.html#cb378-2" tabindex="-1"></a><span class="fu">hist</span>(lin_mod<span class="sc">$</span>residuals, <span class="at">main =</span> <span class="st">&quot;Residual distribution&quot;</span>)</span>
 <span id="cb378-3"><a href="linear.html#cb378-3" tabindex="-1"></a><span class="fu">qqnorm</span>(lin_mod<span class="sc">$</span>residuals, <span class="at">main =</span> <span class="st">&quot;Normal Quantile-Qauntile plot of residuals&quot;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-162-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-166-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Both the histogram and the QQ-plot show deviations from normality, in particular with a long right tail.</p>
 </div>
 <div id="multicollinearity" class="section level3 hasAnchor" number="6.2.4">
@@ -460,15 +461,10 @@ P\Bigg(&amp;\mbox{I could have seen a sample with } \frac{\hat \beta_j}{\hat \si
 <p>The presence of covariates which are highly linearly dependent on the rest is known as <em>multicollinearity</em> and can wreak havoc on our inference. Most often this will simply, due to it leading to very large variance in the regression coefficients, mask potential significance of some of the covariates. However, it can also have the opposite effect, that it leads to some covariates being seen as significant in the model even when they are not, and to a much greater extent than would happen by chance if actually this multicollinearity were not present.</p>
 <p><em>Variance Inflation Factors</em> (VIFs) can be used to assess the level of multicollinearity, and the VIF for variable <span class="math inline">\(X_j\)</span> is equal to <span class="math inline">\(1/(1-R^2_j)\)</span> where <span class="math inline">\(R^2_j\)</span> is the R-squared value from regression <span class="math inline">\(X_j\)</span> on the other covariates using a linear model. The function <code>vif</code> in the package <code>car</code> computes Generalised VIFs which, for numeric covariates are the same as standard VIFs, but for categorical covariates combine the VIFs from each of the associated dummy variables.</p>
 <div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="linear.html#cb379-1" tabindex="-1"></a><span class="do">### Load the car library</span></span>
-<span id="cb379-2"><a href="linear.html#cb379-2" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
-<pre><code>## Loading required package: carData</code></pre>
-<pre><code>## 
-## Attaching package: &#39;car&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     recode</code></pre>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="linear.html#cb383-1" tabindex="-1"></a><span class="do">### Compute the (Generalised) VIFs from our linear model from the Auto data</span></span>
-<span id="cb383-2"><a href="linear.html#cb383-2" tabindex="-1"></a><span class="fu">vif</span>(lin_mod)</span></code></pre></div>
+<span id="cb379-2"><a href="linear.html#cb379-2" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb379-3"><a href="linear.html#cb379-3" tabindex="-1"></a></span>
+<span id="cb379-4"><a href="linear.html#cb379-4" tabindex="-1"></a><span class="do">### Compute the (Generalised) VIFs from our linear model from the Auto data</span></span>
+<span id="cb379-5"><a href="linear.html#cb379-5" tabindex="-1"></a><span class="fu">vif</span>(lin_mod)</span></code></pre></div>
 <pre><code>##                   GVIF Df GVIF^(1/(2*Df))
 ## cylinders    10.737771  1        3.276854
 ## displacement 22.937950  1        4.789358
@@ -567,83 +563,83 @@ s.t. &amp; \ h(\bbeta) \leq t
 <p><strong>Example: “High Dimensional” Regression Simulation</strong></p>
 <p>Here we will look at the estimation of regression coefficients in a situation where the number of observations is only moderately greater than the number of covariates. The reason for this is so that we can compare the ridge estimates with the OLS estimates, and the OLS solution does not exist (or more precisely there is no unique solution) when <span class="math inline">\(n \leq p\)</span>.</p>
 <p>In particular in the following R code we will simulate <span class="math inline">\(n = 250\)</span> observations with <span class="math inline">\(p = 200\)</span> covariates, and in such a way that only twenty covariates have a substantial influence on the response (with coefficients equal to 1); eighty have a very slight influence (with coefficients equal to 0.1) and the remaining 100 are not related to the response (with coefficients equal to 0).</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="linear.html#cb385-1" tabindex="-1"></a><span class="do">### We need to load the glmnet library</span></span>
-<span id="cb385-2"><a href="linear.html#cb385-2" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb385-3"><a href="linear.html#cb385-3" tabindex="-1"></a></span>
-<span id="cb385-4"><a href="linear.html#cb385-4" tabindex="-1"></a><span class="do">### As always we also need to start by setting up what is constant</span></span>
-<span id="cb385-5"><a href="linear.html#cb385-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">250</span></span>
-<span id="cb385-6"><a href="linear.html#cb385-6" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb385-7"><a href="linear.html#cb385-7" tabindex="-1"></a></span>
-<span id="cb385-8"><a href="linear.html#cb385-8" tabindex="-1"></a>beta_true <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">100</span>))</span>
-<span id="cb385-9"><a href="linear.html#cb385-9" tabindex="-1"></a></span>
-<span id="cb385-10"><a href="linear.html#cb385-10" tabindex="-1"></a>sigma_residual <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb385-11"><a href="linear.html#cb385-11" tabindex="-1"></a></span>
-<span id="cb385-12"><a href="linear.html#cb385-12" tabindex="-1"></a><span class="do">### Now we can simulate observations</span></span>
-<span id="cb385-13"><a href="linear.html#cb385-13" tabindex="-1"></a></span>
-<span id="cb385-14"><a href="linear.html#cb385-14" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>p), n, p)</span>
-<span id="cb385-15"><a href="linear.html#cb385-15" tabindex="-1"></a>y <span class="ot">&lt;-</span> X<span class="sc">%*%</span>beta_true <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_residual)</span>
-<span id="cb385-16"><a href="linear.html#cb385-16" tabindex="-1"></a></span>
-<span id="cb385-17"><a href="linear.html#cb385-17" tabindex="-1"></a><span class="do">### ... and fit OLS and ridge models</span></span>
-<span id="cb385-18"><a href="linear.html#cb385-18" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>., <span class="fu">data.frame</span>(X, y))</span>
-<span id="cb385-19"><a href="linear.html#cb385-19" tabindex="-1"></a></span>
-<span id="cb385-20"><a href="linear.html#cb385-20" tabindex="-1"></a>ridge <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">0</span>, )</span>
-<span id="cb385-21"><a href="linear.html#cb385-21" tabindex="-1"></a><span class="co"># Notice that the glmnet function does not take a formula argument but rather requires</span></span>
-<span id="cb385-22"><a href="linear.html#cb385-22" tabindex="-1"></a><span class="co"># the matrix or data frame of covariates and vector of responses separately.</span></span>
-<span id="cb385-23"><a href="linear.html#cb385-23" tabindex="-1"></a><span class="co"># You may ignore the alpha = 0 component for now. Ultimately this is just telling glmnet to</span></span>
-<span id="cb385-24"><a href="linear.html#cb385-24" tabindex="-1"></a><span class="co"># fit ridge models and not LASSO or other elastic net models (which we still have to cover)</span></span>
-<span id="cb385-25"><a href="linear.html#cb385-25" tabindex="-1"></a></span>
-<span id="cb385-26"><a href="linear.html#cb385-26" tabindex="-1"></a><span class="do">### We can now investigate the estimated coefficients by plotting them along with the actual values</span></span>
-<span id="cb385-27"><a href="linear.html#cb385-27" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb385-28"><a href="linear.html#cb385-28" tabindex="-1"></a></span>
-<span id="cb385-29"><a href="linear.html#cb385-29" tabindex="-1"></a><span class="fu">plot</span>(ols<span class="sc">$</span>coefficients[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;OLS coefficients&#39;</span>) </span>
-<span id="cb385-30"><a href="linear.html#cb385-30" tabindex="-1"></a><span class="co"># we exclude the intercept as we are not interested in that for now</span></span>
-<span id="cb385-31"><a href="linear.html#cb385-31" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb385-32"><a href="linear.html#cb385-32" tabindex="-1"></a></span>
-<span id="cb385-33"><a href="linear.html#cb385-33" tabindex="-1"></a><span class="co"># glmnet fits a large number of models by default, for a range of 100 different values for lambda</span></span>
-<span id="cb385-34"><a href="linear.html#cb385-34" tabindex="-1"></a><span class="co"># These are stored in the columns of the output field $beta</span></span>
-<span id="cb385-35"><a href="linear.html#cb385-35" tabindex="-1"></a><span class="co"># For example</span></span>
-<span id="cb385-36"><a href="linear.html#cb385-36" tabindex="-1"></a><span class="fu">plot</span>(ridge<span class="sc">$</span>beta[,<span class="dv">90</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge coefficients&#39;</span>)</span>
-<span id="cb385-37"><a href="linear.html#cb385-37" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-164-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="linear.html#cb381-1" tabindex="-1"></a><span class="do">### We need to load the glmnet library</span></span>
+<span id="cb381-2"><a href="linear.html#cb381-2" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb381-3"><a href="linear.html#cb381-3" tabindex="-1"></a></span>
+<span id="cb381-4"><a href="linear.html#cb381-4" tabindex="-1"></a><span class="do">### As always we also need to start by setting up what is constant</span></span>
+<span id="cb381-5"><a href="linear.html#cb381-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb381-6"><a href="linear.html#cb381-6" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb381-7"><a href="linear.html#cb381-7" tabindex="-1"></a></span>
+<span id="cb381-8"><a href="linear.html#cb381-8" tabindex="-1"></a>beta_true <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">100</span>))</span>
+<span id="cb381-9"><a href="linear.html#cb381-9" tabindex="-1"></a></span>
+<span id="cb381-10"><a href="linear.html#cb381-10" tabindex="-1"></a>sigma_residual <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb381-11"><a href="linear.html#cb381-11" tabindex="-1"></a></span>
+<span id="cb381-12"><a href="linear.html#cb381-12" tabindex="-1"></a><span class="do">### Now we can simulate observations</span></span>
+<span id="cb381-13"><a href="linear.html#cb381-13" tabindex="-1"></a></span>
+<span id="cb381-14"><a href="linear.html#cb381-14" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>p), n, p)</span>
+<span id="cb381-15"><a href="linear.html#cb381-15" tabindex="-1"></a>y <span class="ot">&lt;-</span> X<span class="sc">%*%</span>beta_true <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_residual)</span>
+<span id="cb381-16"><a href="linear.html#cb381-16" tabindex="-1"></a></span>
+<span id="cb381-17"><a href="linear.html#cb381-17" tabindex="-1"></a><span class="do">### ... and fit OLS and ridge models</span></span>
+<span id="cb381-18"><a href="linear.html#cb381-18" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>., <span class="fu">data.frame</span>(X, y))</span>
+<span id="cb381-19"><a href="linear.html#cb381-19" tabindex="-1"></a></span>
+<span id="cb381-20"><a href="linear.html#cb381-20" tabindex="-1"></a>ridge <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">0</span>, )</span>
+<span id="cb381-21"><a href="linear.html#cb381-21" tabindex="-1"></a><span class="co"># Notice that the glmnet function does not take a formula argument but rather requires</span></span>
+<span id="cb381-22"><a href="linear.html#cb381-22" tabindex="-1"></a><span class="co"># the matrix or data frame of covariates and vector of responses separately.</span></span>
+<span id="cb381-23"><a href="linear.html#cb381-23" tabindex="-1"></a><span class="co"># You may ignore the alpha = 0 component for now. Ultimately this is just telling glmnet to</span></span>
+<span id="cb381-24"><a href="linear.html#cb381-24" tabindex="-1"></a><span class="co"># fit ridge models and not LASSO or other elastic net models (which we still have to cover)</span></span>
+<span id="cb381-25"><a href="linear.html#cb381-25" tabindex="-1"></a></span>
+<span id="cb381-26"><a href="linear.html#cb381-26" tabindex="-1"></a><span class="do">### We can now investigate the estimated coefficients by plotting them along with the actual values</span></span>
+<span id="cb381-27"><a href="linear.html#cb381-27" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb381-28"><a href="linear.html#cb381-28" tabindex="-1"></a></span>
+<span id="cb381-29"><a href="linear.html#cb381-29" tabindex="-1"></a><span class="fu">plot</span>(ols<span class="sc">$</span>coefficients[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;OLS coefficients&#39;</span>) </span>
+<span id="cb381-30"><a href="linear.html#cb381-30" tabindex="-1"></a><span class="co"># we exclude the intercept as we are not interested in that for now</span></span>
+<span id="cb381-31"><a href="linear.html#cb381-31" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb381-32"><a href="linear.html#cb381-32" tabindex="-1"></a></span>
+<span id="cb381-33"><a href="linear.html#cb381-33" tabindex="-1"></a><span class="co"># glmnet fits a large number of models by default, for a range of 100 different values for lambda</span></span>
+<span id="cb381-34"><a href="linear.html#cb381-34" tabindex="-1"></a><span class="co"># These are stored in the columns of the output field $beta</span></span>
+<span id="cb381-35"><a href="linear.html#cb381-35" tabindex="-1"></a><span class="co"># For example</span></span>
+<span id="cb381-36"><a href="linear.html#cb381-36" tabindex="-1"></a><span class="fu">plot</span>(ridge<span class="sc">$</span>beta[,<span class="dv">90</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge coefficients&#39;</span>)</span>
+<span id="cb381-37"><a href="linear.html#cb381-37" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-168-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>It should be clear that the ridge estimates are much closer to the actual values of the coefficients. However, choosing an inappropriate value for <span class="math inline">\(\lambda\)</span> may lead to either too little or too much “shrinkage”. As mentioned previously the <code>glmnet</code> package also provides the function <code>cv.glmnet</code> which will run cross-validation and perform model selection for us.</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="linear.html#cb386-1" tabindex="-1"></a><span class="do">### First let&#39;s simply run cross-validation with the default settings (except</span></span>
-<span id="cb386-2"><a href="linear.html#cb386-2" tabindex="-1"></a><span class="do">### that we set alpha = 0).</span></span>
-<span id="cb386-3"><a href="linear.html#cb386-3" tabindex="-1"></a><span class="do">### As always you can learn more about these using help(glmnet)</span></span>
-<span id="cb386-4"><a href="linear.html#cb386-4" tabindex="-1"></a>ridge_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">0</span>)</span>
-<span id="cb386-5"><a href="linear.html#cb386-5" tabindex="-1"></a></span>
-<span id="cb386-6"><a href="linear.html#cb386-6" tabindex="-1"></a><span class="do">### Plotting the ridge_cv object will produce a visualisation of the (square root of the)</span></span>
-<span id="cb386-7"><a href="linear.html#cb386-7" tabindex="-1"></a><span class="do">### estimated prediction error for different lambda, along with standard error bars</span></span>
-<span id="cb386-8"><a href="linear.html#cb386-8" tabindex="-1"></a><span class="do">### The two vertical lines show the value for lambda which gave the smallest estimate</span></span>
-<span id="cb386-9"><a href="linear.html#cb386-9" tabindex="-1"></a><span class="do">### of prediction error and the simplest model (largest lambda) with estimated</span></span>
-<span id="cb386-10"><a href="linear.html#cb386-10" tabindex="-1"></a><span class="do">### prediction error within one standard error of the lowest.</span></span>
-<span id="cb386-11"><a href="linear.html#cb386-11" tabindex="-1"></a><span class="do">### Note that lambda is plotted on a -log(lambda) transformation, and so the values</span></span>
-<span id="cb386-12"><a href="linear.html#cb386-12" tabindex="-1"></a><span class="do">### close to the left correspond with the largest values of lambda (most regularisation)</span></span>
-<span id="cb386-13"><a href="linear.html#cb386-13" tabindex="-1"></a><span class="fu">plot</span>(ridge_cv)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-165-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="linear.html#cb387-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
-<span id="cb387-2"><a href="linear.html#cb387-2" tabindex="-1"></a>ridge_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="linear.html#cb382-1" tabindex="-1"></a><span class="do">### First let&#39;s simply run cross-validation with the default settings (except</span></span>
+<span id="cb382-2"><a href="linear.html#cb382-2" tabindex="-1"></a><span class="do">### that we set alpha = 0).</span></span>
+<span id="cb382-3"><a href="linear.html#cb382-3" tabindex="-1"></a><span class="do">### As always you can learn more about these using help(glmnet)</span></span>
+<span id="cb382-4"><a href="linear.html#cb382-4" tabindex="-1"></a>ridge_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb382-5"><a href="linear.html#cb382-5" tabindex="-1"></a></span>
+<span id="cb382-6"><a href="linear.html#cb382-6" tabindex="-1"></a><span class="do">### Plotting the ridge_cv object will produce a visualisation of the (square root of the)</span></span>
+<span id="cb382-7"><a href="linear.html#cb382-7" tabindex="-1"></a><span class="do">### estimated prediction error for different lambda, along with standard error bars</span></span>
+<span id="cb382-8"><a href="linear.html#cb382-8" tabindex="-1"></a><span class="do">### The two vertical lines show the value for lambda which gave the smallest estimate</span></span>
+<span id="cb382-9"><a href="linear.html#cb382-9" tabindex="-1"></a><span class="do">### of prediction error and the simplest model (largest lambda) with estimated</span></span>
+<span id="cb382-10"><a href="linear.html#cb382-10" tabindex="-1"></a><span class="do">### prediction error within one standard error of the lowest.</span></span>
+<span id="cb382-11"><a href="linear.html#cb382-11" tabindex="-1"></a><span class="do">### Note that lambda is plotted on a -log(lambda) transformation, and so the values</span></span>
+<span id="cb382-12"><a href="linear.html#cb382-12" tabindex="-1"></a><span class="do">### close to the left correspond with the largest values of lambda (most regularisation)</span></span>
+<span id="cb382-13"><a href="linear.html#cb382-13" tabindex="-1"></a><span class="fu">plot</span>(ridge_cv)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-169-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="linear.html#cb383-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
+<span id="cb383-2"><a href="linear.html#cb383-2" tabindex="-1"></a>ridge_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
 <pre><code>## [1] 2.206135</code></pre>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="linear.html#cb389-1" tabindex="-1"></a>ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se <span class="co"># using 1 standard error rule</span></span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="linear.html#cb385-1" tabindex="-1"></a>ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se <span class="co"># using 1 standard error rule</span></span></code></pre></div>
 <pre><code>## [1] 9.774551</code></pre>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="linear.html#cb391-1" tabindex="-1"></a><span class="do">### To extract a specific solution we can use the function coef(model, s = lambda).</span></span>
-<span id="cb391-2"><a href="linear.html#cb391-2" tabindex="-1"></a><span class="do">### Let&#39;s plot the solutions selected using cross-validation</span></span>
-<span id="cb391-3"><a href="linear.html#cb391-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb391-4"><a href="linear.html#cb391-4" tabindex="-1"></a></span>
-<span id="cb391-5"><a href="linear.html#cb391-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge by minimum CV error&#39;</span>) </span>
-<span id="cb391-6"><a href="linear.html#cb391-6" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>)</span>
-<span id="cb391-7"><a href="linear.html#cb391-7" tabindex="-1"></a></span>
-<span id="cb391-8"><a href="linear.html#cb391-8" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge by 1 standard error rule&#39;</span>) </span>
-<span id="cb391-9"><a href="linear.html#cb391-9" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-165-2.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="linear.html#cb387-1" tabindex="-1"></a><span class="do">### To extract a specific solution we can use the function coef(model, s = lambda).</span></span>
+<span id="cb387-2"><a href="linear.html#cb387-2" tabindex="-1"></a><span class="do">### Let&#39;s plot the solutions selected using cross-validation</span></span>
+<span id="cb387-3"><a href="linear.html#cb387-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb387-4"><a href="linear.html#cb387-4" tabindex="-1"></a></span>
+<span id="cb387-5"><a href="linear.html#cb387-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge by minimum CV error&#39;</span>) </span>
+<span id="cb387-6"><a href="linear.html#cb387-6" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb387-7"><a href="linear.html#cb387-7" tabindex="-1"></a></span>
+<span id="cb387-8"><a href="linear.html#cb387-8" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge by 1 standard error rule&#39;</span>) </span>
+<span id="cb387-9"><a href="linear.html#cb387-9" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-169-2.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We can see that the solutions are heavily shrunk compared with the OLS solution, but this has resulted in overall much better estimation. We can, for example, consider the differences between the estimated coefficients and the true coefficients</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="linear.html#cb392-1" tabindex="-1"></a><span class="do">### Squared error of OLS coefficients</span></span>
-<span id="cb392-2"><a href="linear.html#cb392-2" tabindex="-1"></a><span class="fu">sum</span>((ols<span class="sc">$</span>coefficients[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="linear.html#cb388-1" tabindex="-1"></a><span class="do">### Squared error of OLS coefficients</span></span>
+<span id="cb388-2"><a href="linear.html#cb388-2" tabindex="-1"></a><span class="fu">sum</span>((ols<span class="sc">$</span>coefficients[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 45.42456</code></pre>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="linear.html#cb394-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from minimum CV error</span></span>
-<span id="cb394-2"><a href="linear.html#cb394-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="linear.html#cb390-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from minimum CV error</span></span>
+<span id="cb390-2"><a href="linear.html#cb390-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 8.318845</code></pre>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="linear.html#cb396-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from 1 standard error rule</span></span>
-<span id="cb396-2"><a href="linear.html#cb396-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="linear.html#cb392-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from 1 standard error rule</span></span>
+<span id="cb392-2"><a href="linear.html#cb392-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 12.44804</code></pre>
 <p><strong>Degrees of Freedom/Covariance Penalties for Ridge Regression</strong></p>
 <p>Because the ridge model has a “nice” (closed form) solution, many of its statistical properties are relatively well understood. In particular, when the linear model assumptions are met it is known that</p>
@@ -652,27 +648,27 @@ s.t. &amp; \ h(\bbeta) \leq t
 \]</span></p>
 <p>where <span class="math inline">\(d_1 &gt; d_2 &gt; ... &gt; d_p\)</span> are the singular values of the <span class="math inline">\(\X_0\)</span>, the design matrix but excluding the column of ones (i.e. just the matrix of observations of the covariates). However, because estimation is conducted after standardising the covariates this needs to be taken into account.</p>
 <p>Let’s see how selection based on the covariance penalty approach we looked at in the previous section performs:</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="linear.html#cb398-1" tabindex="-1"></a><span class="do">### First we standardise the covariates</span></span>
-<span id="cb398-2"><a href="linear.html#cb398-2" tabindex="-1"></a>X_stand <span class="ot">&lt;-</span> <span class="fu">scale</span>(X, <span class="at">center =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb398-3"><a href="linear.html#cb398-3" tabindex="-1"></a></span>
-<span id="cb398-4"><a href="linear.html#cb398-4" tabindex="-1"></a><span class="do">### Now we compute the singular value decomposition</span></span>
-<span id="cb398-5"><a href="linear.html#cb398-5" tabindex="-1"></a>SVD <span class="ot">&lt;-</span> <span class="fu">svd</span>(X_stand)</span>
-<span id="cb398-6"><a href="linear.html#cb398-6" tabindex="-1"></a></span>
-<span id="cb398-7"><a href="linear.html#cb398-7" tabindex="-1"></a><span class="do">### We can now compute estimates for the expected in sample error</span></span>
-<span id="cb398-8"><a href="linear.html#cb398-8" tabindex="-1"></a><span class="do">### over the range of values by computing the training error for each</span></span>
-<span id="cb398-9"><a href="linear.html#cb398-9" tabindex="-1"></a><span class="do">### value of lambda and then adding the covariance penalty</span></span>
-<span id="cb398-10"><a href="linear.html#cb398-10" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(ridge, X), <span class="dv">2</span>, <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb398-11"><a href="linear.html#cb398-11" tabindex="-1"></a></span>
-<span id="cb398-12"><a href="linear.html#cb398-12" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ridge<span class="sc">$</span>lambda, <span class="cf">function</span>(lambda)</span>
-<span id="cb398-13"><a href="linear.html#cb398-13" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>lambda))))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
-<span id="cb398-14"><a href="linear.html#cb398-14" tabindex="-1"></a></span>
-<span id="cb398-15"><a href="linear.html#cb398-15" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
-<span id="cb398-16"><a href="linear.html#cb398-16" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
-<span id="cb398-17"><a href="linear.html#cb398-17" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> ridge<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
-<span id="cb398-18"><a href="linear.html#cb398-18" tabindex="-1"></a>lambda_select</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="linear.html#cb394-1" tabindex="-1"></a><span class="do">### First we standardise the covariates</span></span>
+<span id="cb394-2"><a href="linear.html#cb394-2" tabindex="-1"></a>X_stand <span class="ot">&lt;-</span> <span class="fu">scale</span>(X, <span class="at">center =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb394-3"><a href="linear.html#cb394-3" tabindex="-1"></a></span>
+<span id="cb394-4"><a href="linear.html#cb394-4" tabindex="-1"></a><span class="do">### Now we compute the singular value decomposition</span></span>
+<span id="cb394-5"><a href="linear.html#cb394-5" tabindex="-1"></a>SVD <span class="ot">&lt;-</span> <span class="fu">svd</span>(X_stand)</span>
+<span id="cb394-6"><a href="linear.html#cb394-6" tabindex="-1"></a></span>
+<span id="cb394-7"><a href="linear.html#cb394-7" tabindex="-1"></a><span class="do">### We can now compute estimates for the expected in sample error</span></span>
+<span id="cb394-8"><a href="linear.html#cb394-8" tabindex="-1"></a><span class="do">### over the range of values by computing the training error for each</span></span>
+<span id="cb394-9"><a href="linear.html#cb394-9" tabindex="-1"></a><span class="do">### value of lambda and then adding the covariance penalty</span></span>
+<span id="cb394-10"><a href="linear.html#cb394-10" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(ridge, X), <span class="dv">2</span>, <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb394-11"><a href="linear.html#cb394-11" tabindex="-1"></a></span>
+<span id="cb394-12"><a href="linear.html#cb394-12" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ridge<span class="sc">$</span>lambda, <span class="cf">function</span>(lambda)</span>
+<span id="cb394-13"><a href="linear.html#cb394-13" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>lambda))))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
+<span id="cb394-14"><a href="linear.html#cb394-14" tabindex="-1"></a></span>
+<span id="cb394-15"><a href="linear.html#cb394-15" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
+<span id="cb394-16"><a href="linear.html#cb394-16" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
+<span id="cb394-17"><a href="linear.html#cb394-17" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> ridge<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
+<span id="cb394-18"><a href="linear.html#cb394-18" tabindex="-1"></a>lambda_select</span></code></pre></div>
 <pre><code>## [1] 1.520604</code></pre>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="linear.html#cb400-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
-<span id="cb400-2"><a href="linear.html#cb400-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="linear.html#cb396-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
+<span id="cb396-2"><a href="linear.html#cb396-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 8.093744</code></pre>
 <p>The accuracy of the solution is similar to that selected using cross validation, but requires much less computation.</p>
 </div>
@@ -704,45 +700,45 @@ s.t. &amp; \ h(\bbeta) \leq t
 <h4><span class="header-section-number">6.3.4.2</span> The LASSO in R<a href="linear.html#the-lasso-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Fitting LASSO models in R is done exactly as it was for ridge except we set the argument <code>alpha</code> to one, rather than to zero.</p>
 <p>Let’s again fit models to our simulated “high dimensional” data in order to (better than in only two dimensions) visualise the selection capabilities of the LASSO, and also see how accurate models selected with cross-validation are in comparison with OLS and ridge. The following chunk of R code is analogous to what we did earlier, with only the very minor modification to <code>alpha</code></p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="linear.html#cb402-1" tabindex="-1"></a><span class="do">### We start by performing cross validation in order to select appropriate</span></span>
-<span id="cb402-2"><a href="linear.html#cb402-2" tabindex="-1"></a><span class="do">### values for lambda</span></span>
-<span id="cb402-3"><a href="linear.html#cb402-3" tabindex="-1"></a>lasso_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb402-4"><a href="linear.html#cb402-4" tabindex="-1"></a></span>
-<span id="cb402-5"><a href="linear.html#cb402-5" tabindex="-1"></a><span class="do">### As before, plotting the lasso_cv object will produce a visualisation</span></span>
-<span id="cb402-6"><a href="linear.html#cb402-6" tabindex="-1"></a><span class="do">### of the (square root of the) estimated prediction error for different</span></span>
-<span id="cb402-7"><a href="linear.html#cb402-7" tabindex="-1"></a><span class="do">### lambda, along with standard error bars, with vertical lines showing</span></span>
-<span id="cb402-8"><a href="linear.html#cb402-8" tabindex="-1"></a><span class="do">### the solution which minimises estimated prediction error and the</span></span>
-<span id="cb402-9"><a href="linear.html#cb402-9" tabindex="-1"></a><span class="do">### solution using the 1 standard error rule</span></span>
-<span id="cb402-10"><a href="linear.html#cb402-10" tabindex="-1"></a><span class="do">### As before lambda is plotted on a -log(lambda) transformation</span></span>
-<span id="cb402-11"><a href="linear.html#cb402-11" tabindex="-1"></a></span>
-<span id="cb402-12"><a href="linear.html#cb402-12" tabindex="-1"></a><span class="fu">plot</span>(lasso_cv)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-168-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="linear.html#cb403-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
-<span id="cb403-2"><a href="linear.html#cb403-2" tabindex="-1"></a>lasso_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="linear.html#cb398-1" tabindex="-1"></a><span class="do">### We start by performing cross validation in order to select appropriate</span></span>
+<span id="cb398-2"><a href="linear.html#cb398-2" tabindex="-1"></a><span class="do">### values for lambda</span></span>
+<span id="cb398-3"><a href="linear.html#cb398-3" tabindex="-1"></a>lasso_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb398-4"><a href="linear.html#cb398-4" tabindex="-1"></a></span>
+<span id="cb398-5"><a href="linear.html#cb398-5" tabindex="-1"></a><span class="do">### As before, plotting the lasso_cv object will produce a visualisation</span></span>
+<span id="cb398-6"><a href="linear.html#cb398-6" tabindex="-1"></a><span class="do">### of the (square root of the) estimated prediction error for different</span></span>
+<span id="cb398-7"><a href="linear.html#cb398-7" tabindex="-1"></a><span class="do">### lambda, along with standard error bars, with vertical lines showing</span></span>
+<span id="cb398-8"><a href="linear.html#cb398-8" tabindex="-1"></a><span class="do">### the solution which minimises estimated prediction error and the</span></span>
+<span id="cb398-9"><a href="linear.html#cb398-9" tabindex="-1"></a><span class="do">### solution using the 1 standard error rule</span></span>
+<span id="cb398-10"><a href="linear.html#cb398-10" tabindex="-1"></a><span class="do">### As before lambda is plotted on a -log(lambda) transformation</span></span>
+<span id="cb398-11"><a href="linear.html#cb398-11" tabindex="-1"></a></span>
+<span id="cb398-12"><a href="linear.html#cb398-12" tabindex="-1"></a><span class="fu">plot</span>(lasso_cv)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-172-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="linear.html#cb399-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
+<span id="cb399-2"><a href="linear.html#cb399-2" tabindex="-1"></a>lasso_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
 <pre><code>## [1] 0.1748325</code></pre>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="linear.html#cb405-1" tabindex="-1"></a>lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se <span class="co"># using 1 standard error rule</span></span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="linear.html#cb401-1" tabindex="-1"></a>lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se <span class="co"># using 1 standard error rule</span></span></code></pre></div>
 <pre><code>## [1] 0.3055247</code></pre>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="linear.html#cb407-1" tabindex="-1"></a><span class="do">### To extract a specific solution we can use the function coef(model, s = lambda).</span></span>
-<span id="cb407-2"><a href="linear.html#cb407-2" tabindex="-1"></a><span class="do">### Let&#39;s plot the solutions selected using cross-validation</span></span>
-<span id="cb407-3"><a href="linear.html#cb407-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb407-4"><a href="linear.html#cb407-4" tabindex="-1"></a></span>
-<span id="cb407-5"><a href="linear.html#cb407-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>],</span>
-<span id="cb407-6"><a href="linear.html#cb407-6" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta),</span>
-<span id="cb407-7"><a href="linear.html#cb407-7" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;LASSO by minimum CV error&#39;</span>) </span>
-<span id="cb407-8"><a href="linear.html#cb407-8" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb407-9"><a href="linear.html#cb407-9" tabindex="-1"></a></span>
-<span id="cb407-10"><a href="linear.html#cb407-10" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>],</span>
-<span id="cb407-11"><a href="linear.html#cb407-11" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta),</span>
-<span id="cb407-12"><a href="linear.html#cb407-12" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;LASSO by 1 standard error rule&#39;</span>) </span>
-<span id="cb407-13"><a href="linear.html#cb407-13" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-168-2.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="linear.html#cb403-1" tabindex="-1"></a><span class="do">### To extract a specific solution we can use the function coef(model, s = lambda).</span></span>
+<span id="cb403-2"><a href="linear.html#cb403-2" tabindex="-1"></a><span class="do">### Let&#39;s plot the solutions selected using cross-validation</span></span>
+<span id="cb403-3"><a href="linear.html#cb403-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb403-4"><a href="linear.html#cb403-4" tabindex="-1"></a></span>
+<span id="cb403-5"><a href="linear.html#cb403-5" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb403-6"><a href="linear.html#cb403-6" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta),</span>
+<span id="cb403-7"><a href="linear.html#cb403-7" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;LASSO by minimum CV error&#39;</span>) </span>
+<span id="cb403-8"><a href="linear.html#cb403-8" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb403-9"><a href="linear.html#cb403-9" tabindex="-1"></a></span>
+<span id="cb403-10"><a href="linear.html#cb403-10" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb403-11"><a href="linear.html#cb403-11" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta),</span>
+<span id="cb403-12"><a href="linear.html#cb403-12" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;LASSO by 1 standard error rule&#39;</span>) </span>
+<span id="cb403-13"><a href="linear.html#cb403-13" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-172-2.png" width="576" style="display: block; margin: auto;" /></p>
 <p>It should be clear that in both solutions many of the coefficients have been set exactly to zero. It may also be apparent that those associated with the large true coefficients are typically less shrunken compared to the ridge counterparts.</p>
 <p>The overall squared estimation error also shows the good performance of the LASSO</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="linear.html#cb408-1" tabindex="-1"></a><span class="do">### Squared error of LASSO coefficients from minimum CV error</span></span>
-<span id="cb408-2"><a href="linear.html#cb408-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="linear.html#cb404-1" tabindex="-1"></a><span class="do">### Squared error of LASSO coefficients from minimum CV error</span></span>
+<span id="cb404-2"><a href="linear.html#cb404-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda.min)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4.914901</code></pre>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="linear.html#cb410-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from 1 standard error rule</span></span>
-<span id="cb410-2"><a href="linear.html#cb410-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="linear.html#cb406-1" tabindex="-1"></a><span class="do">### Squared error of ridge coefficients from 1 standard error rule</span></span>
+<span id="cb406-2"><a href="linear.html#cb406-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lasso_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 5.817716</code></pre>
 <p><strong>Degrees of Freedom and Covariance Penalties?</strong></p>
 <p>It has been shown that for the LASSO with fixed <span class="math inline">\(\lambda\)</span> one has</p>
@@ -750,28 +746,28 @@ s.t. &amp; \ h(\bbeta) \leq t
 \sum_{i=1}^n Cov(Y_i, \hat Y_i) = E\left[\sum_j I\left(\hbl_j(\lambda) \not = 0\right)\right],
 \]</span></p>
 <p>that is, the covariance between the responses and the fitted values is equal to the <em>expected</em> number of non-zero coefficients (including the intercept). We can in principle use the number of non-zero coefficients in the solution we obtained as an estimate for this:</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="linear.html#cb412-1" tabindex="-1"></a><span class="do">### As before we compute the training error and covariance penalties</span></span>
-<span id="cb412-2"><a href="linear.html#cb412-2" tabindex="-1"></a><span class="do">### However we haven&#39;t simply fit the LASSO for a range of lambda values</span></span>
-<span id="cb412-3"><a href="linear.html#cb412-3" tabindex="-1"></a><span class="do">### as we only called to cv.glmnet so far. However, the lasso_cv object</span></span>
-<span id="cb412-4"><a href="linear.html#cb412-4" tabindex="-1"></a><span class="do">### has a field $glmnet.fit which contains exactly the same as the output</span></span>
-<span id="cb412-5"><a href="linear.html#cb412-5" tabindex="-1"></a><span class="do">### from a call to glmnet</span></span>
-<span id="cb412-6"><a href="linear.html#cb412-6" tabindex="-1"></a></span>
-<span id="cb412-7"><a href="linear.html#cb412-7" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(lasso_cv<span class="sc">$</span>glmnet.fit, X), <span class="dv">2</span>,</span>
-<span id="cb412-8"><a href="linear.html#cb412-8" tabindex="-1"></a>                         <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb412-9"><a href="linear.html#cb412-9" tabindex="-1"></a></span>
-<span id="cb412-10"><a href="linear.html#cb412-10" tabindex="-1"></a><span class="do">### Now the covariance penalties depend on the estimated coefficients</span></span>
-<span id="cb412-11"><a href="linear.html#cb412-11" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">apply</span>(lasso_cv<span class="sc">$</span>glmnet.fit<span class="sc">$</span>beta, <span class="dv">2</span>,</span>
-<span id="cb412-12"><a href="linear.html#cb412-12" tabindex="-1"></a>                       <span class="cf">function</span>(beta) <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(beta<span class="sc">!=</span><span class="dv">0</span>)))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
-<span id="cb412-13"><a href="linear.html#cb412-13" tabindex="-1"></a><span class="co"># note above we have 1 + sum(beta!=0) since the intercept is not included</span></span>
-<span id="cb412-14"><a href="linear.html#cb412-14" tabindex="-1"></a><span class="co"># in $beta</span></span>
-<span id="cb412-15"><a href="linear.html#cb412-15" tabindex="-1"></a></span>
-<span id="cb412-16"><a href="linear.html#cb412-16" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
-<span id="cb412-17"><a href="linear.html#cb412-17" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
-<span id="cb412-18"><a href="linear.html#cb412-18" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> lasso_cv<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
-<span id="cb412-19"><a href="linear.html#cb412-19" tabindex="-1"></a>lambda_select</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="linear.html#cb408-1" tabindex="-1"></a><span class="do">### As before we compute the training error and covariance penalties</span></span>
+<span id="cb408-2"><a href="linear.html#cb408-2" tabindex="-1"></a><span class="do">### However we haven&#39;t simply fit the LASSO for a range of lambda values</span></span>
+<span id="cb408-3"><a href="linear.html#cb408-3" tabindex="-1"></a><span class="do">### as we only called to cv.glmnet so far. However, the lasso_cv object</span></span>
+<span id="cb408-4"><a href="linear.html#cb408-4" tabindex="-1"></a><span class="do">### has a field $glmnet.fit which contains exactly the same as the output</span></span>
+<span id="cb408-5"><a href="linear.html#cb408-5" tabindex="-1"></a><span class="do">### from a call to glmnet</span></span>
+<span id="cb408-6"><a href="linear.html#cb408-6" tabindex="-1"></a></span>
+<span id="cb408-7"><a href="linear.html#cb408-7" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(lasso_cv<span class="sc">$</span>glmnet.fit, X), <span class="dv">2</span>,</span>
+<span id="cb408-8"><a href="linear.html#cb408-8" tabindex="-1"></a>                         <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb408-9"><a href="linear.html#cb408-9" tabindex="-1"></a></span>
+<span id="cb408-10"><a href="linear.html#cb408-10" tabindex="-1"></a><span class="do">### Now the covariance penalties depend on the estimated coefficients</span></span>
+<span id="cb408-11"><a href="linear.html#cb408-11" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">apply</span>(lasso_cv<span class="sc">$</span>glmnet.fit<span class="sc">$</span>beta, <span class="dv">2</span>,</span>
+<span id="cb408-12"><a href="linear.html#cb408-12" tabindex="-1"></a>                       <span class="cf">function</span>(beta) <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(beta<span class="sc">!=</span><span class="dv">0</span>)))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
+<span id="cb408-13"><a href="linear.html#cb408-13" tabindex="-1"></a><span class="co"># note above we have 1 + sum(beta!=0) since the intercept is not included</span></span>
+<span id="cb408-14"><a href="linear.html#cb408-14" tabindex="-1"></a><span class="co"># in $beta</span></span>
+<span id="cb408-15"><a href="linear.html#cb408-15" tabindex="-1"></a></span>
+<span id="cb408-16"><a href="linear.html#cb408-16" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
+<span id="cb408-17"><a href="linear.html#cb408-17" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
+<span id="cb408-18"><a href="linear.html#cb408-18" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> lasso_cv<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
+<span id="cb408-19"><a href="linear.html#cb408-19" tabindex="-1"></a>lambda_select</span></code></pre></div>
 <pre><code>## [1] 0.1322543</code></pre>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="linear.html#cb414-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
-<span id="cb414-2"><a href="linear.html#cb414-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="linear.html#cb410-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
+<span id="cb410-2"><a href="linear.html#cb410-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 5.031624</code></pre>
 </div>
 <div id="ridge-or-lasso" class="section level4 hasAnchor" number="6.3.4.3">
@@ -843,6 +839,23 @@ s.t. &amp; \ h(\bbeta) \leq t
 <li>Remember that it is important to standardise covariates when regularising a linear model</li>
 <li>The <code>glmnet</code> package is a fantastic piece of software</li>
 </ul>
+</div>
+<div id="exercises-7" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Exercises<a href="linear.html#exercises-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Refer to the <code>Auto</code> data set in the <code>ISLR2</code> package, and the task of predicting <code>mpg</code> from the other variables (excluding <code>name</code>). Obtain approximate <span class="math inline">\(95\%\)</span> confidence intervals for the regression coefficients using (i) the outputs from <code>summary(model)</code> where <code>model</code> is obtained with the function <code>lm</code>; (ii) the bootstrap. Compare the results from these two approaches.</p></li>
+<li><p>Again with reference to the <code>Auto</code> data set, the objective of this task is to compare ordinary least squares regression models for modelling <code>mpg</code>, <code>log(mpg)</code> and <code>sqrt(mpg)</code>, using the other variables (except <code>name</code>). Start by setting aside <span class="math inline">\(30\%\)</span> of the data as a test set.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Use 10-fold cross validation to estimate the expected prediction error for predicting <code>mpg</code> with each of the models. You will need to somehow incorporate the back-transformation into the cross validation, where appropriate. You could do this by setting up your own <code>caret</code> model, or by writing your own cross validation code. There may also be other ways you could do this.</p></li>
+<li><p>Estimate the prediction error of the model selected from the cross validation results, using the test set.</p></li>
+</ol></li>
+<li><p>Download the <code>Genes.RData</code> file from the R Scripts folder on Moodle. This is a simulation based modification of the Khan Gene Data included in the ISLR2 package. There is a total of 2308 covariates related to gene expression measurements associated with cancerous tumour tissues, and a response variable (y) derived from information related to cancer type, which can be treated as continuous. Start by setting aside <span class="math inline">\(30\%\)</span> of the data for testing.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Using both cross validation based estimates of expected prediction error and covariance based estimates of expected in-sample error, select appropriate values for <span class="math inline">\(\lambda\)</span> for use within a ridge regression model.</p></li>
+<li><p>Do the same as above for the LASSO, and also select appropriate values for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\lambda\)</span> for an elastic net model using cross validation.</p></li>
+<li><p>Choose a single model from all of these options. THEN evaluate the performance of <em>all of them</em> on the test set. What do you observe?</p></li>
+</ol></li>
+</ol>
 
 </div>
 </div>

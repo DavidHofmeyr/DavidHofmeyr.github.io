@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="linear.html"><a href="linear.html#ordinary-least-squares"><i class="fa fa-check"></i><b>6.2</b> Ordinary Least Squares</a></li>
 <li class="chapter" data-level="6.3" data-path="linear.html"><a href="linear.html#regularisation-for-linear-models"><i class="fa fa-check"></i><b>6.3</b> Regularisation for Linear Models</a></li>
 <li class="chapter" data-level="6.4" data-path="linear.html"><a href="linear.html#summary-6"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="linear.html"><a href="linear.html#exercises-7"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="glms.html"><a href="glms.html"><i class="fa fa-check"></i><b>7</b> Generalised Linear Models</a>
 <ul>
@@ -351,7 +352,7 @@ set of <span class="math inline">\(n = 30\)</span> realisations of <span class="
 <span id="cb359-31"><a href="fundamentals2.html#cb359-31" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb359-32"><a href="fundamentals2.html#cb359-32" tabindex="-1"></a></span>
 <span id="cb359-33"><a href="fundamentals2.html#cb359-33" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-151-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-155-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Try re-running the above code multiple times. You will see how much the fitted function varies from sample to sample. This is because the model is trying to model too much of the data and is capturing a lot of what makes the samples different (the residual “noise” terms) and not only what makes them similar (the actual functional “signal” component).</p>
 <p>Now try changing the degree of the polynomial and run the code multiple times. What do you observe?</p>
 <p>Although we never know the true function in practice, for a comparison like we have here, using simulations like this in order to see how well different types of models <em>tend to perform</em> can be very instructive.</p>
@@ -516,7 +517,7 @@ section. We have the setup where</p>
 <span id="cb360-22"><a href="fundamentals2.html#cb360-22" tabindex="-1"></a></span>
 <span id="cb360-23"><a href="fundamentals2.html#cb360-23" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
 <span id="cb360-24"><a href="fundamentals2.html#cb360-24" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-152-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-156-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Run the above code multiple times. You should not be surprised to see a
 different fitted model each time, since the sample changed. Although no
 single fitted model can show us what the bias and variance are, repeated
@@ -566,7 +567,7 @@ all of the lines fit to the different data sets generated.</p>
 <span id="cb361-35"><a href="fundamentals2.html#cb361-35" tabindex="-1"></a></span>
 <span id="cb361-36"><a href="fundamentals2.html#cb361-36" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb361-37"><a href="fundamentals2.html#cb361-37" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-153-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-157-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Now we are able to see the bias more clearly, where the dashed line is the average fitted value for each value of <span class="math inline">\(x\)</span> over all 500 fitted models. We can also see that that variance increases as we move away from the middle of the range of <span class="math inline">\(x\)</span> values.</p>
 <p>We know that as we increase the flexibility (degree of the polynomial, where a linear/affine function is just a degree one polynomial) we should see the bias decreasing and the variance increasing. Let’s run the same experiment but for degrees two up to five for comparison.</p>
 <div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="fundamentals2.html#cb362-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
@@ -601,7 +602,7 @@ all of the lines fit to the different data sets generated.</p>
 <span id="cb362-30"><a href="fundamentals2.html#cb362-30" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb362-31"><a href="fundamentals2.html#cb362-31" tabindex="-1"></a>  <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb362-32"><a href="fundamentals2.html#cb362-32" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-154-1.png" width="1200px" height="800px" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-158-1.png" width="1200px" height="800px" style="display: block; margin: auto;" /></p>
 <p>We can see that the quadratic (degree two) model still has very obvious
 bias, in that the average fit shown with the dashed line over/underestimates the true function at different values of <span class="math inline">\(x\)</span>. In the extreme left and right we can also see slight bias in the degree three polynomial model.</p>
 <p>Although we can see very slight deviations in the average fit from the true function for degrees four and five, these are down to the fact that we have averaged 500 fitted models and not infinitely many. In fact if the true model is a degree <span class="math inline">\(d\)</span> polynomial (where here we know <span class="math inline">\(d = 4\)</span>) then the bias of all models with degree at least <span class="math inline">\(d\)</span> is theoretically zero.</p>

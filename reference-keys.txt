@@ -1,4 +1,4 @@
-fig:unnamed-chunk-71
+fig:unnamed-chunk-75
 introduction-to-r
 background-on-r
 getting-started-with-rstudio
@@ -127,6 +127,7 @@ the-lasso-in-r
 ridge-or-lasso
 alternatives
 summary-6
+exercises-7
 glms
 generalised-predictive-modelling
 link-functions
