@@ -761,7 +761,7 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb408-14"><a href="linear.html#cb408-14" tabindex="-1"></a>})</span>
 <span id="cb408-15"><a href="linear.html#cb408-15" tabindex="-1"></a><span class="co"># note above we have 1 + sum(beta!=0) since the intercept is not included in $beta</span></span>
 <span id="cb408-16"><a href="linear.html#cb408-16" tabindex="-1"></a></span>
-<span id="cb408-17"><a href="linear.html#cb408-17" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> <span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span><span class="fu">max</span>(dfs))<span class="sc">/</span>n</span>
+<span id="cb408-17"><a href="linear.html#cb408-17" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> <span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span><span class="fu">max</span>(dfs))<span class="sc">*</span>n</span>
 <span id="cb408-18"><a href="linear.html#cb408-18" tabindex="-1"></a></span>
 <span id="cb408-19"><a href="linear.html#cb408-19" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>sig2_hat<span class="sc">*</span>dfs<span class="sc">/</span>n</span>
 <span id="cb408-20"><a href="linear.html#cb408-20" tabindex="-1"></a></span>
@@ -769,10 +769,10 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb408-22"><a href="linear.html#cb408-22" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
 <span id="cb408-23"><a href="linear.html#cb408-23" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> lasso_cv<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
 <span id="cb408-24"><a href="linear.html#cb408-24" tabindex="-1"></a>lambda_select</span></code></pre></div>
-<pre><code>## [1] 0.0004133895</code></pre>
+<pre><code>## [1] 0.1322543</code></pre>
 <div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="linear.html#cb410-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
 <span id="cb410-2"><a href="linear.html#cb410-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 41.23203</code></pre>
+<pre><code>## [1] 5.031624</code></pre>
 </div>
 <div id="ridge-or-lasso" class="section level4 hasAnchor" number="6.3.4.3">
 <h4><span class="header-section-number">6.3.4.3</span> Ridge or LASSO?<a href="linear.html#ridge-or-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h4>
