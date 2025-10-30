@@ -1,4 +1,4 @@
-fig:unnamed-chunk-75
+fig:unnamed-chunk-70
 introduction-to-r
 background-on-r
 getting-started-with-rstudio
@@ -143,9 +143,10 @@ case-weights
 updownsampling
 changing-classification-threshold
 summary-7
+exercises-8
 nonlinear1
 basis-expansions
-examples-of-bases
+model-training-1
 kernels-and-reproducing-kernel-hilbert-spaces
 the-kernel-trick
 support-vector-machines

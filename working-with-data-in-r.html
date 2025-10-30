@@ -195,12 +195,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
 <li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
 <li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-7"><i class="fa fa-check"></i><b>7.3</b> Summary</a></li>
+<li class="chapter" data-level="7.4" data-path="glms.html"><a href="glms.html#exercises-8"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
-<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
@@ -628,14 +628,14 @@ time and is often an iterative process.</p>
 <p>For example, we may expect that there will be a negative relationship between temperature and wind speed since (i) high wind speeds may have a direct cooling effect; and (ii) high pressure systems (low temperatures) produce high wind speeds</p>
 <div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="working-with-data-in-r.html#cb307-1" tabindex="-1"></a><span class="fu">plot</span>(airquality<span class="sc">$</span>Wind, airquality<span class="sc">$</span>Temp,</span>
 <span id="cb307-2"><a href="working-with-data-in-r.html#cb307-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Wind Speed&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Temperature&quot;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-124-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-119-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Indeed we can see that the trend is that high temperatures <em>typically</em> coincide with lower wind speeds, but that there is a lot of <em>scatter</em> of the points around this general relationship.</p>
 <p>Although in this case there is a physical law which suggests we may see such a relationship, scatter plots can also simply be used as exploratory tools to investigate whether there may be a relationship between variables or not. If we call <code>plot()</code> on an entire data frame R will produce a <em>matrix of plots</em> showing the scatter plots of all pairs of variables against one another. When the number of variables is only up to about six or seven this can be instructive, but if there is a large number of variables then this will not be very easy to digest.</p>
 <div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="working-with-data-in-r.html#cb308-1" tabindex="-1"></a><span class="fu">plot</span>(airquality)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-125-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-120-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The scatter plots of the <em>continuous</em> variables <code>Ozone</code>, <code>Solar.R</code>, <code>Wind</code> and <code>Temp</code> are quite instructive, and to a lesser extent their plots against <code>Month</code> as well. However, although we should expect some relationship between these measured variables and time, since the day of the month “resets” somewhat arbitrarily at the turn of each month plotting against <code>Day</code> may not have been very useful. We can plot a sub-data frame in the obvious way, by selecting some of its columns</p>
 <div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="working-with-data-in-r.html#cb309-1" tabindex="-1"></a><span class="fu">plot</span>(airquality[,<span class="sc">!</span>(<span class="fu">names</span>(airquality)<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Month&quot;</span>))])</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-126-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-121-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="box-plots" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Box-plots<a href="working-with-data-in-r.html#box-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -644,18 +644,18 @@ time and is often an iterative process.</p>
 - An exception to this is that if there are values above the value <span class="math inline">\(Q_3 + 1.5(Q_3-Q_1)\)</span>, where <span class="math inline">\(Q_3-Q_1\)</span> is called the “interquartile range” (IQR) then the top “whisker” only extends to the largest value below this threshold and all points above it are shown individually. The same applies to the values below <span class="math inline">\(Q_1 - 1.5(Q_3-Q_1)\)</span>.</p>
 <p>For example the boxplot of <code>Ozone</code> shows that there are two values above the threshold <span class="math inline">\(Q_3 + 1.5 IQR\)</span>, but no such “outliers” in the lower values.</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="working-with-data-in-r.html#cb310-1" tabindex="-1"></a><span class="fu">boxplot</span>(airquality<span class="sc">$</span>Ozone)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-127-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-122-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Boxplots are extremely useful for getting a sense of the symmetry/asymmetry of the distribution. If the distribution is roughly symmetric we should see the median roughly in the middle of the “box” and the lengths of the whiskers being more or less the same length. The distribution of <code>Ozone</code> is <em>right skewed</em> since the length of the upper half of the “box” is longer than that of the lower half and the upper whisker is longer than the lower whisker (plus there are some fairly extreme values in the <em>upper tail</em>).</p>
 <p>We saw when using scatter plots that the <em>discrete</em> variables <code>Month</code> and <code>Day</code> were less instructive. We can investigate the relationships numeric and categorical variables (where we might reasonably think of <code>Month</code> as a category for this purpose) by comparing the distributions of the numeric variable within different levels/values of the category. We can achieve this using box-plots by calling</p>
 <div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="working-with-data-in-r.html#cb311-1" tabindex="-1"></a><span class="fu">boxplot</span>(Ozone<span class="sc">~</span>Month, <span class="at">data =</span> airquality)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-128-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-123-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The argument <code>Ozone~Month</code> is a <code>formula</code> which tells R we want to know “how does <code>Ozone</code> relate to <code>Month</code>?”. We will use formulas a lot in this module when we start to fit predictive models. We can clearly see above that the distribution of <code>Ozone</code> varies a lot with the changing months. Also, since the months are ordered this gives us a sense of change over time, with <code>Ozone</code> peaking in July and Aurgust (Months 7 and 8).</p>
 </div>
 <div id="histograms" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Histograms<a href="working-with-data-in-r.html#histograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Histograms provide a far more detailed representation of the distribution of a numeric variable. How they work is by breaking up the interval/range of values of the variable into equal width <em>bins</em> and then showing the proportions of the observations which fall into each of these bins.</p>
 <div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="working-with-data-in-r.html#cb312-1" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-129-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-124-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Setting <code>freq = FALSE</code> tells R we want to see the <em>proportion</em> of observations in each bin and not the total, however in some cases we may wish to see the total and can simply omit this argument since its default is to show the totals.</p>
 <p>It should be clear that the shape of the histogram will depend on the number of bins being used. Although the general shape will be similar for any appropriate number of bins, the more bins we include the more potential for the histogram for capturing detail in the distribution. However, using a large number of bins increases the variability in the proportions. By default <code>hist()</code> will use what is known as Sturge’s rule to compute an appropriate number of bins, but we can also vary this manually by providing <code>breaks = number_of_bins</code></p>
 <div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="working-with-data-in-r.html#cb313-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
@@ -663,7 +663,7 @@ time and is often an iterative process.</p>
 <span id="cb313-3"><a href="working-with-data-in-r.html#cb313-3" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">7</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb313-4"><a href="working-with-data-in-r.html#cb313-4" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">12</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb313-5"><a href="working-with-data-in-r.html#cb313-5" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">25</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-130-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-125-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="summary-2" class="section level2 hasAnchor" number="2.4">

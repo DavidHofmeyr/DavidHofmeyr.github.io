@@ -195,12 +195,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
 <li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
 <li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-7"><i class="fa fa-check"></i><b>7.3</b> Summary</a></li>
+<li class="chapter" data-level="7.4" data-path="glms.html"><a href="glms.html#exercises-8"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
-<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
@@ -327,7 +327,7 @@ h(z) = \log\left(\frac{z}{1-z}\right), \ h^{-1}(z) = \frac{1}{1+\exp(-z)}.
 <span id="cb412-7"><a href="glms.html#cb412-7" tabindex="-1"></a></span>
 <span id="cb412-8"><a href="glms.html#cb412-8" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
 <span id="cb412-9"><a href="glms.html#cb412-9" tabindex="-1"></a><span class="fu">plot</span>(z, <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>z)), <span class="at">ylab =</span> <span class="fu">expression</span>(h<span class="sc">^-</span><span class="dv">1</span><span class="sc">*</span>(z)), <span class="at">main =</span> <span class="st">&quot;Logistic inverse link function&quot;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-175-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-170-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Estimation in Logistic Regression</strong></p>
 <p>Now, in the context of GLMs recall that we are modelling <span class="math inline">\(E[Y|X]\)</span> from the perspective that <span class="math inline">\(h^{-1}(g^*(X)) = E[Y|X]\)</span>, and we are selecting our estimate for <span class="math inline">\(g^*(X)\)</span> from the collection of all linear (affine) functions of <span class="math inline">\(X\)</span>. For convenience let’s use the notation <span class="math inline">\(q(X) = E[Y|X]\)</span>, which in the context of logistic regression is also equal to <span class="math inline">\(P(Y = 1|X)\)</span>. We may therefore write</p>
 <p><span class="math display">\[\begin{align*}
@@ -504,7 +504,7 @@ h(\hat q(X)) = \log\left(\frac{\hat q(X)}{1-\hat q(X)}\right) = \hat \beta_0 + \
 <pre><code>## Setting levels: control = No, case = Yes</code></pre>
 <pre><code>## Setting direction: controls &lt; cases</code></pre>
 <div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="glms.html#cb427-1" tabindex="-1"></a><span class="fu">plot</span>(logistic_roc)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-181-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-176-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="glms.html#cb428-1" tabindex="-1"></a>logistic_roc</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -738,7 +738,7 @@ P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)
 <pre><code>## 
 ##   No  Yes 
 ## 9667  333</code></pre>
-<p>As always we will start by splitting the data set into training and test sets. We will then fit logistic regression models as normal and then by setting the case weights. We will also explore up and downsampling, and modifying the threshold, in the exercises.</p>
+<p>As always we will start by splitting the data set into training and test sets. We will then fit logistic regression models as normal and then by setting the case weights. We will also explore modifying the threshold in the exercises.</p>
 <div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="glms.html#cb460-1" tabindex="-1"></a><span class="do">### First we split the data and fit a baseline logistic regression model to</span></span>
 <span id="cb460-2"><a href="glms.html#cb460-2" tabindex="-1"></a><span class="do">### the training set</span></span>
 <span id="cb460-3"><a href="glms.html#cb460-3" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(Default<span class="sc">$</span>default, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
@@ -867,6 +867,24 @@ P(Y = i|X) &amp;= \frac{q_i(X)}{(1-q_i(X))\left(1 + \sum_{j=1}^{K-1}\frac{q_j(X)
 <li><p>we explored numerous assessment criteria for classification models</p></li>
 <li><p>we considered how class imbalance can make “detection” of the minority classes challenging, and explored remedies such as case weights and up/down sampling</p></li>
 </ul>
+</div>
+<div id="exercises-8" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Exercises<a href="glms.html#exercises-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Download the <code>Titanic.RData</code> file from the R Scripts folder on Moodle. The objective is to predict whether individuals on the Titanic survived or not, based on <code>age</code>, <code>sex</code> and <code>passengerClass</code>. Start by splitting the data into <span class="math inline">\(70\%\)</span> training/selection and <span class="math inline">\(30\%\)</span> testing. The data contain missing entries and these will need to be imputed. You can simply impute before doing the train/test splitting but it is important to be aware of the subtleties here since generally we should only use an imputation model based on the training data to perform imputation on both training and testing sets. Ideally one should include imputation as part of the model fitting procedure, in that it should also respect the train/validation context (i.e. imputation on validation sets should not use validation data), however we will not go into any detail on this.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Fit an appropriate generalised linear model in order to predict survival using the other variables. Provide an interpretation of the coefficient estimate associated with <code>age</code>.</p></li>
+<li><p>Report the performance on the test set as you think is most appropriate.</p></li>
+</ol></li>
+<li><p>Load the <code>pmlbr</code> library and then fetch the <code>sonar</code> data set using <code>sonar &lt;- fetch_data("sonar")</code>. This is a binary classification problem to detect whether sonar signals have bounced off rock (<code>$target = 1</code>) or metal (<code>$target = 0</code>). The covariates correspond with the energy within different frequency bands, integrated over a fixed time interval, as a result there is a high degree of correlation between the covariates. Use five fold cross validation in order to select</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>An appopriate value of <span class="math inline">\(\lambda\)</span> for use within a LASSO logistic regression model.</p></li>
+<li><p>Appropriate values of <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\alpha\)</span> for use within an elastic net logistic regression model.</p></li>
+<li><p>Plot and compare the estimated coefficient vectors from each of the selected models.</p></li>
+</ol></li>
+<li><p>Refer to the <code>Default</code> data set in the package <code>ISLR2</code>. The task is to select a threshold for classification when using a logistic regression model. Use 10 fold cross validation to estimate the balanced accuracy for each threshold in <code>seq(0.1, 0.9, by = 0.1)</code>, and select the threshold which gives the highest balanced accuracy. You can use the “solutions” to
+the exercises from the previous chapter to help you implement your own cross validation, which may be the simplest way to do this. Start by setting aside <span class="math inline">\(30\%\)</span> of the data for testing, and perform cross validation on the remaining <span class="math inline">\(70\%\)</span>. After selecting a threshold and obtaining a model trained on the entire <span class="math inline">\(70\%\)</span> not set aside for testing, compare the balanced accuracy on the test set of this model with that of the logistic regression model using the case weights as described in this section.</p></li>
+</ol>
 
 </div>
 </div>

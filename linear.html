@@ -195,12 +195,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
 <li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
 <li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-7"><i class="fa fa-check"></i><b>7.3</b> Summary</a></li>
+<li class="chapter" data-level="7.4" data-path="glms.html"><a href="glms.html#exercises-8"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
-<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
@@ -336,7 +336,7 @@ Y = \beta_0^* + \sum_{j=1}^p \beta_j^* X_j + \epsilon,
 <span id="cb372-27"><a href="linear.html#cb372-27" tabindex="-1"></a><span class="fu">plot</span>(x2, y2, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), <span class="at">xlab =</span> <span class="st">&#39;X&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Y&#39;</span>, <span class="at">main =</span> <span class="st">&#39;X values spread out&#39;</span>)</span>
 <span id="cb372-28"><a href="linear.html#cb372-28" tabindex="-1"></a><span class="fu">abline</span>(lm2<span class="sc">$</span>coefficients)</span>
 <span id="cb372-29"><a href="linear.html#cb372-29" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-163-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-158-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Returning to the distribution of <span class="math inline">\(\hbbeta\)</span>, if we look at each of the coefficients separately we have that <span class="math inline">\((\hat \beta_j - \beta^*_j)\big/\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\)</span> has a standard normal distribution. But in practice we do not know the value of <span class="math inline">\(\sigma_{\epsilon}^2\)</span> and need to estimate it. We will not go into any of the details for why, as these are beyond the scope of the module, but if we estimate <span class="math inline">\(\sigma_{\epsilon}^2\)</span> using <span class="math inline">\(\frac{1}{n-p-1}\sum_{i=1}^n r_i^2\)</span>, where <span class="math inline">\(r_1, ..., r_n\)</span> are the residuals from the fitted model, then <span class="math inline">\((\hat \beta_j - \beta^*_j)\big/\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\)</span> has a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-p-1\)</span> degrees of freedom. This becomes important when we want to make inference about the true values of the coefficients since it allows us to obtain confidence intervals for the regression coefficients. Specifically we can obtain a <span class="math inline">\((1-\alpha)\times 100\%\)</span> confidence interval using <span class="math display">\[
 \left(\hat \beta_j + t_{\alpha/2}\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}, \hat \beta_j + t_{1-\alpha/2}\hat\sigma_{\epsilon}\sqrt{(\X^\top \X)^{-1}_{jj}}\right),
 \]</span> where <span class="math inline">\(t_{q}\)</span> is the <span class="math inline">\(q\)</span> quantile of the <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-p-1\)</span> degrees of freedom.</p>
@@ -443,7 +443,7 @@ P\Bigg(&amp;\mbox{I could have seen a sample with } \frac{\hat \beta_j}{\hat \si
 <div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="linear.html#cb377-1" tabindex="-1"></a><span class="do">### Let&#39;s return to the Auto data set and the linear model we fit</span></span>
 <span id="cb377-2"><a href="linear.html#cb377-2" tabindex="-1"></a><span class="fu">plot</span>(lin_mod<span class="sc">$</span>fitted.values, lin_mod<span class="sc">$</span>residuals,</span>
 <span id="cb377-3"><a href="linear.html#cb377-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Fitted values&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-165-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-160-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>It should be clear that there is a relationship between the fitted values (estimated signal component) and the residuals (estimated noise component). In addition to the “U”-shape, we can also see that the residual variance is larger for larger fitted values, which would also violate the assumption that the residuals are independent of <span class="math inline">\(X\)</span>.</p>
 <p>Note that although we can use such a plot to determine if the linear model is “incorrect”, we cannot reasonably rely on such a plot to “confirm” that the true model is linear. Nonetheless, if there is no apparent relationship present then it is certainly not unreasonable to rely on the model for prediction.</p>
 <p><strong>Normality of Residuals</strong></p>
@@ -451,7 +451,7 @@ P\Bigg(&amp;\mbox{I could have seen a sample with } \frac{\hat \beta_j}{\hat \si
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="linear.html#cb378-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb378-2"><a href="linear.html#cb378-2" tabindex="-1"></a><span class="fu">hist</span>(lin_mod<span class="sc">$</span>residuals, <span class="at">main =</span> <span class="st">&quot;Residual distribution&quot;</span>)</span>
 <span id="cb378-3"><a href="linear.html#cb378-3" tabindex="-1"></a><span class="fu">qqnorm</span>(lin_mod<span class="sc">$</span>residuals, <span class="at">main =</span> <span class="st">&quot;Normal Quantile-Qauntile plot of residuals&quot;</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-166-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-161-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Both the histogram and the QQ-plot show deviations from normality, in particular with a long right tail.</p>
 </div>
 <div id="multicollinearity" class="section level3 hasAnchor" number="6.2.4">
@@ -600,7 +600,7 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb381-35"><a href="linear.html#cb381-35" tabindex="-1"></a><span class="co"># For example</span></span>
 <span id="cb381-36"><a href="linear.html#cb381-36" tabindex="-1"></a><span class="fu">plot</span>(ridge<span class="sc">$</span>beta[,<span class="dv">90</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge coefficients&#39;</span>)</span>
 <span id="cb381-37"><a href="linear.html#cb381-37" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-168-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-163-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>It should be clear that the ridge estimates are much closer to the actual values of the coefficients. However, choosing an inappropriate value for <span class="math inline">\(\lambda\)</span> may lead to either too little or too much “shrinkage”. As mentioned previously the <code>glmnet</code> package also provides the function <code>cv.glmnet</code> which will run cross-validation and perform model selection for us.</p>
 <div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="linear.html#cb382-1" tabindex="-1"></a><span class="do">### First let&#39;s simply run cross-validation with the default settings (except</span></span>
 <span id="cb382-2"><a href="linear.html#cb382-2" tabindex="-1"></a><span class="do">### that we set alpha = 0).</span></span>
@@ -615,7 +615,7 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb382-11"><a href="linear.html#cb382-11" tabindex="-1"></a><span class="do">### Note that lambda is plotted on a -log(lambda) transformation, and so the values</span></span>
 <span id="cb382-12"><a href="linear.html#cb382-12" tabindex="-1"></a><span class="do">### close to the left correspond with the largest values of lambda (most regularisation)</span></span>
 <span id="cb382-13"><a href="linear.html#cb382-13" tabindex="-1"></a><span class="fu">plot</span>(ridge_cv)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-169-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-164-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="linear.html#cb383-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
 <span id="cb383-2"><a href="linear.html#cb383-2" tabindex="-1"></a>ridge_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
 <pre><code>## [1] 2.206135</code></pre>
@@ -630,7 +630,7 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb387-7"><a href="linear.html#cb387-7" tabindex="-1"></a></span>
 <span id="cb387-8"><a href="linear.html#cb387-8" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">coef</span>(ridge_cv, <span class="at">s =</span> ridge_cv<span class="sc">$</span>lambda<span class="fl">.1</span>se)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta), <span class="at">main =</span> <span class="st">&#39;Ridge by 1 standard error rule&#39;</span>) </span>
 <span id="cb387-9"><a href="linear.html#cb387-9" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-169-2.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-164-2.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We can see that the solutions are heavily shrunk compared with the OLS solution, but this has resulted in overall much better estimation. We can, for example, consider the differences between the estimated coefficients and the true coefficients</p>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="linear.html#cb388-1" tabindex="-1"></a><span class="do">### Squared error of OLS coefficients</span></span>
 <span id="cb388-2"><a href="linear.html#cb388-2" tabindex="-1"></a><span class="fu">sum</span>((ols<span class="sc">$</span>coefficients[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
@@ -712,7 +712,7 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb398-10"><a href="linear.html#cb398-10" tabindex="-1"></a><span class="do">### As before lambda is plotted on a -log(lambda) transformation</span></span>
 <span id="cb398-11"><a href="linear.html#cb398-11" tabindex="-1"></a></span>
 <span id="cb398-12"><a href="linear.html#cb398-12" tabindex="-1"></a><span class="fu">plot</span>(lasso_cv)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-172-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-167-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="linear.html#cb399-1" tabindex="-1"></a><span class="do">### We can extract these two values of lambda</span></span>
 <span id="cb399-2"><a href="linear.html#cb399-2" tabindex="-1"></a>lasso_cv<span class="sc">$</span>lambda.min <span class="co"># minimum estimated prediction error</span></span></code></pre></div>
 <pre><code>## [1] 0.1748325</code></pre>
@@ -731,7 +731,7 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb403-11"><a href="linear.html#cb403-11" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">3</span>), <span class="at">xlab =</span> <span class="st">&#39;index&#39;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(beta),</span>
 <span id="cb403-12"><a href="linear.html#cb403-12" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;LASSO by 1 standard error rule&#39;</span>) </span>
 <span id="cb403-13"><a href="linear.html#cb403-13" tabindex="-1"></a><span class="fu">lines</span>(beta_true, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="figures/unnamed-chunk-172-2.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figures/unnamed-chunk-167-2.png" width="576" style="display: block; margin: auto;" /></p>
 <p>It should be clear that in both solutions many of the coefficients have been set exactly to zero. It may also be apparent that those associated with the large true coefficients are typically less shrunken compared to the ridge counterparts.</p>
 <p>The overall squared estimation error also shows the good performance of the LASSO</p>
 <div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="linear.html#cb404-1" tabindex="-1"></a><span class="do">### Squared error of LASSO coefficients from minimum CV error</span></span>
@@ -849,7 +849,7 @@ s.t. &amp; \ h(\bbeta) \leq t
 <li><p>Use 10-fold cross validation to estimate the expected prediction error for predicting <code>mpg</code> with each of the models. You will need to somehow incorporate the back-transformation into the cross validation, where appropriate. You could do this by setting up your own <code>caret</code> model, or by writing your own cross validation code. There may also be other ways you could do this.</p></li>
 <li><p>Estimate the prediction error of the model selected from the cross validation results, using the test set.</p></li>
 </ol></li>
-<li><p>Download the <code>Genes.RData</code> file from the R Scripts folder on Moodle. This is a simulation based modification of the Khan Gene Data included in the ISLR2 package. There is a total of 2308 covariates related to gene expression measurements associated with cancerous tumour tissues, and a response variable (y) derived from information related to cancer type, which can be treated as continuous. Start by setting aside <span class="math inline">\(30\%\)</span> of the data for testing.</p>
+<li><p>Download the <code>Genes.RData</code> file from the R Scripts folder on Moodle. This is a simulation based modification of the Khan Gene Data included in the ISLR2 package. There is a total of 2308 covariates related to gene expression measurements associated with cancerous tumour tissues, and a response variable (<code>y</code>) derived from information related to cancer type, which can be treated as continuous. Start by setting aside <span class="math inline">\(30\%\)</span> of the data for testing.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Using both cross validation based estimates of expected prediction error and covariance based estimates of expected in-sample error, select appropriate values for <span class="math inline">\(\lambda\)</span> for use within a ridge regression model.</p></li>
 <li><p>Do the same as above for the LASSO, and also select appropriate values for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\lambda\)</span> for an elastic net model using cross validation.</p></li>
