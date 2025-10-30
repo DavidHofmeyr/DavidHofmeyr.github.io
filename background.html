@@ -769,7 +769,7 @@ P(l &lt; \theta - \hat \theta &lt; u) = 0.95.
 <span id="cb335-27"><a href="background.html#cb335-27" tabindex="-1"></a><span class="do">### on the distribution of 2*skew(x) - skews_B</span></span>
 <span id="cb335-28"><a href="background.html#cb335-28" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## 0.2359479 1.1093878</code></pre>
+## 0.2422004 1.1211485</code></pre>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="background.html#cb337-1" tabindex="-1"></a><span class="do">### We can also visualise the estimated distribution whose quantiles define</span></span>
 <span id="cb337-2"><a href="background.html#cb337-2" tabindex="-1"></a><span class="do">### confidence interval</span></span>
 <span id="cb337-3"><a href="background.html#cb337-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="at">main =</span> <span class="st">&quot;Bootstrap Distribution&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>

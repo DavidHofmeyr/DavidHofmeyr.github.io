@@ -354,20 +354,13 @@ Y = \beta_0^* + \sum_{j=1}^p \beta_j^* X_j + \epsilon,
 <span id="cb373-4"><a href="linear.html#cb373-4" tabindex="-1"></a></span>
 <span id="cb373-5"><a href="linear.html#cb373-5" tabindex="-1"></a><span class="do">### Inspect the data set variables</span></span>
 <span id="cb373-6"><a href="linear.html#cb373-6" tabindex="-1"></a><span class="fu">head</span>(Auto)</span></code></pre></div>
-<pre><code>##   mpg cylinders displacement horsepower weight acceleration year origin
-## 1  18         8          307        130   3504         12.0   70      1
-## 2  15         8          350        165   3693         11.5   70      1
-## 3  18         8          318        150   3436         11.0   70      1
-## 4  16         8          304        150   3433         12.0   70      1
-## 5  17         8          302        140   3449         10.5   70      1
-## 6  15         8          429        198   4341         10.0   70      1
-##                        name
-## 1 chevrolet chevelle malibu
-## 2         buick skylark 320
-## 3        plymouth satellite
-## 4             amc rebel sst
-## 5               ford torino
-## 6          ford galaxie 500</code></pre>
+<pre><code>##   mpg cylinders displacement horsepower weight acceleration year origin                      name
+## 1  18         8          307        130   3504         12.0   70      1 chevrolet chevelle malibu
+## 2  15         8          350        165   3693         11.5   70      1         buick skylark 320
+## 3  18         8          318        150   3436         11.0   70      1        plymouth satellite
+## 4  16         8          304        150   3433         12.0   70      1             amc rebel sst
+## 5  17         8          302        140   3449         10.5   70      1               ford torino
+## 6  15         8          429        198   4341         10.0   70      1          ford galaxie 500</code></pre>
 <div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="linear.html#cb375-1" tabindex="-1"></a><span class="do">### We see the response variable mpg, and eight other variables</span></span>
 <span id="cb375-2"><a href="linear.html#cb375-2" tabindex="-1"></a><span class="do">### which could be used as predictors. Most of these appear sensibly</span></span>
 <span id="cb375-3"><a href="linear.html#cb375-3" tabindex="-1"></a><span class="do">### treated as numeric, and potentially useful predictors. However</span></span>
@@ -517,12 +510,10 @@ s.t. &amp; \ h(\bbeta) \leq t
 <li>There are a number of benefits of jumping straight to the penalised formulation: (i) solving the penalised problem is much easier than solving the constrained formulation (in fact typically constrained optimisation is solved by converting to a penalised problem); and (ii) the statistical properties of the solution to the penalised problem are much better understood than those of the constrained problem.</li>
 </ul>
 <p>Arguably the main reason for describing the constraint formulation at all is that it conveys an intuitive interpretation of how regularisation is achieved more directly: We simply “trap” the potential solutions inside a “small ball”, so they can’t vary too much. However, the penalised formulation can also offer some intuition: Informally we may think of the “effort” in optimising the penalised objective as being split between minimising the training error and minimising the term <span class="math inline">\(\sum_j \beta_j^2\)</span>, and the larger the value of <span class="math inline">\(\lambda\)</span> the more effort is placed on minimising <span class="math inline">\(\sum_j \beta_j^2\)</span>. We also saw that overfitting and high variance estimation comes about if we focus too heavily on the “details” (i.e. the noise) in the observations. By diverting some of the “attention” away from minimising the training error the estimation is less affected by the minutiae in the observations, and so less prone to overfitting.</p>
-<div id="a-quick-comment-on-standardisation" class="section level5 hasAnchor" number="6.3.2.0.1">
-<h5><span class="header-section-number">6.3.2.0.1</span> A Quick Comment on Standardisation<a href="linear.html#a-quick-comment-on-standardisation" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>A Quick Comment on Standardisation</strong></p>
 <p>Notice that the scale of the regression coefficients is typically inversely related to the scale on which the corresponding covariates are measured.</p>
 <p>For example, suppose we were using people’s biometric information in order to assess their risk of certain conditions developing. If we had stored their weight in grams we would need to have a much smaller coefficient for weight then if we had stored their weight in kilograms.</p>
 <p>If we apply the same amount of penalisation to a coefficient which “should be very large” and one which “should” not, purely because of how we stored the data and not because of their intrinsic relevance to the model, then this will have a much greater effect on the first than the second. When performing regularisation in this way it is therefore important to first standardise the coefficients to have similar (or the same) scale/variance. This must of course be taken into account when it comes to predicting the response on new “test cases”.</p>
-</div>
 <div id="visualising-the-effects-of-regularisation" class="section level4 hasAnchor" number="6.3.2.1">
 <h4><span class="header-section-number">6.3.2.1</span> Visualising the Effects of Regularisation<a href="linear.html#visualising-the-effects-of-regularisation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s consider just a very simple scenario, where <span class="math inline">\(Y = X_1 + X_2 + \epsilon\)</span>, and <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are uncorrelated. The true coefficients are therefore each equal to one (and the intercept is equal to zero). At a population level the true regression coefficients are equal to <span class="math inline">\(\argmin_{\bbeta} E[(Y-\beta_1 X_1 - \beta_2 X_2)^2]\)</span>, and the following plot shows the <em>contours</em> of the function <span class="math inline">\(E[(Y-\beta_1 X_1 - \beta_2 X_2)^2]\)</span>. We can see the optimal solution at <span class="math inline">\((1, 1)\)</span> and the value of the objective increasing quadratically as we move away from this point in any direction.</p>
@@ -659,17 +650,25 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb394-9"><a href="linear.html#cb394-9" tabindex="-1"></a><span class="do">### value of lambda and then adding the covariance penalty</span></span>
 <span id="cb394-10"><a href="linear.html#cb394-10" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(ridge, X), <span class="dv">2</span>, <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb394-11"><a href="linear.html#cb394-11" tabindex="-1"></a></span>
-<span id="cb394-12"><a href="linear.html#cb394-12" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ridge<span class="sc">$</span>lambda, <span class="cf">function</span>(lambda)</span>
-<span id="cb394-13"><a href="linear.html#cb394-13" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>lambda))))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
+<span id="cb394-12"><a href="linear.html#cb394-12" tabindex="-1"></a><span class="do">### To find the penalties we need both the degrees of freedom and the</span></span>
+<span id="cb394-13"><a href="linear.html#cb394-13" tabindex="-1"></a><span class="do">### estimate for residual variance</span></span>
 <span id="cb394-14"><a href="linear.html#cb394-14" tabindex="-1"></a></span>
-<span id="cb394-15"><a href="linear.html#cb394-15" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
-<span id="cb394-16"><a href="linear.html#cb394-16" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
-<span id="cb394-17"><a href="linear.html#cb394-17" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> ridge<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
-<span id="cb394-18"><a href="linear.html#cb394-18" tabindex="-1"></a>lambda_select</span></code></pre></div>
-<pre><code>## [1] 1.520604</code></pre>
+<span id="cb394-15"><a href="linear.html#cb394-15" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ridge<span class="sc">$</span>lambda, <span class="cf">function</span>(lambda){</span>
+<span id="cb394-16"><a href="linear.html#cb394-16" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(SVD<span class="sc">$</span>d<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> n<span class="sc">*</span>lambda)))</span>
+<span id="cb394-17"><a href="linear.html#cb394-17" tabindex="-1"></a>})</span>
+<span id="cb394-18"><a href="linear.html#cb394-18" tabindex="-1"></a></span>
+<span id="cb394-19"><a href="linear.html#cb394-19" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> <span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span><span class="fu">max</span>(dfs))<span class="sc">*</span>n</span>
+<span id="cb394-20"><a href="linear.html#cb394-20" tabindex="-1"></a></span>
+<span id="cb394-21"><a href="linear.html#cb394-21" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>dfs<span class="sc">*</span>sig2_hat<span class="sc">/</span>n</span>
+<span id="cb394-22"><a href="linear.html#cb394-22" tabindex="-1"></a></span>
+<span id="cb394-23"><a href="linear.html#cb394-23" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
+<span id="cb394-24"><a href="linear.html#cb394-24" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
+<span id="cb394-25"><a href="linear.html#cb394-25" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> ridge<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
+<span id="cb394-26"><a href="linear.html#cb394-26" tabindex="-1"></a>lambda_select</span></code></pre></div>
+<pre><code>## [1] 0.5997574</code></pre>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="linear.html#cb396-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
 <span id="cb396-2"><a href="linear.html#cb396-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(ridge, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 8.093744</code></pre>
+<pre><code>## [1] 9.823201</code></pre>
 <p>The accuracy of the solution is similar to that selected using cross validation, but requires much less computation.</p>
 </div>
 </div>
@@ -755,20 +754,25 @@ s.t. &amp; \ h(\bbeta) \leq t
 <span id="cb408-7"><a href="linear.html#cb408-7" tabindex="-1"></a>training_errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">predict</span>(lasso_cv<span class="sc">$</span>glmnet.fit, X), <span class="dv">2</span>,</span>
 <span id="cb408-8"><a href="linear.html#cb408-8" tabindex="-1"></a>                         <span class="cf">function</span>(yhat) <span class="fu">mean</span>((y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb408-9"><a href="linear.html#cb408-9" tabindex="-1"></a></span>
-<span id="cb408-10"><a href="linear.html#cb408-10" tabindex="-1"></a><span class="do">### Now the covariance penalties depend on the estimated coefficients</span></span>
-<span id="cb408-11"><a href="linear.html#cb408-11" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="fu">apply</span>(lasso_cv<span class="sc">$</span>glmnet.fit<span class="sc">$</span>beta, <span class="dv">2</span>,</span>
-<span id="cb408-12"><a href="linear.html#cb408-12" tabindex="-1"></a>                       <span class="cf">function</span>(beta) <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(beta<span class="sc">!=</span><span class="dv">0</span>)))<span class="sc">*</span><span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span>p)</span>
-<span id="cb408-13"><a href="linear.html#cb408-13" tabindex="-1"></a><span class="co"># note above we have 1 + sum(beta!=0) since the intercept is not included</span></span>
-<span id="cb408-14"><a href="linear.html#cb408-14" tabindex="-1"></a><span class="co"># in $beta</span></span>
-<span id="cb408-15"><a href="linear.html#cb408-15" tabindex="-1"></a></span>
-<span id="cb408-16"><a href="linear.html#cb408-16" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
-<span id="cb408-17"><a href="linear.html#cb408-17" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
-<span id="cb408-18"><a href="linear.html#cb408-18" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> lasso_cv<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
-<span id="cb408-19"><a href="linear.html#cb408-19" tabindex="-1"></a>lambda_select</span></code></pre></div>
-<pre><code>## [1] 0.1322543</code></pre>
+<span id="cb408-10"><a href="linear.html#cb408-10" tabindex="-1"></a><span class="do">### Now the degrees of freedom depend on the estimated coefficients</span></span>
+<span id="cb408-11"><a href="linear.html#cb408-11" tabindex="-1"></a></span>
+<span id="cb408-12"><a href="linear.html#cb408-12" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">apply</span>(lasso_cv<span class="sc">$</span>glmnet.fit<span class="sc">$</span>beta, <span class="dv">2</span>, <span class="cf">function</span>(beta){</span>
+<span id="cb408-13"><a href="linear.html#cb408-13" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">+</span><span class="fu">sum</span>(beta<span class="sc">!=</span><span class="dv">0</span>)</span>
+<span id="cb408-14"><a href="linear.html#cb408-14" tabindex="-1"></a>})</span>
+<span id="cb408-15"><a href="linear.html#cb408-15" tabindex="-1"></a><span class="co"># note above we have 1 + sum(beta!=0) since the intercept is not included in $beta</span></span>
+<span id="cb408-16"><a href="linear.html#cb408-16" tabindex="-1"></a></span>
+<span id="cb408-17"><a href="linear.html#cb408-17" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> <span class="fu">min</span>(training_errors)<span class="sc">/</span>(n<span class="sc">-</span><span class="fu">max</span>(dfs))<span class="sc">/</span>n</span>
+<span id="cb408-18"><a href="linear.html#cb408-18" tabindex="-1"></a></span>
+<span id="cb408-19"><a href="linear.html#cb408-19" tabindex="-1"></a>cov_penalties <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>sig2_hat<span class="sc">*</span>dfs<span class="sc">/</span>n</span>
+<span id="cb408-20"><a href="linear.html#cb408-20" tabindex="-1"></a></span>
+<span id="cb408-21"><a href="linear.html#cb408-21" tabindex="-1"></a><span class="do">### We can then select the value for lambda which minimises the sum of the</span></span>
+<span id="cb408-22"><a href="linear.html#cb408-22" tabindex="-1"></a><span class="do">### training error and covariance penalty</span></span>
+<span id="cb408-23"><a href="linear.html#cb408-23" tabindex="-1"></a>lambda_select <span class="ot">&lt;-</span> lasso_cv<span class="sc">$</span>lambda[<span class="fu">which.min</span>(training_errors <span class="sc">+</span> cov_penalties)]</span>
+<span id="cb408-24"><a href="linear.html#cb408-24" tabindex="-1"></a>lambda_select</span></code></pre></div>
+<pre><code>## [1] 0.0004133895</code></pre>
 <div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="linear.html#cb410-1" tabindex="-1"></a><span class="do">### Finally we can compute the error in estimating the true coefficients</span></span>
 <span id="cb410-2"><a href="linear.html#cb410-2" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">coef</span>(lasso_cv, <span class="at">s =</span> lambda_select)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> beta_true)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 5.031624</code></pre>
+<pre><code>## [1] 41.23203</code></pre>
 </div>
 <div id="ridge-or-lasso" class="section level4 hasAnchor" number="6.3.4.3">
 <h4><span class="header-section-number">6.3.4.3</span> Ridge or LASSO?<a href="linear.html#ridge-or-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h4>

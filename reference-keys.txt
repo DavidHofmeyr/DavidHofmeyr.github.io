@@ -116,7 +116,6 @@ multicollinearity
 regularisation-for-linear-models
 regularisation-through-constraints
 regularisation-through-penalisation
-a-quick-comment-on-standardisation
 visualising-the-effects-of-regularisation
 ridge-regression
 notes

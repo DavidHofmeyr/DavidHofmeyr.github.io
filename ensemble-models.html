@@ -756,26 +756,16 @@ sufficient.</p>
 <span id="cb514-22"><a href="ensemble-models.html#cb514-22" tabindex="-1"></a></span>
 <span id="cb514-23"><a href="ensemble-models.html#cb514-23" tabindex="-1"></a><span class="do">### We can inspect the results of the cross validation</span></span>
 <span id="cb514-24"><a href="ensemble-models.html#cb514-24" tabindex="-1"></a>gb_model<span class="sc">$</span>results</span></code></pre></div>
-<pre><code>##   shrinkage interaction.depth n.minobsinnode n.trees  Accuracy     Kappa
-## 1       0.1                 1             10     100 0.8704567 0.8396749
-## 4       0.1                 2             10     100 0.8848772 0.8576698
-## 7       0.1                 3             10     100 0.8968583 0.8725216
-## 2       0.1                 1             10     200 0.8779977 0.8492478
-## 5       0.1                 2             10     200 0.8979637 0.8738788
-## 8       0.1                 3             10     200 0.9024032 0.8793976
-## 3       0.1                 1             10     300 0.8839891 0.8566643
-## 6       0.1                 2             10     300 0.8997413 0.8760905
-## 9       0.1                 3             10     300 0.9026225 0.8796597
-##    AccuracySD     KappaSD
-## 1 0.005147918 0.006359900
-## 4 0.007625226 0.009347375
-## 7 0.009026825 0.011066750
-## 2 0.005164187 0.006369456
-## 5 0.007562932 0.009314294
-## 8 0.008225978 0.010157932
-## 3 0.008871559 0.010935541
-## 6 0.011100185 0.013643020
-## 9 0.006896950 0.008477130</code></pre>
+<pre><code>##   shrinkage interaction.depth n.minobsinnode n.trees  Accuracy     Kappa  AccuracySD     KappaSD
+## 1       0.1                 1             10     100 0.8704567 0.8396749 0.005147918 0.006359900
+## 4       0.1                 2             10     100 0.8848772 0.8576698 0.007625226 0.009347375
+## 7       0.1                 3             10     100 0.8968583 0.8725216 0.009026825 0.011066750
+## 2       0.1                 1             10     200 0.8779977 0.8492478 0.005164187 0.006369456
+## 5       0.1                 2             10     200 0.8979637 0.8738788 0.007562932 0.009314294
+## 8       0.1                 3             10     200 0.9024032 0.8793976 0.008225978 0.010157932
+## 3       0.1                 1             10     300 0.8839891 0.8566643 0.008871559 0.010935541
+## 6       0.1                 2             10     300 0.8997413 0.8760905 0.011100185 0.013643020
+## 9       0.1                 3             10     300 0.9026225 0.8796597 0.006896950 0.008477130</code></pre>
 <div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="ensemble-models.html#cb516-1" tabindex="-1"></a><span class="do">### Finally we can make predictions on the test set and the assess the</span></span>
 <span id="cb516-2"><a href="ensemble-models.html#cb516-2" tabindex="-1"></a><span class="do">### test accuracy. We see that the performance is similar to the</span></span>
 <span id="cb516-3"><a href="ensemble-models.html#cb516-3" tabindex="-1"></a><span class="do">### bagging models</span></span>
