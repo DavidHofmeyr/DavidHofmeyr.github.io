@@ -208,6 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
 <li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
 <li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="nonlinearity2.html"><a href="nonlinearity2.html#exercises-9"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
 <ul>
@@ -215,6 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
 <li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
 <li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-9"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.5" data-path="ensemble-models.html"><a href="ensemble-models.html#exercises-10"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 </ul>
 
@@ -319,39 +321,39 @@ Y = 1 + 4X - 3X^2 - X^3 + 2X^4 + \epsilon,
 <p>where <span class="math inline">\(X\)</span> is uniformly distributed on <span class="math inline">\((0,1)\)</span> and
 <span class="math inline">\(\epsilon \sim N(0, 1/25)\)</span>. In the following code chunk we simulate a
 set of <span class="math inline">\(n = 30\)</span> realisations of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="fundamentals2.html#cb359-1" tabindex="-1"></a><span class="do">### First let&#39;s set up what is fixed</span></span>
-<span id="cb359-2"><a href="fundamentals2.html#cb359-2" tabindex="-1"></a><span class="co">#sample size</span></span>
-<span id="cb359-3"><a href="fundamentals2.html#cb359-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb359-4"><a href="fundamentals2.html#cb359-4" tabindex="-1"></a></span>
-<span id="cb359-5"><a href="fundamentals2.html#cb359-5" tabindex="-1"></a><span class="co"># residual standard deviation</span></span>
-<span id="cb359-6"><a href="fundamentals2.html#cb359-6" tabindex="-1"></a>sigma_resid <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span></span>
-<span id="cb359-7"><a href="fundamentals2.html#cb359-7" tabindex="-1"></a></span>
-<span id="cb359-8"><a href="fundamentals2.html#cb359-8" tabindex="-1"></a><span class="co"># true regression function</span></span>
-<span id="cb359-9"><a href="fundamentals2.html#cb359-9" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
-<span id="cb359-10"><a href="fundamentals2.html#cb359-10" tabindex="-1"></a></span>
-<span id="cb359-11"><a href="fundamentals2.html#cb359-11" tabindex="-1"></a><span class="do">### Now we can sample our realisations of X and Y</span></span>
-<span id="cb359-12"><a href="fundamentals2.html#cb359-12" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
-<span id="cb359-13"><a href="fundamentals2.html#cb359-13" tabindex="-1"></a></span>
-<span id="cb359-14"><a href="fundamentals2.html#cb359-14" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
-<span id="cb359-15"><a href="fundamentals2.html#cb359-15" tabindex="-1"></a></span>
-<span id="cb359-16"><a href="fundamentals2.html#cb359-16" tabindex="-1"></a><span class="do">### We then fit a high degree polynomial, say with degree six</span></span>
-<span id="cb359-17"><a href="fundamentals2.html#cb359-17" tabindex="-1"></a></span>
-<span id="cb359-18"><a href="fundamentals2.html#cb359-18" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">poly</span>(x, <span class="dv">6</span>), <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
-<span id="cb359-19"><a href="fundamentals2.html#cb359-19" tabindex="-1"></a></span>
-<span id="cb359-20"><a href="fundamentals2.html#cb359-20" tabindex="-1"></a><span class="do">### For plotting reasons we can obtain predictions over a grid of values of x</span></span>
-<span id="cb359-21"><a href="fundamentals2.html#cb359-21" tabindex="-1"></a></span>
-<span id="cb359-22"><a href="fundamentals2.html#cb359-22" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">by =</span> <span class="fl">0.01</span>))</span>
-<span id="cb359-23"><a href="fundamentals2.html#cb359-23" tabindex="-1"></a></span>
-<span id="cb359-24"><a href="fundamentals2.html#cb359-24" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
-<span id="cb359-25"><a href="fundamentals2.html#cb359-25" tabindex="-1"></a></span>
-<span id="cb359-26"><a href="fundamentals2.html#cb359-26" tabindex="-1"></a><span class="do">### Finally let&#39;s visualise the sample points, the true function and</span></span>
-<span id="cb359-27"><a href="fundamentals2.html#cb359-27" tabindex="-1"></a><span class="do">### the fitted function</span></span>
-<span id="cb359-28"><a href="fundamentals2.html#cb359-28" tabindex="-1"></a></span>
-<span id="cb359-29"><a href="fundamentals2.html#cb359-29" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
-<span id="cb359-30"><a href="fundamentals2.html#cb359-30" tabindex="-1"></a></span>
-<span id="cb359-31"><a href="fundamentals2.html#cb359-31" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb359-32"><a href="fundamentals2.html#cb359-32" tabindex="-1"></a></span>
-<span id="cb359-33"><a href="fundamentals2.html#cb359-33" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="fundamentals2.html#cb364-1" tabindex="-1"></a><span class="do">### First let&#39;s set up what is fixed</span></span>
+<span id="cb364-2"><a href="fundamentals2.html#cb364-2" tabindex="-1"></a><span class="co">#sample size</span></span>
+<span id="cb364-3"><a href="fundamentals2.html#cb364-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb364-4"><a href="fundamentals2.html#cb364-4" tabindex="-1"></a></span>
+<span id="cb364-5"><a href="fundamentals2.html#cb364-5" tabindex="-1"></a><span class="co"># residual standard deviation</span></span>
+<span id="cb364-6"><a href="fundamentals2.html#cb364-6" tabindex="-1"></a>sigma_resid <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb364-7"><a href="fundamentals2.html#cb364-7" tabindex="-1"></a></span>
+<span id="cb364-8"><a href="fundamentals2.html#cb364-8" tabindex="-1"></a><span class="co"># true regression function</span></span>
+<span id="cb364-9"><a href="fundamentals2.html#cb364-9" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb364-10"><a href="fundamentals2.html#cb364-10" tabindex="-1"></a></span>
+<span id="cb364-11"><a href="fundamentals2.html#cb364-11" tabindex="-1"></a><span class="do">### Now we can sample our realisations of X and Y</span></span>
+<span id="cb364-12"><a href="fundamentals2.html#cb364-12" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb364-13"><a href="fundamentals2.html#cb364-13" tabindex="-1"></a></span>
+<span id="cb364-14"><a href="fundamentals2.html#cb364-14" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb364-15"><a href="fundamentals2.html#cb364-15" tabindex="-1"></a></span>
+<span id="cb364-16"><a href="fundamentals2.html#cb364-16" tabindex="-1"></a><span class="do">### We then fit a high degree polynomial, say with degree six</span></span>
+<span id="cb364-17"><a href="fundamentals2.html#cb364-17" tabindex="-1"></a></span>
+<span id="cb364-18"><a href="fundamentals2.html#cb364-18" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">poly</span>(x, <span class="dv">6</span>), <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb364-19"><a href="fundamentals2.html#cb364-19" tabindex="-1"></a></span>
+<span id="cb364-20"><a href="fundamentals2.html#cb364-20" tabindex="-1"></a><span class="do">### For plotting reasons we can obtain predictions over a grid of values of x</span></span>
+<span id="cb364-21"><a href="fundamentals2.html#cb364-21" tabindex="-1"></a></span>
+<span id="cb364-22"><a href="fundamentals2.html#cb364-22" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">by =</span> <span class="fl">0.01</span>))</span>
+<span id="cb364-23"><a href="fundamentals2.html#cb364-23" tabindex="-1"></a></span>
+<span id="cb364-24"><a href="fundamentals2.html#cb364-24" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
+<span id="cb364-25"><a href="fundamentals2.html#cb364-25" tabindex="-1"></a></span>
+<span id="cb364-26"><a href="fundamentals2.html#cb364-26" tabindex="-1"></a><span class="do">### Finally let&#39;s visualise the sample points, the true function and</span></span>
+<span id="cb364-27"><a href="fundamentals2.html#cb364-27" tabindex="-1"></a><span class="do">### the fitted function</span></span>
+<span id="cb364-28"><a href="fundamentals2.html#cb364-28" tabindex="-1"></a></span>
+<span id="cb364-29"><a href="fundamentals2.html#cb364-29" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb364-30"><a href="fundamentals2.html#cb364-30" tabindex="-1"></a></span>
+<span id="cb364-31"><a href="fundamentals2.html#cb364-31" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb364-32"><a href="fundamentals2.html#cb364-32" tabindex="-1"></a></span>
+<span id="cb364-33"><a href="fundamentals2.html#cb364-33" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-150-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Try re-running the above code multiple times. You will see how much the fitted function varies from sample to sample. This is because the model is trying to model too much of the data and is capturing a lot of what makes the samples different (the residual “noise” terms) and not only what makes them similar (the actual functional “signal” component).</p>
 <p>Now try changing the degree of the polynomial and run the code multiple times. What do you observe?</p>
@@ -493,30 +495,30 @@ section. We have the setup where</p>
 \end{align*}\]</span></p>
 <p>where <span class="math inline">\(X\)</span> is uniformly distributed on <span class="math inline">\((0,1)\)</span> and
 <span class="math inline">\(\epsilon \sim N(0, 1/25)\)</span>.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="fundamentals2.html#cb360-1" tabindex="-1"></a><span class="do">### First we can set up what is constant:</span></span>
-<span id="cb360-2"><a href="fundamentals2.html#cb360-2" tabindex="-1"></a><span class="co"># The regression function, a degree 4 polynomial</span></span>
-<span id="cb360-3"><a href="fundamentals2.html#cb360-3" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
-<span id="cb360-4"><a href="fundamentals2.html#cb360-4" tabindex="-1"></a></span>
-<span id="cb360-5"><a href="fundamentals2.html#cb360-5" tabindex="-1"></a><span class="co"># The standard deviation of the residuals (later we can try varying this to see what effect it has on estimation)</span></span>
-<span id="cb360-6"><a href="fundamentals2.html#cb360-6" tabindex="-1"></a>sigma_resid <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span></span>
-<span id="cb360-7"><a href="fundamentals2.html#cb360-7" tabindex="-1"></a></span>
-<span id="cb360-8"><a href="fundamentals2.html#cb360-8" tabindex="-1"></a><span class="co"># The sample size, which has a very substantial effect on the statistical properties of the regression estimator</span></span>
-<span id="cb360-9"><a href="fundamentals2.html#cb360-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb360-10"><a href="fundamentals2.html#cb360-10" tabindex="-1"></a></span>
-<span id="cb360-11"><a href="fundamentals2.html#cb360-11" tabindex="-1"></a><span class="do">### We can now simulate some data with this set-up</span></span>
-<span id="cb360-12"><a href="fundamentals2.html#cb360-12" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
-<span id="cb360-13"><a href="fundamentals2.html#cb360-13" tabindex="-1"></a></span>
-<span id="cb360-14"><a href="fundamentals2.html#cb360-14" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
-<span id="cb360-15"><a href="fundamentals2.html#cb360-15" tabindex="-1"></a></span>
-<span id="cb360-16"><a href="fundamentals2.html#cb360-16" tabindex="-1"></a><span class="do">### Now let&#39;s plot the data, and add the true regression function</span></span>
-<span id="cb360-17"><a href="fundamentals2.html#cb360-17" tabindex="-1"></a></span>
-<span id="cb360-18"><a href="fundamentals2.html#cb360-18" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">3.25</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb360-19"><a href="fundamentals2.html#cb360-19" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>)</span>
-<span id="cb360-20"><a href="fundamentals2.html#cb360-20" tabindex="-1"></a></span>
-<span id="cb360-21"><a href="fundamentals2.html#cb360-21" tabindex="-1"></a><span class="do">### Now let&#39;s add the simple linear regression fit from the data</span></span>
-<span id="cb360-22"><a href="fundamentals2.html#cb360-22" tabindex="-1"></a></span>
-<span id="cb360-23"><a href="fundamentals2.html#cb360-23" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
-<span id="cb360-24"><a href="fundamentals2.html#cb360-24" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="fundamentals2.html#cb365-1" tabindex="-1"></a><span class="do">### First we can set up what is constant:</span></span>
+<span id="cb365-2"><a href="fundamentals2.html#cb365-2" tabindex="-1"></a><span class="co"># The regression function, a degree 4 polynomial</span></span>
+<span id="cb365-3"><a href="fundamentals2.html#cb365-3" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb365-4"><a href="fundamentals2.html#cb365-4" tabindex="-1"></a></span>
+<span id="cb365-5"><a href="fundamentals2.html#cb365-5" tabindex="-1"></a><span class="co"># The standard deviation of the residuals (later we can try varying this to see what effect it has on estimation)</span></span>
+<span id="cb365-6"><a href="fundamentals2.html#cb365-6" tabindex="-1"></a>sigma_resid <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb365-7"><a href="fundamentals2.html#cb365-7" tabindex="-1"></a></span>
+<span id="cb365-8"><a href="fundamentals2.html#cb365-8" tabindex="-1"></a><span class="co"># The sample size, which has a very substantial effect on the statistical properties of the regression estimator</span></span>
+<span id="cb365-9"><a href="fundamentals2.html#cb365-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb365-10"><a href="fundamentals2.html#cb365-10" tabindex="-1"></a></span>
+<span id="cb365-11"><a href="fundamentals2.html#cb365-11" tabindex="-1"></a><span class="do">### We can now simulate some data with this set-up</span></span>
+<span id="cb365-12"><a href="fundamentals2.html#cb365-12" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb365-13"><a href="fundamentals2.html#cb365-13" tabindex="-1"></a></span>
+<span id="cb365-14"><a href="fundamentals2.html#cb365-14" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb365-15"><a href="fundamentals2.html#cb365-15" tabindex="-1"></a></span>
+<span id="cb365-16"><a href="fundamentals2.html#cb365-16" tabindex="-1"></a><span class="do">### Now let&#39;s plot the data, and add the true regression function</span></span>
+<span id="cb365-17"><a href="fundamentals2.html#cb365-17" tabindex="-1"></a></span>
+<span id="cb365-18"><a href="fundamentals2.html#cb365-18" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">3.25</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb365-19"><a href="fundamentals2.html#cb365-19" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>)</span>
+<span id="cb365-20"><a href="fundamentals2.html#cb365-20" tabindex="-1"></a></span>
+<span id="cb365-21"><a href="fundamentals2.html#cb365-21" tabindex="-1"></a><span class="do">### Now let&#39;s add the simple linear regression fit from the data</span></span>
+<span id="cb365-22"><a href="fundamentals2.html#cb365-22" tabindex="-1"></a></span>
+<span id="cb365-23"><a href="fundamentals2.html#cb365-23" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb365-24"><a href="fundamentals2.html#cb365-24" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-151-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Run the above code multiple times. You should not be surprised to see a
 different fitted model each time, since the sample changed. Although no
@@ -530,78 +532,78 @@ models <em>tend</em> to over/under estimate the true function, indicating
 potential bias.</p>
 <p>The following chunk of code will run this experiment 500 times, and add
 all of the lines fit to the different data sets generated.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="fundamentals2.html#cb361-1" tabindex="-1"></a><span class="do">### First we set the number of repeats of the experiment</span></span>
-<span id="cb361-2"><a href="fundamentals2.html#cb361-2" tabindex="-1"></a>repeats <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb361-3"><a href="fundamentals2.html#cb361-3" tabindex="-1"></a></span>
-<span id="cb361-4"><a href="fundamentals2.html#cb361-4" tabindex="-1"></a><span class="do">### We will be adding the lines from multiple fitted regression models</span></span>
-<span id="cb361-5"><a href="fundamentals2.html#cb361-5" tabindex="-1"></a><span class="do">### and so first need to set up a plot on which to add these</span></span>
-<span id="cb361-6"><a href="fundamentals2.html#cb361-6" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb361-7"><a href="fundamentals2.html#cb361-7" tabindex="-1"></a></span>
-<span id="cb361-8"><a href="fundamentals2.html#cb361-8" tabindex="-1"></a><span class="do">### Now we repeat the experiment. We will also store the predictions over</span></span>
-<span id="cb361-9"><a href="fundamentals2.html#cb361-9" tabindex="-1"></a><span class="do">### a grid of values for x so that we can calculate estimate the bias and</span></span>
-<span id="cb361-10"><a href="fundamentals2.html#cb361-10" tabindex="-1"></a><span class="do">### variance</span></span>
-<span id="cb361-11"><a href="fundamentals2.html#cb361-11" tabindex="-1"></a></span>
-<span id="cb361-12"><a href="fundamentals2.html#cb361-12" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">by =</span> .<span class="dv">01</span>))</span>
-<span id="cb361-13"><a href="fundamentals2.html#cb361-13" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">matrix</span>(, repeats, <span class="fu">length</span>(x_grid<span class="sc">$</span>x))</span>
-<span id="cb361-14"><a href="fundamentals2.html#cb361-14" tabindex="-1"></a></span>
-<span id="cb361-15"><a href="fundamentals2.html#cb361-15" tabindex="-1"></a><span class="cf">for</span>(rep <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>repeats){</span>
-<span id="cb361-16"><a href="fundamentals2.html#cb361-16" tabindex="-1"></a>  <span class="co"># simulate data</span></span>
-<span id="cb361-17"><a href="fundamentals2.html#cb361-17" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
-<span id="cb361-18"><a href="fundamentals2.html#cb361-18" tabindex="-1"></a></span>
-<span id="cb361-19"><a href="fundamentals2.html#cb361-19" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
-<span id="cb361-20"><a href="fundamentals2.html#cb361-20" tabindex="-1"></a></span>
-<span id="cb361-21"><a href="fundamentals2.html#cb361-21" tabindex="-1"></a>  <span class="co"># fit model</span></span>
-<span id="cb361-22"><a href="fundamentals2.html#cb361-22" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
-<span id="cb361-23"><a href="fundamentals2.html#cb361-23" tabindex="-1"></a>  </span>
-<span id="cb361-24"><a href="fundamentals2.html#cb361-24" tabindex="-1"></a>  <span class="co"># store predictions</span></span>
-<span id="cb361-25"><a href="fundamentals2.html#cb361-25" tabindex="-1"></a>  predicted[rep,] <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
-<span id="cb361-26"><a href="fundamentals2.html#cb361-26" tabindex="-1"></a>  </span>
-<span id="cb361-27"><a href="fundamentals2.html#cb361-27" tabindex="-1"></a>  <span class="co"># add line to graph</span></span>
-<span id="cb361-28"><a href="fundamentals2.html#cb361-28" tabindex="-1"></a>  </span>
-<span id="cb361-29"><a href="fundamentals2.html#cb361-29" tabindex="-1"></a>  <span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red&quot;</span>, <span class="at">alpha.f =</span> .<span class="dv">1</span>))</span>
-<span id="cb361-30"><a href="fundamentals2.html#cb361-30" tabindex="-1"></a>  </span>
-<span id="cb361-31"><a href="fundamentals2.html#cb361-31" tabindex="-1"></a>}</span>
-<span id="cb361-32"><a href="fundamentals2.html#cb361-32" tabindex="-1"></a></span>
-<span id="cb361-33"><a href="fundamentals2.html#cb361-33" tabindex="-1"></a><span class="do">### All of the lines will have obscured the original plot. We can add that back</span></span>
-<span id="cb361-34"><a href="fundamentals2.html#cb361-34" tabindex="-1"></a><span class="do">### and also add the averaged model predictions</span></span>
-<span id="cb361-35"><a href="fundamentals2.html#cb361-35" tabindex="-1"></a></span>
-<span id="cb361-36"><a href="fundamentals2.html#cb361-36" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb361-37"><a href="fundamentals2.html#cb361-37" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="fundamentals2.html#cb366-1" tabindex="-1"></a><span class="do">### First we set the number of repeats of the experiment</span></span>
+<span id="cb366-2"><a href="fundamentals2.html#cb366-2" tabindex="-1"></a>repeats <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb366-3"><a href="fundamentals2.html#cb366-3" tabindex="-1"></a></span>
+<span id="cb366-4"><a href="fundamentals2.html#cb366-4" tabindex="-1"></a><span class="do">### We will be adding the lines from multiple fitted regression models</span></span>
+<span id="cb366-5"><a href="fundamentals2.html#cb366-5" tabindex="-1"></a><span class="do">### and so first need to set up a plot on which to add these</span></span>
+<span id="cb366-6"><a href="fundamentals2.html#cb366-6" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb366-7"><a href="fundamentals2.html#cb366-7" tabindex="-1"></a></span>
+<span id="cb366-8"><a href="fundamentals2.html#cb366-8" tabindex="-1"></a><span class="do">### Now we repeat the experiment. We will also store the predictions over</span></span>
+<span id="cb366-9"><a href="fundamentals2.html#cb366-9" tabindex="-1"></a><span class="do">### a grid of values for x so that we can calculate estimate the bias and</span></span>
+<span id="cb366-10"><a href="fundamentals2.html#cb366-10" tabindex="-1"></a><span class="do">### variance</span></span>
+<span id="cb366-11"><a href="fundamentals2.html#cb366-11" tabindex="-1"></a></span>
+<span id="cb366-12"><a href="fundamentals2.html#cb366-12" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">by =</span> .<span class="dv">01</span>))</span>
+<span id="cb366-13"><a href="fundamentals2.html#cb366-13" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">matrix</span>(, repeats, <span class="fu">length</span>(x_grid<span class="sc">$</span>x))</span>
+<span id="cb366-14"><a href="fundamentals2.html#cb366-14" tabindex="-1"></a></span>
+<span id="cb366-15"><a href="fundamentals2.html#cb366-15" tabindex="-1"></a><span class="cf">for</span>(rep <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>repeats){</span>
+<span id="cb366-16"><a href="fundamentals2.html#cb366-16" tabindex="-1"></a>  <span class="co"># simulate data</span></span>
+<span id="cb366-17"><a href="fundamentals2.html#cb366-17" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb366-18"><a href="fundamentals2.html#cb366-18" tabindex="-1"></a></span>
+<span id="cb366-19"><a href="fundamentals2.html#cb366-19" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb366-20"><a href="fundamentals2.html#cb366-20" tabindex="-1"></a></span>
+<span id="cb366-21"><a href="fundamentals2.html#cb366-21" tabindex="-1"></a>  <span class="co"># fit model</span></span>
+<span id="cb366-22"><a href="fundamentals2.html#cb366-22" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb366-23"><a href="fundamentals2.html#cb366-23" tabindex="-1"></a>  </span>
+<span id="cb366-24"><a href="fundamentals2.html#cb366-24" tabindex="-1"></a>  <span class="co"># store predictions</span></span>
+<span id="cb366-25"><a href="fundamentals2.html#cb366-25" tabindex="-1"></a>  predicted[rep,] <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
+<span id="cb366-26"><a href="fundamentals2.html#cb366-26" tabindex="-1"></a>  </span>
+<span id="cb366-27"><a href="fundamentals2.html#cb366-27" tabindex="-1"></a>  <span class="co"># add line to graph</span></span>
+<span id="cb366-28"><a href="fundamentals2.html#cb366-28" tabindex="-1"></a>  </span>
+<span id="cb366-29"><a href="fundamentals2.html#cb366-29" tabindex="-1"></a>  <span class="fu">abline</span>(model<span class="sc">$</span>coefficients, <span class="at">col =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red&quot;</span>, <span class="at">alpha.f =</span> .<span class="dv">1</span>))</span>
+<span id="cb366-30"><a href="fundamentals2.html#cb366-30" tabindex="-1"></a>  </span>
+<span id="cb366-31"><a href="fundamentals2.html#cb366-31" tabindex="-1"></a>}</span>
+<span id="cb366-32"><a href="fundamentals2.html#cb366-32" tabindex="-1"></a></span>
+<span id="cb366-33"><a href="fundamentals2.html#cb366-33" tabindex="-1"></a><span class="do">### All of the lines will have obscured the original plot. We can add that back</span></span>
+<span id="cb366-34"><a href="fundamentals2.html#cb366-34" tabindex="-1"></a><span class="do">### and also add the averaged model predictions</span></span>
+<span id="cb366-35"><a href="fundamentals2.html#cb366-35" tabindex="-1"></a></span>
+<span id="cb366-36"><a href="fundamentals2.html#cb366-36" tabindex="-1"></a><span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb366-37"><a href="fundamentals2.html#cb366-37" tabindex="-1"></a><span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-152-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Now we are able to see the bias more clearly, where the dashed line is the average fitted value for each value of <span class="math inline">\(x\)</span> over all 500 fitted models. We can also see that that variance increases as we move away from the middle of the range of <span class="math inline">\(x\)</span> values.</p>
 <p>We know that as we increase the flexibility (degree of the polynomial, where a linear/affine function is just a degree one polynomial) we should see the bias decreasing and the variance increasing. Let’s run the same experiment but for degrees two up to five for comparison.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="fundamentals2.html#cb362-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb362-2"><a href="fundamentals2.html#cb362-2" tabindex="-1"></a></span>
-<span id="cb362-3"><a href="fundamentals2.html#cb362-3" tabindex="-1"></a><span class="do">### We can put the above code into a loop over the degree</span></span>
-<span id="cb362-4"><a href="fundamentals2.html#cb362-4" tabindex="-1"></a><span class="do">### of the polynomial. We&#39;ve seen the linear (degree one)</span></span>
-<span id="cb362-5"><a href="fundamentals2.html#cb362-5" tabindex="-1"></a><span class="do">### polynomial so let&#39;s look at degrees 2 - 5</span></span>
-<span id="cb362-6"><a href="fundamentals2.html#cb362-6" tabindex="-1"></a></span>
-<span id="cb362-7"><a href="fundamentals2.html#cb362-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>){</span>
-<span id="cb362-8"><a href="fundamentals2.html#cb362-8" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb362-9"><a href="fundamentals2.html#cb362-9" tabindex="-1"></a>        <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Degree &quot;</span>, d, <span class="st">&quot; polynomial fits&quot;</span>))</span>
-<span id="cb362-10"><a href="fundamentals2.html#cb362-10" tabindex="-1"></a></span>
-<span id="cb362-11"><a href="fundamentals2.html#cb362-11" tabindex="-1"></a>  x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">by =</span> .<span class="dv">01</span>))</span>
-<span id="cb362-12"><a href="fundamentals2.html#cb362-12" tabindex="-1"></a>  predicted <span class="ot">&lt;-</span> <span class="fu">matrix</span>(, repeats, <span class="fu">length</span>(x_grid<span class="sc">$</span>x))</span>
-<span id="cb362-13"><a href="fundamentals2.html#cb362-13" tabindex="-1"></a></span>
-<span id="cb362-14"><a href="fundamentals2.html#cb362-14" tabindex="-1"></a>  <span class="cf">for</span>(rep <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>repeats){</span>
-<span id="cb362-15"><a href="fundamentals2.html#cb362-15" tabindex="-1"></a>    <span class="co"># simulate data</span></span>
-<span id="cb362-16"><a href="fundamentals2.html#cb362-16" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
-<span id="cb362-17"><a href="fundamentals2.html#cb362-17" tabindex="-1"></a>  </span>
-<span id="cb362-18"><a href="fundamentals2.html#cb362-18" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
-<span id="cb362-19"><a href="fundamentals2.html#cb362-19" tabindex="-1"></a>  </span>
-<span id="cb362-20"><a href="fundamentals2.html#cb362-20" tabindex="-1"></a>    <span class="co"># fit model</span></span>
-<span id="cb362-21"><a href="fundamentals2.html#cb362-21" tabindex="-1"></a>    model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">poly</span>(x, d), <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
-<span id="cb362-22"><a href="fundamentals2.html#cb362-22" tabindex="-1"></a>    </span>
-<span id="cb362-23"><a href="fundamentals2.html#cb362-23" tabindex="-1"></a>    <span class="co"># store predictions</span></span>
-<span id="cb362-24"><a href="fundamentals2.html#cb362-24" tabindex="-1"></a>    predicted[rep,] <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
-<span id="cb362-25"><a href="fundamentals2.html#cb362-25" tabindex="-1"></a>    </span>
-<span id="cb362-26"><a href="fundamentals2.html#cb362-26" tabindex="-1"></a>    <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted[rep,],</span>
-<span id="cb362-27"><a href="fundamentals2.html#cb362-27" tabindex="-1"></a>          <span class="at">col =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red&quot;</span>, <span class="at">alpha.f =</span> .<span class="dv">1</span>))</span>
-<span id="cb362-28"><a href="fundamentals2.html#cb362-28" tabindex="-1"></a>  }</span>
-<span id="cb362-29"><a href="fundamentals2.html#cb362-29" tabindex="-1"></a></span>
-<span id="cb362-30"><a href="fundamentals2.html#cb362-30" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb362-31"><a href="fundamentals2.html#cb362-31" tabindex="-1"></a>  <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb362-32"><a href="fundamentals2.html#cb362-32" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="fundamentals2.html#cb367-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb367-2"><a href="fundamentals2.html#cb367-2" tabindex="-1"></a></span>
+<span id="cb367-3"><a href="fundamentals2.html#cb367-3" tabindex="-1"></a><span class="do">### We can put the above code into a loop over the degree</span></span>
+<span id="cb367-4"><a href="fundamentals2.html#cb367-4" tabindex="-1"></a><span class="do">### of the polynomial. We&#39;ve seen the linear (degree one)</span></span>
+<span id="cb367-5"><a href="fundamentals2.html#cb367-5" tabindex="-1"></a><span class="do">### polynomial so let&#39;s look at degrees 2 - 5</span></span>
+<span id="cb367-6"><a href="fundamentals2.html#cb367-6" tabindex="-1"></a></span>
+<span id="cb367-7"><a href="fundamentals2.html#cb367-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb367-8"><a href="fundamentals2.html#cb367-8" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb367-9"><a href="fundamentals2.html#cb367-9" tabindex="-1"></a>        <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Degree &quot;</span>, d, <span class="st">&quot; polynomial fits&quot;</span>))</span>
+<span id="cb367-10"><a href="fundamentals2.html#cb367-10" tabindex="-1"></a></span>
+<span id="cb367-11"><a href="fundamentals2.html#cb367-11" tabindex="-1"></a>  x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">by =</span> .<span class="dv">01</span>))</span>
+<span id="cb367-12"><a href="fundamentals2.html#cb367-12" tabindex="-1"></a>  predicted <span class="ot">&lt;-</span> <span class="fu">matrix</span>(, repeats, <span class="fu">length</span>(x_grid<span class="sc">$</span>x))</span>
+<span id="cb367-13"><a href="fundamentals2.html#cb367-13" tabindex="-1"></a></span>
+<span id="cb367-14"><a href="fundamentals2.html#cb367-14" tabindex="-1"></a>  <span class="cf">for</span>(rep <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>repeats){</span>
+<span id="cb367-15"><a href="fundamentals2.html#cb367-15" tabindex="-1"></a>    <span class="co"># simulate data</span></span>
+<span id="cb367-16"><a href="fundamentals2.html#cb367-16" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb367-17"><a href="fundamentals2.html#cb367-17" tabindex="-1"></a>  </span>
+<span id="cb367-18"><a href="fundamentals2.html#cb367-18" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">g</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> sigma_resid)</span>
+<span id="cb367-19"><a href="fundamentals2.html#cb367-19" tabindex="-1"></a>  </span>
+<span id="cb367-20"><a href="fundamentals2.html#cb367-20" tabindex="-1"></a>    <span class="co"># fit model</span></span>
+<span id="cb367-21"><a href="fundamentals2.html#cb367-21" tabindex="-1"></a>    model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">poly</span>(x, d), <span class="at">data =</span> <span class="fu">data.frame</span>(x, y))</span>
+<span id="cb367-22"><a href="fundamentals2.html#cb367-22" tabindex="-1"></a>    </span>
+<span id="cb367-23"><a href="fundamentals2.html#cb367-23" tabindex="-1"></a>    <span class="co"># store predictions</span></span>
+<span id="cb367-24"><a href="fundamentals2.html#cb367-24" tabindex="-1"></a>    predicted[rep,] <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, x_grid)</span>
+<span id="cb367-25"><a href="fundamentals2.html#cb367-25" tabindex="-1"></a>    </span>
+<span id="cb367-26"><a href="fundamentals2.html#cb367-26" tabindex="-1"></a>    <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, predicted[rep,],</span>
+<span id="cb367-27"><a href="fundamentals2.html#cb367-27" tabindex="-1"></a>          <span class="at">col =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red&quot;</span>, <span class="at">alpha.f =</span> .<span class="dv">1</span>))</span>
+<span id="cb367-28"><a href="fundamentals2.html#cb367-28" tabindex="-1"></a>  }</span>
+<span id="cb367-29"><a href="fundamentals2.html#cb367-29" tabindex="-1"></a></span>
+<span id="cb367-30"><a href="fundamentals2.html#cb367-30" tabindex="-1"></a>  <span class="fu">curve</span>(g, <span class="at">from =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb367-31"><a href="fundamentals2.html#cb367-31" tabindex="-1"></a>  <span class="fu">lines</span>(x_grid<span class="sc">$</span>x, <span class="fu">colMeans</span>(predicted), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb367-32"><a href="fundamentals2.html#cb367-32" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-153-1.png" width="1200px" height="800px" style="display: block; margin: auto;" /></p>
 <p>We can see that the quadratic (degree two) model still has very obvious
 bias, in that the average fit shown with the dashed line over/underestimates the true function at different values of <span class="math inline">\(x\)</span>. In the extreme left and right we can also see slight bias in the degree three polynomial model.</p>
@@ -809,50 +811,51 @@ degree (or, as we will cover a little later on, we can create our own
 <p>Now, ensuring you have the package installed, run the following code
 chunk. It will run cross validation for estimating the expected prediction error of
 simple polynomial models on the <code>cars</code> data set we explored previously.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="fundamentals2.html#cb363-1" tabindex="-1"></a><span class="do">### First we load the package</span></span>
-<span id="cb363-2"><a href="fundamentals2.html#cb363-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb363-3"><a href="fundamentals2.html#cb363-3" tabindex="-1"></a></span>
-<span id="cb363-4"><a href="fundamentals2.html#cb363-4" tabindex="-1"></a><span class="do">### the function train() is the main workhorse of the package</span></span>
-<span id="cb363-5"><a href="fundamentals2.html#cb363-5" tabindex="-1"></a><span class="do">### it takes formula and data arguments, just as we saw with the</span></span>
-<span id="cb363-6"><a href="fundamentals2.html#cb363-6" tabindex="-1"></a><span class="do">### lm() function. Also, since it offers broad functionality we</span></span>
-<span id="cb363-7"><a href="fundamentals2.html#cb363-7" tabindex="-1"></a><span class="do">### to specify what method (type of model) we want to be using.</span></span>
-<span id="cb363-8"><a href="fundamentals2.html#cb363-8" tabindex="-1"></a><span class="do">### Finally we need to provide an argument called trControl which</span></span>
-<span id="cb363-9"><a href="fundamentals2.html#cb363-9" tabindex="-1"></a><span class="do">### tells train() what exactly we want to do, i.e., just fit one</span></span>
-<span id="cb363-10"><a href="fundamentals2.html#cb363-10" tabindex="-1"></a><span class="do">### model on all the data, or do CV (or something else like the</span></span>
-<span id="cb363-11"><a href="fundamentals2.html#cb363-11" tabindex="-1"></a><span class="do">### bootstrap) for model selection. The trControl object is</span></span>
-<span id="cb363-12"><a href="fundamentals2.html#cb363-12" tabindex="-1"></a><span class="do">### produced by the function trainControl. For details on this</span></span>
-<span id="cb363-13"><a href="fundamentals2.html#cb363-13" tabindex="-1"></a><span class="do">### have a look at help(trainControl), remembering to ensure the</span></span>
-<span id="cb363-14"><a href="fundamentals2.html#cb363-14" tabindex="-1"></a><span class="do">### caret package is loaded.</span></span>
-<span id="cb363-15"><a href="fundamentals2.html#cb363-15" tabindex="-1"></a></span>
-<span id="cb363-16"><a href="fundamentals2.html#cb363-16" tabindex="-1"></a><span class="do">### let&#39;s start by setting up the trControl object. We want to do</span></span>
-<span id="cb363-17"><a href="fundamentals2.html#cb363-17" tabindex="-1"></a><span class="do">### cross validation, and let&#39;s choose 10 folds</span></span>
-<span id="cb363-18"><a href="fundamentals2.html#cb363-18" tabindex="-1"></a></span>
-<span id="cb363-19"><a href="fundamentals2.html#cb363-19" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
-<span id="cb363-20"><a href="fundamentals2.html#cb363-20" tabindex="-1"></a></span>
-<span id="cb363-21"><a href="fundamentals2.html#cb363-21" tabindex="-1"></a><span class="do">### For the models linked directly by caret we can perform CV</span></span>
-<span id="cb363-22"><a href="fundamentals2.html#cb363-22" tabindex="-1"></a><span class="do">### across multiple &quot;versions&quot; of the model using a single call.</span></span>
-<span id="cb363-23"><a href="fundamentals2.html#cb363-23" tabindex="-1"></a><span class="do">### However simple polynomial regression is not linked directly</span></span>
-<span id="cb363-24"><a href="fundamentals2.html#cb363-24" tabindex="-1"></a><span class="do">### and so we cannot directly use a single call to run CV for</span></span>
-<span id="cb363-25"><a href="fundamentals2.html#cb363-25" tabindex="-1"></a><span class="do">### all polynomial degrees, and will have to do these in a loop</span></span>
-<span id="cb363-26"><a href="fundamentals2.html#cb363-26" tabindex="-1"></a></span>
-<span id="cb363-27"><a href="fundamentals2.html#cb363-27" tabindex="-1"></a>CV_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb363-28"><a href="fundamentals2.html#cb363-28" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
-<span id="cb363-29"><a href="fundamentals2.html#cb363-29" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb363-30"><a href="fundamentals2.html#cb363-30" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
-<span id="cb363-31"><a href="fundamentals2.html#cb363-31" tabindex="-1"></a>  CV_results[[d]] <span class="ot">&lt;-</span> <span class="fu">train</span>(form, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb363-32"><a href="fundamentals2.html#cb363-32" tabindex="-1"></a>                           <span class="at">data =</span> cars, <span class="at">trControl =</span> trControl)</span>
-<span id="cb363-33"><a href="fundamentals2.html#cb363-33" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="fundamentals2.html#cb368-1" tabindex="-1"></a><span class="do">### First we load the package</span></span>
+<span id="cb368-2"><a href="fundamentals2.html#cb368-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="fundamentals2.html#cb371-1" tabindex="-1"></a><span class="do">### the function train() is the main workhorse of the package</span></span>
+<span id="cb371-2"><a href="fundamentals2.html#cb371-2" tabindex="-1"></a><span class="do">### it takes formula and data arguments, just as we saw with the</span></span>
+<span id="cb371-3"><a href="fundamentals2.html#cb371-3" tabindex="-1"></a><span class="do">### lm() function. Also, since it offers broad functionality we</span></span>
+<span id="cb371-4"><a href="fundamentals2.html#cb371-4" tabindex="-1"></a><span class="do">### to specify what method (type of model) we want to be using.</span></span>
+<span id="cb371-5"><a href="fundamentals2.html#cb371-5" tabindex="-1"></a><span class="do">### Finally we need to provide an argument called trControl which</span></span>
+<span id="cb371-6"><a href="fundamentals2.html#cb371-6" tabindex="-1"></a><span class="do">### tells train() what exactly we want to do, i.e., just fit one</span></span>
+<span id="cb371-7"><a href="fundamentals2.html#cb371-7" tabindex="-1"></a><span class="do">### model on all the data, or do CV (or something else like the</span></span>
+<span id="cb371-8"><a href="fundamentals2.html#cb371-8" tabindex="-1"></a><span class="do">### bootstrap) for model selection. The trControl object is</span></span>
+<span id="cb371-9"><a href="fundamentals2.html#cb371-9" tabindex="-1"></a><span class="do">### produced by the function trainControl. For details on this</span></span>
+<span id="cb371-10"><a href="fundamentals2.html#cb371-10" tabindex="-1"></a><span class="do">### have a look at help(trainControl), remembering to ensure the</span></span>
+<span id="cb371-11"><a href="fundamentals2.html#cb371-11" tabindex="-1"></a><span class="do">### caret package is loaded.</span></span>
+<span id="cb371-12"><a href="fundamentals2.html#cb371-12" tabindex="-1"></a></span>
+<span id="cb371-13"><a href="fundamentals2.html#cb371-13" tabindex="-1"></a><span class="do">### let&#39;s start by setting up the trControl object. We want to do</span></span>
+<span id="cb371-14"><a href="fundamentals2.html#cb371-14" tabindex="-1"></a><span class="do">### cross validation, and let&#39;s choose 10 folds</span></span>
+<span id="cb371-15"><a href="fundamentals2.html#cb371-15" tabindex="-1"></a></span>
+<span id="cb371-16"><a href="fundamentals2.html#cb371-16" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb371-17"><a href="fundamentals2.html#cb371-17" tabindex="-1"></a></span>
+<span id="cb371-18"><a href="fundamentals2.html#cb371-18" tabindex="-1"></a><span class="do">### For the models linked directly by caret we can perform CV</span></span>
+<span id="cb371-19"><a href="fundamentals2.html#cb371-19" tabindex="-1"></a><span class="do">### across multiple &quot;versions&quot; of the model using a single call.</span></span>
+<span id="cb371-20"><a href="fundamentals2.html#cb371-20" tabindex="-1"></a><span class="do">### However simple polynomial regression is not linked directly</span></span>
+<span id="cb371-21"><a href="fundamentals2.html#cb371-21" tabindex="-1"></a><span class="do">### and so we cannot directly use a single call to run CV for</span></span>
+<span id="cb371-22"><a href="fundamentals2.html#cb371-22" tabindex="-1"></a><span class="do">### all polynomial degrees, and will have to do these in a loop</span></span>
+<span id="cb371-23"><a href="fundamentals2.html#cb371-23" tabindex="-1"></a></span>
+<span id="cb371-24"><a href="fundamentals2.html#cb371-24" tabindex="-1"></a>CV_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb371-25"><a href="fundamentals2.html#cb371-25" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb371-26"><a href="fundamentals2.html#cb371-26" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb371-27"><a href="fundamentals2.html#cb371-27" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
+<span id="cb371-28"><a href="fundamentals2.html#cb371-28" tabindex="-1"></a>  CV_results[[d]] <span class="ot">&lt;-</span> <span class="fu">train</span>(form, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb371-29"><a href="fundamentals2.html#cb371-29" tabindex="-1"></a>                           <span class="at">data =</span> cars, <span class="at">trControl =</span> trControl)</span>
+<span id="cb371-30"><a href="fundamentals2.html#cb371-30" tabindex="-1"></a>}</span></code></pre></div>
 <p>Setting the seed before each call to the function <code>train</code> was important
 here so that the same CV folds were used each time. In the output of
 <code>train</code> is a list with a field <code>results</code> which contains the performance
 statistics from the cross validation. The result <code>RMSE</code> (Root Mean
 Squared Error) is the square root of the estimate of expected prediction
 error based on the squared error loss function.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="fundamentals2.html#cb364-1" tabindex="-1"></a>CV_results[[<span class="dv">1</span>]]<span class="sc">$</span>results<span class="sc">$</span>RMSE</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="fundamentals2.html#cb372-1" tabindex="-1"></a>CV_results[[<span class="dv">1</span>]]<span class="sc">$</span>results<span class="sc">$</span>RMSE</span></code></pre></div>
 <pre><code>## [1] 15.11234</code></pre>
 <p>If we wish to choose the model which gave the lowest expected prediction
 error, we can inspect them all</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="fundamentals2.html#cb366-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="fundamentals2.html#cb374-1" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))</span></code></pre></div>
 <pre><code>## [1] 15.11234 14.91259 14.93013 14.83372 15.93608</code></pre>
 <p>We can see that the degree four polynomial gave the smallest estimated
 expected prediction error. However, the differences when compared with
@@ -900,36 +903,36 @@ E_{\tilde Y_1, ..., \tilde Y_n}\left[\frac{1}{n}\sum_{i=1}^n L(\tilde Y_i, \hg(\
 <p>The first term above is just the training error. The second term above may be seen as a “penalty” to avoid selecting models likely to overfit. Models with too much flexibility will fit very closely to the sample, meaning that the fitted values would “follow” the values of the response if we instead had a different set of realisations (a different sample). This leads to a high covariance between each <span class="math inline">\(Y_i\)</span> and its corresponding fitted value, <span class="math inline">\(\hg(\x_i)\)</span>. The more flexibility, the more able the model will be able to follow the variations in the data, leading to higher covariance between the actual responses and the fitted values from the model.</p>
 <p>This doesn’t yet, however, tell us about how to compute or estimate these covariances. It turns out, however, that for some models we can obtain analytical expressions for the covariance between the response and fitted values. For example in a simplified setting (like the linear and quadratic models we have seen) the quantity <span class="math inline">\(\sum_{i=1}^n Cov(Y_i \hat Y_i)\)</span> is equal to <span class="math inline">\(\sigma^2_{\epsilon}\)</span> multiplied by the number of parameters in the model (the model <em>degrees of freedom</em>). As long as we can obtain a reasonable estimate for <span class="math inline">\(\sigma^2_{\epsilon}\)</span> we can use this to obtain estimates of the expected in-sample error and use this as an alternative to something like cross validation to select/tune a model. As a rule-of-thumb estimating <span class="math inline">\(\sigma^2_{\epsilon}\)</span> with the quantity <span class="math inline">\(\frac{1}{n - df(\hg^*)}\sum_{i=1}^n(y_i - \hg^*(\x_i))^2\)</span>, where <span class="math inline">\(\hg^*\)</span> is the most (or one of the most) flexible models which has been fit and <span class="math inline">\(df(\hg^*)\)</span> is its degrees of freedom.</p>
 <p>Let’s apply this to the <code>cars</code> data set to see how it compares with cross validation</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="fundamentals2.html#cb368-1" tabindex="-1"></a><span class="do">### Let&#39;s create a vector to store the training errors of</span></span>
-<span id="cb368-2"><a href="fundamentals2.html#cb368-2" tabindex="-1"></a><span class="do">### the polynomial models for d = 1, 2, ..., 5</span></span>
-<span id="cb368-3"><a href="fundamentals2.html#cb368-3" tabindex="-1"></a>tr_err <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">5</span>)</span>
-<span id="cb368-4"><a href="fundamentals2.html#cb368-4" tabindex="-1"></a></span>
-<span id="cb368-5"><a href="fundamentals2.html#cb368-5" tabindex="-1"></a><span class="do">### Now we can loop of the the degree of the polynomial</span></span>
-<span id="cb368-6"><a href="fundamentals2.html#cb368-6" tabindex="-1"></a><span class="do">### as before</span></span>
-<span id="cb368-7"><a href="fundamentals2.html#cb368-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
-<span id="cb368-8"><a href="fundamentals2.html#cb368-8" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
-<span id="cb368-9"><a href="fundamentals2.html#cb368-9" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(form, <span class="at">data =</span> cars)</span>
-<span id="cb368-10"><a href="fundamentals2.html#cb368-10" tabindex="-1"></a>  </span>
-<span id="cb368-11"><a href="fundamentals2.html#cb368-11" tabindex="-1"></a>  tr_err[d] <span class="ot">&lt;-</span> <span class="fu">mean</span>((mod<span class="sc">$</span>fitted.values <span class="sc">-</span> cars<span class="sc">$</span>dist)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb368-12"><a href="fundamentals2.html#cb368-12" tabindex="-1"></a>}</span>
-<span id="cb368-13"><a href="fundamentals2.html#cb368-13" tabindex="-1"></a></span>
-<span id="cb368-14"><a href="fundamentals2.html#cb368-14" tabindex="-1"></a><span class="do">### Now we can use the training error from the most flexible</span></span>
-<span id="cb368-15"><a href="fundamentals2.html#cb368-15" tabindex="-1"></a><span class="do">### to estimate the residual variance</span></span>
-<span id="cb368-16"><a href="fundamentals2.html#cb368-16" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cars)</span>
-<span id="cb368-17"><a href="fundamentals2.html#cb368-17" tabindex="-1"></a></span>
-<span id="cb368-18"><a href="fundamentals2.html#cb368-18" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> tr_err[<span class="dv">5</span>]<span class="sc">/</span>(n <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">*</span>n</span>
-<span id="cb368-19"><a href="fundamentals2.html#cb368-19" tabindex="-1"></a><span class="co"># Can you see why this is the appropriate estimate?</span></span>
-<span id="cb368-20"><a href="fundamentals2.html#cb368-20" tabindex="-1"></a></span>
-<span id="cb368-21"><a href="fundamentals2.html#cb368-21" tabindex="-1"></a><span class="do">### Now let&#39;s estimate the expected in-sample error</span></span>
-<span id="cb368-22"><a href="fundamentals2.html#cb368-22" tabindex="-1"></a><span class="do">### for each model</span></span>
-<span id="cb368-23"><a href="fundamentals2.html#cb368-23" tabindex="-1"></a>eise <span class="ot">&lt;-</span> tr_err <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>sig2_hat<span class="sc">*</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span>n</span>
-<span id="cb368-24"><a href="fundamentals2.html#cb368-24" tabindex="-1"></a></span>
-<span id="cb368-25"><a href="fundamentals2.html#cb368-25" tabindex="-1"></a>eise</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="fundamentals2.html#cb376-1" tabindex="-1"></a><span class="do">### Let&#39;s create a vector to store the training errors of</span></span>
+<span id="cb376-2"><a href="fundamentals2.html#cb376-2" tabindex="-1"></a><span class="do">### the polynomial models for d = 1, 2, ..., 5</span></span>
+<span id="cb376-3"><a href="fundamentals2.html#cb376-3" tabindex="-1"></a>tr_err <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">5</span>)</span>
+<span id="cb376-4"><a href="fundamentals2.html#cb376-4" tabindex="-1"></a></span>
+<span id="cb376-5"><a href="fundamentals2.html#cb376-5" tabindex="-1"></a><span class="do">### Now we can loop of the the degree of the polynomial</span></span>
+<span id="cb376-6"><a href="fundamentals2.html#cb376-6" tabindex="-1"></a><span class="do">### as before</span></span>
+<span id="cb376-7"><a href="fundamentals2.html#cb376-7" tabindex="-1"></a><span class="cf">for</span>(d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb376-8"><a href="fundamentals2.html#cb376-8" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste0</span>(<span class="st">&quot;dist~poly(speed,&quot;</span>, d, <span class="st">&quot;)&quot;</span>))</span>
+<span id="cb376-9"><a href="fundamentals2.html#cb376-9" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(form, <span class="at">data =</span> cars)</span>
+<span id="cb376-10"><a href="fundamentals2.html#cb376-10" tabindex="-1"></a>  </span>
+<span id="cb376-11"><a href="fundamentals2.html#cb376-11" tabindex="-1"></a>  tr_err[d] <span class="ot">&lt;-</span> <span class="fu">mean</span>((mod<span class="sc">$</span>fitted.values <span class="sc">-</span> cars<span class="sc">$</span>dist)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb376-12"><a href="fundamentals2.html#cb376-12" tabindex="-1"></a>}</span>
+<span id="cb376-13"><a href="fundamentals2.html#cb376-13" tabindex="-1"></a></span>
+<span id="cb376-14"><a href="fundamentals2.html#cb376-14" tabindex="-1"></a><span class="do">### Now we can use the training error from the most flexible</span></span>
+<span id="cb376-15"><a href="fundamentals2.html#cb376-15" tabindex="-1"></a><span class="do">### to estimate the residual variance</span></span>
+<span id="cb376-16"><a href="fundamentals2.html#cb376-16" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cars)</span>
+<span id="cb376-17"><a href="fundamentals2.html#cb376-17" tabindex="-1"></a></span>
+<span id="cb376-18"><a href="fundamentals2.html#cb376-18" tabindex="-1"></a>sig2_hat <span class="ot">&lt;-</span> tr_err[<span class="dv">5</span>]<span class="sc">/</span>(n <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">*</span>n</span>
+<span id="cb376-19"><a href="fundamentals2.html#cb376-19" tabindex="-1"></a><span class="co"># Can you see why this is the appropriate estimate?</span></span>
+<span id="cb376-20"><a href="fundamentals2.html#cb376-20" tabindex="-1"></a></span>
+<span id="cb376-21"><a href="fundamentals2.html#cb376-21" tabindex="-1"></a><span class="do">### Now let&#39;s estimate the expected in-sample error</span></span>
+<span id="cb376-22"><a href="fundamentals2.html#cb376-22" tabindex="-1"></a><span class="do">### for each model</span></span>
+<span id="cb376-23"><a href="fundamentals2.html#cb376-23" tabindex="-1"></a>eise <span class="ot">&lt;-</span> tr_err <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>sig2_hat<span class="sc">*</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span>n</span>
+<span id="cb376-24"><a href="fundamentals2.html#cb376-24" tabindex="-1"></a></span>
+<span id="cb376-25"><a href="fundamentals2.html#cb376-25" tabindex="-1"></a>eise</span></code></pre></div>
 <pre><code>## [1] 245.7308 244.4849 250.0081 252.6074 261.2458</code></pre>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="fundamentals2.html#cb370-1" tabindex="-1"></a><span class="do">### When we did cross validation the caret package</span></span>
-<span id="cb370-2"><a href="fundamentals2.html#cb370-2" tabindex="-1"></a><span class="do">### returned the square root of the estimated expected</span></span>
-<span id="cb370-3"><a href="fundamentals2.html#cb370-3" tabindex="-1"></a><span class="do">### prediction error</span></span>
-<span id="cb370-4"><a href="fundamentals2.html#cb370-4" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="fundamentals2.html#cb378-1" tabindex="-1"></a><span class="do">### When we did cross validation the caret package</span></span>
+<span id="cb378-2"><a href="fundamentals2.html#cb378-2" tabindex="-1"></a><span class="do">### returned the square root of the estimated expected</span></span>
+<span id="cb378-3"><a href="fundamentals2.html#cb378-3" tabindex="-1"></a><span class="do">### prediction error</span></span>
+<span id="cb378-4"><a href="fundamentals2.html#cb378-4" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">lapply</span>(CV_results, <span class="cf">function</span>(l) l<span class="sc">$</span>results<span class="sc">$</span>RMSE))<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 228.3829 222.3852 222.9089 220.0393 253.9585</code></pre>
 <p>We can see that the estimates for expected in-sample error and the cross validation based estimates of expected prediction error are quite similar.</p>
 </div>
@@ -971,20 +974,18 @@ E_{\tilde Y_1, ..., \tilde Y_n}\left[\frac{1}{n}\sum_{i=1}^n L(\tilde Y_i, \hg(\
 <div id="exercises-6" class="section level2 hasAnchor" number="5.6">
 <h2><span class="header-section-number">5.6</span> Exercises<a href="fundamentals2.html#exercises-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
-<li>Refer to the experiments in Chapter <a href="fundamentals2.html#biasvariance">5.3.2.1</a>.</li>
-</ol>
+<li><p>Refer to the experiments in Chapter <a href="fundamentals2.html#biasvariance">5.3.2.1</a>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Modify these experiments to estimate the quantities <span class="math inline">\(E_X[Bias(\hg(X))^2]\)</span> and <span class="math inline">\(E_X[Var(\hg(X))]\)</span> for <span class="math inline">\(\hg\)</span> being a polynomial regression model with degree set to each of 1, 2, …, 6. To do this create a grid of <span class="math inline">\(X\)</span> values from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> with spacing of 0.01. Then repeatedly generate samples (1000 in total) of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, each of size <span class="math inline">\(n = 30\)</span>, and fit your polynomial models to each sample before obtaining their predictions for each value in the grid. From these you can estimate the bias and variance at each grid point, and use these to obtain the averages over <span class="math inline">\(X\)</span> (note that we can only use a simple average over the grid points because <span class="math inline">\(X\)</span> is uniformly distributed).</p></li>
 <li><p>Plot the estimates of <span class="math inline">\(E_X[Bias(\hg(X))^2]\)</span> and <span class="math inline">\(E_X[Var(\hg(X))]\)</span> as well as their sum, on the same axes, as a function of the degree of the polynomial.</p></li>
 <li><p>Repeat a. and b. for <span class="math inline">\(n = 200\)</span>. What do you observe?</p></li>
-</ol>
-<ol start="2" style="list-style-type: decimal">
-<li>Refer to the <code>Auto</code> data set in the package <code>ISLR2</code>. Below you will fit and select models for predicting <code>mpg</code>. Start by setting aside <span class="math inline">\(30\%\)</span> of the data as a test set. You can use the function <code>createDataPartition()</code> from the <code>caret</code> package.</li>
-</ol>
+</ol></li>
+<li><p>Refer to the <code>Auto</code> data set in the package <code>ISLR2</code>. Below you will fit and select models for predicting <code>mpg</code>. Start by setting aside <span class="math inline">\(30\%\)</span> of the data as a test set. You can use the function <code>createDataPartition()</code> from the <code>caret</code> package.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>By visualising the relationships between <code>mpg</code> and each other numeric variable, choose one to act as a predictor for <code>mpg</code>. Perform five fold cross-validation to estimate the expected prediction errors of polynomial regression models for degrees from 1 to 5. Choose a model from these and assess its performance by computing the average squared error on the test set.</p></li>
 <li><p>Use five fold cross validation to estimate the expected prediction errors of polynomial models of degrees from 1 to 5 applied to each of the possible numeric predictors. Use the estimates of their performance to select a model and use this to assess its predictive performance using the test set. You can do this using either a loop (or nested loop) or, if you’d like a challenge, by defining your own model for <code>caret</code> to use which has two parameters (polynomial degree and an index for which variable to use as a predictor).</p></li>
 <li><p>Use estimates arising from expected in-sample error to select the model with the best pair of predictor variable and polynomial degree and compare its performance to that selected in b.</p></li>
+</ol></li>
 </ol>
 
 </div>

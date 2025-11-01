@@ -154,13 +154,14 @@ nonlinearity2
 smoothing-as-local-averaging
 nearest-neighbours
 classification-with-knn
-tuning-knn-models-in-r
+tuningknn
 decision-trees
 fitting-and-pruning-decision-trees
 regression-trees
 classification-trees
 some-further-comments-on-decision-trees
 summary-8
+exercises-9
 ensemble-models
 bagging
 variance-reduction-through-model-averaging
@@ -173,3 +174,4 @@ gradient-boosting
 extreme-gradient-boosting
 variable-importance
 summary-9
+exercises-10
