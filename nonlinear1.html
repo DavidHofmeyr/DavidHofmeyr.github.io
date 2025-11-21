@@ -195,12 +195,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="glms.html"><a href="glms.html#generalised-predictive-modelling"><i class="fa fa-check"></i><b>7.1</b> Generalised Predictive Modelling</a></li>
 <li class="chapter" data-level="7.2" data-path="glms.html"><a href="glms.html#classification-and-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Classification and Logistic Regression</a></li>
 <li class="chapter" data-level="7.3" data-path="glms.html"><a href="glms.html#summary-7"><i class="fa fa-check"></i><b>7.3</b> Summary</a></li>
+<li class="chapter" data-level="7.4" data-path="glms.html"><a href="glms.html#exercises-8"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces"><i class="fa fa-check"></i><b>8.2</b> Kernels and Reproducing Kernel Hilbert Spaces</a></li>
-<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.3</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
@@ -208,6 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
 <li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
 <li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="nonlinearity2.html"><a href="nonlinearity2.html#exercises-9"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
 <ul>
@@ -215,6 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
 <li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
 <li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-9"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.5" data-path="ensemble-models.html"><a href="ensemble-models.html#exercises-10"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 </ul>
 
@@ -235,23 +237,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="nonlinear1" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> Nonlinearity Part I<a href="nonlinear1.html#nonlinear1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><span style="color:red"><span style="font-size:30pt">Under Construction</span></span></p>
+<p>In the last two chapters we looked in reasonable depth at linear and generalised linear models, in which the relationships between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X = (X_1, X_2, ..., X_p)\)</span> are characterised only by a vector of <em>regression coefficients</em> which simply capture how changes in the predictors correspond to changes in the expectation of the response (possibly via a <em>link function</em>).</p>
+<p>This simple structure makes linear and generalised linear models highly interpretable, and their statistical properties well understood. However, many modern applications involve situations where far more flexibility is needed in order to accurately capture the relationships between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>. In Chapters <a href="fundamentals1.html#fundamentals1">4</a> and <a href="fundamentals2.html#fundamentals2">5</a> we encountered a simple illustrative example approach by which non-linearity can be introduced in a principled manner, by means of <em>polynomials</em>.</p>
 <div id="basis-expansions" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Basis Expansions<a href="nonlinear1.html#basis-expansions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="examples-of-bases" class="section level3 hasAnchor" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> Examples of Bases<a href="nonlinear1.html#examples-of-bases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The polynomials we saw previously are an example of a <em>basis expansion</em>. In linear algebra we can think of a basis for a <em>vector space</em> as a set of vectors, say <span class="math inline">\(\mathcal{B}\)</span>, with the property that every element of the vector space can be expressed as a linear combination of these <em>basis vectors</em>. The same idea can be applied to spaces of functions (like our set <span class="math inline">\(\F\)</span>). Specifically, suppose <span class="math inline">\(\{b_1, ..., b_q\}\)</span> is a basis for <span class="math inline">\(\F\)</span> (the value <span class="math inline">\(q\)</span> is the dimension of the function space). Then this means that every <span class="math inline">\(g \in \F\)</span> can be written in the form <span class="math display">\[
+g(\x) = \sum_{j=1}^q \beta_j b_j(\x),
+\]</span> for some coefficients <span class="math inline">\(\beta_1, ..., \beta_q\)</span>.</p>
+<p><strong>Example: Polynomials</strong></p>
+<p>For the particular case of the degree <span class="math inline">\(d\)</span> polynomials in a single variable <span class="math inline">\(x\)</span>, the natural basis is <span class="math inline">\(b_j(x) = x^j; j = 0, ..., d\)</span>. If we want to describe degree <span class="math inline">\(d\)</span> polynomials in more than one variable, say <span class="math inline">\(p\)</span> of them, then the natural basis includes all functions of the form <span class="math display">\[
+b(\x) = \prod_{j=1}^p x_j^{d_j},
+\]</span> where the <span class="math inline">\(d_j\)</span>’s are natural numbers with <span class="math inline">\(\sum_{j=1}^p d_j \leq d\)</span>.</p>
+<p>For example the space of degree three polynomials in variables <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are <span class="math display">\[
+1; \ x_1; \ x_2; \ x_1^2; \ x_2^2; \ x_1x_2; \ x_1^3; \ x_2^3; \ x_1^2x_2; \ x_1x_2^2.
+\]</span></p>
+<div id="model-training-1" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Model Training<a href="nonlinear1.html#model-training-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Just as we described it for linear models and simple polynomials, since every function in <span class="math inline">\(\F\)</span> can be expressed as a linear combination of the basis functions, the same must be true of our fitted model, i.e. <span class="math display">\[
+\hg(\x) = \sum_{j=1}^q \hbeta_j b_j(\x),
+\]</span> where we have <span class="math display">\[
+\hbbeta = \argmin_{\bbeta \in \R^q} \frac{1}{n}\sum_{i=1}^n L\left(y_i, \sum_{j=1}^q \beta_j b_j(\x_i)\right) + P(\bbeta),
+\]</span> where <span class="math inline">\(P(\bbeta)\)</span> is here just some arbitrary regularisation penalty (which could be zero).</p>
+<p>This clearly has remarkable similarity with linear models, with the only difference ultimately being that instead of the terms <span class="math inline">\(x_{ij}; i = 1, ..., n; j = 1, ..., p\)</span> we have the terms <span class="math inline">\(b_j(\x_i); i = 1, ..., n; j = 1, ..., q\)</span>. In a practical setting we could therefore simply create the matrix <span class="math inline">\(\mathbf{B}\)</span> with <span class="math inline">\(i,j\)</span>-th element <span class="math inline">\(b_j(\x_i)\)</span> and use this in place of the matrix <span class="math inline">\(\X\)</span> we had for linear models.</p>
+<p><strong>Choosing a Basis</strong></p>
+<p>For a given <span class="math inline">\(\F\)</span> it may not always be clear how to construct a basis. However, we don’t need to approach the problem from this point of view. We can instead start by choosing our basis functions, in which case we will be implicitly choosing <span class="math inline">\(\F\)</span> as the set of all functions <em>generated</em> by this basis; i.e. all functions expressible as linear combinations of the basis functions.</p>
+<p>We could essentially choose almost any functions to include in a basis, as long as there isn’t a lot of <em>redundancy</em> among them. However, we will focus on a special class of bases which we do not have to engage with explicitly.</p>
+</div>
+<div id="kernels-and-reproducing-kernel-hilbert-spaces" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Kernels and Reproducing Kernel Hilbert Spaces<a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One of the hallmarks of modern statistical learning is the remarkable capabilities of <em>overparameterised</em> models whose training has been appropriately regularised to avoid overfitting. What this essentially means is the use of extremely flexible “model classes” (<span class="math inline">\(\F\)</span>), with penalties on the training error to regularise the fitting process.</p>
+<p>In the present context this corresponds with extremely large bases (sometimes with infinitely many basis functions). However, it should be clear that from a practical standpoint actually applying the approach described previously would require the use of matrices <span class="math inline">\(\mathbf{B}\)</span>, as before with <span class="math inline">\(i,j\)</span>-th element equal to <span class="math inline">\(b_j(\x_i)\)</span>, with extremely large numbers of columns. Even fitting simple linear models would then become computationally intractable. Moreover, when it comes to infinite bases we can only engage with such “matrices” conceptually, but clearly cannot actually evaluate them.</p>
+<p><strong>Kernels</strong> are ways around this. In the context of basis expansions a kernel is a function <span class="math inline">\(K\)</span>, which takes two arguments <span class="math inline">\(\x_1, \x_2\)</span> from the same</p>
+<div id="the-kernel-trick" class="section level4 hasAnchor" number="8.1.2.1">
+<h4><span class="header-section-number">8.1.2.1</span> The Kernel Trick<a href="nonlinear1.html#the-kernel-trick" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
 </div>
-<div id="kernels-and-reproducing-kernel-hilbert-spaces" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Kernels and Reproducing Kernel Hilbert Spaces<a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="the-kernel-trick" class="section level3 hasAnchor" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> The Kernel Trick<a href="nonlinear1.html#the-kernel-trick" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-</div>
-<div id="support-vector-machines" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Support Vector Machines<a href="nonlinear1.html#support-vector-machines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="multi-class-svm" class="section level3 hasAnchor" number="8.3.1">
-<h3><span class="header-section-number">8.3.1</span> Multi-class SVM<a href="nonlinear1.html#multi-class-svm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="support-vector-machines" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Support Vector Machines<a href="nonlinear1.html#support-vector-machines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="multi-class-svm" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Multi-class SVM<a href="nonlinear1.html#multi-class-svm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
