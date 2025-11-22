@@ -146,10 +146,15 @@ exercises-8
 nonlinear1
 basis-expansions
 model-training-1
-kernels-and-reproducing-kernel-hilbert-spaces
+kernels
 the-kernel-trick
-support-vector-machines
+support-vector-methods
+support-vector-classifiers
 multi-class-svm
+svm-in-r
+support-vector-regression
+support-vector-regression-in-r
+summary-8
 nonlinearity2
 smoothing-as-local-averaging
 nearest-neighbours
@@ -160,7 +165,7 @@ fitting-and-pruning-decision-trees
 regression-trees
 classification-trees
 some-further-comments-on-decision-trees
-summary-8
+summary-9
 exercises-9
 ensemble-models
 bagging
@@ -173,5 +178,5 @@ boosting
 gradient-boosting
 extreme-gradient-boosting
 variable-importance
-summary-9
+summary-10
 exercises-10

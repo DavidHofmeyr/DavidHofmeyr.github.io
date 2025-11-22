@@ -200,14 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-methods"><i class="fa fa-check"></i><b>8.2</b> Support Vector Methods</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#summary-8"><i class="fa fa-check"></i><b>8.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
 <li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
 <li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
-<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-9"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="nonlinearity2.html"><a href="nonlinearity2.html#exercises-9"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
@@ -215,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
 <li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
 <li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
-<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-9"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-10"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
 <li class="chapter" data-level="10.5" data-path="ensemble-models.html"><a href="ensemble-models.html#exercises-10"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 </ul>
@@ -321,8 +322,7 @@ pretty useful function to have a first look at a new data frame:</p>
 <span id="cb252-6"><a href="working-with-data-in-r.html#cb252-6" tabindex="-1"></a>planets<span class="sc">$</span>density <span class="ot">&lt;-</span> planets<span class="sc">$</span>mass<span class="sc">/</span>volumes</span>
 <span id="cb252-7"><a href="working-with-data-in-r.html#cb252-7" tabindex="-1"></a></span>
 <span id="cb252-8"><a href="working-with-data-in-r.html#cb252-8" tabindex="-1"></a>planets<span class="sc">$</span>density</span></code></pre></div>
-<pre><code>## [1] 5423.2029 5244.9771 5511.4124 3934.1175 1327.5384  686.7827 1270.5254
-## [8] 1631.7267</code></pre>
+<pre><code>## [1] 5423.2029 5244.9771 5511.4124 3934.1175 1327.5384  686.7827 1270.5254 1631.7267</code></pre>
 <p><strong>Factor Variables</strong></p>
 <p>It is common in statistical data to have categorical variables,
 indicating some subdivision of the data, such as social class, primary
@@ -571,15 +571,11 @@ like colon separated values, you can setup <code>read.table(, sep = ":")</code> 
 <h4><span class="header-section-number">2.2.2.1</span> Loading Data from Packages<a href="working-with-data-in-r.html#loading-data-from-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For the most part we will be working with data which are contained in existing R libraries. Depending on the package, when we load its library using the function <code>library()</code> either R will also import all of the package’s data sets to the global environment or it will allow you to access these data sets with the function <code>data()</code>.</p>
 <p>We can also use the function <code>data()</code> to inspect the entire list of data sets included in a package. Let’s look at the <code>ISLR2</code> package to start. If you haven’t already done so, install the package using <code>install.packages("ISLR2")</code>.</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="working-with-data-in-r.html#cb302-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;ISLR2&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:MASS&#39;:
-## 
-##     Boston</code></pre>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="working-with-data-in-r.html#cb305-1" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;ISLR2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="working-with-data-in-r.html#cb302-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb302-2"><a href="working-with-data-in-r.html#cb302-2" tabindex="-1"></a></span>
+<span id="cb302-3"><a href="working-with-data-in-r.html#cb302-3" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;ISLR2&quot;</span>)</span></code></pre></div>
 <p>This should bring up a new tab called <code>R data sets</code> which includes the list of data sets included in the <code>ISLR2</code> package. Since <code>ISLR2</code> automatically loads its data sets to the environment (so-called <em>lazy loading</em>) along with the library, you should be able to access these. For example</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="working-with-data-in-r.html#cb306-1" tabindex="-1"></a><span class="fu">str</span>(Auto)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="working-with-data-in-r.html#cb303-1" tabindex="-1"></a><span class="fu">str</span>(Auto)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    392 obs. of  9 variables:
 ##  $ mpg         : num  18 15 18 16 17 15 14 14 14 15 ...
 ##  $ cylinders   : int  8 8 8 8 8 8 8 8 8 8 ...
@@ -588,7 +584,7 @@ like colon separated values, you can setup <code>read.table(, sep = ":")</code> 
 ##  $ weight      : int  3504 3693 3436 3433 3449 4341 4354 4312 4425 3850 ...
 ##  $ acceleration: num  12 11.5 11 12 10.5 10 9 8.5 10 8.5 ...
 ##  $ year        : int  70 70 70 70 70 70 70 70 70 70 ...
-##  $ origin      : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ origin      : Factor w/ 3 levels &quot;American&quot;,&quot;European&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ name        : Factor w/ 304 levels &quot;amc ambassador brougham&quot;,..: 49 36 231 14 161 141 54 223 241 2 ...
 ##  - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int [1:5] 33 127 331 337 355
 ##   ..- attr(*, &quot;names&quot;)= chr [1:5] &quot;33&quot; &quot;127&quot; &quot;331&quot; &quot;337&quot; ...</code></pre>
@@ -619,7 +615,7 @@ time and is often an iterative process.</p>
 <p><strong>The <code>airquality</code> Data Set</strong></p>
 <p>For illustrative purposes we will be working with one of the data sets which is loaded automatically when we start R. The <code>airquality</code> data set includes multiple air quality measurements taken in the Summer (May - September) of 1973 in New York. As always, if you want details on anything you can use the function <code>help(airquality)</code>.</p>
 <p>Let’s begin by inspecting the contents of that data set.</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="working-with-data-in-r.html#cb308-1" tabindex="-1"></a><span class="fu">str</span>(airquality)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="working-with-data-in-r.html#cb305-1" tabindex="-1"></a><span class="fu">str</span>(airquality)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    153 obs. of  6 variables:
 ##  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
 ##  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
@@ -632,15 +628,15 @@ time and is often an iterative process.</p>
 <h3><span class="header-section-number">2.3.1</span> Scatter Plots<a href="working-with-data-in-r.html#scatter-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A scatter plot is a plot of the values of two variables against one another. When we used the function <code>plot()</code> in the previous chapter, even though we primarily used this to visualise the graphs of functions, what was actually happening is that R was plotting pairs of values of the vector of arguments to the function and the function evaluations against one another (either as points, <code>type = "p"</code> or as a line, <code>type = "l"</code>). Since in general we don’t expect two measured (rather than <em>derived</em>) variables in a data set to fit precisely to some functional form using a scatter plot of two measured variables as points is useful for getting a sense of the <em>general trend</em> in the relationship between the variables, or perhaps to see whether or not there is a relationship at all.</p>
 <p>For example, we may expect that there will be a negative relationship between temperature and wind speed since (i) high wind speeds may have a direct cooling effect; and (ii) high pressure systems (low temperatures) produce high wind speeds</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="working-with-data-in-r.html#cb310-1" tabindex="-1"></a><span class="fu">plot</span>(airquality<span class="sc">$</span>Wind, airquality<span class="sc">$</span>Temp,</span>
-<span id="cb310-2"><a href="working-with-data-in-r.html#cb310-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Wind Speed&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Temperature&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="working-with-data-in-r.html#cb307-1" tabindex="-1"></a><span class="fu">plot</span>(airquality<span class="sc">$</span>Wind, airquality<span class="sc">$</span>Temp,</span>
+<span id="cb307-2"><a href="working-with-data-in-r.html#cb307-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Wind Speed&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Temperature&quot;</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-119-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Indeed we can see that the trend is that high temperatures <em>typically</em> coincide with lower wind speeds, but that there is a lot of <em>scatter</em> of the points around this general relationship.</p>
 <p>Although in this case there is a physical law which suggests we may see such a relationship, scatter plots can also simply be used as exploratory tools to investigate whether there may be a relationship between variables or not. If we call <code>plot()</code> on an entire data frame R will produce a <em>matrix of plots</em> showing the scatter plots of all pairs of variables against one another. When the number of variables is only up to about six or seven this can be instructive, but if there is a large number of variables then this will not be very easy to digest.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="working-with-data-in-r.html#cb311-1" tabindex="-1"></a><span class="fu">plot</span>(airquality)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="working-with-data-in-r.html#cb308-1" tabindex="-1"></a><span class="fu">plot</span>(airquality)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-120-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The scatter plots of the <em>continuous</em> variables <code>Ozone</code>, <code>Solar.R</code>, <code>Wind</code> and <code>Temp</code> are quite instructive, and to a lesser extent their plots against <code>Month</code> as well. However, although we should expect some relationship between these measured variables and time, since the day of the month “resets” somewhat arbitrarily at the turn of each month plotting against <code>Day</code> may not have been very useful. We can plot a sub-data frame in the obvious way, by selecting some of its columns</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="working-with-data-in-r.html#cb312-1" tabindex="-1"></a><span class="fu">plot</span>(airquality[,<span class="sc">!</span>(<span class="fu">names</span>(airquality)<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Month&quot;</span>))])</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="working-with-data-in-r.html#cb309-1" tabindex="-1"></a><span class="fu">plot</span>(airquality[,<span class="sc">!</span>(<span class="fu">names</span>(airquality)<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;Month&quot;</span>))])</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-121-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="box-plots" class="section level3 hasAnchor" number="2.3.2">
@@ -649,26 +645,26 @@ time and is often an iterative process.</p>
 <p>A box-plot shows the distribution of values with a “box” illustrating the range between the first and third quartiles along with a line for the median, and “whiskers” reaching to the maximum and minimum values.
 - An exception to this is that if there are values above the value <span class="math inline">\(Q_3 + 1.5(Q_3-Q_1)\)</span>, where <span class="math inline">\(Q_3-Q_1\)</span> is called the “interquartile range” (IQR) then the top “whisker” only extends to the largest value below this threshold and all points above it are shown individually. The same applies to the values below <span class="math inline">\(Q_1 - 1.5(Q_3-Q_1)\)</span>.</p>
 <p>For example the boxplot of <code>Ozone</code> shows that there are two values above the threshold <span class="math inline">\(Q_3 + 1.5 IQR\)</span>, but no such “outliers” in the lower values.</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="working-with-data-in-r.html#cb313-1" tabindex="-1"></a><span class="fu">boxplot</span>(airquality<span class="sc">$</span>Ozone)</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="working-with-data-in-r.html#cb310-1" tabindex="-1"></a><span class="fu">boxplot</span>(airquality<span class="sc">$</span>Ozone)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-122-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Boxplots are extremely useful for getting a sense of the symmetry/asymmetry of the distribution. If the distribution is roughly symmetric we should see the median roughly in the middle of the “box” and the lengths of the whiskers being more or less the same length. The distribution of <code>Ozone</code> is <em>right skewed</em> since the length of the upper half of the “box” is longer than that of the lower half and the upper whisker is longer than the lower whisker (plus there are some fairly extreme values in the <em>upper tail</em>).</p>
 <p>We saw when using scatter plots that the <em>discrete</em> variables <code>Month</code> and <code>Day</code> were less instructive. We can investigate the relationships numeric and categorical variables (where we might reasonably think of <code>Month</code> as a category for this purpose) by comparing the distributions of the numeric variable within different levels/values of the category. We can achieve this using box-plots by calling</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="working-with-data-in-r.html#cb314-1" tabindex="-1"></a><span class="fu">boxplot</span>(Ozone<span class="sc">~</span>Month, <span class="at">data =</span> airquality)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="working-with-data-in-r.html#cb311-1" tabindex="-1"></a><span class="fu">boxplot</span>(Ozone<span class="sc">~</span>Month, <span class="at">data =</span> airquality)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-123-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The argument <code>Ozone~Month</code> is a <code>formula</code> which tells R we want to know “how does <code>Ozone</code> relate to <code>Month</code>?”. We will use formulas a lot in this module when we start to fit predictive models. We can clearly see above that the distribution of <code>Ozone</code> varies a lot with the changing months. Also, since the months are ordered this gives us a sense of change over time, with <code>Ozone</code> peaking in July and Aurgust (Months 7 and 8).</p>
 </div>
 <div id="histograms" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Histograms<a href="working-with-data-in-r.html#histograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Histograms provide a far more detailed representation of the distribution of a numeric variable. How they work is by breaking up the interval/range of values of the variable into equal width <em>bins</em> and then showing the proportions of the observations which fall into each of these bins.</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="working-with-data-in-r.html#cb315-1" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="working-with-data-in-r.html#cb312-1" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-124-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Setting <code>freq = FALSE</code> tells R we want to see the <em>proportion</em> of observations in each bin and not the total, however in some cases we may wish to see the total and can simply omit this argument since its default is to show the totals.</p>
 <p>It should be clear that the shape of the histogram will depend on the number of bins being used. Although the general shape will be similar for any appropriate number of bins, the more bins we include the more potential for the histogram for capturing detail in the distribution. However, using a large number of bins increases the variability in the proportions. By default <code>hist()</code> will use what is known as Sturge’s rule to compute an appropriate number of bins, but we can also vary this manually by providing <code>breaks = number_of_bins</code></p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="working-with-data-in-r.html#cb316-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb316-2"><a href="working-with-data-in-r.html#cb316-2" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">4</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb316-3"><a href="working-with-data-in-r.html#cb316-3" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">7</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb316-4"><a href="working-with-data-in-r.html#cb316-4" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">12</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb316-5"><a href="working-with-data-in-r.html#cb316-5" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">25</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="working-with-data-in-r.html#cb313-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb313-2"><a href="working-with-data-in-r.html#cb313-2" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">4</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb313-3"><a href="working-with-data-in-r.html#cb313-3" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">7</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb313-4"><a href="working-with-data-in-r.html#cb313-4" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">12</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb313-5"><a href="working-with-data-in-r.html#cb313-5" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Ozone, <span class="at">breaks =</span> <span class="dv">25</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-125-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -681,15 +677,13 @@ type of data it contains (strings vs numbers) can differ from the
 other columns. Accessing data can be done using both the dollar
 syntax and the square-bracket syntax:</li>
 </ul>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="working-with-data-in-r.html#cb317-1" tabindex="-1"></a>planets<span class="sc">$</span>name</span></code></pre></div>
-<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot; 
-## [8] &quot;Neptune&quot;</code></pre>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="working-with-data-in-r.html#cb319-1" tabindex="-1"></a>planets<span class="sc">$</span>name[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="working-with-data-in-r.html#cb314-1" tabindex="-1"></a>planets<span class="sc">$</span>name</span></code></pre></div>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot;  &quot;Neptune&quot;</code></pre>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="working-with-data-in-r.html#cb316-1" tabindex="-1"></a>planets<span class="sc">$</span>name[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;</code></pre>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="working-with-data-in-r.html#cb321-1" tabindex="-1"></a>planets[, <span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot; 
-## [8] &quot;Neptune&quot;</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="working-with-data-in-r.html#cb323-1" tabindex="-1"></a>planets[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="working-with-data-in-r.html#cb318-1" tabindex="-1"></a>planets[, <span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;   &quot;Earth&quot;   &quot;Mars&quot;    &quot;Jupiter&quot; &quot;Saturn&quot;  &quot;Uranus&quot;  &quot;Neptune&quot;</code></pre>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="working-with-data-in-r.html#cb320-1" tabindex="-1"></a>planets[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Mercury&quot; &quot;Venus&quot;</code></pre>
 <ul>
 <li><p>To export data use either the <code>write.table()</code> or <code>write.csv()</code>
@@ -704,13 +698,13 @@ menu in RStudio that allows you to do the same thing.</p></li>
 <li><p>Working directories are good, as they allow you to use relative
 paths, rather than absolute ones.</p></li>
 </ul>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="working-with-data-in-r.html#cb325-1" tabindex="-1"></a><span class="co"># relative file names</span></span>
-<span id="cb325-2"><a href="working-with-data-in-r.html#cb325-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;H:/Awesome R Data/&quot;</span>)</span>
-<span id="cb325-3"><a href="working-with-data-in-r.html#cb325-3" tabindex="-1"></a><span class="fu">write.table</span>(planets, <span class="at">file =</span> <span class="st">&quot;planet.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb325-4"><a href="working-with-data-in-r.html#cb325-4" tabindex="-1"></a></span>
-<span id="cb325-5"><a href="working-with-data-in-r.html#cb325-5" tabindex="-1"></a><span class="co"># absolute file names</span></span>
-<span id="cb325-6"><a href="working-with-data-in-r.html#cb325-6" tabindex="-1"></a><span class="fu">write.table</span>(planets, <span class="at">file =</span> <span class="st">&quot;H:/Awesome R Data/planet.csv&quot;</span>,</span>
-<span id="cb325-7"><a href="working-with-data-in-r.html#cb325-7" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="working-with-data-in-r.html#cb322-1" tabindex="-1"></a><span class="co"># relative file names</span></span>
+<span id="cb322-2"><a href="working-with-data-in-r.html#cb322-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;H:/Awesome R Data/&quot;</span>)</span>
+<span id="cb322-3"><a href="working-with-data-in-r.html#cb322-3" tabindex="-1"></a><span class="fu">write.table</span>(planets, <span class="at">file =</span> <span class="st">&quot;planet.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb322-4"><a href="working-with-data-in-r.html#cb322-4" tabindex="-1"></a></span>
+<span id="cb322-5"><a href="working-with-data-in-r.html#cb322-5" tabindex="-1"></a><span class="co"># absolute file names</span></span>
+<span id="cb322-6"><a href="working-with-data-in-r.html#cb322-6" tabindex="-1"></a><span class="fu">write.table</span>(planets, <span class="at">file =</span> <span class="st">&quot;H:/Awesome R Data/planet.csv&quot;</span>,</span>
+<span id="cb322-7"><a href="working-with-data-in-r.html#cb322-7" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <ul>
 <li><p>It can be a good idea to set your working directory at the top of
 your script.</p></li>

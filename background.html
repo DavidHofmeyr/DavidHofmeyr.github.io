@@ -200,14 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-methods"><i class="fa fa-check"></i><b>8.2</b> Support Vector Methods</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#summary-8"><i class="fa fa-check"></i><b>8.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
 <li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
 <li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
-<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-9"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="nonlinearity2.html"><a href="nonlinearity2.html#exercises-9"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
@@ -215,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
 <li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
 <li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
-<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-9"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-10"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
 <li class="chapter" data-level="10.5" data-path="ensemble-models.html"><a href="ensemble-models.html#exercises-10"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 </ul>
@@ -413,16 +414,16 @@ E[X + Y] = E[X] + E[Y].
 <ul>
 <li>the probability that exactly 7 bulbs germinate</li>
 </ul>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="background.html#cb327-1" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">7</span>, <span class="dv">20</span>, <span class="fl">0.32</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="background.html#cb324-1" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">7</span>, <span class="dv">20</span>, <span class="fl">0.32</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1770433</code></pre>
 <ul>
 <li>the probability that at most 5 bulbs germinate</li>
 </ul>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="background.html#cb329-1" tabindex="-1"></a><span class="do">### Fill in the gaps to complete</span></span>
-<span id="cb329-2"><a href="background.html#cb329-2" tabindex="-1"></a><span class="fu">pbinom</span>(, , )</span>
-<span id="cb329-3"><a href="background.html#cb329-3" tabindex="-1"></a></span>
-<span id="cb329-4"><a href="background.html#cb329-4" tabindex="-1"></a><span class="do">### How could you get the same answer by combining</span></span>
-<span id="cb329-5"><a href="background.html#cb329-5" tabindex="-1"></a><span class="do">### the dbinom() and sum() functions?</span></span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="background.html#cb326-1" tabindex="-1"></a><span class="do">### Fill in the gaps to complete</span></span>
+<span id="cb326-2"><a href="background.html#cb326-2" tabindex="-1"></a><span class="fu">pbinom</span>(, , )</span>
+<span id="cb326-3"><a href="background.html#cb326-3" tabindex="-1"></a></span>
+<span id="cb326-4"><a href="background.html#cb326-4" tabindex="-1"></a><span class="do">### How could you get the same answer by combining</span></span>
+<span id="cb326-5"><a href="background.html#cb326-5" tabindex="-1"></a><span class="do">### the dbinom() and sum() functions?</span></span></code></pre></div>
 </div>
 <div id="the-poisson-distribution" class="section level4 hasAnchor" number="3.2.1.4">
 <h4><span class="header-section-number">3.2.1.4</span> The Poisson Distribution<a href="background.html#the-poisson-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -446,13 +447,13 @@ p_X(x) = e^{-\lambda}\frac{\lambda^x}{x!}; x = 0, 1, 2, ...
 <ul>
 <li>the probability that exactly five customers arrive between 08h30 and 09h00: The <span class="math inline">\(\lambda\)</span> parameter is 15 × 0.5 = 7.5, and again we use the prefix “d” for the pmf, i.e. the function <code>dpois(x, lambda)</code></li>
 </ul>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="background.html#cb330-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">5</span>, <span class="fl">7.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="background.html#cb327-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">5</span>, <span class="fl">7.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1093746</code></pre>
 <ul>
 <li>the probability that at least forty customers arrive between 08h30 and 11h00: Note that <span class="math inline">\(P(X \geq x) = 1-P(X &lt; x)\)</span> (recall the rules for probabability)</li>
 </ul>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="background.html#cb332-1" tabindex="-1"></a><span class="do">### Fill in to complete</span></span>
-<span id="cb332-2"><a href="background.html#cb332-2" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">ppois</span>(, )</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="background.html#cb329-1" tabindex="-1"></a><span class="do">### Fill in to complete</span></span>
+<span id="cb329-2"><a href="background.html#cb329-2" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">ppois</span>(, )</span></code></pre></div>
 </div>
 </div>
 <div id="probability-distributions-continuous" class="section level3 hasAnchor" number="3.2.2">
@@ -524,12 +525,12 @@ P(\mu - 3\sigma \leq X \leq \mu + 3\sigma) &amp;= 0.9973.
 <ul>
 <li>lower than <span class="math inline">\(0^\circ\)</span>C? This can be obtained directly from the cdf,</li>
 </ul>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="background.html#cb333-1" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">14</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="background.html#cb330-1" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">14</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 0.08075666</code></pre>
 <ul>
 <li>higher than <span class="math inline">\(20^\circ\)</span>C? For this we are looking for the <em>complement</em> of <span class="math inline">\(X \leq 20\)</span></li>
 </ul>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="background.html#cb335-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="dv">20</span>, <span class="dv">14</span>, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="background.html#cb332-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="dv">20</span>, <span class="dv">14</span>, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2742531</code></pre>
 <ul>
 <li><p>Note that when dealing with discrete random variables which take on only integer values we have for integer <span class="math inline">\(x\)</span> that <span class="math inline">\(P(X \leq x) = 1-P(X&gt;x) = 1 - P(X \geq x+1)\)</span> since the event <span class="math inline">\(X &gt; x\)</span> includes only values for <span class="math inline">\(X\)</span> which are at least <span class="math inline">\(x+1\)</span></p></li>
@@ -711,79 +712,79 @@ P(l &lt; \theta - \hat \theta &lt; u) = 0.95.
 <li>Let’s begin by seeing the central limit theorem in action. We will simulate multiple samples from a standard <em>exponential distribution</em> (with density function <span class="math inline">\(\exp(-x)\)</span>) and investigate the distribution of the sample means, after appropriate standardisation. Just as the prefices <code>d</code> and <code>p</code> were used to evaluate the pmf/pdf and cdf respectively, the prefix <code>r</code> is used to denote functions used for simulating/generating random realisations from a distribution. For example <code>rexp(n)</code> will generate a sample of size <span class="math inline">\(n\)</span> from a standard exponential distribution.</li>
 </ol>
 <p>Now, the mean and variance of the standard exponential are both one, and so we should see the distribution of all the <span class="math inline">\(\sqrt{n}(\bar x - 1)\)</span> values looking close to a standard normal, provided the sample size is large enough.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="background.html#cb337-1" tabindex="-1"></a><span class="do">### We will use three sample sizes, 10 (too small for the CLT), 30 (the apparent border of what is</span></span>
-<span id="cb337-2"><a href="background.html#cb337-2" tabindex="-1"></a><span class="do">### large enough although the exponential distribution is quite heavily skewed) and 100 </span></span>
-<span id="cb337-3"><a href="background.html#cb337-3" tabindex="-1"></a><span class="do">### (should be large enough even for a very skew distribution).</span></span>
-<span id="cb337-4"><a href="background.html#cb337-4" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb337-5"><a href="background.html#cb337-5" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb337-6"><a href="background.html#cb337-6" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb337-7"><a href="background.html#cb337-7" tabindex="-1"></a></span>
-<span id="cb337-8"><a href="background.html#cb337-8" tabindex="-1"></a><span class="do">### To compute the sample means efficiently we can store the different samples in the rows of a matrix</span></span>
-<span id="cb337-9"><a href="background.html#cb337-9" tabindex="-1"></a><span class="do">### and then use the function rowMeans. Let&#39;s generate nsamp = 10000 samples of each of the different sample</span></span>
-<span id="cb337-10"><a href="background.html#cb337-10" tabindex="-1"></a><span class="do">### sizes and calculate the means</span></span>
-<span id="cb337-11"><a href="background.html#cb337-11" tabindex="-1"></a>nsamp <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb337-12"><a href="background.html#cb337-12" tabindex="-1"></a>xbar_n1 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n1), nsamp, n1))</span>
-<span id="cb337-13"><a href="background.html#cb337-13" tabindex="-1"></a>xbar_n2 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n2), nsamp, n2))</span>
-<span id="cb337-14"><a href="background.html#cb337-14" tabindex="-1"></a>xbar_n3 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n3), nsamp, n3))</span>
-<span id="cb337-15"><a href="background.html#cb337-15" tabindex="-1"></a></span>
-<span id="cb337-16"><a href="background.html#cb337-16" tabindex="-1"></a><span class="do">### We can use a histogram to estimate the densities of the sample means (after standardisation).</span></span>
-<span id="cb337-17"><a href="background.html#cb337-17" tabindex="-1"></a><span class="do">### Histograms chop up the interval of the sample into equal width &quot;bins&quot; and then present the</span></span>
-<span id="cb337-18"><a href="background.html#cb337-18" tabindex="-1"></a><span class="do">### density as proportional to the number of points falling in each bin</span></span>
-<span id="cb337-19"><a href="background.html#cb337-19" tabindex="-1"></a><span class="do">### We can also overlay the standard normal density to see how good the approximation is</span></span>
-<span id="cb337-20"><a href="background.html#cb337-20" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb337-21"><a href="background.html#cb337-21" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n1)<span class="sc">*</span>(xbar_n1<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 10&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb337-22"><a href="background.html#cb337-22" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span>
-<span id="cb337-23"><a href="background.html#cb337-23" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n2)<span class="sc">*</span>(xbar_n2<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 30&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb337-24"><a href="background.html#cb337-24" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span>
-<span id="cb337-25"><a href="background.html#cb337-25" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n3)<span class="sc">*</span>(xbar_n3<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 100&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb337-26"><a href="background.html#cb337-26" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="background.html#cb334-1" tabindex="-1"></a><span class="do">### We will use three sample sizes, 10 (too small for the CLT), 30 (the apparent border of what is</span></span>
+<span id="cb334-2"><a href="background.html#cb334-2" tabindex="-1"></a><span class="do">### large enough although the exponential distribution is quite heavily skewed) and 100 </span></span>
+<span id="cb334-3"><a href="background.html#cb334-3" tabindex="-1"></a><span class="do">### (should be large enough even for a very skew distribution).</span></span>
+<span id="cb334-4"><a href="background.html#cb334-4" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb334-5"><a href="background.html#cb334-5" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb334-6"><a href="background.html#cb334-6" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb334-7"><a href="background.html#cb334-7" tabindex="-1"></a></span>
+<span id="cb334-8"><a href="background.html#cb334-8" tabindex="-1"></a><span class="do">### To compute the sample means efficiently we can store the different samples in the rows of a matrix</span></span>
+<span id="cb334-9"><a href="background.html#cb334-9" tabindex="-1"></a><span class="do">### and then use the function rowMeans. Let&#39;s generate nsamp = 10000 samples of each of the different sample</span></span>
+<span id="cb334-10"><a href="background.html#cb334-10" tabindex="-1"></a><span class="do">### sizes and calculate the means</span></span>
+<span id="cb334-11"><a href="background.html#cb334-11" tabindex="-1"></a>nsamp <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb334-12"><a href="background.html#cb334-12" tabindex="-1"></a>xbar_n1 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n1), nsamp, n1))</span>
+<span id="cb334-13"><a href="background.html#cb334-13" tabindex="-1"></a>xbar_n2 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n2), nsamp, n2))</span>
+<span id="cb334-14"><a href="background.html#cb334-14" tabindex="-1"></a>xbar_n3 <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(<span class="fu">matrix</span>(<span class="fu">rexp</span>(nsamp<span class="sc">*</span>n3), nsamp, n3))</span>
+<span id="cb334-15"><a href="background.html#cb334-15" tabindex="-1"></a></span>
+<span id="cb334-16"><a href="background.html#cb334-16" tabindex="-1"></a><span class="do">### We can use a histogram to estimate the densities of the sample means (after standardisation).</span></span>
+<span id="cb334-17"><a href="background.html#cb334-17" tabindex="-1"></a><span class="do">### Histograms chop up the interval of the sample into equal width &quot;bins&quot; and then present the</span></span>
+<span id="cb334-18"><a href="background.html#cb334-18" tabindex="-1"></a><span class="do">### density as proportional to the number of points falling in each bin</span></span>
+<span id="cb334-19"><a href="background.html#cb334-19" tabindex="-1"></a><span class="do">### We can also overlay the standard normal density to see how good the approximation is</span></span>
+<span id="cb334-20"><a href="background.html#cb334-20" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb334-21"><a href="background.html#cb334-21" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n1)<span class="sc">*</span>(xbar_n1<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 10&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb334-22"><a href="background.html#cb334-22" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb334-23"><a href="background.html#cb334-23" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n2)<span class="sc">*</span>(xbar_n2<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 30&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb334-24"><a href="background.html#cb334-24" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb334-25"><a href="background.html#cb334-25" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">sqrt</span>(n3)<span class="sc">*</span>(xbar_n3<span class="dv">-1</span>), <span class="at">main =</span> <span class="st">&quot;Sample size = 100&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb334-26"><a href="background.html#cb334-26" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>), <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">1000</span>)), <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-134-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The histogram for <span class="math inline">\(n = 10\)</span> shows very clear skewness, and the approximation of the normal density is not good. For <span class="math inline">\(n=30\)</span> the approximation is better, but the skewness is still evident especially in the tails. When <span class="math inline">\(n = 100\)</span> the approximation becomes much better.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>The skewness of a random variable <span class="math inline">\(X\)</span> is equal to <span class="math inline">\(E[(X - \mu_X)^3]/\sigma_X^3\)</span> and a large positive value indicates the <em>tail</em> of the distribution on the right is longer than that on the left, and a large negative value indicates the reverse. If <span class="math inline">\(X\)</span> has what is known as a <em>Gamma distribution</em>, with shape parameter <span class="math inline">\(\alpha\)</span> and scale parameter <span class="math inline">\(\sigma\)</span> then its skewness is <span class="math inline">\(2/\sqrt{\alpha}\)</span>. The distribution of sample skewness is close to normal for large <span class="math inline">\(n\)</span>, but nonetheless we can use the bootstrap in order to obtain an estimate for a <span class="math inline">\(95\%\)</span> confidence interval. Below we simulate a sample of size <span class="math inline">\(n=50\)</span> from a Gamma<span class="math inline">\((3, 1)\)</span> distribution and then estimate a confidence interval from <span class="math inline">\(B = 1000\)</span> bootstrap samples.</li>
 </ol>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="background.html#cb338-1" tabindex="-1"></a><span class="do">### Start with settings of the sample size, and shape and scale parameters</span></span>
-<span id="cb338-2"><a href="background.html#cb338-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb338-3"><a href="background.html#cb338-3" tabindex="-1"></a>shape <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb338-4"><a href="background.html#cb338-4" tabindex="-1"></a>scale <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb338-5"><a href="background.html#cb338-5" tabindex="-1"></a></span>
-<span id="cb338-6"><a href="background.html#cb338-6" tabindex="-1"></a><span class="do">### Generate a sample from the Gamma(shape, scale) distribution</span></span>
-<span id="cb338-7"><a href="background.html#cb338-7" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(n, <span class="at">shape =</span> shape, <span class="at">scale =</span> scale)</span>
-<span id="cb338-8"><a href="background.html#cb338-8" tabindex="-1"></a></span>
-<span id="cb338-9"><a href="background.html#cb338-9" tabindex="-1"></a><span class="do">### Define a function to calculate the sample skewness</span></span>
-<span id="cb338-10"><a href="background.html#cb338-10" tabindex="-1"></a>skew <span class="ot">&lt;-</span> <span class="cf">function</span>(z) <span class="fu">mean</span>((z<span class="sc">-</span><span class="fu">mean</span>(z))<span class="sc">^</span><span class="dv">3</span>)<span class="sc">/</span><span class="fu">mean</span>((z<span class="sc">-</span><span class="fu">mean</span>(z))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="fl">1.5</span></span>
-<span id="cb338-11"><a href="background.html#cb338-11" tabindex="-1"></a></span>
-<span id="cb338-12"><a href="background.html#cb338-12" tabindex="-1"></a><span class="do">### Now we can conduct the bootstrap procedure</span></span>
-<span id="cb338-13"><a href="background.html#cb338-13" tabindex="-1"></a><span class="do">### Set up a vector in which to store the skewness values from the</span></span>
-<span id="cb338-14"><a href="background.html#cb338-14" tabindex="-1"></a><span class="do">### bootstrap samples</span></span>
-<span id="cb338-15"><a href="background.html#cb338-15" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb338-16"><a href="background.html#cb338-16" tabindex="-1"></a>skews_B <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb338-17"><a href="background.html#cb338-17" tabindex="-1"></a></span>
-<span id="cb338-18"><a href="background.html#cb338-18" tabindex="-1"></a><span class="do">### Now loop over b in 1:B</span></span>
-<span id="cb338-19"><a href="background.html#cb338-19" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B){</span>
-<span id="cb338-20"><a href="background.html#cb338-20" tabindex="-1"></a>  <span class="co"># Resample from x with replacement</span></span>
-<span id="cb338-21"><a href="background.html#cb338-21" tabindex="-1"></a>  x_b <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb338-22"><a href="background.html#cb338-22" tabindex="-1"></a>  <span class="co"># Calculate the sample skewness for the bootstrap sample</span></span>
-<span id="cb338-23"><a href="background.html#cb338-23" tabindex="-1"></a>  skews_B[b] <span class="ot">&lt;-</span> <span class="fu">skew</span>(x_b)</span>
-<span id="cb338-24"><a href="background.html#cb338-24" tabindex="-1"></a>}</span>
-<span id="cb338-25"><a href="background.html#cb338-25" tabindex="-1"></a></span>
-<span id="cb338-26"><a href="background.html#cb338-26" tabindex="-1"></a><span class="do">### Compute the 95% confidence interval using the quantile function</span></span>
-<span id="cb338-27"><a href="background.html#cb338-27" tabindex="-1"></a><span class="do">### on the distribution of 2*skew(x) - skews_B</span></span>
-<span id="cb338-28"><a href="background.html#cb338-28" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="background.html#cb335-1" tabindex="-1"></a><span class="do">### Start with settings of the sample size, and shape and scale parameters</span></span>
+<span id="cb335-2"><a href="background.html#cb335-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb335-3"><a href="background.html#cb335-3" tabindex="-1"></a>shape <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb335-4"><a href="background.html#cb335-4" tabindex="-1"></a>scale <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb335-5"><a href="background.html#cb335-5" tabindex="-1"></a></span>
+<span id="cb335-6"><a href="background.html#cb335-6" tabindex="-1"></a><span class="do">### Generate a sample from the Gamma(shape, scale) distribution</span></span>
+<span id="cb335-7"><a href="background.html#cb335-7" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(n, <span class="at">shape =</span> shape, <span class="at">scale =</span> scale)</span>
+<span id="cb335-8"><a href="background.html#cb335-8" tabindex="-1"></a></span>
+<span id="cb335-9"><a href="background.html#cb335-9" tabindex="-1"></a><span class="do">### Define a function to calculate the sample skewness</span></span>
+<span id="cb335-10"><a href="background.html#cb335-10" tabindex="-1"></a>skew <span class="ot">&lt;-</span> <span class="cf">function</span>(z) <span class="fu">mean</span>((z<span class="sc">-</span><span class="fu">mean</span>(z))<span class="sc">^</span><span class="dv">3</span>)<span class="sc">/</span><span class="fu">mean</span>((z<span class="sc">-</span><span class="fu">mean</span>(z))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="fl">1.5</span></span>
+<span id="cb335-11"><a href="background.html#cb335-11" tabindex="-1"></a></span>
+<span id="cb335-12"><a href="background.html#cb335-12" tabindex="-1"></a><span class="do">### Now we can conduct the bootstrap procedure</span></span>
+<span id="cb335-13"><a href="background.html#cb335-13" tabindex="-1"></a><span class="do">### Set up a vector in which to store the skewness values from the</span></span>
+<span id="cb335-14"><a href="background.html#cb335-14" tabindex="-1"></a><span class="do">### bootstrap samples</span></span>
+<span id="cb335-15"><a href="background.html#cb335-15" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb335-16"><a href="background.html#cb335-16" tabindex="-1"></a>skews_B <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb335-17"><a href="background.html#cb335-17" tabindex="-1"></a></span>
+<span id="cb335-18"><a href="background.html#cb335-18" tabindex="-1"></a><span class="do">### Now loop over b in 1:B</span></span>
+<span id="cb335-19"><a href="background.html#cb335-19" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B){</span>
+<span id="cb335-20"><a href="background.html#cb335-20" tabindex="-1"></a>  <span class="co"># Resample from x with replacement</span></span>
+<span id="cb335-21"><a href="background.html#cb335-21" tabindex="-1"></a>  x_b <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb335-22"><a href="background.html#cb335-22" tabindex="-1"></a>  <span class="co"># Calculate the sample skewness for the bootstrap sample</span></span>
+<span id="cb335-23"><a href="background.html#cb335-23" tabindex="-1"></a>  skews_B[b] <span class="ot">&lt;-</span> <span class="fu">skew</span>(x_b)</span>
+<span id="cb335-24"><a href="background.html#cb335-24" tabindex="-1"></a>}</span>
+<span id="cb335-25"><a href="background.html#cb335-25" tabindex="-1"></a></span>
+<span id="cb335-26"><a href="background.html#cb335-26" tabindex="-1"></a><span class="do">### Compute the 95% confidence interval using the quantile function</span></span>
+<span id="cb335-27"><a href="background.html#cb335-27" tabindex="-1"></a><span class="do">### on the distribution of 2*skew(x) - skews_B</span></span>
+<span id="cb335-28"><a href="background.html#cb335-28" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## 0.8630929 2.6132129</code></pre>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="background.html#cb340-1" tabindex="-1"></a><span class="do">### We can also visualise the estimated distribution whose quantiles define</span></span>
-<span id="cb340-2"><a href="background.html#cb340-2" tabindex="-1"></a><span class="do">### confidence interval</span></span>
-<span id="cb340-3"><a href="background.html#cb340-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="at">main =</span> <span class="st">&quot;Bootstrap Distribution&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb340-4"><a href="background.html#cb340-4" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="dv">2</span><span class="sc">~</span><span class="fu">hat</span>(theta)[obs]<span class="sc">~-</span><span class="er">~</span><span class="fu">hat</span>(theta)<span class="sc">^</span>{<span class="st">&quot;*&quot;</span>}))</span>
-<span id="cb340-5"><a href="background.html#cb340-5" tabindex="-1"></a></span>
-<span id="cb340-6"><a href="background.html#cb340-6" tabindex="-1"></a><span class="do">### We can also add vertical lines to show the estimated value and the</span></span>
-<span id="cb340-7"><a href="background.html#cb340-7" tabindex="-1"></a><span class="do">### boundaries of the confidence interval</span></span>
-<span id="cb340-8"><a href="background.html#cb340-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">skew</span>(x), <span class="at">col =</span> <span class="dv">2</span>) <span class="co"># estimated value</span></span>
-<span id="cb340-9"><a href="background.html#cb340-9" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="co"># confidence interval</span></span>
-<span id="cb340-10"><a href="background.html#cb340-10" tabindex="-1"></a></span>
-<span id="cb340-11"><a href="background.html#cb340-11" tabindex="-1"></a><span class="do">### We can also add the true skewness</span></span>
-<span id="cb340-12"><a href="background.html#cb340-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">2</span><span class="sc">/</span><span class="fu">sqrt</span>(shape), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+## 0.4533211 1.5877722</code></pre>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="background.html#cb337-1" tabindex="-1"></a><span class="do">### We can also visualise the estimated distribution whose quantiles define</span></span>
+<span id="cb337-2"><a href="background.html#cb337-2" tabindex="-1"></a><span class="do">### confidence interval</span></span>
+<span id="cb337-3"><a href="background.html#cb337-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="at">main =</span> <span class="st">&quot;Bootstrap Distribution&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb337-4"><a href="background.html#cb337-4" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="dv">2</span><span class="sc">~</span><span class="fu">hat</span>(theta)[obs]<span class="sc">~-</span><span class="er">~</span><span class="fu">hat</span>(theta)<span class="sc">^</span>{<span class="st">&quot;*&quot;</span>}))</span>
+<span id="cb337-5"><a href="background.html#cb337-5" tabindex="-1"></a></span>
+<span id="cb337-6"><a href="background.html#cb337-6" tabindex="-1"></a><span class="do">### We can also add vertical lines to show the estimated value and the</span></span>
+<span id="cb337-7"><a href="background.html#cb337-7" tabindex="-1"></a><span class="do">### boundaries of the confidence interval</span></span>
+<span id="cb337-8"><a href="background.html#cb337-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">skew</span>(x), <span class="at">col =</span> <span class="dv">2</span>) <span class="co"># estimated value</span></span>
+<span id="cb337-9"><a href="background.html#cb337-9" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">skew</span>(x)<span class="sc">-</span>skews_B, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="co"># confidence interval</span></span>
+<span id="cb337-10"><a href="background.html#cb337-10" tabindex="-1"></a></span>
+<span id="cb337-11"><a href="background.html#cb337-11" tabindex="-1"></a><span class="do">### We can also add the true skewness</span></span>
+<span id="cb337-12"><a href="background.html#cb337-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">2</span><span class="sc">/</span><span class="fu">sqrt</span>(shape), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-135-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -843,38 +844,38 @@ E[X] = (E[X_1], E[X_2], ..., E[X_p])^\top = (\mu_{X_1}, ..., \mu_{X_p})^\top = \
 <h3><span class="header-section-number">3.5.3</span> Measures of Dependence<a href="background.html#measures-of-dependence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Although the sign of the covariance gives an indication that there may be a positive/negative relationship between two random variables, it does not on its own give a sense of how strong the relationship is. The reason for this is that it depends on the <em>scale</em> of the random variables.</p>
 <p>In the following <code>x</code> and <code>y</code> are very weakly related to and have a large covariance, whereas <code>w</code> and <code>z</code> are very strongly related to one another but have a comparatively minuscule covariance.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="background.html#cb341-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb341-2"><a href="background.html#cb341-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">100</span>)</span>
-<span id="cb341-3"><a href="background.html#cb341-3" tabindex="-1"></a></span>
-<span id="cb341-4"><a href="background.html#cb341-4" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="fl">0.1</span>)</span>
-<span id="cb341-5"><a href="background.html#cb341-5" tabindex="-1"></a>z <span class="ot">&lt;-</span> w <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="fl">0.05</span>)</span>
-<span id="cb341-6"><a href="background.html#cb341-6" tabindex="-1"></a></span>
-<span id="cb341-7"><a href="background.html#cb341-7" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb341-8"><a href="background.html#cb341-8" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Covariance = &quot;</span>, <span class="fu">round</span>(<span class="fu">cov</span>(x, y), <span class="dv">4</span>)))</span>
-<span id="cb341-9"><a href="background.html#cb341-9" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Covariance = &quot;</span>, <span class="fu">round</span>(<span class="fu">cov</span>(w, z), <span class="dv">4</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="background.html#cb338-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb338-2"><a href="background.html#cb338-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">100</span>)</span>
+<span id="cb338-3"><a href="background.html#cb338-3" tabindex="-1"></a></span>
+<span id="cb338-4"><a href="background.html#cb338-4" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="fl">0.1</span>)</span>
+<span id="cb338-5"><a href="background.html#cb338-5" tabindex="-1"></a>z <span class="ot">&lt;-</span> w <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="fl">0.05</span>)</span>
+<span id="cb338-6"><a href="background.html#cb338-6" tabindex="-1"></a></span>
+<span id="cb338-7"><a href="background.html#cb338-7" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb338-8"><a href="background.html#cb338-8" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Covariance = &quot;</span>, <span class="fu">round</span>(<span class="fu">cov</span>(x, y), <span class="dv">4</span>)))</span>
+<span id="cb338-9"><a href="background.html#cb338-9" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Covariance = &quot;</span>, <span class="fu">round</span>(<span class="fu">cov</span>(w, z), <span class="dv">4</span>)))</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-136-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Correlation</strong></p>
 <p>The <em>correlation</em> between two random variables is a direct standardisation of the covariance to account for their scale. Specifically the correlation between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by <span class="math inline">\(\rho_{X, Y} = \frac{Cov(X, Y)}{\sigma_X\sigma_Y}\)</span>. Correlation lies between -1 and 1 with values below -0.9 or above 0.9 indicating a very strong <em>linear</em> relationships between the two variables, and anything between about -0.2 and 0.2 suggesting no substantial (linear) relationship is present. Intermediate values indicate some relationship and the relationship gets stronger the closer to -1 or 1 the correlation gets.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="background.html#cb342-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb342-2"><a href="background.html#cb342-2" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x, y), <span class="dv">4</span>)))</span>
-<span id="cb342-3"><a href="background.html#cb342-3" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(w, z), <span class="dv">4</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="background.html#cb339-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb339-2"><a href="background.html#cb339-2" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x, y), <span class="dv">4</span>)))</span>
+<span id="cb339-3"><a href="background.html#cb339-3" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(w, z), <span class="dv">4</span>)))</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-137-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>(Normalised) Mutual Information</strong></p>
 <p>Correlation captures linear dependence between random variables extremely well. However, it is possible for two variables to be extremely highly dependent on one another and yet have a correlation of zero.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="background.html#cb343-1" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb343-2"><a href="background.html#cb343-2" tabindex="-1"></a>v <span class="ot">&lt;-</span> u<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> .<span class="dv">1</span>)</span>
-<span id="cb343-3"><a href="background.html#cb343-3" tabindex="-1"></a><span class="fu">plot</span>(u, v, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(u, v), <span class="dv">4</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="background.html#cb340-1" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb340-2"><a href="background.html#cb340-2" tabindex="-1"></a>v <span class="ot">&lt;-</span> u<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">sd =</span> .<span class="dv">1</span>)</span>
+<span id="cb340-3"><a href="background.html#cb340-3" tabindex="-1"></a><span class="fu">plot</span>(u, v, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Correlation = &quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(u, v), <span class="dv">4</span>)))</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-138-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in the above is zero at a population level, but because of the randomness in the samples <code>x</code> and <code>y</code> the sample correlation is slightly off zero.</p>
 <p>The <em>mutual information</em> (MI) quantifies the amount of shared “information” is in two random variables. We will not go into information theory in any explicit form, but rather introduce the mutual information only for illustrative purposes. Just like covariance mutual information depends on the scale of the random variables, and various normalised versions of mutual information have been proposed. We will simply use a normalisation which first standardises each of the variables by its standard deviation, i.e. <span class="math inline">\(MI(X/\sigma_X, Y/\sigma_Y)\)</span>. Let’s use the <code>mutinfo</code> function in the package <code>FNN</code> to compute mutual information:</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="background.html#cb344-1" tabindex="-1"></a><span class="do">### Start by loading the library</span></span>
-<span id="cb344-2"><a href="background.html#cb344-2" tabindex="-1"></a><span class="fu">library</span>(FNN)</span>
-<span id="cb344-3"><a href="background.html#cb344-3" tabindex="-1"></a></span>
-<span id="cb344-4"><a href="background.html#cb344-4" tabindex="-1"></a><span class="do">### Now let&#39;s look at all three pairs we generated before</span></span>
-<span id="cb344-5"><a href="background.html#cb344-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb344-6"><a href="background.html#cb344-6" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(x<span class="sc">/</span><span class="fu">sd</span>(x), y<span class="sc">/</span><span class="fu">sd</span>(y)), <span class="dv">4</span>)))</span>
-<span id="cb344-7"><a href="background.html#cb344-7" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(w<span class="sc">/</span><span class="fu">sd</span>(w), z<span class="sc">/</span><span class="fu">sd</span>(z)), <span class="dv">4</span>)))</span>
-<span id="cb344-8"><a href="background.html#cb344-8" tabindex="-1"></a><span class="fu">plot</span>(u, v, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(u<span class="sc">/</span><span class="fu">sd</span>(u), v<span class="sc">/</span><span class="fu">sd</span>(v)), <span class="dv">4</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="background.html#cb341-1" tabindex="-1"></a><span class="do">### Start by loading the library</span></span>
+<span id="cb341-2"><a href="background.html#cb341-2" tabindex="-1"></a><span class="fu">library</span>(FNN)</span>
+<span id="cb341-3"><a href="background.html#cb341-3" tabindex="-1"></a></span>
+<span id="cb341-4"><a href="background.html#cb341-4" tabindex="-1"></a><span class="do">### Now let&#39;s look at all three pairs we generated before</span></span>
+<span id="cb341-5"><a href="background.html#cb341-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb341-6"><a href="background.html#cb341-6" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(x<span class="sc">/</span><span class="fu">sd</span>(x), y<span class="sc">/</span><span class="fu">sd</span>(y)), <span class="dv">4</span>)))</span>
+<span id="cb341-7"><a href="background.html#cb341-7" tabindex="-1"></a><span class="fu">plot</span>(w, z, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(w<span class="sc">/</span><span class="fu">sd</span>(w), z<span class="sc">/</span><span class="fu">sd</span>(z)), <span class="dv">4</span>)))</span>
+<span id="cb341-8"><a href="background.html#cb341-8" tabindex="-1"></a><span class="fu">plot</span>(u, v, <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Normalised MI = &quot;</span>, <span class="fu">round</span>(<span class="fu">mutinfo</span>(u<span class="sc">/</span><span class="fu">sd</span>(u), v<span class="sc">/</span><span class="fu">sd</span>(v)), <span class="dv">4</span>)))</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-139-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Although the (normalised) mutual information is able to capture dependence which is not linear, it cannot describe the nature of the relationship (like positive/negative correlation).</p>
 <p>We can see that the mutual information estimated from <code>x</code> and <code>y</code> is very close to zero and the linearly dependent <code>z</code> and <code>w</code> have a normalised mutual information close to one. The estimated normalised mutual information from <code>u</code> and <code>v</code> is much higher still, even though their correlation is very close to zero.</p>

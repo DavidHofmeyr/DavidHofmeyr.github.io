@@ -200,14 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-methods"><i class="fa fa-check"></i><b>8.2</b> Support Vector Methods</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#summary-8"><i class="fa fa-check"></i><b>8.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
 <li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
 <li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
-<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-9"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="nonlinearity2.html"><a href="nonlinearity2.html#exercises-9"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
@@ -215,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
 <li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
 <li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
-<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-9"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-10"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
 <li class="chapter" data-level="10.5" data-path="ensemble-models.html"><a href="ensemble-models.html#exercises-10"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 </ul>
@@ -338,8 +339,8 @@ easily communicated in the regression context.</p>
 information documenting the distance needed to bring a car to halt (in
 feet) for a variety of different initial speeds (in miles per hour,
 mph).</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="fundamentals1.html#cb347-1" tabindex="-1"></a><span class="fu">data</span>(cars, <span class="at">package =</span> <span class="st">&quot;datasets&quot;</span>)</span>
-<span id="cb347-2"><a href="fundamentals1.html#cb347-2" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="fundamentals1.html#cb344-1" tabindex="-1"></a><span class="fu">data</span>(cars, <span class="at">package =</span> <span class="st">&quot;datasets&quot;</span>)</span>
+<span id="cb344-2"><a href="fundamentals1.html#cb344-2" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-140-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Unsurprisingly the distance needed to stop a car increases with speed.
 Unsurprisingly, also, there is variability in the distances even for the
@@ -354,8 +355,8 @@ these data. A <code>formula</code> object in R has the form <code>y~x1 + x2 + �
 here <code>y</code> is the name of the response variable within the data frame
 argument <code>data</code>, and <code>x1</code> etc. are the names of the covariates we want
 to include in our model. Here we only have a single covariate <code>speed</code>.</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="fundamentals1.html#cb348-1" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span>speed, <span class="at">data =</span> cars)</span>
-<span id="cb348-2"><a href="fundamentals1.html#cb348-2" tabindex="-1"></a>model</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="fundamentals1.html#cb345-1" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span>speed, <span class="at">data =</span> cars)</span>
+<span id="cb345-2"><a href="fundamentals1.html#cb345-2" tabindex="-1"></a>model</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dist ~ speed, data = cars)
@@ -366,8 +367,8 @@ to include in our model. Here we only have a single covariate <code>speed</code>
 <p>Printing the model shows that the line of best fit has an intercept at
 -17.579 and a slope of 3.932. We can add this line to our plot using the
 function <code>abline</code></p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="fundamentals1.html#cb350-1" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
-<span id="cb350-2"><a href="fundamentals1.html#cb350-2" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="fundamentals1.html#cb347-1" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb347-2"><a href="fundamentals1.html#cb347-2" tabindex="-1"></a><span class="fu">abline</span>(model<span class="sc">$</span>coefficients)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-142-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Although the model does a reasonable job capturing the trend of the
 relationship, it has some obvious limitations. For one, it has a
@@ -378,8 +379,8 @@ covariates are equal to zero. In the current example it should be clear
 that if the speed is zero (i.e. the car is not moving) then the distance
 needed to stop is also zero. We can force R to set the intercept to zero
 by modifying the formula as <code>y~0 + x1 + x2 +…</code> :</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="fundamentals1.html#cb351-1" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>speed, <span class="at">data =</span> cars)</span>
-<span id="cb351-2"><a href="fundamentals1.html#cb351-2" tabindex="-1"></a>model0</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="fundamentals1.html#cb348-1" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>speed, <span class="at">data =</span> cars)</span>
+<span id="cb348-2"><a href="fundamentals1.html#cb348-2" tabindex="-1"></a>model0</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dist ~ 0 + speed, data = cars)
@@ -387,8 +388,8 @@ by modifying the formula as <code>y~0 + x1 + x2 +…</code> :</p>
 ## Coefficients:
 ## speed  
 ## 2.909</code></pre>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="fundamentals1.html#cb353-1" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
-<span id="cb353-2"><a href="fundamentals1.html#cb353-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, model0<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="fundamentals1.html#cb350-1" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb350-2"><a href="fundamentals1.html#cb350-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, model0<span class="sc">$</span>coefficients)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-144-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>It may be clear to you that the first model “looks better”. The line
 fits closer to the data points, on average. This is because the first
@@ -625,25 +626,25 @@ Y = 1+4X-3X^2-X^3+2X^4 + \epsilon,
 \]</span> where <span class="math inline">\(\epsilon \sim N(0, 1/25)\)</span>. That is, the regression function
 <span class="math inline">\(g^*\)</span> is a degree four polynomial and the residual term is a normal
 random variable with standard deviation <span class="math inline">\(1/5\)</span>.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="fundamentals1.html#cb354-1" tabindex="-1"></a><span class="do">### The regression function, a degree 4 polynomial</span></span>
-<span id="cb354-2"><a href="fundamentals1.html#cb354-2" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
-<span id="cb354-3"><a href="fundamentals1.html#cb354-3" tabindex="-1"></a></span>
-<span id="cb354-4"><a href="fundamentals1.html#cb354-4" tabindex="-1"></a><span class="do">### For now we will fix thiry values of X equally spaced</span></span>
-<span id="cb354-5"><a href="fundamentals1.html#cb354-5" tabindex="-1"></a><span class="do">### in the interval (0, 1)</span></span>
-<span id="cb354-6"><a href="fundamentals1.html#cb354-6" tabindex="-1"></a></span>
-<span id="cb354-7"><a href="fundamentals1.html#cb354-7" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span><span class="sc">/</span><span class="dv">31</span></span>
-<span id="cb354-8"><a href="fundamentals1.html#cb354-8" tabindex="-1"></a></span>
-<span id="cb354-9"><a href="fundamentals1.html#cb354-9" tabindex="-1"></a><span class="do">### We can simulate potential values for Y associated with</span></span>
-<span id="cb354-10"><a href="fundamentals1.html#cb354-10" tabindex="-1"></a><span class="do">### these, by adding residuals. We will simulate residuals</span></span>
-<span id="cb354-11"><a href="fundamentals1.html#cb354-11" tabindex="-1"></a><span class="do">### from a N(0, 1/25) distribution</span></span>
-<span id="cb354-12"><a href="fundamentals1.html#cb354-12" tabindex="-1"></a></span>
-<span id="cb354-13"><a href="fundamentals1.html#cb354-13" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(X) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">sd =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>)</span>
-<span id="cb354-14"><a href="fundamentals1.html#cb354-14" tabindex="-1"></a></span>
-<span id="cb354-15"><a href="fundamentals1.html#cb354-15" tabindex="-1"></a><span class="fu">plot</span>(X, y, <span class="at">xlab =</span> <span class="st">&#39;x&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">3.25</span>))</span>
-<span id="cb354-16"><a href="fundamentals1.html#cb354-16" tabindex="-1"></a></span>
-<span id="cb354-17"><a href="fundamentals1.html#cb354-17" tabindex="-1"></a><span class="do">### We can also add the line showing the true regression function</span></span>
-<span id="cb354-18"><a href="fundamentals1.html#cb354-18" tabindex="-1"></a></span>
-<span id="cb354-19"><a href="fundamentals1.html#cb354-19" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">length =</span> <span class="dv">100</span>), <span class="fu">g</span>(<span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">length =</span> <span class="dv">100</span>)), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="fundamentals1.html#cb351-1" tabindex="-1"></a><span class="do">### The regression function, a degree 4 polynomial</span></span>
+<span id="cb351-2"><a href="fundamentals1.html#cb351-2" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb351-3"><a href="fundamentals1.html#cb351-3" tabindex="-1"></a></span>
+<span id="cb351-4"><a href="fundamentals1.html#cb351-4" tabindex="-1"></a><span class="do">### For now we will fix thiry values of X equally spaced</span></span>
+<span id="cb351-5"><a href="fundamentals1.html#cb351-5" tabindex="-1"></a><span class="do">### in the interval (0, 1)</span></span>
+<span id="cb351-6"><a href="fundamentals1.html#cb351-6" tabindex="-1"></a></span>
+<span id="cb351-7"><a href="fundamentals1.html#cb351-7" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span><span class="sc">/</span><span class="dv">31</span></span>
+<span id="cb351-8"><a href="fundamentals1.html#cb351-8" tabindex="-1"></a></span>
+<span id="cb351-9"><a href="fundamentals1.html#cb351-9" tabindex="-1"></a><span class="do">### We can simulate potential values for Y associated with</span></span>
+<span id="cb351-10"><a href="fundamentals1.html#cb351-10" tabindex="-1"></a><span class="do">### these, by adding residuals. We will simulate residuals</span></span>
+<span id="cb351-11"><a href="fundamentals1.html#cb351-11" tabindex="-1"></a><span class="do">### from a N(0, 1/25) distribution</span></span>
+<span id="cb351-12"><a href="fundamentals1.html#cb351-12" tabindex="-1"></a></span>
+<span id="cb351-13"><a href="fundamentals1.html#cb351-13" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">g</span>(X) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">sd =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>)</span>
+<span id="cb351-14"><a href="fundamentals1.html#cb351-14" tabindex="-1"></a></span>
+<span id="cb351-15"><a href="fundamentals1.html#cb351-15" tabindex="-1"></a><span class="fu">plot</span>(X, y, <span class="at">xlab =</span> <span class="st">&#39;x&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">3.25</span>))</span>
+<span id="cb351-16"><a href="fundamentals1.html#cb351-16" tabindex="-1"></a></span>
+<span id="cb351-17"><a href="fundamentals1.html#cb351-17" tabindex="-1"></a><span class="do">### We can also add the line showing the true regression function</span></span>
+<span id="cb351-18"><a href="fundamentals1.html#cb351-18" tabindex="-1"></a></span>
+<span id="cb351-19"><a href="fundamentals1.html#cb351-19" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">length =</span> <span class="dv">100</span>), <span class="fu">g</span>(<span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">1</span>, <span class="fl">1.1</span>, <span class="at">length =</span> <span class="dv">100</span>)), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-145-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>But the realisations of <span class="math inline">\(Y\)</span> could be different even if the values of <span class="math inline">\(X\)</span>
 didn’t change, since for each <span class="math inline">\(X\)</span> there is an entire distribution of
@@ -812,16 +813,16 @@ the function <code>lm</code> produces a “line of best fit”, and in fact is s
 the optimisation problem which minimises the training error, using the
 squared error loss function. We can validate this by comparing its
 output with the closed form solution described above</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="fundamentals1.html#cb355-1" tabindex="-1"></a><span class="do">### Our X matrix described above has a column of ones followed</span></span>
-<span id="cb355-2"><a href="fundamentals1.html#cb355-2" tabindex="-1"></a><span class="do">### by a column containing the single covariate. We can use</span></span>
-<span id="cb355-3"><a href="fundamentals1.html#cb355-3" tabindex="-1"></a><span class="do">### the cbind function to produce this</span></span>
-<span id="cb355-4"><a href="fundamentals1.html#cb355-4" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, cars<span class="sc">$</span>speed)</span>
-<span id="cb355-5"><a href="fundamentals1.html#cb355-5" tabindex="-1"></a></span>
-<span id="cb355-6"><a href="fundamentals1.html#cb355-6" tabindex="-1"></a><span class="do">### Next we can find the coefficients for the best linear fit to the data</span></span>
-<span id="cb355-7"><a href="fundamentals1.html#cb355-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> cars<span class="sc">$</span>dist</span>
-<span id="cb355-8"><a href="fundamentals1.html#cb355-8" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
-<span id="cb355-9"><a href="fundamentals1.html#cb355-9" tabindex="-1"></a></span>
-<span id="cb355-10"><a href="fundamentals1.html#cb355-10" tabindex="-1"></a>beta_hat</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="fundamentals1.html#cb352-1" tabindex="-1"></a><span class="do">### Our X matrix described above has a column of ones followed</span></span>
+<span id="cb352-2"><a href="fundamentals1.html#cb352-2" tabindex="-1"></a><span class="do">### by a column containing the single covariate. We can use</span></span>
+<span id="cb352-3"><a href="fundamentals1.html#cb352-3" tabindex="-1"></a><span class="do">### the cbind function to produce this</span></span>
+<span id="cb352-4"><a href="fundamentals1.html#cb352-4" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, cars<span class="sc">$</span>speed)</span>
+<span id="cb352-5"><a href="fundamentals1.html#cb352-5" tabindex="-1"></a></span>
+<span id="cb352-6"><a href="fundamentals1.html#cb352-6" tabindex="-1"></a><span class="do">### Next we can find the coefficients for the best linear fit to the data</span></span>
+<span id="cb352-7"><a href="fundamentals1.html#cb352-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> cars<span class="sc">$</span>dist</span>
+<span id="cb352-8"><a href="fundamentals1.html#cb352-8" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
+<span id="cb352-9"><a href="fundamentals1.html#cb352-9" tabindex="-1"></a></span>
+<span id="cb352-10"><a href="fundamentals1.html#cb352-10" tabindex="-1"></a>beta_hat</span></code></pre></div>
 <pre><code>##            [,1]
 ## [1,] -17.579095
 ## [2,]   3.932409</code></pre>
@@ -835,9 +836,9 @@ validate these existing implementations, when possible, is beneficial.</p>
 field <code>$fitted.values</code> which is the vector of values
 <span class="math inline">\((\hat y_i, ..., \hat y_n)^\top\)</span> from the model. We can use this to
 evaluate the training error:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="fundamentals1.html#cb357-1" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span>speed, <span class="at">data =</span> cars)</span>
-<span id="cb357-2"><a href="fundamentals1.html#cb357-2" tabindex="-1"></a></span>
-<span id="cb357-3"><a href="fundamentals1.html#cb357-3" tabindex="-1"></a><span class="fu">mean</span>((cars<span class="sc">$</span>dist <span class="sc">-</span> model<span class="sc">$</span>fitted.values)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="fundamentals1.html#cb354-1" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span>speed, <span class="at">data =</span> cars)</span>
+<span id="cb354-2"><a href="fundamentals1.html#cb354-2" tabindex="-1"></a></span>
+<span id="cb354-3"><a href="fundamentals1.html#cb354-3" tabindex="-1"></a><span class="fu">mean</span>((cars<span class="sc">$</span>dist <span class="sc">-</span> model<span class="sc">$</span>fitted.values)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 227.0704</code></pre>
 <p><strong>A Straightforward Extension: Simple Polynomial Regression</strong></p>
 <p>An obvious question which might arise is “why linear?”.</p>
@@ -859,21 +860,21 @@ the <code>lm</code> function.</p>
 <p>The following code will fit a quadratic (degree 2 polynomial) function
 to the <code>cars</code> data set, and then plot the result and evaluate the
 training error.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="fundamentals1.html#cb359-1" tabindex="-1"></a><span class="do">### First plot the data again</span></span>
-<span id="cb359-2"><a href="fundamentals1.html#cb359-2" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
-<span id="cb359-3"><a href="fundamentals1.html#cb359-3" tabindex="-1"></a></span>
-<span id="cb359-4"><a href="fundamentals1.html#cb359-4" tabindex="-1"></a><span class="do">### Now we fit the model</span></span>
-<span id="cb359-5"><a href="fundamentals1.html#cb359-5" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span><span class="fu">poly</span>(speed, <span class="dv">2</span>, <span class="at">raw =</span> <span class="cn">TRUE</span>), <span class="at">data =</span> cars)</span>
-<span id="cb359-6"><a href="fundamentals1.html#cb359-6" tabindex="-1"></a></span>
-<span id="cb359-7"><a href="fundamentals1.html#cb359-7" tabindex="-1"></a><span class="do">### We now cannot use the abline function to illustrate the fit, but can use</span></span>
-<span id="cb359-8"><a href="fundamentals1.html#cb359-8" tabindex="-1"></a><span class="do">### predict(model, new_data) for a range of speeds (e.g. 0 to 30) and use</span></span>
-<span id="cb359-9"><a href="fundamentals1.html#cb359-9" tabindex="-1"></a><span class="do">### the function lines() to add to the plot. The new data argument must</span></span>
-<span id="cb359-10"><a href="fundamentals1.html#cb359-10" tabindex="-1"></a><span class="do">### have the same covariates as the data used to fit the model:</span></span>
-<span id="cb359-11"><a href="fundamentals1.html#cb359-11" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">speed =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="at">length =</span> <span class="dv">100</span>))</span>
-<span id="cb359-12"><a href="fundamentals1.html#cb359-12" tabindex="-1"></a><span class="fu">lines</span>(new_data<span class="sc">$</span>speed, <span class="fu">predict</span>(model2, new_data))</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="fundamentals1.html#cb356-1" tabindex="-1"></a><span class="do">### First plot the data again</span></span>
+<span id="cb356-2"><a href="fundamentals1.html#cb356-2" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb356-3"><a href="fundamentals1.html#cb356-3" tabindex="-1"></a></span>
+<span id="cb356-4"><a href="fundamentals1.html#cb356-4" tabindex="-1"></a><span class="do">### Now we fit the model</span></span>
+<span id="cb356-5"><a href="fundamentals1.html#cb356-5" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist<span class="sc">~</span><span class="fu">poly</span>(speed, <span class="dv">2</span>, <span class="at">raw =</span> <span class="cn">TRUE</span>), <span class="at">data =</span> cars)</span>
+<span id="cb356-6"><a href="fundamentals1.html#cb356-6" tabindex="-1"></a></span>
+<span id="cb356-7"><a href="fundamentals1.html#cb356-7" tabindex="-1"></a><span class="do">### We now cannot use the abline function to illustrate the fit, but can use</span></span>
+<span id="cb356-8"><a href="fundamentals1.html#cb356-8" tabindex="-1"></a><span class="do">### predict(model, new_data) for a range of speeds (e.g. 0 to 30) and use</span></span>
+<span id="cb356-9"><a href="fundamentals1.html#cb356-9" tabindex="-1"></a><span class="do">### the function lines() to add to the plot. The new data argument must</span></span>
+<span id="cb356-10"><a href="fundamentals1.html#cb356-10" tabindex="-1"></a><span class="do">### have the same covariates as the data used to fit the model:</span></span>
+<span id="cb356-11"><a href="fundamentals1.html#cb356-11" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">speed =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="at">length =</span> <span class="dv">100</span>))</span>
+<span id="cb356-12"><a href="fundamentals1.html#cb356-12" tabindex="-1"></a><span class="fu">lines</span>(new_data<span class="sc">$</span>speed, <span class="fu">predict</span>(model2, new_data))</span></code></pre></div>
 <p><img src="figures/unnamed-chunk-148-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="fundamentals1.html#cb360-1" tabindex="-1"></a><span class="do">### We can use the same command again to evaluate the training error</span></span>
-<span id="cb360-2"><a href="fundamentals1.html#cb360-2" tabindex="-1"></a><span class="fu">mean</span>((cars<span class="sc">$</span>dist <span class="sc">-</span> model2<span class="sc">$</span>fitted.values)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="fundamentals1.html#cb357-1" tabindex="-1"></a><span class="do">### We can use the same command again to evaluate the training error</span></span>
+<span id="cb357-2"><a href="fundamentals1.html#cb357-2" tabindex="-1"></a><span class="fu">mean</span>((cars<span class="sc">$</span>dist <span class="sc">-</span> model2<span class="sc">$</span>fitted.values)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 216.4943</code></pre>
 <ul>
 <li>How does this training error compare with the training error from the
@@ -886,18 +887,18 @@ to the equation describing the fitted <em>muliple linear regression model</em>
 that instead of the single covariate raised to power <span class="math inline">\(j\)</span> we have the
 <span class="math inline">\(j\)</span>-th from <span class="math inline">\(p\)</span> total covariates, i.e. we see <span class="math inline">\(x_j\)</span> instead of <span class="math inline">\(x^j\)</span>. Indeed fitting the degree <span class="math inline">\(d\)</span> polynomial regression model is equivalent to fitting the multiple linear
 regression model where we use the “engineered features” <span class="math inline">\(X_2 = X^2, X_3=X^3, ..., X_d=X^d\)</span>. We could therefore equally apply the closed form expression for the multiple linear model after creating these features for ourselves.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="fundamentals1.html#cb362-1" tabindex="-1"></a><span class="do">### Start by creating our new X matrix with a column of</span></span>
-<span id="cb362-2"><a href="fundamentals1.html#cb362-2" tabindex="-1"></a><span class="do">### ones and then the single covariate raised to each of the</span></span>
-<span id="cb362-3"><a href="fundamentals1.html#cb362-3" tabindex="-1"></a><span class="do">### powers 1 to d, where to match the above we have d=2</span></span>
-<span id="cb362-4"><a href="fundamentals1.html#cb362-4" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb362-5"><a href="fundamentals1.html#cb362-5" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span>d, <span class="cf">function</span>(j) cars<span class="sc">$</span>speed<span class="sc">^</span>j)</span>
-<span id="cb362-6"><a href="fundamentals1.html#cb362-6" tabindex="-1"></a><span class="co"># make sure you understand why this is creating the matrix it should</span></span>
-<span id="cb362-7"><a href="fundamentals1.html#cb362-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> cars<span class="sc">$</span>dist</span>
-<span id="cb362-8"><a href="fundamentals1.html#cb362-8" tabindex="-1"></a></span>
-<span id="cb362-9"><a href="fundamentals1.html#cb362-9" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
-<span id="cb362-10"><a href="fundamentals1.html#cb362-10" tabindex="-1"></a></span>
-<span id="cb362-11"><a href="fundamentals1.html#cb362-11" tabindex="-1"></a><span class="do">### We can check that the solutions are the same:</span></span>
-<span id="cb362-12"><a href="fundamentals1.html#cb362-12" tabindex="-1"></a><span class="fu">cbind</span>(beta_hat, model2<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="fundamentals1.html#cb359-1" tabindex="-1"></a><span class="do">### Start by creating our new X matrix with a column of</span></span>
+<span id="cb359-2"><a href="fundamentals1.html#cb359-2" tabindex="-1"></a><span class="do">### ones and then the single covariate raised to each of the</span></span>
+<span id="cb359-3"><a href="fundamentals1.html#cb359-3" tabindex="-1"></a><span class="do">### powers 1 to d, where to match the above we have d=2</span></span>
+<span id="cb359-4"><a href="fundamentals1.html#cb359-4" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb359-5"><a href="fundamentals1.html#cb359-5" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span>d, <span class="cf">function</span>(j) cars<span class="sc">$</span>speed<span class="sc">^</span>j)</span>
+<span id="cb359-6"><a href="fundamentals1.html#cb359-6" tabindex="-1"></a><span class="co"># make sure you understand why this is creating the matrix it should</span></span>
+<span id="cb359-7"><a href="fundamentals1.html#cb359-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> cars<span class="sc">$</span>dist</span>
+<span id="cb359-8"><a href="fundamentals1.html#cb359-8" tabindex="-1"></a></span>
+<span id="cb359-9"><a href="fundamentals1.html#cb359-9" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
+<span id="cb359-10"><a href="fundamentals1.html#cb359-10" tabindex="-1"></a></span>
+<span id="cb359-11"><a href="fundamentals1.html#cb359-11" tabindex="-1"></a><span class="do">### We can check that the solutions are the same:</span></span>
+<span id="cb359-12"><a href="fundamentals1.html#cb359-12" tabindex="-1"></a><span class="fu">cbind</span>(beta_hat, model2<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##                                  [,1]      [,2]
 ## (Intercept)                 2.4701378 2.4701378
 ## poly(speed, 2, raw = TRUE)1 0.9132876 0.9132876

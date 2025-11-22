@@ -200,14 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8" data-path="nonlinear1.html"><a href="nonlinear1.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity Part I</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="nonlinear1.html"><a href="nonlinear1.html#basis-expansions"><i class="fa fa-check"></i><b>8.1</b> Basis Expansions</a></li>
-<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-machines"><i class="fa fa-check"></i><b>8.2</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinear1.html"><a href="nonlinear1.html#support-vector-methods"><i class="fa fa-check"></i><b>8.2</b> Support Vector Methods</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinear1.html"><a href="nonlinear1.html#summary-8"><i class="fa fa-check"></i><b>8.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nonlinearity2.html"><a href="nonlinearity2.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity Part II</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="nonlinearity2.html"><a href="nonlinearity2.html#smoothing-as-local-averaging"><i class="fa fa-check"></i><b>9.1</b> Smoothing as Local Averaging</a></li>
 <li class="chapter" data-level="9.2" data-path="nonlinearity2.html"><a href="nonlinearity2.html#nearest-neighbours"><i class="fa fa-check"></i><b>9.2</b> Nearest Neighbours</a></li>
 <li class="chapter" data-level="9.3" data-path="nonlinearity2.html"><a href="nonlinearity2.html#decision-trees"><i class="fa fa-check"></i><b>9.3</b> Decision Trees</a></li>
-<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-8"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.4" data-path="nonlinearity2.html"><a href="nonlinearity2.html#summary-9"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="nonlinearity2.html"><a href="nonlinearity2.html#exercises-9"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ensemble-models.html"><a href="ensemble-models.html"><i class="fa fa-check"></i><b>10</b> Ensemble Models</a>
@@ -215,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="ensemble-models.html"><a href="ensemble-models.html#bagging"><i class="fa fa-check"></i><b>10.1</b> Bagging</a></li>
 <li class="chapter" data-level="10.2" data-path="ensemble-models.html"><a href="ensemble-models.html#boosting"><i class="fa fa-check"></i><b>10.2</b> Boosting</a></li>
 <li class="chapter" data-level="10.3" data-path="ensemble-models.html"><a href="ensemble-models.html#variable-importance"><i class="fa fa-check"></i><b>10.3</b> Variable Importance</a></li>
-<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-9"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.4" data-path="ensemble-models.html"><a href="ensemble-models.html#summary-10"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
 <li class="chapter" data-level="10.5" data-path="ensemble-models.html"><a href="ensemble-models.html#exercises-10"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 </ul>
@@ -237,7 +238,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="nonlinear1" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> Nonlinearity Part I<a href="nonlinear1.html#nonlinear1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In the last two chapters we looked in reasonable depth at linear and generalised linear models, in which the relationships between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X = (X_1, X_2, ..., X_p)\)</span> are characterised only by a vector of <em>regression coefficients</em> which simply capture how changes in the predictors correspond to changes in the expectation of the response (possibly via a <em>link function</em>).</p>
+<p><span class="math display">\[
+\def\x{\mathbf{x}}
+\def\Rr{\mathbb{R}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\def\F{\mathcal{F}}
+\def\hbbeta{\hat{\boldsymbol{\beta}}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\X{\mathbf{X}}
+\def\y{\mathbf{y}}
+\def\hg{\hat g}
+\def\a{\mathbf{a}}
+\def\K{\mathbf{K}}
+\def\B{\mathbf{B}}
+\def\b{\mathbf{b}}
+\def\w{\mathbf{w}}
+\]</span></p>
+<p>In the last two chapters we looked in reasonable depth at linear and generalised linear models, in which the relationships between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X = (X_1, X_2, ..., X_p)\)</span> are characterised only by a vector of <em>regression coefficients</em>, which concisely capture how changes in the predictors correspond to changes in the expectation of the response (possibly via a <em>link function</em>).</p>
 <p>This simple structure makes linear and generalised linear models highly interpretable, and their statistical properties well understood. However, many modern applications involve situations where far more flexibility is needed in order to accurately capture the relationships between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>. In Chapters <a href="fundamentals1.html#fundamentals1">4</a> and <a href="fundamentals2.html#fundamentals2">5</a> we encountered a simple illustrative example approach by which non-linearity can be introduced in a principled manner, by means of <em>polynomials</em>.</p>
 <div id="basis-expansions" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Basis Expansions<a href="nonlinear1.html#basis-expansions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -261,24 +279,402 @@ b(\x) = \prod_{j=1}^p x_j^{d_j},
 <p>This clearly has remarkable similarity with linear models, with the only difference ultimately being that instead of the terms <span class="math inline">\(x_{ij}; i = 1, ..., n; j = 1, ..., p\)</span> we have the terms <span class="math inline">\(b_j(\x_i); i = 1, ..., n; j = 1, ..., q\)</span>. In a practical setting we could therefore simply create the matrix <span class="math inline">\(\mathbf{B}\)</span> with <span class="math inline">\(i,j\)</span>-th element <span class="math inline">\(b_j(\x_i)\)</span> and use this in place of the matrix <span class="math inline">\(\X\)</span> we had for linear models.</p>
 <p><strong>Choosing a Basis</strong></p>
 <p>For a given <span class="math inline">\(\F\)</span> it may not always be clear how to construct a basis. However, we don’t need to approach the problem from this point of view. We can instead start by choosing our basis functions, in which case we will be implicitly choosing <span class="math inline">\(\F\)</span> as the set of all functions <em>generated</em> by this basis; i.e. all functions expressible as linear combinations of the basis functions.</p>
-<p>We could essentially choose almost any functions to include in a basis, as long as there isn’t a lot of <em>redundancy</em> among them. However, we will focus on a special class of bases which we do not have to engage with explicitly.</p>
+<p>We could essentially choose “almost” any functions to include in a basis, as long as there isn’t a lot of <em>redundancy</em> among them.</p>
+<p>The following example shows a simple simulated data set containing a single covariate <span class="math inline">\(X\)</span> and response variable <span class="math inline">\(Y\)</span></p>
+<p><img src="figures/unnamed-chunk-188-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Let’s consider two potential bases. The first row of plots below shows (i) the basis functions for the degree seven polynomials; (ii) these basis functions multiplied by the optimal coefficients; and (iii) the resulting fit to the observations. The second row shows the same plots but for a quadratic <em>spline</em> basis (don’t worry, you don’t need to know about splines, this is just another example).</p>
+<p><img src="figures/unnamed-chunk-189-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Both are able to fit very well to the data. Generally speaking polynomials are not a preferred basis largely due to issues of high variance and because their extrapolation (prediction beyond the range of the observations) is very poorly controlled. Splines typically will have much lower variance and their extrapolation can be even better controlled using what are known as <em>natural splines</em> where extrapolation is forced to be linear (again, don’t worry about any details on splines, they’re just here as an alternative to ploynomials).</p>
+<p>However, we will focus on a special class of bases which we do not have to engage with explicitly.</p>
 </div>
-<div id="kernels-and-reproducing-kernel-hilbert-spaces" class="section level3 hasAnchor" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> Kernels and Reproducing Kernel Hilbert Spaces<a href="nonlinear1.html#kernels-and-reproducing-kernel-hilbert-spaces" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="kernels" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Kernels<a href="nonlinear1.html#kernels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One of the hallmarks of modern statistical learning is the remarkable capabilities of <em>overparameterised</em> models whose training has been appropriately regularised to avoid overfitting. What this essentially means is the use of extremely flexible “model classes” (<span class="math inline">\(\F\)</span>), with penalties on the training error to regularise the fitting process.</p>
 <p>In the present context this corresponds with extremely large bases (sometimes with infinitely many basis functions). However, it should be clear that from a practical standpoint actually applying the approach described previously would require the use of matrices <span class="math inline">\(\mathbf{B}\)</span>, as before with <span class="math inline">\(i,j\)</span>-th element equal to <span class="math inline">\(b_j(\x_i)\)</span>, with extremely large numbers of columns. Even fitting simple linear models would then become computationally intractable. Moreover, when it comes to infinite bases we can only engage with such “matrices” conceptually, but clearly cannot actually evaluate them.</p>
-<p><strong>Kernels</strong> are ways around this. In the context of basis expansions a kernel is a function <span class="math inline">\(K\)</span>, which takes two arguments <span class="math inline">\(\x_1, \x_2\)</span> from the same</p>
+<p><strong>Kernels</strong> are ways around this. In the context of basis expansions a kernel is a function <span class="math inline">\(K\)</span>, which takes two arguments <span class="math inline">\(\x, \x&#39;\)</span> (these could be a pair of observations, for example) and returns a real number, and has the property that for any collection of points <span class="math inline">\(\x_1, ..., \x_n\)</span> the matrix <span class="math inline">\(\K \in \R^{n \times n}\)</span>, with <span class="math inline">\(i,j\)</span>-th element equal to <span class="math inline">\(K(\x_i, \x_j)\)</span> is symmetric and positive semi-definite (don’t worry about what this means if it is not something you’re familiar with, as we won’t be engaging much with the maths).</p>
+<p>Some popular examples are</p>
+<ol style="list-style-type: decimal">
+<li><p>The (Gaussian) radial basis kernel; <span class="math inline">\(K(\x, \x&#39;) = \exp\left(-||\x - \x&#39;||^2/\sigma^2\right)\)</span>, where <span class="math inline">\(\sigma\)</span> is a hyperparameter of the kernel. Note that there are other parameterisations of the Gaussian kernel.</p></li>
+<li><p>The polynomial kernel(s); <span class="math inline">\(K(\x, \x&#39;) = (c + \x^\top \x&#39;)^d\)</span>, where we now have two hyperparameters <span class="math inline">\(c\)</span> and the <em>degree</em> <span class="math inline">\(d\)</span>.</p></li>
+</ol>
 <div id="the-kernel-trick" class="section level4 hasAnchor" number="8.1.2.1">
 <h4><span class="header-section-number">8.1.2.1</span> The Kernel Trick<a href="nonlinear1.html#the-kernel-trick" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To see what makes kernels special, we need to be aware of an important fact. Let’s consider the ridge regression model, and for simplicity let’s focus on fitting the model without an intercept (recall that we can center the observations first which allows us to account for the intercep indirectly). In this case we have <span class="math inline">\(\hbbeta = (\X^\top\X + n \lambda \I)^{-1}\X^\top \y\)</span>, where <span class="math inline">\(\X\)</span> now does not contain the column of ones (these are what fits the intercept usually). To make a prediction from the resulting model, we have <span class="math inline">\(\hg(\x) = \hbeta_0 + \sum_{j=1}^p \hbeta_j\x_j\)</span>, where the intercept is not included in <span class="math inline">\(\hbbeta\)</span> as it was before since we are estimating it separately, which can also be written as <span class="math inline">\(\hbeta_0 + \x^\top \hbbeta\)</span>. Now, it turns out that we can write <span class="math inline">\(\x^\top \hbbeta\)</span> in a different form, as
+<span class="math inline">\(\sum_{i=1}^n a_i \x_i^\top \x = \a^\top \X\x\)</span> where the vector <span class="math inline">\(\a = (a_1, ..., a_n)^\top\)</span> is equal to <span class="math inline">\((\X\X^\top + n\lambda \I)^{-1}\y\)</span>. If we first converted our <span class="math inline">\(\X\)</span> to a <span class="math inline">\(\B\)</span>, i.e. by applying all of the basis functions to each of our observations, then we would simply replace every instance of <span class="math inline">\(\X\)</span> with <span class="math inline">\(\B\)</span> and every instance of <span class="math inline">\(\x_i\)</span> or <span class="math inline">\(\x\)</span> with <span class="math inline">\(\b_i = (b_1(\x_i), ..., b_q(\x_i))^\top\)</span> or <span class="math inline">\(\b = (b_1(\x), ..., b_q(\x))^\top\)</span>.</p>
+<p>Now, this may not look like any progress, however what is important is that with this formulation everything is expressed in terms of inner products between pairs of observations (the <span class="math inline">\(i,j\)</span>-th element of <span class="math inline">\(\X\X^\top\)</span> is <span class="math inline">\(\x_i^\top \x_j\)</span>) and between the observations and the query point, <span class="math inline">\(\x\)</span>. It is here that the kernel “trick” comes in. For any kernel, <span class="math inline">\(K\)</span>, there is an associated <em>feature map</em>, <span class="math inline">\(\phi_K\)</span>, with the property that for every pair <span class="math inline">\(\x, \x&#39;\)</span> we have <span class="math inline">\(K(\x, \x&#39;) = \phi_K(\x)^\top \phi_K(\x&#39;)\)</span>. That is, evaluating the kernel on two points is equivalent to first mapping those points to the <em>feature space</em> and then taking the inner product between them. But this feature space can essentially just be thought of as the outputs of a collection of basis functions, i.e. we may think of <span class="math inline">\(\phi_K(\x)^\top \phi_K(\x&#39;)\)</span> as <span class="math inline">\((b_1(\x), ..., b_q(\x))^\top(b_1(\x&#39;), ..., b_q(\x&#39;))\)</span>. The matrix <span class="math inline">\(\mathbf{K}\)</span>, with <span class="math inline">\(i,j\)</span>-th element <span class="math inline">\(K(\x_i, \x_j)\)</span> is therefore analogous to the matrix <span class="math inline">\(\B\B^\top\)</span>. But by using a kernel we don’t ever have to evaluate the basis functions explicitly, since we only ever care about inner products between their outputs, and the kernel does all that “behing the scenes”.</p>
+<p><strong>A Quick Summary</strong></p>
+<p>Let’s quickly take stock. We want to move beyond linearity, and have learned that one way to do this is to first <em>transform</em> the observations by applying a collection of (potentially) non-linear functions to them. After this, we can fit a linear model on the transformed data. If we want a high degree of flexibility this may require a large number of such non-linear “basis functions”, and a lot of computation to evaluate them all. A kernel is a way of bypassing a lot of this computation, since if we only ever need inner products between vectors of the basis functions evaluated on pairs of points then we get all the calculations done for us, simply by evaluating the kernel on the same pairs of points.</p>
+<p>So, if we wanted to fit a (kernel) ridge regression model for a given value of <span class="math inline">\(\lambda\)</span>, we would do the following</p>
+<ol style="list-style-type: decimal">
+<li><p>Compute the “Gram matrix” <span class="math inline">\(\K\)</span> (analogous to <span class="math inline">\(\X\X^\top\)</span>).</p></li>
+<li><p>Compute the vector <span class="math inline">\(\a = (\K + n\lambda \I)^{-1}\y\)</span> (analogous to <span class="math inline">\((\X\X^\top + n \lambda \I)^{-1}\y\)</span>).</p></li>
+<li><p>To make a prediction, i.e. evaluate <span class="math inline">\(\hg(\x)\)</span>, we use <span class="math inline">\(\a^\top(K(\x,\x_1), ..., K(\x, \x_n))^\top\)</span> (analogous to <span class="math inline">\(\a^\top\X\x\)</span>)</p></li>
+</ol>
+<p>Let’s apply this to the simple simulated example from before. Note that in the above examples one of the basis functions was just a constant <span class="math inline">\(1\)</span>, which is how the intercept is fit. When using the Gaussian kernel it is more straightforward to first subtract the mean of the values of <span class="math inline">\(Y\)</span> and then add these to the predictions afterwards</p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="nonlinear1.html#cb476-1" tabindex="-1"></a><span class="do">### First set up constants (we can try varying these below)</span></span>
+<span id="cb476-2"><a href="nonlinear1.html#cb476-2" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fl">0.001</span></span>
+<span id="cb476-3"><a href="nonlinear1.html#cb476-3" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
+<span id="cb476-4"><a href="nonlinear1.html#cb476-4" tabindex="-1"></a></span>
+<span id="cb476-5"><a href="nonlinear1.html#cb476-5" tabindex="-1"></a><span class="do">### Now construct the Gram matrix and the vector a</span></span>
+<span id="cb476-6"><a href="nonlinear1.html#cb476-6" tabindex="-1"></a><span class="do">### The function dist() will compute all pairwise distances</span></span>
+<span id="cb476-7"><a href="nonlinear1.html#cb476-7" tabindex="-1"></a></span>
+<span id="cb476-8"><a href="nonlinear1.html#cb476-8" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">as.matrix</span>(<span class="fu">dist</span>(x)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>sigma<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb476-9"><a href="nonlinear1.html#cb476-9" tabindex="-1"></a></span>
+<span id="cb476-10"><a href="nonlinear1.html#cb476-10" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">solve</span>(K <span class="sc">+</span> <span class="fu">length</span>(x)<span class="sc">*</span>lambda<span class="sc">*</span><span class="fu">diag</span>(<span class="fu">length</span>(x)))<span class="sc">%*%</span>(y<span class="sc">-</span><span class="fu">mean</span>(y))</span>
+<span id="cb476-11"><a href="nonlinear1.html#cb476-11" tabindex="-1"></a><span class="co"># Note we fit to y-mean(y) here, and will add back mean(y) later</span></span>
+<span id="cb476-12"><a href="nonlinear1.html#cb476-12" tabindex="-1"></a></span>
+<span id="cb476-13"><a href="nonlinear1.html#cb476-13" tabindex="-1"></a><span class="do">### Now let&#39;s get the predictions on a grid</span></span>
+<span id="cb476-14"><a href="nonlinear1.html#cb476-14" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb476-15"><a href="nonlinear1.html#cb476-15" tabindex="-1"></a></span>
+<span id="cb476-16"><a href="nonlinear1.html#cb476-16" tabindex="-1"></a><span class="do">### See if you can work out why the following is</span></span>
+<span id="cb476-17"><a href="nonlinear1.html#cb476-17" tabindex="-1"></a><span class="do">### computing the pairwise (squared) distances</span></span>
+<span id="cb476-18"><a href="nonlinear1.html#cb476-18" tabindex="-1"></a><span class="do">### between the observations and the grid.</span></span>
+<span id="cb476-19"><a href="nonlinear1.html#cb476-19" tabindex="-1"></a><span class="do">### Note that this formulation will only work for</span></span>
+<span id="cb476-20"><a href="nonlinear1.html#cb476-20" tabindex="-1"></a><span class="do">### a single covariate.</span></span>
+<span id="cb476-21"><a href="nonlinear1.html#cb476-21" tabindex="-1"></a></span>
+<span id="cb476-22"><a href="nonlinear1.html#cb476-22" tabindex="-1"></a>dx_grid <span class="ot">&lt;-</span> (xs<span class="sc">%*%</span><span class="fu">t</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(x))) <span class="sc">-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(xs))<span class="sc">%*%</span><span class="fu">t</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb476-23"><a href="nonlinear1.html#cb476-23" tabindex="-1"></a></span>
+<span id="cb476-24"><a href="nonlinear1.html#cb476-24" tabindex="-1"></a><span class="do">### Now put these into the kernel and make predictions</span></span>
+<span id="cb476-25"><a href="nonlinear1.html#cb476-25" tabindex="-1"></a>kK <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dx_grid<span class="sc">/</span>sigma<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb476-26"><a href="nonlinear1.html#cb476-26" tabindex="-1"></a></span>
+<span id="cb476-27"><a href="nonlinear1.html#cb476-27" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> kK<span class="sc">%*%</span>a <span class="sc">+</span> <span class="fu">mean</span>(y)</span>
+<span id="cb476-28"><a href="nonlinear1.html#cb476-28" tabindex="-1"></a><span class="co"># here is where we add back the mean of the y&#39;s</span></span>
+<span id="cb476-29"><a href="nonlinear1.html#cb476-29" tabindex="-1"></a></span>
+<span id="cb476-30"><a href="nonlinear1.html#cb476-30" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">2</span>), <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>)</span>
+<span id="cb476-31"><a href="nonlinear1.html#cb476-31" tabindex="-1"></a></span>
+<span id="cb476-32"><a href="nonlinear1.html#cb476-32" tabindex="-1"></a><span class="fu">lines</span>(xs, yhat, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-190-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>We can see the model fits very nicely to the observations, and it may also be clear that the gradient is less steep at the edges of the plot which will typically lead to less problematic extrapolation.</p>
+<p>Now let’s see the effect of changing the two hyperparameters, <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\lambda\)</span>. It may already be clear to you what changing <span class="math inline">\(\lambda\)</span> will do, whereas the effect of <span class="math inline">\(\sigma\)</span> may not yet be clear.</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="nonlinear1.html#cb477-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb477-2"><a href="nonlinear1.html#cb477-2" tabindex="-1"></a></span>
+<span id="cb477-3"><a href="nonlinear1.html#cb477-3" tabindex="-1"></a><span class="do">### Keeping gamma fixed, but changing lambda</span></span>
+<span id="cb477-4"><a href="nonlinear1.html#cb477-4" tabindex="-1"></a>lambda1 <span class="ot">&lt;-</span> .<span class="dv">01</span></span>
+<span id="cb477-5"><a href="nonlinear1.html#cb477-5" tabindex="-1"></a>lambda2 <span class="ot">&lt;-</span> .<span class="dv">1</span></span>
+<span id="cb477-6"><a href="nonlinear1.html#cb477-6" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
+<span id="cb477-7"><a href="nonlinear1.html#cb477-7" tabindex="-1"></a></span>
+<span id="cb477-8"><a href="nonlinear1.html#cb477-8" tabindex="-1"></a><span class="do">### The following is essentially as it was above</span></span>
+<span id="cb477-9"><a href="nonlinear1.html#cb477-9" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">as.matrix</span>(<span class="fu">dist</span>(x)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>sigma<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb477-10"><a href="nonlinear1.html#cb477-10" tabindex="-1"></a></span>
+<span id="cb477-11"><a href="nonlinear1.html#cb477-11" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="fu">solve</span>(K <span class="sc">+</span> <span class="fu">length</span>(x)<span class="sc">*</span>lambda1<span class="sc">*</span><span class="fu">diag</span>(<span class="fu">length</span>(x)))<span class="sc">%*%</span>(y<span class="sc">-</span><span class="fu">mean</span>(y))</span>
+<span id="cb477-12"><a href="nonlinear1.html#cb477-12" tabindex="-1"></a></span>
+<span id="cb477-13"><a href="nonlinear1.html#cb477-13" tabindex="-1"></a>kK <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dx_grid<span class="sc">/</span>sigma<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb477-14"><a href="nonlinear1.html#cb477-14" tabindex="-1"></a></span>
+<span id="cb477-15"><a href="nonlinear1.html#cb477-15" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> kK<span class="sc">%*%</span>a1 <span class="sc">+</span> <span class="fu">mean</span>(y)</span>
+<span id="cb477-16"><a href="nonlinear1.html#cb477-16" tabindex="-1"></a></span>
+<span id="cb477-17"><a href="nonlinear1.html#cb477-17" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">2</span>), <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>, <span class="at">main =</span> <span class="fu">expression</span>(sigma<span class="sc">~</span><span class="st">&quot;= 0.15,&quot;</span><span class="sc">~</span>lambda<span class="sc">~</span><span class="st">&quot;= 0.01&quot;</span>))</span>
+<span id="cb477-18"><a href="nonlinear1.html#cb477-18" tabindex="-1"></a><span class="fu">lines</span>(xs, yhat, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb477-19"><a href="nonlinear1.html#cb477-19" tabindex="-1"></a></span>
+<span id="cb477-20"><a href="nonlinear1.html#cb477-20" tabindex="-1"></a><span class="do">### Now for the other value of lambda</span></span>
+<span id="cb477-21"><a href="nonlinear1.html#cb477-21" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> <span class="fu">solve</span>(K <span class="sc">+</span> <span class="fu">length</span>(x)<span class="sc">*</span>lambda2<span class="sc">*</span><span class="fu">diag</span>(<span class="fu">length</span>(x)))<span class="sc">%*%</span>(y<span class="sc">-</span><span class="fu">mean</span>(y))</span>
+<span id="cb477-22"><a href="nonlinear1.html#cb477-22" tabindex="-1"></a></span>
+<span id="cb477-23"><a href="nonlinear1.html#cb477-23" tabindex="-1"></a>kK <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dx_grid<span class="sc">/</span>sigma<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb477-24"><a href="nonlinear1.html#cb477-24" tabindex="-1"></a></span>
+<span id="cb477-25"><a href="nonlinear1.html#cb477-25" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> kK<span class="sc">%*%</span>a2 <span class="sc">+</span> <span class="fu">mean</span>(y)</span>
+<span id="cb477-26"><a href="nonlinear1.html#cb477-26" tabindex="-1"></a></span>
+<span id="cb477-27"><a href="nonlinear1.html#cb477-27" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">2</span>), <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>, <span class="at">main =</span> <span class="fu">expression</span>(sigma<span class="sc">~</span><span class="st">&quot;= 0.15,&quot;</span><span class="sc">~</span>lambda<span class="sc">~</span><span class="st">&quot;= 0.1&quot;</span>))</span>
+<span id="cb477-28"><a href="nonlinear1.html#cb477-28" tabindex="-1"></a><span class="fu">lines</span>(xs, yhat, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb477-29"><a href="nonlinear1.html#cb477-29" tabindex="-1"></a></span>
+<span id="cb477-30"><a href="nonlinear1.html#cb477-30" tabindex="-1"></a><span class="do">#################################################</span></span>
+<span id="cb477-31"><a href="nonlinear1.html#cb477-31" tabindex="-1"></a><span class="do">### Now keeping lambda fixed, but changing gamma</span></span>
+<span id="cb477-32"><a href="nonlinear1.html#cb477-32" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> .<span class="dv">001</span></span>
+<span id="cb477-33"><a href="nonlinear1.html#cb477-33" tabindex="-1"></a>sigma1 <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb477-34"><a href="nonlinear1.html#cb477-34" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb477-35"><a href="nonlinear1.html#cb477-35" tabindex="-1"></a></span>
+<span id="cb477-36"><a href="nonlinear1.html#cb477-36" tabindex="-1"></a>K1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">as.matrix</span>(<span class="fu">dist</span>(x)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>sigma1<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb477-37"><a href="nonlinear1.html#cb477-37" tabindex="-1"></a></span>
+<span id="cb477-38"><a href="nonlinear1.html#cb477-38" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="fu">solve</span>(K1 <span class="sc">+</span> <span class="fu">length</span>(x)<span class="sc">*</span>lambda<span class="sc">*</span><span class="fu">diag</span>(<span class="fu">length</span>(x)))<span class="sc">%*%</span>(y<span class="sc">-</span><span class="fu">mean</span>(y))</span>
+<span id="cb477-39"><a href="nonlinear1.html#cb477-39" tabindex="-1"></a></span>
+<span id="cb477-40"><a href="nonlinear1.html#cb477-40" tabindex="-1"></a>kK1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dx_grid<span class="sc">/</span>sigma1<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb477-41"><a href="nonlinear1.html#cb477-41" tabindex="-1"></a></span>
+<span id="cb477-42"><a href="nonlinear1.html#cb477-42" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> kK1<span class="sc">%*%</span>a1 <span class="sc">+</span> <span class="fu">mean</span>(y)</span>
+<span id="cb477-43"><a href="nonlinear1.html#cb477-43" tabindex="-1"></a></span>
+<span id="cb477-44"><a href="nonlinear1.html#cb477-44" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">2</span>), <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>, <span class="at">main =</span> <span class="fu">expression</span>(sigma<span class="sc">~</span><span class="st">&quot;= 0.05,&quot;</span><span class="sc">~</span>lambda<span class="sc">~</span><span class="st">&quot;= 0.001&quot;</span>))</span>
+<span id="cb477-45"><a href="nonlinear1.html#cb477-45" tabindex="-1"></a><span class="fu">lines</span>(xs, yhat, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb477-46"><a href="nonlinear1.html#cb477-46" tabindex="-1"></a></span>
+<span id="cb477-47"><a href="nonlinear1.html#cb477-47" tabindex="-1"></a><span class="do">### Now for the other value of sigma</span></span>
+<span id="cb477-48"><a href="nonlinear1.html#cb477-48" tabindex="-1"></a><span class="do">### We have a different Gram matrix now since it depends on sigma </span></span>
+<span id="cb477-49"><a href="nonlinear1.html#cb477-49" tabindex="-1"></a>K2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">as.matrix</span>(<span class="fu">dist</span>(x)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>sigma2<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb477-50"><a href="nonlinear1.html#cb477-50" tabindex="-1"></a></span>
+<span id="cb477-51"><a href="nonlinear1.html#cb477-51" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> <span class="fu">solve</span>(K2 <span class="sc">+</span> <span class="fu">length</span>(x)<span class="sc">*</span>lambda<span class="sc">*</span><span class="fu">diag</span>(<span class="fu">length</span>(x)))<span class="sc">%*%</span>(y<span class="sc">-</span><span class="fu">mean</span>(y))</span>
+<span id="cb477-52"><a href="nonlinear1.html#cb477-52" tabindex="-1"></a></span>
+<span id="cb477-53"><a href="nonlinear1.html#cb477-53" tabindex="-1"></a>kK2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>dx_grid<span class="sc">/</span>sigma2<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb477-54"><a href="nonlinear1.html#cb477-54" tabindex="-1"></a></span>
+<span id="cb477-55"><a href="nonlinear1.html#cb477-55" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> kK2<span class="sc">%*%</span>a2 <span class="sc">+</span> <span class="fu">mean</span>(y)</span>
+<span id="cb477-56"><a href="nonlinear1.html#cb477-56" tabindex="-1"></a></span>
+<span id="cb477-57"><a href="nonlinear1.html#cb477-57" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">2</span>), <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>, <span class="at">main =</span> <span class="fu">expression</span>(sigma<span class="sc">~</span><span class="st">&quot;= 0.5,&quot;</span><span class="sc">~</span>lambda<span class="sc">~</span><span class="st">&quot;= 0.001&quot;</span>))</span>
+<span id="cb477-58"><a href="nonlinear1.html#cb477-58" tabindex="-1"></a><span class="fu">lines</span>(xs, yhat, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-191-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The effects of changing each parameter may or may not be clear visibly. Increasing <span class="math inline">\(\lambda\)</span> will shrink the coefficients of the basis functions, and lead to less pronounced (lower amplitude) “ups and downs”, but the number of ups and downs will be the same (same “frequncy”). On the other hand, increasing <span class="math inline">\(\gamma\)</span> will lead to a more “wiggly” fit (higher “frequency” variation), as the fitted model is able to focus on more subtle, local variations in the data. On the other hand a smaller value of <span class="math inline">\(\gamma\)</span> has the opposite effect; generally fewer ups and downs (lower “frequency” variation), and a fitted function which captures the broader range shape of the data.</p>
+<p><strong>Kernel Regression in R</strong></p>
+<p>The <code>caret</code> package allows us to link to multiple kernel methods, including <code>method = "krlsRadial"</code> which aligns closely with the kernel ridge regression model described above. In addition, an excellent approximate method exists in the <code>liquidSVM</code> package (no longer on CRAN but available <a href="https://cran.r-project.org/src/contrib/Archive/liquidSVM/">here</a>).</p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="nonlinear1.html#cb478-1" tabindex="-1"></a><span class="do">### Start by loading the library (this may ask you to install</span></span>
+<span id="cb478-2"><a href="nonlinear1.html#cb478-2" tabindex="-1"></a><span class="do">### a few other packages)</span></span>
+<span id="cb478-3"><a href="nonlinear1.html#cb478-3" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb478-4"><a href="nonlinear1.html#cb478-4" tabindex="-1"></a></span>
+<span id="cb478-5"><a href="nonlinear1.html#cb478-5" tabindex="-1"></a><span class="do">### Let&#39;s do ten fold cross validation to select values of</span></span>
+<span id="cb478-6"><a href="nonlinear1.html#cb478-6" tabindex="-1"></a><span class="do">### sigma and lambda</span></span>
+<span id="cb478-7"><a href="nonlinear1.html#cb478-7" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb478-8"><a href="nonlinear1.html#cb478-8" tabindex="-1"></a></span>
+<span id="cb478-9"><a href="nonlinear1.html#cb478-9" tabindex="-1"></a><span class="do">### The krls method has an automatic way of selecting lambda</span></span>
+<span id="cb478-10"><a href="nonlinear1.html#cb478-10" tabindex="-1"></a><span class="do">### but we can override this by specifying values in our</span></span>
+<span id="cb478-11"><a href="nonlinear1.html#cb478-11" tabindex="-1"></a><span class="do">### tuning grid</span></span>
+<span id="cb478-12"><a href="nonlinear1.html#cb478-12" tabindex="-1"></a>tuneGr <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">sigma =</span> <span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">lambda =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">6</span><span class="sc">:</span><span class="dv">0</span>)))</span>
+<span id="cb478-13"><a href="nonlinear1.html#cb478-13" tabindex="-1"></a></span>
+<span id="cb478-14"><a href="nonlinear1.html#cb478-14" tabindex="-1"></a><span class="do">### Now we can fit the model as we normally would. When running</span></span>
+<span id="cb478-15"><a href="nonlinear1.html#cb478-15" tabindex="-1"></a><span class="do">### krls will print a lot to the console unless we set</span></span>
+<span id="cb478-16"><a href="nonlinear1.html#cb478-16" tabindex="-1"></a><span class="do">### print.level = 0</span></span>
+<span id="cb478-17"><a href="nonlinear1.html#cb478-17" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y), <span class="at">method =</span> <span class="st">&quot;krlsRadial&quot;</span>,</span>
+<span id="cb478-18"><a href="nonlinear1.html#cb478-18" tabindex="-1"></a>      <span class="at">trControl =</span> trControl, <span class="at">tuneGrid =</span> tuneGr,</span>
+<span id="cb478-19"><a href="nonlinear1.html#cb478-19" tabindex="-1"></a>      <span class="at">print.level =</span> <span class="dv">0</span>)</span>
+<span id="cb478-20"><a href="nonlinear1.html#cb478-20" tabindex="-1"></a></span>
+<span id="cb478-21"><a href="nonlinear1.html#cb478-21" tabindex="-1"></a><span class="do">### Now we can check the selected hyperparameters</span></span>
+<span id="cb478-22"><a href="nonlinear1.html#cb478-22" tabindex="-1"></a>model<span class="sc">$</span>bestTune</span></code></pre></div>
+<pre><code>##      lambda sigma
+## 22 0.015625   0.5</code></pre>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="nonlinear1.html#cb480-1" tabindex="-1"></a><span class="do">### ... and see how the fit looks by eye. Of course this is</span></span>
+<span id="cb480-2"><a href="nonlinear1.html#cb480-2" tabindex="-1"></a><span class="do">### just a single covariate and otherwise we would need more</span></span>
+<span id="cb480-3"><a href="nonlinear1.html#cb480-3" tabindex="-1"></a><span class="do">### abstract diagnostics to assess fit</span></span>
+<span id="cb480-4"><a href="nonlinear1.html#cb480-4" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>)</span>
+<span id="cb480-5"><a href="nonlinear1.html#cb480-5" tabindex="-1"></a><span class="fu">lines</span>(x_grid, <span class="fu">predict</span>(model, <span class="fu">data.frame</span>(<span class="at">x =</span> x_grid)), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-192-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Note that when there are multiple covariates it is important to standardise them. Some kernel methods will have this built into how they are fit, but within <code>caret</code> you can always ensure this by setting <code>train(..., preProcess = "scale")</code>. In the above you will see that the value of <code>sigma</code> which is selected by cross validation is very large compared with the value which previously gave a pleasing fit by eye. This is because the <code>krls</code> method automatically standardises the variables before fitting. If we were to multiply the covariate values by some fixed constant then we should equally multiply the value of <code>sigma</code> by the same constant. Since the values of <span class="math inline">\(X\)</span> are uniformly distributed on <span class="math inline">\((0, 1)\)</span> they have standard deviation approximately <span class="math inline">\(1/\sqrt{12}\)</span>, and so compared with how we had implemented it manually before, where we did not standardise <span class="math inline">\(X\)</span>, we should multiply the selected value of <code>sigma</code> by <span class="math inline">\(1/\sqrt{12}\)</span>, giving us <code>model$bestTune["sigma"]/sqrt(12) =</code> 0.1443376, which is close to the value of <span class="math inline">\(0.15\)</span> we saw gave a good fit before.</p>
+<p><strong>The Representer Theorem</strong></p>
+<p>Although we saw explicitly how the solution arises for ridge regression, there is a theorem (the Representer Theorem) which says that the solution in the form <span class="math inline">\(\hg = \a^\top (K(\x,\x_1), ..., K(\x, \x_n))^\top\)</span> holds for a very large collection of problems, and only the values in <span class="math inline">\(\a\)</span> differ across settings.</p>
+<p><strong>Computational Complexity</strong></p>
+<p>One of the major limitations of these kernel methods is that they become very computationally intensive for large <span class="math inline">\(n\)</span> (scaling quadratically), except when there is only a single covariate. For more than about ten thousand observations it is common to use some sort of approximation methods.</p>
 </div>
 </div>
 </div>
-<div id="support-vector-machines" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Support Vector Machines<a href="nonlinear1.html#support-vector-machines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="multi-class-svm" class="section level3 hasAnchor" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Multi-class SVM<a href="nonlinear1.html#multi-class-svm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="support-vector-methods" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Support Vector Methods<a href="nonlinear1.html#support-vector-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many ways in which Support Vector Methods can be introduced, but one is that they are essentially regularised linear models (which, like other linear models we have seen can be applied on basis expansions or “kernelised”) with loss functions which are designed in such a way that many of the terms in the vector <span class="math inline">\(\a\)</span> (recall the formulation of the opimal solution and w.r.t. the Representer Theorem) are exactly zero. What this means is that these methods <em>can be</em> far more computationally efficient than methods like the kernel ridge regression model above (where <span class="math inline">\(\a\)</span> is <em>dense</em>).</p>
+<div id="support-vector-classifiers" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Support Vector Classifiers<a href="nonlinear1.html#support-vector-classifiers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Typically the term <em>Support Vector Machine</em> (SVM) applies to the classification model, which is similar to logistic regression with a ridge penalty except the loss function is given by</p>
+<p><span class="math display">\[
+L(y, \hat y) = \left\{\begin{array}{ll}
+\max\{0, 1-\hat y\}; &amp; y = 1\\
+\max\{0, 1+\hat y\}; &amp; y = 0,
+\end{array}\right.
+\]</span></p>
+<p>where <span class="math inline">\(\hat y\)</span> is the output from the linear (or “kenelised”) model, i.e. without any link function. Note that typically in the literature, when describing SVMs, the binary response is encoded as taking values in <span class="math inline">\(\{-1, 1\}\)</span> instead of <span class="math inline">\(\{0, 1\}\)</span>. This allows for a more concise description of the loss function as <span class="math inline">\(L(y, \hat y) = \max\{0, 1-y \hat y\}\)</span>. Also, instead of the parameters <span class="math inline">\(\beta_0, ..., \beta_p\)</span>, SVM is usually described in terms of <span class="math inline">\(b, w_1, ..., w_p\)</span> where the <span class="math inline">\(w_j\)</span>’s are directly analogous to the <span class="math inline">\(\beta_j\)</span>’s and <span class="math inline">\(b = -\beta_0\)</span>, so that <span class="math inline">\(\hat y = \w^\top \x - b\)</span>.</p>
+<p>These details are unimportant for the purpose of this module, and what is important is the difference in the loss function and how this affects estimation and computation. To begin to understand the difference in the loss function, the following shows the shape of the loss function for a case with <span class="math inline">\(Y = 1\)</span> (if <span class="math inline">\(Y = 0\)</span> the loss would be mirrored in the vertical axis), with the corresponding loss function from logistic regression.</p>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="nonlinear1.html#cb481-1" tabindex="-1"></a><span class="do">### Potential values of yhat</span></span>
+<span id="cb481-2"><a href="nonlinear1.html#cb481-2" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length =</span> <span class="dv">500</span>)</span>
+<span id="cb481-3"><a href="nonlinear1.html#cb481-3" tabindex="-1"></a></span>
+<span id="cb481-4"><a href="nonlinear1.html#cb481-4" tabindex="-1"></a><span class="do">### SVM loss specifically for case where y = 1</span></span>
+<span id="cb481-5"><a href="nonlinear1.html#cb481-5" tabindex="-1"></a>loss_svm <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">-</span>yhat)<span class="sc">*</span>(yhat<span class="sc">&lt;</span><span class="dv">1</span>)</span>
+<span id="cb481-6"><a href="nonlinear1.html#cb481-6" tabindex="-1"></a></span>
+<span id="cb481-7"><a href="nonlinear1.html#cb481-7" tabindex="-1"></a><span class="do">### logistic regression loss (from the negative log-likelihood)</span></span>
+<span id="cb481-8"><a href="nonlinear1.html#cb481-8" tabindex="-1"></a><span class="do">### specifically for the case where y = 1</span></span>
+<span id="cb481-9"><a href="nonlinear1.html#cb481-9" tabindex="-1"></a>loss_logistic <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>yhat))</span>
+<span id="cb481-10"><a href="nonlinear1.html#cb481-10" tabindex="-1"></a></span>
+<span id="cb481-11"><a href="nonlinear1.html#cb481-11" tabindex="-1"></a><span class="fu">plot</span>(yhat, loss_svm, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(y)), </span>
+<span id="cb481-12"><a href="nonlinear1.html#cb481-12" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Loss&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Loss functions for SVM and Logistic Regression for Y = 1&quot;</span>)</span>
+<span id="cb481-13"><a href="nonlinear1.html#cb481-13" tabindex="-1"></a><span class="fu">lines</span>(yhat, loss_logistic, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-193-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The way to intuit this plot is to recognise that for those cases with <span class="math inline">\(Y = 1\)</span> we want to predictions (outputs of the linear/kernelised model) to be positive. The SVM loss (solid line above) simply says “as long as the prediction is <em>good enough</em> (i.e. achieves a <em>margin</em> of at least 1 away from being misclassified) the loss is zero, and otherwise there is a loss which increases linearly”. On the other hand, the logistic loss is non-zero everywhere, which means that no matter how far a prediction is from being incorrect the logistic regression model will still “try” to make it even more correct. Arguably this “effort” is wasted, and we should only focus on achieving predictions with a reasonable margin for error (since there is noise in the observations and other potential observations will only tend to be similar to those in the sample) and place all other emphasis on minimising the error on those which are actually being misclassified.</p>
+<p>In addition to this arguably justifiable motivation, it is precisely because the loss function will be exactly zero for many observations which makes the vector <span class="math inline">\(\a\)</span> sparse; only those points with non-zero error or a margin exactly equal to one will have non-zero entries in <span class="math inline">\(\a\)</span>, these are the so-called “support vectors”.</p>
+<div id="multi-class-svm" class="section level4 hasAnchor" number="8.2.1.1">
+<h4><span class="header-section-number">8.2.1.1</span> Multi-class SVM<a href="nonlinear1.html#multi-class-svm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is only the logistic regression model, because of the interpretation in terms of the log-odds, which admits the multinomial solution for multiclass classification. With SVM it is necessary to use either the one-vs-one or one-vs-all approach, with the one-vs-one being the most popular.</p>
+</div>
+<div id="svm-in-r" class="section level4 hasAnchor" number="8.2.1.2">
+<h4><span class="header-section-number">8.2.1.2</span> SVM in R<a href="nonlinear1.html#svm-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Unfortunately, as has been the case with a few other topics, different implementations of the same or similar methods are not always consistent with one another. As mentioned previously there are multiple parameterisations of the Gaussian kernel and the most straightforward implementation of SVM linked to with <code>caret</code> uses a different parameterisation from that linked to for kernel regression. In particular, when using <code>train(method = "svmRadial")</code>, the formulation of the Gaussian kernel is <span class="math inline">\(K(\x, \x&#39;) = \exp(-\sigma ||\x-\x&#39;||^2)\)</span>. As long as an appropriate range of values is considered, then cross validation will typically select a good value without you having to engage directly with this parameterisation, but it is nonetheless important to be aware of.</p>
+<p>Let’s use the <code>satimage</code> data set again, which we initially saw with multinomial regression. We can fit both a linear SVM and a kernelised variant.</p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="nonlinear1.html#cb482-1" tabindex="-1"></a><span class="do">### load our library</span></span>
+<span id="cb482-2"><a href="nonlinear1.html#cb482-2" tabindex="-1"></a><span class="fu">library</span>(pmlbr)</span>
+<span id="cb482-3"><a href="nonlinear1.html#cb482-3" tabindex="-1"></a></span>
+<span id="cb482-4"><a href="nonlinear1.html#cb482-4" tabindex="-1"></a><span class="do">### Fetch the satimage data set and convert response to a factor variable</span></span>
+<span id="cb482-5"><a href="nonlinear1.html#cb482-5" tabindex="-1"></a>satimage <span class="ot">&lt;-</span> <span class="fu">fetch_data</span>(<span class="st">&quot;satimage&quot;</span>)</span></code></pre></div>
+<pre><code>## Download successful.</code></pre>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="nonlinear1.html#cb484-1" tabindex="-1"></a>satimage<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(satimage<span class="sc">$</span>target)</span>
+<span id="cb484-2"><a href="nonlinear1.html#cb484-2" tabindex="-1"></a></span>
+<span id="cb484-3"><a href="nonlinear1.html#cb484-3" tabindex="-1"></a><span class="do">### Create training/test split</span></span>
+<span id="cb484-4"><a href="nonlinear1.html#cb484-4" tabindex="-1"></a>train_ix <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(satimage<span class="sc">$</span>target, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb484-5"><a href="nonlinear1.html#cb484-5" tabindex="-1"></a></span>
+<span id="cb484-6"><a href="nonlinear1.html#cb484-6" tabindex="-1"></a>satimage.tr <span class="ot">&lt;-</span> satimage[train_ix,]</span>
+<span id="cb484-7"><a href="nonlinear1.html#cb484-7" tabindex="-1"></a>satimage.te <span class="ot">&lt;-</span> satimage[<span class="sc">-</span>train_ix,]</span>
+<span id="cb484-8"><a href="nonlinear1.html#cb484-8" tabindex="-1"></a></span>
+<span id="cb484-9"><a href="nonlinear1.html#cb484-9" tabindex="-1"></a><span class="do">### The default call to linear SVM will only use a single value of</span></span>
+<span id="cb484-10"><a href="nonlinear1.html#cb484-10" tabindex="-1"></a><span class="do">### the regularisation parameter (here called C and </span></span>
+<span id="cb484-11"><a href="nonlinear1.html#cb484-11" tabindex="-1"></a><span class="do">### acting similarly to 1/lambda).</span></span>
+<span id="cb484-12"><a href="nonlinear1.html#cb484-12" tabindex="-1"></a><span class="do">### We can override this by specifying a tuning grid</span></span>
+<span id="cb484-13"><a href="nonlinear1.html#cb484-13" tabindex="-1"></a></span>
+<span id="cb484-14"><a href="nonlinear1.html#cb484-14" tabindex="-1"></a>svm_lin <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr, <span class="at">method =</span> <span class="st">&quot;svmLinear&quot;</span>, </span>
+<span id="cb484-15"><a href="nonlinear1.html#cb484-15" tabindex="-1"></a>               <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="st">&quot;cv&quot;</span>, <span class="dv">10</span>),</span>
+<span id="cb484-16"><a href="nonlinear1.html#cb484-16" tabindex="-1"></a>               <span class="at">tuneGrid =</span> <span class="fu">expand.grid</span>(<span class="at">C =</span> <span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span>)))</span>
+<span id="cb484-17"><a href="nonlinear1.html#cb484-17" tabindex="-1"></a></span>
+<span id="cb484-18"><a href="nonlinear1.html#cb484-18" tabindex="-1"></a><span class="do">### We can check the highest accuracy based on cross validation</span></span>
+<span id="cb484-19"><a href="nonlinear1.html#cb484-19" tabindex="-1"></a><span class="do">### and the hyperparameter which led to this</span></span>
+<span id="cb484-20"><a href="nonlinear1.html#cb484-20" tabindex="-1"></a></span>
+<span id="cb484-21"><a href="nonlinear1.html#cb484-21" tabindex="-1"></a><span class="fu">max</span>(svm_lin<span class="sc">$</span>results[,<span class="st">&quot;Accuracy&quot;</span>])</span></code></pre></div>
+<pre><code>## [1] 0.8773289</code></pre>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="nonlinear1.html#cb486-1" tabindex="-1"></a>svm_lin<span class="sc">$</span>bestTune</span></code></pre></div>
+<pre><code>##      C
+## 4 0.25</code></pre>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="nonlinear1.html#cb488-1" tabindex="-1"></a><span class="do">### Finally we can assess the performance on the test data</span></span>
+<span id="cb488-2"><a href="nonlinear1.html#cb488-2" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(svm_lin, satimage.te), satimage.te<span class="sc">$</span>target)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   1   2   3   4   5   7
+##          1 452   2   2   3  12   0
+##          2   0 195   2   0   6   0
+##          3   4   0 395  49   0   7
+##          4   0   1   7  80   3  55
+##          5   3  12   0   6 175  20
+##          7   0   0   1  49  16 370
+## 
+## Overall Statistics
+##                                        
+##                Accuracy : 0.8651       
+##                  95% CI : (0.849, 0.88)
+##     No Information Rate : 0.2382       
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16    
+##                                        
+##                   Kappa : 0.8329       
+##                                        
+##  Mcnemar&#39;s Test P-Value : NA           
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5 Class: 7
+## Sensitivity            0.9847   0.9286   0.9705  0.42781  0.82547   0.8186
+## Specificity            0.9871   0.9953   0.9605  0.96207  0.97609   0.9553
+## Pos Pred Value         0.9597   0.9606   0.8681  0.54795  0.81019   0.8486
+## Neg Pred Value         0.9952   0.9913   0.9918  0.93992  0.97838   0.9450
+## Prevalence             0.2382   0.1090   0.2112  0.09704  0.11002   0.2346
+## Detection Rate         0.2346   0.1012   0.2050  0.04152  0.09081   0.1920
+## Detection Prevalence   0.2444   0.1053   0.2361  0.07577  0.11209   0.2263
+## Balanced Accuracy      0.9859   0.9620   0.9655  0.69494  0.90078   0.8869</code></pre>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="nonlinear1.html#cb490-1" tabindex="-1"></a><span class="do">### Similarly with the Gaussian kernel only a very limited tuning</span></span>
+<span id="cb490-2"><a href="nonlinear1.html#cb490-2" tabindex="-1"></a><span class="do">### is done, and we will expand on this. Note that running the following</span></span>
+<span id="cb490-3"><a href="nonlinear1.html#cb490-3" tabindex="-1"></a><span class="do">### will take quite a bit of time, and so if you are just playing around</span></span>
+<span id="cb490-4"><a href="nonlinear1.html#cb490-4" tabindex="-1"></a><span class="do">### with this method it is advisable to use a smaller training set</span></span>
+<span id="cb490-5"><a href="nonlinear1.html#cb490-5" tabindex="-1"></a><span class="do">### As an alternative consider exploring liquidSVM, which is approximate but</span></span>
+<span id="cb490-6"><a href="nonlinear1.html#cb490-6" tabindex="-1"></a><span class="do">### much faster. It takes a little more work to apply, but not</span></span>
+<span id="cb490-7"><a href="nonlinear1.html#cb490-7" tabindex="-1"></a><span class="do">### insurmountable</span></span>
+<span id="cb490-8"><a href="nonlinear1.html#cb490-8" tabindex="-1"></a></span>
+<span id="cb490-9"><a href="nonlinear1.html#cb490-9" tabindex="-1"></a>svm_rbf <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>., <span class="at">data =</span> satimage.tr, <span class="at">method =</span> <span class="st">&quot;svmRadial&quot;</span>, </span>
+<span id="cb490-10"><a href="nonlinear1.html#cb490-10" tabindex="-1"></a>               <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="st">&quot;cv&quot;</span>, <span class="dv">10</span>),</span>
+<span id="cb490-11"><a href="nonlinear1.html#cb490-11" tabindex="-1"></a>               <span class="at">tuneGrid =</span> <span class="fu">expand.grid</span>(<span class="at">sigma=</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:-</span><span class="dv">1</span>), <span class="at">C=</span><span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span>)))</span>
+<span id="cb490-12"><a href="nonlinear1.html#cb490-12" tabindex="-1"></a></span>
+<span id="cb490-13"><a href="nonlinear1.html#cb490-13" tabindex="-1"></a><span class="do">### As before we can check the highest accuracy based on cross validation</span></span>
+<span id="cb490-14"><a href="nonlinear1.html#cb490-14" tabindex="-1"></a><span class="do">### and the hyperparameters which led to this</span></span>
+<span id="cb490-15"><a href="nonlinear1.html#cb490-15" tabindex="-1"></a></span>
+<span id="cb490-16"><a href="nonlinear1.html#cb490-16" tabindex="-1"></a><span class="fu">max</span>(svm_rbf<span class="sc">$</span>results[,<span class="st">&quot;Accuracy&quot;</span>])</span></code></pre></div>
+<pre><code>## [1] 0.9208083</code></pre>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="nonlinear1.html#cb492-1" tabindex="-1"></a>svm_rbf<span class="sc">$</span>bestTune</span></code></pre></div>
+<pre><code>##    sigma C
+## 20  0.25 4</code></pre>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="nonlinear1.html#cb494-1" tabindex="-1"></a><span class="do">### and we can assess the performance on the test data</span></span>
+<span id="cb494-2"><a href="nonlinear1.html#cb494-2" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(svm_rbf, satimage.te), satimage.te<span class="sc">$</span>target)</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   1   2   3   4   5   7
+##          1 448   0   3   0   4   0
+##          2   3 205   3   4   3   1
+##          3   5   0 397  42   1  14
+##          4   0   1   3 120   1  18
+##          5   3   3   0   1 197  16
+##          7   0   1   1  20   6 403
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9185          
+##                  95% CI : (0.9054, 0.9304)
+##     No Information Rate : 0.2382          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.8993          
+##                                           
+##  Mcnemar&#39;s Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: 1 Class: 2 Class: 3 Class: 4 Class: 5 Class: 7
+## Sensitivity            0.9760   0.9762   0.9754  0.64171   0.9292   0.8916
+## Specificity            0.9952   0.9918   0.9592  0.98678   0.9866   0.9810
+## Pos Pred Value         0.9846   0.9361   0.8649  0.83916   0.8955   0.9350
+## Neg Pred Value         0.9925   0.9971   0.9932  0.96244   0.9912   0.9672
+## Prevalence             0.2382   0.1090   0.2112  0.09704   0.1100   0.2346
+## Detection Rate         0.2325   0.1064   0.2060  0.06227   0.1022   0.2091
+## Detection Prevalence   0.2361   0.1136   0.2382  0.07421   0.1142   0.2237
+## Balanced Accuracy      0.9856   0.9840   0.9673  0.81425   0.9579   0.9363</code></pre>
+<p>The kernelised variant <code>svm_rbf</code> achieves substantially higher performance, although it is noteworthy that the linear SVM achieves slightly better performance than the multinomial model we fit in Chapter <a href="glms.html#glms">7</a>, however this could be down to the difference in train/test splits. It is also the case that the kernelised model is considerably more computationally demanding, especially when we consider that multiple hyperparameters need to be tuned.</p>
+<p>From a prediction perspective it is arguably always the case that one should use the Gaussian kernel rather than the linear kernel since for very small <span class="math inline">\(\sigma\)</span> (with this parameterisation, or very large with the parameterisation described in relation to kernel ridge regression) the fitted model is very close to linear.</p>
+</div>
+</div>
+<div id="support-vector-regression" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Support Vector Regression<a href="nonlinear1.html#support-vector-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before finishing this chapter we will briefly look at regression within the support vector framework. The typical loss function used in Support Vector Regression (SVR) is known as the <em><span class="math inline">\(\epsilon\)</span>-insensitive</em> loss, and takes the form <span class="math inline">\(L(y, \hat y)  = \max\{0, |y-\hat y| - \epsilon\}\)</span>. What this means is that if the prediction, <span class="math inline">\(\hat y\)</span>, is within <span class="math inline">\(\epsilon\)</span> of the true value, <span class="math inline">\(y\)</span>, then the loss is zero, and otherwise the loss increases linearly with the difference between the two.</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="nonlinear1.html#cb496-1" tabindex="-1"></a><span class="do">### Potential values for the estimated residual, y - yhat</span></span>
+<span id="cb496-2"><a href="nonlinear1.html#cb496-2" tabindex="-1"></a>rhat <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">length =</span> <span class="dv">500</span>)</span>
+<span id="cb496-3"><a href="nonlinear1.html#cb496-3" tabindex="-1"></a></span>
+<span id="cb496-4"><a href="nonlinear1.html#cb496-4" tabindex="-1"></a><span class="do">### Let&#39;s plot the loss for two values of epsilon</span></span>
+<span id="cb496-5"><a href="nonlinear1.html#cb496-5" tabindex="-1"></a>eps1 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb496-6"><a href="nonlinear1.html#cb496-6" tabindex="-1"></a>eps2 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb496-7"><a href="nonlinear1.html#cb496-7" tabindex="-1"></a></span>
+<span id="cb496-8"><a href="nonlinear1.html#cb496-8" tabindex="-1"></a><span class="fu">plot</span>(rhat, (<span class="fu">abs</span>(rhat) <span class="sc">&gt;</span> eps1)<span class="sc">*</span>(<span class="fu">abs</span>(rhat)<span class="sc">-</span>eps1), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb496-9"><a href="nonlinear1.html#cb496-9" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="st">&quot;y - &quot;</span><span class="sc">~</span><span class="fu">hat</span>(y)), <span class="at">ylab =</span> <span class="st">&quot;Loss&quot;</span>)</span>
+<span id="cb496-10"><a href="nonlinear1.html#cb496-10" tabindex="-1"></a><span class="fu">lines</span>(rhat, (<span class="fu">abs</span>(rhat) <span class="sc">&gt;</span> eps2)<span class="sc">*</span>(<span class="fu">abs</span>(rhat)<span class="sc">-</span>eps2), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb496-11"><a href="nonlinear1.html#cb496-11" tabindex="-1"></a></span>
+<span id="cb496-12"><a href="nonlinear1.html#cb496-12" tabindex="-1"></a><span class="do">### We can also add the more common loss functions: the absolute and squared error loss</span></span>
+<span id="cb496-13"><a href="nonlinear1.html#cb496-13" tabindex="-1"></a><span class="fu">lines</span>(rhat, <span class="fu">abs</span>(rhat), <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb496-14"><a href="nonlinear1.html#cb496-14" tabindex="-1"></a><span class="fu">lines</span>(rhat, rhat<span class="sc">^</span><span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-195-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>In the above the <span class="math inline">\(\epsilon\)</span>-insensitive loss is shown for <span class="math inline">\(\epsilon = 0.1\)</span> (solid line) and <span class="math inline">\(\epsilon = 0.5\)</span> (long dashes). In addition the absolute loss (short dashes) and squared error (dashes and dots) are shown for comparison. The squared error loss is very heavily penalising of large errors, and this makes training using this loss function very sensitive to potential outliers. The absolute and <span class="math inline">\(\epsilon\)</span>-insensitive losses are far more <em>robust</em>. Similar to SVM above, it is only the observations which have non-zero loss or have a residual exactly equal to either <span class="math inline">\(\epsilon\)</span> or <span class="math inline">\(-\epsilon\)</span> which have non-zero entries in the vector <span class="math inline">\(\a\)</span>.</p>
+<div id="support-vector-regression-in-r" class="section level4 hasAnchor" number="8.2.2.1">
+<h4><span class="header-section-number">8.2.2.1</span> Support Vector Regression in R<a href="nonlinear1.html#support-vector-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Calling <code>train(method = "svmRadial")</code> (or <code>method = "svmLinear"</code>) can be used for either classification or regression and <code>caret</code> will determine which depending on whether the response is numeric or categorical (factor). There are multiple “versions” of SVR, however by default <code>caret</code> will use the <span class="math inline">\(\epsilon\)</span>-insensitive loss. The actual value of <span class="math inline">\(\epsilon\)</span> is less important than the other hyperparameters, and in fact <code>caret</code> does not allow you to tune this parameter directly and to deviate from the default of <code>epsilon = 0.1</code> one must specify this as <code>train(method = "smvRadial", epsilon = eps)</code>.</p>
+<p>Let’s look at the simple simulated data set from before.</p>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="nonlinear1.html#cb497-1" tabindex="-1"></a><span class="do">### We&#39;ll use the same cross validation set up as before</span></span>
+<span id="cb497-2"><a href="nonlinear1.html#cb497-2" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb497-3"><a href="nonlinear1.html#cb497-3" tabindex="-1"></a></span>
+<span id="cb497-4"><a href="nonlinear1.html#cb497-4" tabindex="-1"></a><span class="do">### Recall that sigma acts like the inverse square root compared</span></span>
+<span id="cb497-5"><a href="nonlinear1.html#cb497-5" tabindex="-1"></a><span class="do">### with how it was applied in kernel ridge regression</span></span>
+<span id="cb497-6"><a href="nonlinear1.html#cb497-6" tabindex="-1"></a><span class="do">### and C</span></span>
+<span id="cb497-7"><a href="nonlinear1.html#cb497-7" tabindex="-1"></a>tuneGr <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">sigma =</span> <span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>), <span class="at">C =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>)))</span>
+<span id="cb497-8"><a href="nonlinear1.html#cb497-8" tabindex="-1"></a></span>
+<span id="cb497-9"><a href="nonlinear1.html#cb497-9" tabindex="-1"></a><span class="do">### Now we can fit the model as we normally would. When running</span></span>
+<span id="cb497-10"><a href="nonlinear1.html#cb497-10" tabindex="-1"></a><span class="do">### krls will print a lot to the console unless we set</span></span>
+<span id="cb497-11"><a href="nonlinear1.html#cb497-11" tabindex="-1"></a><span class="do">### print.level = 0</span></span>
+<span id="cb497-12"><a href="nonlinear1.html#cb497-12" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(y<span class="sc">~</span>x, <span class="at">data =</span> <span class="fu">data.frame</span>(x, y), <span class="at">method =</span> <span class="st">&quot;svmRadial&quot;</span>,</span>
+<span id="cb497-13"><a href="nonlinear1.html#cb497-13" tabindex="-1"></a>      <span class="at">trControl =</span> trControl, <span class="at">tuneGrid =</span> tuneGr)</span>
+<span id="cb497-14"><a href="nonlinear1.html#cb497-14" tabindex="-1"></a></span>
+<span id="cb497-15"><a href="nonlinear1.html#cb497-15" tabindex="-1"></a><span class="do">### Now we can check the selected hyperparameters</span></span>
+<span id="cb497-16"><a href="nonlinear1.html#cb497-16" tabindex="-1"></a>model<span class="sc">$</span>bestTune</span></code></pre></div>
+<pre><code>##    sigma C
+## 61     4 4</code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="nonlinear1.html#cb499-1" tabindex="-1"></a><span class="do">### ... and see how the fit looks by eye. Of course this is</span></span>
+<span id="cb499-2"><a href="nonlinear1.html#cb499-2" tabindex="-1"></a><span class="do">### just a single covariate and otherwise we would need more</span></span>
+<span id="cb499-3"><a href="nonlinear1.html#cb499-3" tabindex="-1"></a><span class="do">### abstract diagnostics to assess fit</span></span>
+<span id="cb499-4"><a href="nonlinear1.html#cb499-4" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>)</span>
+<span id="cb499-5"><a href="nonlinear1.html#cb499-5" tabindex="-1"></a><span class="fu">lines</span>(x_grid, <span class="fu">predict</span>(model, <span class="fu">data.frame</span>(<span class="at">x =</span> x_grid)), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-196-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="summary-8" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Summary<a href="nonlinear1.html#summary-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Basis expansions are a natural way to introduce non-linearity into predictive models</p>
+<ul>
+<li><p>By first transforming the covariates by applying a collection of <em>basis functions</em>, a linear model is then applied to the transformed data</p></li>
+<li><p>This is equivalent to setting <span class="math inline">\(\hg = \sum_{j=1}^q \hat \beta_j b_j\)</span>, where the coefficients come from the linear model applied on the transformed covariates and <span class="math inline">\(b_j\)</span> is the <span class="math inline">\(j\)</span>-th basis function</p></li>
+</ul></li>
+<li><p>Kernels are an elegant way to shortcut much of the needed computation, as evaluating <span class="math inline">\(K(\x, \x&#39;)\)</span> is equivalent to first transforming each of the arguments using all of the (potentially infinitely many) basis functions, and then taking their inner product</p></li>
+<li><p>Support vector methods are comparatively computationally efficient alternatives to the standard “kernelised” linear models</p>
+<ul>
+<li><p>In addition to being comparatively computationally efficient, support vector models are fairly robust (especially in the case of the regression models)</p></li>
+<li><p>In reading literature (and documentation of some software) you may find reference to least squares support vector methods; these are essentially the same as kernel ridge regression</p></li>
+</ul></li>
+</ul>
 
-</div>
 </div>
 </div>
             </section>
